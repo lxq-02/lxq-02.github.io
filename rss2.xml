@@ -9,29 +9,28 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>命由我做，福自己求</description>
-    <pubDate>Sun, 07 Jul 2024 10:10:57 GMT</pubDate>
+    <pubDate>Sun, 07 Jul 2024 12:04:38 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>test</title>
-      <link>http://example.com/2024/07/07/test/</link>
-      <guid>http://example.com/2024/07/07/test/</guid>
+      <title>收藏</title>
+      <link>http://example.com/2024/07/07/%E6%94%B6%E8%97%8F/</link>
+      <guid>http://example.com/2024/07/07/%E6%94%B6%E8%97%8F/</guid>
       <pubDate>Sun, 07 Jul 2024 04:00:00 GMT</pubDate>
       
         
         
-      <description>&lt;p&gt;这里是你的文章内容。&lt;br&gt;This is a test md.&lt;/p&gt;
-</description>
+      <description>&lt;p&gt;搭建博客：&lt;a href=&quot;https://zhuanlan.zhihu.com/p/102592286&quot;&gt;https://zhuanlan.zhihu.com/p/102592286&lt;/a&gt;&lt;br&gt;博客分类：&lt;a href=&quot;https://www.jianshu.com</description>
         
       
       
       
-      <content:encoded><![CDATA[<p>这里是你的文章内容。<br>This is a test md.</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>搭建博客：<a href="https://zhuanlan.zhihu.com/p/102592286">https://zhuanlan.zhihu.com/p/102592286</a><br>博客分类：<a href="https://www.jianshu.com/p/e17711e44e00">https://www.jianshu.com/p/e17711e44e00</a></p>]]></content:encoded>
       
       
       
       
-      <comments>http://example.com/2024/07/07/test/#disqus_thread</comments>
+      <comments>http://example.com/2024/07/07/%E6%94%B6%E8%97%8F/#disqus_thread</comments>
       
     </item>
     
