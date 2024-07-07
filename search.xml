@@ -4,13 +4,21 @@
   
     
     <entry>
-      <title></title>
+      <title>Windows 使用指南</title>
       <link href="/2024/07/07/%E7%BC%96%E7%A8%8B/"/>
       <url>/2024/07/07/%E7%BC%96%E7%A8%8B/</url>
       
-        <content type="html"><![CDATA[<p>This is a test md.</p>]]></content>
+        <content type="html"><![CDATA[<p>这里是你的文章内容。<br>This is a test md.</p>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> Windows </tag>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
       
     </entry>
     

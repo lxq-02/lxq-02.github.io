@@ -9,26 +9,30 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>命由我做，福自己求</description>
-    <pubDate>Sun, 07 Jul 2024 09:57:21 GMT</pubDate>
+    <pubDate>Sun, 07 Jul 2024 10:08:10 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title></title>
+      <title>Windows 使用指南</title>
       <link>http://example.com/2024/07/07/%E7%BC%96%E7%A8%8B/</link>
       <guid>http://example.com/2024/07/07/%E7%BC%96%E7%A8%8B/</guid>
-      <pubDate>Sun, 07 Jul 2024 09:57:21 GMT</pubDate>
+      <pubDate>Sun, 07 Jul 2024 04:00:00 GMT</pubDate>
       
         
         
-      <description>&lt;p&gt;This is a test md.&lt;/p&gt;
+      <description>&lt;p&gt;这里是你的文章内容。&lt;br&gt;This is a test md.&lt;/p&gt;
 </description>
         
       
       
       
-      <content:encoded><![CDATA[<p>This is a test md.</p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>这里是你的文章内容。<br>This is a test md.</p>]]></content:encoded>
       
       
+      
+      <category domain="http://example.com/tags/Windows/">Windows</category>
+      
+      <category domain="http://example.com/tags/%E6%95%99%E7%A8%8B/">教程</category>
       
       
       <comments>http://example.com/2024/07/07/%E7%BC%96%E7%A8%8B/#disqus_thread</comments>
