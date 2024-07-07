@@ -39,5 +39,28 @@
       
     </item>
     
+    <item>
+      <title>test</title>
+      <link>http://example.com/2024/07/07/test/</link>
+      <guid>http://example.com/2024/07/07/test/</guid>
+      <pubDate>Sun, 07 Jul 2024 04:00:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;这里是你的文章内容。&lt;br&gt;This is a test md.&lt;/p&gt;
+</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>这里是你的文章内容。<br>This is a test md.</p>]]></content:encoded>
+      
+      
+      
+      
+      <comments>http://example.com/2024/07/07/test/#disqus_thread</comments>
+      
+    </item>
+    
   </channel>
 </rss>
