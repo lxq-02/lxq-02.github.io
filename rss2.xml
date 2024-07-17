@@ -49,39 +49,12 @@
       
       
       
-      <content:encoded><![CDATA[<p>搭建博客：<a href="https://zhuanlan.zhihu.com/p/102592286">https://zhuanlan.zhihu.com/p/102592286</a><br>博客分类：<a href="https://www.jianshu.com/p/e17711e44e00">https://www.jianshu.com/p/e17711e44e00</a></p>]]></content:encoded>
+      <content:encoded><![CDATA[<p>搭建博客：<a href="https://zhuanlan.zhihu.com/p/102592286">https://zhuanlan.zhihu.com/p/102592286</a><br>博客分类：<a href="https://www.jianshu.com/p/e17711e44e00">https://www.jianshu.com/p/e17711e44e00</a></p><p><a href="https://cloud.tencent.com/developer/article/1970544">Hexo + Typora + 开发Hexo插件 解决图片路径不一致-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>]]></content:encoded>
       
       
       
       
       <comments>http://example.com/2024/07/07/%E6%94%B6%E8%97%8F/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Windows 使用指南</title>
-      <link>http://example.com/2024/07/07/%E7%BC%96%E7%A8%8B/</link>
-      <guid>http://example.com/2024/07/07/%E7%BC%96%E7%A8%8B/</guid>
-      <pubDate>Sun, 07 Jul 2024 04:00:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;这里是你的文章内容。&lt;br&gt;This is a test md.&lt;/p&gt;
-</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>这里是你的文章内容。<br>This is a test md.</p>]]></content:encoded>
-      
-      
-      
-      <category domain="http://example.com/tags/Windows/">Windows</category>
-      
-      <category domain="http://example.com/tags/%E6%95%99%E7%A8%8B/">教程</category>
-      
-      
-      <comments>http://example.com/2024/07/07/%E7%BC%96%E7%A8%8B/#disqus_thread</comments>
       
     </item>
     
