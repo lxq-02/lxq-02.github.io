@@ -110,6 +110,32 @@
     </item>
     
     <item>
+      <title>语音识别_查看博客(一)</title>
+      <link>http://example.com/2024/08/04/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/%E6%9F%A5%E7%9C%8B%E5%8D%9A%E5%AE%A2/</link>
+      <guid>http://example.com/2024/08/04/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/%E6%9F%A5%E7%9C%8B%E5%8D%9A%E5%AE%A2/</guid>
+      <pubDate>Sun, 04 Aug 2024 10:05:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;cmake下载：&lt;a href=&quot;https://blog.csdn.net/didi_ya/article/details/123029415&quot;&gt;Windows下CMake的下载与安装详解_cmake下载-CSDN博客&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;vcpkg&lt;/p&gt;
+&lt;p&gt;博客</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<p>cmake下载：<a href="https://blog.csdn.net/didi_ya/article/details/123029415">Windows下CMake的下载与安装详解_cmake下载-CSDN博客</a></p><p>vcpkg</p><p>博客：<a href="https://blog.csdn.net/adminstate/article/details/134966644">vcpkg下载及安装-CSDN博客</a></p><p><a href="https://blog.csdn.net/m0_48095841/article/details/135639120">Windows下载安装vcpkg并使用它来安装第三方库（visualstudio）_vcpkg下载-CSDN博客</a></p><p>下载：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:microsoft/vcpkg.git</span><br><span class="line">cd vcpkg</span><br></pre></td></tr></table></figure><p>引导vcpkg</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bootstrap-vcpkg.bat</span><br></pre></td></tr></table></figure><p>添加vcpkg路径到系统PATH</p><p><a href="https://cloud.tencent.com/developer/article/2349643">识别准确率竟如此高，实时语音识别服务-腾讯云开发者社区-腾讯云 (tencent.com)</a></p><p>AaltoASR:<a href="https://github.com/aalto-speech/AaltoASR/blob/develop/INSTALLATION.md">AaltoASR&#x2F;INSTALLATION.md at develop · aalto-speech&#x2F;AaltoASR (github.com)</a></p>]]></content:encoded>
+      
+      
+      
+      <category domain="http://example.com/tags/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/">语音识别</category>
+      
+      
+      <comments>http://example.com/2024/08/04/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/%E6%9F%A5%E7%9C%8B%E5%8D%9A%E5%AE%A2/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
       <title>语音识别_SAPI实现语音识别(四)</title>
       <link>http://example.com/2024/08/04/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/SAPI/</link>
       <guid>http://example.com/2024/08/04/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/SAPI/</guid>
@@ -154,32 +180,6 @@
       
       
       <comments>http://example.com/2024/08/04/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/%E6%A8%A1%E6%8B%9FAI%E5%8A%9F%E8%83%BD/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>语音识别_查看博客(一)</title>
-      <link>http://example.com/2024/08/04/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/%E6%9F%A5%E7%9C%8B%E5%8D%9A%E5%AE%A2/</link>
-      <guid>http://example.com/2024/08/04/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/%E6%9F%A5%E7%9C%8B%E5%8D%9A%E5%AE%A2/</guid>
-      <pubDate>Sun, 04 Aug 2024 10:05:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;cmake下载：&lt;a href=&quot;https://blog.csdn.net/didi_ya/article/details/123029415&quot;&gt;Windows下CMake的下载与安装详解_cmake下载-CSDN博客&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;vcpkg&lt;/p&gt;
-&lt;p&gt;博客</description>
-        
-      
-      
-      
-      <content:encoded><![CDATA[<p>cmake下载：<a href="https://blog.csdn.net/didi_ya/article/details/123029415">Windows下CMake的下载与安装详解_cmake下载-CSDN博客</a></p><p>vcpkg</p><p>博客：<a href="https://blog.csdn.net/adminstate/article/details/134966644">vcpkg下载及安装-CSDN博客</a></p><p><a href="https://blog.csdn.net/m0_48095841/article/details/135639120">Windows下载安装vcpkg并使用它来安装第三方库（visualstudio）_vcpkg下载-CSDN博客</a></p><p>下载：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:microsoft/vcpkg.git</span><br><span class="line">cd vcpkg</span><br></pre></td></tr></table></figure><p>引导vcpkg</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bootstrap-vcpkg.bat</span><br></pre></td></tr></table></figure><p>添加vcpkg路径到系统PATH</p><p><a href="https://cloud.tencent.com/developer/article/2349643">识别准确率竟如此高，实时语音识别服务-腾讯云开发者社区-腾讯云 (tencent.com)</a></p><p>AaltoASR:<a href="https://github.com/aalto-speech/AaltoASR/blob/develop/INSTALLATION.md">AaltoASR&#x2F;INSTALLATION.md at develop · aalto-speech&#x2F;AaltoASR (github.com)</a></p>]]></content:encoded>
-      
-      
-      
-      <category domain="http://example.com/tags/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/">语音识别</category>
-      
-      
-      <comments>http://example.com/2024/08/04/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/%E6%9F%A5%E7%9C%8B%E5%8D%9A%E5%AE%A2/#disqus_thread</comments>
       
     </item>
     
