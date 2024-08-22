@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、基础1.1、操作系统概述操作系统：软件的一类 作用：协助用户调度硬件工作，充当用户和计算机硬件之间的桥梁 常见的操作系统： PC端：Windows、Linux、MacOS 移动端：Android、IOS、鸿蒙系统 1.2、初始Linux1.2.1 Linux的诞生Linux由林纳斯·托瓦兹在1991年创立并发展至今成为服务器操作系统领域的核心系统。 1.2.2 Linux系统的内核内核提供了L">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux_基础(一)">
+<meta property="og:url" content="http://example.com/2024/07/07/Linux/Linux/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="一、基础1.1、操作系统概述操作系统：软件的一类 作用：协助用户调度硬件工作，充当用户和计算机硬件之间的桥梁 常见的操作系统： PC端：Windows、Linux、MacOS 移动端：Android、IOS、鸿蒙系统 1.2、初始Linux1.2.1 Linux的诞生Linux由林纳斯·托瓦兹在1991年创立并发展至今成为服务器操作系统领域的核心系统。 1.2.2 Linux系统的内核内核提供了L">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221207212358655.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208115950907.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208120052453.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208120138387.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208120153131.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208120206976.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208120214175.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208120523327.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208120551815.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208120611311.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208120626447.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208120635094.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208120705488.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027214128.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208205542925.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208211409101.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208211533134.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208214054343.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208214113063.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208214659002.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208214955238.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221208220054878.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221220160623738.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027215841.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027215846.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027215849.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027215858.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027220005.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027220010.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221220161459179.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221220161727878.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221220163811465.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221220163820246.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221220165137119.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221220165215384.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221222150710168.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221222150745830.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221222162246791.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027220514.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027220525.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027220429.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027220449.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027220554.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221222173301043.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223103330084.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221129.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221149.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221201.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221210.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221241.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223110120135.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223111253580.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223111320996.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223111332360.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223145308409.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223145320545.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223145329645.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221340.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221354.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221413.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221440.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221514.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221545.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223145453912.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223145535989.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223145559821.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223150445424.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223150554747.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221223150610423.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221906-167178047054416.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027221939.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux/20221027222512-167178047054822.png">
+<meta property="article:published_time" content="2024-07-07T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-22T09:11:35.215Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/07/07/Linux/Linux/image-20221207212358655.png">
+
+<link rel="canonical" href="http://example.com/2024/07/07/Linux/Linux/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux_基础(一) | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/07/Linux/Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux_基础(一)
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-07 12:00:00" itemprop="dateCreated datePublished" datetime="2024-07-07T12:00:00+08:00">2024-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-22 17:11:35" itemprop="dateModified" datetime="2024-08-22T17:11:35+08:00">2024-08-22</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、基础"><a href="#一、基础" class="headerlink" title="一、基础"></a>一、基础</h1><h2 id="1-1、操作系统概述"><a href="#1-1、操作系统概述" class="headerlink" title="1.1、操作系统概述"></a>1.1、操作系统概述</h2><p><strong>操作系统：</strong>软件的一类</p>
+<p><strong>作用：</strong>协助用户调度硬件工作，充当用户和计算机硬件之间的桥梁</p>
+<p>常见的操作系统：</p>
+<p>PC端：Windows、Linux、MacOS</p>
+<p>移动端：Android、IOS、鸿蒙系统</p>
+<h2 id="1-2、初始Linux"><a href="#1-2、初始Linux" class="headerlink" title="1.2、初始Linux"></a>1.2、初始Linux</h2><h3 id="1-2-1-Linux的诞生"><a href="#1-2-1-Linux的诞生" class="headerlink" title="1.2.1 Linux的诞生"></a>1.2.1 Linux的诞生</h3><p>Linux由林纳斯·托瓦兹在1991年创立并发展至今成为服务器操作系统领域的核心系统。</p>
+<h3 id="1-2-2-Linux系统的内核"><a href="#1-2-2-Linux系统的内核" class="headerlink" title="1.2.2 Linux系统的内核"></a>1.2.2 Linux系统的内核</h3><p>内核提供了Linux系统的主要功能，如硬件调度管理的能力。</p>
+<p>Linux内核是免费开源的，任何人都可以查看内核的源代码，甚至是贡献源代码</p>
+<p>网站：<a target="_blank" rel="noopener" href="https://www.kernel.org/">https://www.kernel.org</a></p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221207212358655.png" alt="image-20221207212358655"></p>
+<p>比如，播放音乐，无论用户使用自带音乐播放器还是自行安装的第三方播放器</p>
+<p>均是由播放器程序，调用内核提供的相关功能，由内核调用CPU解码、音响发声等</p>
+<h3 id="1-2-3-Linux系统发行版"><a href="#1-2-3-Linux系统发行版" class="headerlink" title="1.2.3 Linux系统发行版"></a>1.2.3 Linux系统发行版</h3><p>内核无法被用户直接使用，需要配合应用程序才能被用户使用。</p>
+<p>在内核之上，封装系统级应用程序，组合在一起就称之为Linux发行版。</p>
+<p>centOS，ubuntu</p>
+<h2 id="1-3、虚拟机介绍"><a href="#1-3、虚拟机介绍" class="headerlink" title="1.3、虚拟机介绍"></a>1.3、虚拟机介绍</h2><p>虚拟机：通过虚拟化技术，在电脑内，虚拟出计算机硬件，并给虚拟的硬件安装操作系统，即可得到一台虚拟的电脑，称之为虚拟机</p>
+<p>使用虚拟机的原因：</p>
+<p>在其他其他系统中配置Linux环境进行学习</p>
+<h2 id="1-4、VMware-WorkStation安装"><a href="#1-4、VMware-WorkStation安装" class="headerlink" title="1.4、VMware WorkStation安装"></a>1.4、VMware WorkStation安装</h2><h3 id="1-4-1、VMware-WorkStation软件"><a href="#1-4-1、VMware-WorkStation软件" class="headerlink" title="1.4.1、VMware WorkStation软件"></a>1.4.1、VMware WorkStation软件</h3><p><strong>虚拟化软件</strong></p>
+<p>通过虚拟化集市，虚拟出计算机的硬件。</p>
+<p><strong>下载地址：</strong><a target="_blank" rel="noopener" href="https://www.vmware.com/cn/products/workstation-pro.html">https://www.vmware.com/cn/products/workstation-pro.html</a></p>
+<h3 id="1-4-2、软件的安装"><a href="#1-4-2、软件的安装" class="headerlink" title="1.4.2、软件的安装"></a>1.4.2、软件的安装</h3><p>软件安装完成后，验证一下网络适配器是否正常配置。</p>
+<p>或者通过快捷键：win + r<br>输入ncpa.cpl回车即可打开</p>
+<h2 id="1-5、在VMware上安装Linux"><a href="#1-5、在VMware上安装Linux" class="headerlink" title="1.5、在VMware上安装Linux"></a>1.5、在VMware上安装Linux</h2><h3 id="1-5-1-下载CentOS操作系统"><a href="#1-5-1-下载CentOS操作系统" class="headerlink" title="1.5.1 下载CentOS操作系统"></a>1.5.1 下载CentOS操作系统</h3><p>首先，我们需要下载操作系统的安装文件，本次使用CentOS7.6版本进行学习：<br><a target="_blank" rel="noopener" href="https://vault.centos.org/7.6.1810/isos/x86_64/">https://vault.centos.org/7.6.1810/isos/x86_64/</a>   (最后的&#x2F;不要漏掉）</p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208115950907.png" alt="image-20221208115950907"></p>
+<p>或者直接使用如下链接下载：<br><a target="_blank" rel="noopener" href="https://vault.centos.org/7.6.1810/isos/x86_64/CentOS-7-x86_64-DVD-1810.iso">https://vault.centos.org/7.6.1810/isos/x86_64/CentOS-7-x86_64-DVD-1810.iso</a></p>
+<h3 id="1-5-2-在VMware中安装CentOS操作系统"><a href="#1-5-2-在VMware中安装CentOS操作系统" class="headerlink" title="1.5.2 在VMware中安装CentOS操作系统"></a>1.5.2 在VMware中安装CentOS操作系统</h3><p>打开VMware软件</p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208120052453.png" alt="image-20221208120052453"> </p>
+<p>按照步骤创建虚拟机：</p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208120138387.png" alt="image-20221208120138387"></p>
+<p>点击完成后，即开启了CentOS系统的安装，耐心等待安装完成即可，后续都是自动化的。</p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208120153131.png" alt="image-20221208120153131"> </p>
+<p>点击用户名：<br><img src="/2024/07/07/Linux/Linux/image-20221208120206976.png" alt="image-20221208120206976"></p>
+<p>输入密码：</p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208120214175.png" alt="image-20221208120214175"></p>
+<h2 id="1-6、远程连接Linux系统"><a href="#1-6、远程连接Linux系统" class="headerlink" title="1.6、远程连接Linux系统"></a>1.6、远程连接Linux系统</h2><h3 id="1-6-1-图形化和命令行"><a href="#1-6-1-图形化和命令行" class="headerlink" title="1.6.1 图形化和命令行"></a>1.6.1 图形化和命令行</h3><ul>
+<li>图形化操作是指使用操作系统附带的图形化页面，以图形化的窗口形式获得操作反馈，从而对操作系统进行操作、使用</li>
+<li>命令行操作是指使用各种命令，以文字字符的形式获得操作反馈，从而对操作系统进行操作、使用</li>
+</ul>
+<h3 id="1-6-2-FinalShell"><a href="#1-6-2-FinalShell" class="headerlink" title="1.6.2 FinalShell"></a>1.6.2 FinalShell</h3><p>我们使用VMware可以得到Linux虚拟机，但是在VMware中操作Linux的命令行页面不太方便，主要是：<br>内容的复制、粘贴跨越VMware不方便<br>文件的上传、下载跨越VMware不方便<br>也就是和Linux系统的各类交互，跨越VMware不方便</p>
+<p>我们可以通过第三方软件，FinalShell，远程连接到Linux操作系统之上。<br>并通过FinalShell去操作Linux系统。<br>这样各类操作都会十分的方便。</p>
+<p>FinalShell的下载地址为：<br>Windows:<br><a target="_blank" rel="noopener" href="http://www.hostbuf.com/downloads/finalshell_install.exe">http://www.hostbuf.com/downloads/finalshell_install.exe</a><br>Mac:<br><a target="_blank" rel="noopener" href="http://www.hostbuf.com/downloads/finalshell_install.pkg">http://www.hostbuf.com/downloads/finalshell_install.pkg</a><br>下载完成后双击打开安装。</p>
+<h3 id="1-6-3-连接到Linux系统"><a href="#1-6-3-连接到Linux系统" class="headerlink" title="1.6.3 连接到Linux系统"></a>1.6.3 连接到Linux系统</h3><p>首先，先查询到Linux系统的IP地址<br><img src="/2024/07/07/Linux/Linux/image-20221208120523327.png" alt="image-20221208120523327"> </p>
+<p>打开Finshell软件，配置到Linux系统的连接（Mac和Windows系统的操作一致，不再分开赘述）<br><img src="/2024/07/07/Linux/Linux/image-20221208120551815.png" alt="image-20221208120551815"> </p>
+<p>按图示配置连接，并点击确定<br><img src="/2024/07/07/Linux/Linux/image-20221208120611311.png" alt="image-20221208120611311"> </p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208120626447.png" alt="image-20221208120626447"> </p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208120635094.png" alt="image-20221208120635094"> </p>
+<p>如图，连接成功<br><img src="/2024/07/07/Linux/Linux/image-20221208120705488.png" alt="image-20221208120705488"> </p>
+<p>注意：<br>Linux虚拟机如果重启，有可能，发生IP改变<br>如果改变IP需要在FinalShell中修改连接的IP地址</p>
+<h2 id="1-7、扩展：WSL（Windows-Subsystem-for-Linux）"><a href="#1-7、扩展：WSL（Windows-Subsystem-for-Linux）" class="headerlink" title="1.7、扩展：WSL（Windows Subsystem for Linux）"></a>1.7、扩展：WSL（Windows Subsystem for Linux）</h2><p>WSL：Windows Subsystem for Linux，是用于Windows系统之上的Linux子系统。<br>作用很简单，可以在Windows系统中获得Linux系统环境，并完全直连计算机硬件，无需通过虚拟机虚拟硬件。</p>
+<p>简而言之：<br>Windows10的WSL功能，可以无需单独虚拟一套硬件设备<br>就可以直接使用主机的物理硬件，构建Linux操作系统<br>并不会影响Windows系统本身的运行</p>
+<p>安装：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/475462241">Windows 11 安装 WSL2 - 知乎 (zhihu.com)</a></p>
+<h2 id="1-8、快照"><a href="#1-8、快照" class="headerlink" title="1.8、快照"></a>1.8、快照</h2><ol>
+<li>快照有什么作用？<br>快照可以保存虚拟机的状态， 当虚拟机出现问题的时候， 可以通过预先制作的快照恢复到制作时候的状态， 用作备份用。</li>
+<li>VMware Workstation 和 VMware Fusion 都支持制作快照去使用</li>
+</ol>
+<h1 id="二、Linux基础命令"><a href="#二、Linux基础命令" class="headerlink" title="二、Linux基础命令"></a>二、Linux基础命令</h1><h2 id="2-1、Linux的目录结构"><a href="#2-1、Linux的目录结构" class="headerlink" title="2.1、Linux的目录结构"></a>2.1、Linux的目录结构</h2><p><img src="/2024/07/07/Linux/Linux/20221027214128.png" alt="image-20221027214128453"></p>
+<ul>
+<li><code>/</code>，根目录是最顶级的目录了</li>
+<li>Linux只有一个顶级目录：<code>/</code></li>
+<li>路径描述的层次关系同样适用<code>/</code>来表示</li>
+<li>&#x2F;home&#x2F;itheima&#x2F;a.txt，表示根目录下的home文件夹内有itheima文件夹，内有a.txt</li>
+</ul>
+<h2 id="2-2、Linux命令入门"><a href="#2-2、Linux命令入门" class="headerlink" title="2.2、Linux命令入门"></a>2.2、Linux命令入门</h2><h3 id="2-2-1-Linux命令基础"><a href="#2-2-1-Linux命令基础" class="headerlink" title="2.2.1 Linux命令基础"></a>2.2.1 Linux命令基础</h3><ul>
+<li><p><strong>命令：</strong>即Linux操作指令，是系统内置的程序，可以以字符化的形式去使用</p>
+</li>
+<li><p><strong>命令行：</strong>即Linux终端，可以提供字符化的操作页面提供命令行</p>
+</li>
+</ul>
+<p>Linux命令的通用格式</p>
+<p><code>command [-options] [parameter]</code></p>
+<ul>
+<li>命令本体，即命令本身</li>
+<li>可选选项，控制命令的行为细节</li>
+<li>可选参数，控制命令的指向目标</li>
+</ul>
+<h3 id="2-2-2-ls命令入门"><a href="#2-2-2-ls命令入门" class="headerlink" title="2.2.2 ls命令入门"></a>2.2.2 ls命令入门</h3><p>功能：列出文件夹信息</p>
+<p>语法：<code>ls [-l -h -a] [参数]</code></p>
+<ul>
+<li>参数：被查看的文件夹，不提供参数，表示查看当前工作目录</li>
+<li>-l，以列表形式查看</li>
+<li>-h，配合-l，以更加人性化的方式显示文件大小</li>
+<li>-a，显示隐藏文件<ul>
+<li>隐藏文件是以<code>.</code>开头的</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208205542925.png" alt="image-20221208205542925"></p>
+<p><strong>命令的选项组合使用</strong></p>
+<ul>
+<li>命令的选项是可以组合使用的，比如：ls -lah，等同于ls -l -a -h</li>
+</ul>
+<p>HOME目录</p>
+<p>每一个用户在Linux系统中都有自己的专属工作目录，称之为HOME目录。</p>
+<ul>
+<li><p>普通用户的HOME目录，默认在：<code>/home/用户名</code></p>
+</li>
+<li><p>root用户的HOME目录，在：<code>/root</code></p>
+</li>
+</ul>
+<p>FinalShell登陆终端后，默认的工作目录就是用户的HOME目录</p>
+<h2 id="2-3、目录切换指令（cd-pwd"><a href="#2-3、目录切换指令（cd-pwd" class="headerlink" title="2.3、目录切换指令（cd&#x2F;pwd)"></a>2.3、目录切换指令（cd&#x2F;pwd)</h2><h3 id="2-3-1-cd-切换工作目录"><a href="#2-3-1-cd-切换工作目录" class="headerlink" title="2.3.1 cd 切换工作目录"></a>2.3.1 cd 切换工作目录</h3><p>功能：切换工作目录</p>
+<p>语法：<code>cd [目标目录]</code></p>
+<p>来自英文：Change Directory</p>
+<p>参数：目标目录，要切换去的地方，不提供默认切换到<code>当前登录用户HOME目录</code></p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208211409101.png" alt="image-20221208211409101"></p>
+<h3 id="2-3-2-pwd-查看当前工作目录"><a href="#2-3-2-pwd-查看当前工作目录" class="headerlink" title="2.3.2 pwd 查看当前工作目录"></a>2.3.2 pwd 查看当前工作目录</h3><p>功能：展示当前工作目录</p>
+<p>来自英文：Print Work Directory</p>
+<p>语法：<code>pwd</code></p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208211533134.png" alt="image-20221208211533134"> </p>
+<h3 id="2-3-3-相对路径、绝对路径"><a href="#2-3-3-相对路径、绝对路径" class="headerlink" title="2.3.3 相对路径、绝对路径"></a>2.3.3 相对路径、绝对路径</h3><ul>
+<li><p>相对路径，&#x3D;&#x3D;非&#x3D;&#x3D;<code>/</code>开头的称之为相对路径</p>
+<p>相对路径表示以<code>当前目录</code>作为起点，去描述路径，如<code>test/a.txt</code>，表示当前工作目录内的test文件夹内的a.txt文件</p>
+</li>
+<li><p>绝对路径，&#x3D;&#x3D;以&#x3D;&#x3D;<code>/</code>开头的称之为绝对路径</p>
+<p>绝对路径从<code>根</code>开始描述路径</p>
+</li>
+</ul>
+<h3 id="2-3-4-特殊路径符"><a href="#2-3-4-特殊路径符" class="headerlink" title="2.3.4 特殊路径符"></a>2.3.4 特殊路径符</h3><ul>
+<li><code>.</code>，表示当前，比如.&#x2F;a.txt，表示当前文件夹内的<code>a.txt</code>文件</li>
+<li><code>..</code>，表示上级目录，比如<code>../</code>表示上级目录，<code>../../</code>表示上级的上级目录</li>
+<li><code>~</code>，表示用户的HOME目录，比如<code>cd ~</code>，即可切回用户HOME目录</li>
+</ul>
+<h2 id="2-4、创建目录指令（mkdir）"><a href="#2-4、创建目录指令（mkdir）" class="headerlink" title="2.4、创建目录指令（mkdir）"></a>2.4、创建目录指令（mkdir）</h2><p>功能：创建文件夹</p>
+<p>来自英文：Make Directory </p>
+<p>语法：<code>mkdir [-p] 参数</code></p>
+<ul>
+<li>参数：被创建文件夹的路径</li>
+<li>选项：-p，可选，表示创建前置路径，表示自动创建不存在的父目录，适用于创建连续多层级的目录</li>
+</ul>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208214054343.png" alt="image-20221208214054343"> </p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208214113063.png" alt="image-20221208214113063"> </p>
+<p>注意：创建文件夹需要修改权限，请确保操作均在HOME目录内，不要在HOME外操作<br>涉及到权限问题，HOME外无法成功</p>
+<h2 id="2-5、文件操作指令"><a href="#2-5、文件操作指令" class="headerlink" title="2.5、文件操作指令"></a>2.5、文件操作指令</h2><p>（touch、cat、more、cp、mv）</p>
+<h3 id="2-5-1-touch命令"><a href="#2-5-1-touch命令" class="headerlink" title="2.5.1 touch命令"></a>2.5.1 touch命令</h3><p>功能：创建文件</p>
+<p>语法：<code>touch 参数</code></p>
+<ul>
+<li>参数：被创建的文件路径</li>
+<li>touch命令无选项，参数必填，表示要创建的文件路径，相对、绝对、特殊路径符均可以使用</li>
+</ul>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208214659002.png" alt="image-20221208214659002"></p>
+<h3 id="2-5-2-cat命令"><a href="#2-5-2-cat命令" class="headerlink" title="2.5.2 cat命令"></a>2.5.2 cat命令</h3><p>功能：查看文件内容</p>
+<p>语法：<code>cat 参数</code></p>
+<ul>
+<li>参数：被查看的文件路径</li>
+<li>cat是直接将内容全部显示出来</li>
+</ul>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208214955238.png" alt="image-20221208214955238"> </p>
+<h3 id="2-5-3-more命令"><a href="#2-5-3-more命令" class="headerlink" title="2.5.3 more命令"></a>2.5.3 more命令</h3><p>功能：查看文件，可以支持翻页查看</p>
+<p>语法：<code>more 参数</code></p>
+<ul>
+<li>参数：被查看的文件路径</li>
+<li>在查看过程中：<ul>
+<li><code>空格</code>键翻页</li>
+<li><code>q</code>退出查看</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-4-cp命令"><a href="#2-5-4-cp命令" class="headerlink" title="2.5.4 cp命令"></a>2.5.4 cp命令</h3><p>功能：复制文件、文件夹</p>
+<p>语法：<code>cp [-r] 参数1 参数2</code></p>
+<ul>
+<li>参数1，被复制的</li>
+<li>参数2，要复制去的地方</li>
+<li>选项：-r，可选，复制文件夹使用</li>
+</ul>
+<p>示例：</p>
+<ul>
+<li>cp a.txt b.txt，复制当前目录下a.txt为b.txt</li>
+<li>cp a.txt test&#x2F;，复制当前目录a.txt到test文件夹内</li>
+<li>cp -r test test2，复制文件夹test到当前文件夹内为test2存在</li>
+</ul>
+<h3 id="2-5-5-mv命令"><a href="#2-5-5-mv命令" class="headerlink" title="2.5.5 mv命令"></a>2.5.5 mv命令</h3><p>功能：移动文件、文件夹</p>
+<p>语法：<code>mv 参数1 参数2</code></p>
+<ul>
+<li>参数1：被移动的</li>
+<li>参数2：要移动去的地方，参数2如果不存在，则会进行改名</li>
+</ul>
+<p><img src="/2024/07/07/Linux/Linux/image-20221208220054878.png" alt="image-20221208220054878"> </p>
+<h3 id="2-5-6-rm命令"><a href="#2-5-6-rm命令" class="headerlink" title="2.5.6 rm命令"></a>2.5.6 rm命令</h3><p>功能：删除文件、文件夹</p>
+<p>语法：<code>rm [-r -f] 参数...参数</code></p>
+<ul>
+<li>参数：支持多个，每一个表示被删除的，空格进行分隔</li>
+<li>选项：-r，删除文件夹使用</li>
+<li>选项：-f，强制删除，不会给出确认提示，一般root用户会用到</li>
+</ul>
+<blockquote>
+<p>rm命令很危险，一定要注意，特别是切换到root用户的时候。</p>
+</blockquote>
+<h2 id="2-6、查找命令（which、find）"><a href="#2-6、查找命令（which、find）" class="headerlink" title="2.6、查找命令（which、find）"></a>2.6、查找命令（which、find）</h2><h3 id="2-6-1-which命令"><a href="#2-6-1-which命令" class="headerlink" title="2.6.1 which命令"></a>2.6.1 which命令</h3><p>功能：查看命令的程序本体文件路径</p>
+<p>语法：<code>which 参数</code></p>
+<ul>
+<li>参数：被查看的命令</li>
+</ul>
+<h3 id="2-6-2-find命令"><a href="#2-6-2-find命令" class="headerlink" title="2.6.2 find命令"></a>2.6.2 find命令</h3><p>功能：搜索文件</p>
+<p>语法1按文件名搜索：<code>find 路径 -name 参数</code></p>
+<ul>
+<li>路径，搜索的起始路径</li>
+<li>参数，搜索的关键字，支持通配符*， 比如：<code>*</code>test表示搜索任意以test结尾的文件</li>
+</ul>
+<p>语法：<code>find 起始路径 -size +|-n[KMG]</code><br>+、- 表示大于和小于<br>n表示大小数字<br>kMG表示大小单位，k(小写字母)表示kb，M表示MB，G表示GB</p>
+<p>示例：<br>查找小于10KB的文件： find &#x2F; -size -10k<br>查找大于100MB的文件：find &#x2F; -size +100M<br>查找大于1GB的文件：find &#x2F; -size +1G</p>
+<h3 id="2-6-3-通配符"><a href="#2-6-3-通配符" class="headerlink" title="2.6.3 通配符"></a>2.6.3 通配符</h3><p>被查找文件名，支持使用通配符 * 来做模糊查询。<br>符号* 表示通配符，即匹配任意内容（包含空），示例：<br>test*，表示匹配任何以test开头的内容<br>*test，表示匹配任何以test结尾的内容<br><em>test</em>，表示匹配任何包含test的内容<br>基于通配符的含义，可以结合find命令做文件的模糊查询。</p>
+<h2 id="2-7、grep、wc和管道符"><a href="#2-7、grep、wc和管道符" class="headerlink" title="2.7、grep、wc和管道符"></a>2.7、grep、wc和管道符</h2><h3 id="2-7-1-grep命令"><a href="#2-7-1-grep命令" class="headerlink" title="2.7.1 grep命令"></a>2.7.1 grep命令</h3><p>功能：过滤关键字</p>
+<p>语法：<code>grep [-n] 关键字 文件路径</code></p>
+<ul>
+<li>选项-n，可选，表示在结果中显示匹配的行的行号。</li>
+<li>参数，关键字，必填，表示过滤的关键字，带有空格或其它特殊符号，建议使用””将关键字包围起来</li>
+<li>参数，文件路径，必填，表示要过滤内容的文件路径，可作为内容输入端口</li>
+</ul>
+<blockquote>
+<p>参数文件路径，可以作为管道符的输入</p>
+</blockquote>
+<h3 id="2-7-2-wc命令"><a href="#2-7-2-wc命令" class="headerlink" title="2.7.2 wc命令"></a>2.7.2 wc命令</h3><p>功能：统计</p>
+<p>语法：<code>wc [-c -m -l -w] 文件路径</code></p>
+<ul>
+<li>选项，-c，统计bytes数量</li>
+<li>选项，-m，统计字符数量</li>
+<li>选项，-l，统计行数</li>
+<li>选项，-w，统计单词数量</li>
+<li>参数，文件路径，被统计的文件，可作为内容输入端口</li>
+</ul>
+<blockquote>
+<p>参数文件路径，可作为管道符的输入</p>
+</blockquote>
+<h3 id="2-7-3-管道符"><a href="#2-7-3-管道符" class="headerlink" title="2.7.3 管道符|"></a>2.7.3 管道符|</h3><p>写法：<code>|</code></p>
+<p>功能：将符号左边的结果，作为符号右边的输入</p>
+<p>示例：</p>
+<p><code>cat a.txt | grep itheima</code>，将</p>
+<p> a.txt的结果，作为grep命令的输入，用来过滤<code>itheima</code>关键字</p>
+<p>可以支持嵌套：</p>
+<p><code>cat a.txt | grep itheima | grep itcast</code></p>
+<h2 id="2-8、echo和重定向符"><a href="#2-8、echo和重定向符" class="headerlink" title="2.8、echo和重定向符"></a>2.8、echo和重定向符</h2><h3 id="2-8-1-echo命令"><a href="#2-8-1-echo命令" class="headerlink" title="2.8.1 echo命令"></a>2.8.1 echo命令</h3><p>功能：输出内容</p>
+<p>语法：<code>echo 参数</code></p>
+<ul>
+<li>参数：被输出的内容</li>
+</ul>
+<h3 id="2-8-2-反引号"><a href="#2-8-2-反引号" class="headerlink" title="2.8.2 &#96;反引号"></a>2.8.2 &#96;反引号</h3><p>功能：被两个反引号包围的内容，会作为命令执行</p>
+<p>示例：</p>
+<ul>
+<li>echo `pwd`，会输出当前工作目录</li>
+</ul>
+<h3 id="2-8-3-tail命令"><a href="#2-8-3-tail命令" class="headerlink" title="2.8.3 tail命令"></a>2.8.3 tail命令</h3><p>功能：查看文件尾部内容</p>
+<p>语法：<code>tail [-f] 参数</code></p>
+<ul>
+<li>参数：被查看的文件</li>
+<li>选项：-f，持续跟踪文件修改</li>
+</ul>
+<h3 id="2-8-4-head命令"><a href="#2-8-4-head命令" class="headerlink" title="2.8.4 head命令"></a>2.8.4 head命令</h3><p>功能：查看文件头部内容</p>
+<p>语法：<code>head [-n] 参数</code></p>
+<ul>
+<li>参数：被查看的文件</li>
+<li>选项：-n，查看的行数</li>
+</ul>
+<h3 id="2-8-5-重定向符"><a href="#2-8-5-重定向符" class="headerlink" title="2.8.5 重定向符"></a>2.8.5 重定向符</h3><p>功能：将符号左边的结果，输出到右边指定的文件中去</p>
+<ul>
+<li><code>&gt;</code>，表示覆盖输出</li>
+<li><code>&gt;&gt;</code>，表示追加输出</li>
+</ul>
+<h2 id="2-9、vi编辑器"><a href="#2-9、vi编辑器" class="headerlink" title="2.9、vi编辑器"></a>2.9、vi编辑器</h2><p><img src="/2024/07/07/Linux/Linux/image-20221220160623738.png" alt="image-20221220160623738"></p>
+<h3 id="命令模式快捷键"><a href="#命令模式快捷键" class="headerlink" title="命令模式快捷键"></a>命令模式快捷键</h3><p><img src="/2024/07/07/Linux/Linux/20221027215841.png" alt="image-20221027215841573"></p>
+<p><img src="/2024/07/07/Linux/Linux/20221027215846.png" alt="image-20221027215846581"></p>
+<p><img src="/2024/07/07/Linux/Linux/20221027215849.png" alt="image-20221027215849668"></p>
+<h3 id="底线命令快捷键"><a href="#底线命令快捷键" class="headerlink" title="底线命令快捷键"></a>底线命令快捷键</h3><p><img src="/2024/07/07/Linux/Linux/20221027215858.png" alt="image-20221027215858967"></p>
+<h2 id="2-10-命令的选项"><a href="#2-10-命令的选项" class="headerlink" title="2.10 命令的选项"></a>2.10 命令的选项</h2><p>我们学习的一系列Linux命令，它们所拥有的选项都是非常多的。</p>
+<p>比如，简单的ls命令就有：-a -A -b -c -C -d -D -f -F -g -G -h -H -i -I -k -l -L -m -n -N -o -p -q -Q -r-R -s -S -t -T -u -U -v -w -x -X -1等选项，可以发现选项是极其多的。</p>
+<p>课程中， 并不会将全部的选项都进行讲解，否则，一个ls命令就可能讲解2小时之久。</p>
+<p>课程中，会对常见的选项进行讲解， 足够满足绝大多数的学习、工作场景。</p>
+<h3 id="查看命令的帮助"><a href="#查看命令的帮助" class="headerlink" title="查看命令的帮助"></a>查看命令的帮助</h3><p>可以通过：<code>命令 --help</code>查看命令的帮助手册</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027220005.png" alt="image-20221027220005610"></p>
+<h3 id="查看命令的详细手册"><a href="#查看命令的详细手册" class="headerlink" title="查看命令的详细手册"></a>查看命令的详细手册</h3><p>可以通过：<code>man 命令</code>查看某命令的详细手册</p>
+<p>man ls，就是查看ls命令的详细手册<br>man cd，就是查看cd命令的详细手册</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027220010.png" alt="image-20221027220009949"></p>
+<p>大多数手册都是全英文的，如果阅读吃力，可以通过重定向符：man ls &gt; ls-man.txt，输出手册到文件<br>然后通过翻译软件翻译内容查看哦</p>
+<h1 id="三、用户和权限"><a href="#三、用户和权限" class="headerlink" title="三、用户和权限"></a>三、用户和权限</h1><h2 id="3-1、root用户"><a href="#3-1、root用户" class="headerlink" title="3.1、root用户"></a>3.1、root用户</h2><h3 id="3-1-1-root用户（超级管理员）"><a href="#3-1-1-root用户（超级管理员）" class="headerlink" title="3.1.1 root用户（超级管理员）"></a>3.1.1 root用户（超级管理员）</h3><p>无论是Windows、MacOS、Linux均采用多用户的管理模式进行权限管理。</p>
+<ul>
+<li>在Linux系统中，拥有最大权限的账户名为：root（超级管理员）</li>
+<li>而在前期，我们一直使用的账户是普通的用户：lixinqian</li>
+</ul>
+<p><img src="/2024/07/07/Linux/Linux/image-20221220161459179.png" alt="image-20221220161459179"> </p>
+<h3 id="3-1-2-su和exit指令"><a href="#3-1-2-su和exit指令" class="headerlink" title="3.1.2 su和exit指令"></a>3.1.2 su和exit指令</h3><p>su指令</p>
+<p>作用：账户切换的系统命令，</p>
+<p>来源英文单词：Switch User<br>语法：<code>su [-] [用户名]</code></p>
+<ul>
+<li>符号是可选的，表示是否在切换用户后加载环境变量（后续讲解），建议带上<br>参数：用户名，表示要切换的用户，用户名也可以省略，省略表示切换到root<br>切换用户后，可以通过exit命令退回上一个用户，也可以使用快捷键：ctrl + d</li>
+</ul>
+<p>使用普通用户，切换到其它用户需要输入密码，如切换到root用户<br>使用root用户切换到其它用户，无需密码，可以直接切换</p>
+<h3 id="3-1-3-sudo命令"><a href="#3-1-3-sudo命令" class="headerlink" title="3.1.3 sudo命令"></a>3.1.3 sudo命令</h3><p>在我们得知root密码的时候，可以通过su命令切换到root得到最大权限。<br>但是我们不建议长期使用root用户，避免带来系统损坏。</p>
+<p>我们可以使用sudo命令，为普通的命令授权，临时以root身份执行。</p>
+<p>语法：<code>sudo 其他命令</code><br>在其它命令之前，带上sudo，即可为这一条命令临时赋予root授权</p>
+<p>但是并不是所有的用户，都有权利使用sudo，我们需要为普通用户配置sudo认证</p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221220161727878.png" alt="image-20221220161727878"> </p>
+<h2 id="3-2、用户、用户组管理"><a href="#3-2、用户、用户组管理" class="headerlink" title="3.2、用户、用户组管理"></a>3.2、用户、用户组管理</h2><h3 id="3-2-1-Linux用户管理模式"><a href="#3-2-1-Linux用户管理模式" class="headerlink" title="3.2.1 Linux用户管理模式"></a>3.2.1 Linux用户管理模式</h3><ul>
+<li>Linux可以支持多用户、多用户组、用户加入多个组</li>
+<li>Linux权限管控的单元是用户级别和用户组级别</li>
+</ul>
+<h3 id="3-2-2-用户组管理"><a href="#3-2-2-用户组管理" class="headerlink" title="3.2.2 用户组管理"></a>3.2.2 用户组管理</h3><p>以下命令需root用户执行</p>
+<ul>
+<li>创建用户组<ul>
+<li><code>groupadd 用户组名</code></li>
+</ul>
+</li>
+<li>删除用户组<ul>
+<li><code>groupdel 用户组名</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-3-用户管理"><a href="#3-2-3-用户管理" class="headerlink" title="3.2.3 用户管理"></a>3.2.3 用户管理</h3><p>以下命令需root用户执行</p>
+<ul>
+<li>创建用户<ul>
+<li><code>useradd [-g -d] 用户名</code></li>
+<li>选项：-g指定用户的组，不指定-g，会创建同名组并自动加入，指定-g需要组已经存在，如已存在同名组，必须使用-g</li>
+<li>选项：-d指定用户HOME路径，不指定，HOME目录默认在：&#x2F;home&#x2F;用户名</li>
+</ul>
+</li>
+<li>删除用户<ul>
+<li><code>userdel [-r] 用户名</code></li>
+<li>选项：-r，删除用户的HOME目录，不使用-r，删除用户时，HOME目录保留</li>
+</ul>
+</li>
+<li>产看用户所属组<ul>
+<li><code>id [用户名]</code></li>
+<li>参数：用户名，被查看的用户，如果不提供则查看自身</li>
+</ul>
+</li>
+<li>修改用户所属组<ul>
+<li><code>usermod -aG 用户组 用户名</code></li>
+<li>将指定用户加入指定用户组</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-4-getent"><a href="#3-2-4-getent" class="headerlink" title="3.2.4 getent"></a>3.2.4 getent</h3><p><img src="/2024/07/07/Linux/Linux/image-20221220163811465.png" alt="image-20221220163811465"> </p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221220163820246.png" alt="image-20221220163820246"> </p>
+<h2 id="3-3、查看权限控制"><a href="#3-3、查看权限控制" class="headerlink" title="3.3、查看权限控制"></a>3.3、查看权限控制</h2><h3 id="3-3-1-认知权限信息"><a href="#3-3-1-认知权限信息" class="headerlink" title="3.3.1 认知权限信息"></a>3.3.1 认知权限信息</h3><p>通过ls -l 可以以列表形式查看内容，并显示权限细节<br><img src="/2024/07/07/Linux/Linux/image-20221220165137119.png" alt="image-20221220165137119"></p>
+<p>序号1，表示文件、文件夹的权限控制信息<br>序号2，表示文件、文件夹所属用户<br>序号3，表示文件、文件夹所属用户组</p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221220165215384.png" alt="image-20221220165215384"> </p>
+<h3 id="3-3-2-rwx"><a href="#3-3-2-rwx" class="headerlink" title="3.3.2 rwx"></a>3.3.2 rwx</h3><p>那么，rwx到底代表什么呢？</p>
+<ul>
+<li>r表示读权限</li>
+<li>w表示写权限</li>
+<li>x表示执行权限</li>
+</ul>
+<p>针对文件、文件夹的不同，rwx的含义有细微差别</p>
+<ul>
+<li>r，针对文件可以查看文件内容<ul>
+<li>针对文件夹，可以查看文件夹内容，如ls命令</li>
+</ul>
+</li>
+<li>w，针对文件表示可以修改此文件<ul>
+<li>针对文件夹，可以在文件夹内：创建、删除、改名等操作</li>
+</ul>
+</li>
+<li>x，针对文件表示可以将文件作为程序执行<ul>
+<li>针对文件夹，表示可以更改工作目录到此文件夹，即cd进入</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-4、修改权限控制"><a href="#3-4、修改权限控制" class="headerlink" title="3.4、修改权限控制"></a>3.4、修改权限控制</h2><h3 id="3-4-1-chmod"><a href="#3-4-1-chmod" class="headerlink" title="3.4.1 chmod"></a>3.4.1 chmod</h3><p>功能：修改文件、文件夹的权限细节</p>
+<p>限制：只能是文件、文件夹的所属用户或root有权修改</p>
+<p>语法：<code>chmod [-R] 权限 文件或文件夹</code></p>
+<p>选项：-R，对文件夹内的全部内容应用同样规则</p>
+<p>示例：</p>
+<ul>
+<li><code>chmod u=rwx,g=rx,o=x hello.txt</code> ，将文件权限修改为：<code>rwxr-x--x</code><ul>
+<li>其中：u表示user所属用户权限，g表示group组权限，o表示other其它用户权限</li>
+</ul>
+</li>
+<li><code>chmod -R u=rwx,g=rx,o=x test</code>，将文件夹test以及文件夹内全部内容权限设置为：<code>rwxr-x--x</code></li>
+<li>除此之外，还有快捷写法：<code>chmod 751 hello.txt</code></li>
+<li>快捷写法：就是将用户、用户组、其他用户的权限都按照二进制的形式表示</li>
+</ul>
+<h3 id="3-4-2-chown"><a href="#3-4-2-chown" class="headerlink" title="3.4.2 chown"></a>3.4.2 chown</h3><p>功能：修改文件、文件夹的所属用户、组<br>限制，只可root执行<br>语法：<code>chown [-R] [用户][:][用户组] 文件或文件夹</code><br>选项，-R，同chmod，对文件夹内全部内容应用相同规则<br>选项，用户，修改所属用户<br>选项，用户组，修改所属用户组<br>:用于分隔用户和用户组</p>
+<p>示例：<br>chown root hello.txt，将hello.txt所属用户修改为root<br>chown :root hello.txt，将hello.txt所属用户组修改为root<br>chown root:itheima hello.txt，将hello.txt所属用户修改为root，用户组修改为itheima<br>chown -R root test，将文件夹test的所属用户修改为root并对文件夹内全部内容应用同样规则</p>
+<h1 id="四、Linux使用操作"><a href="#四、Linux使用操作" class="headerlink" title="四、Linux使用操作"></a>四、Linux使用操作</h1><h2 id="4-1、快捷键"><a href="#4-1、快捷键" class="headerlink" title="4.1、快捷键"></a>4.1、快捷键</h2><ol>
+<li>ctrl + c 强制停止<ol>
+<li>停止程序</li>
+<li>停止输入错误的命令</li>
+</ol>
+</li>
+<li>ctrl + d 退出登出<ol>
+<li>退出账户登录</li>
+<li>退出某些特定程序的专属页面</li>
+<li>不能退出vi&#x2F;vim</li>
+</ol>
+</li>
+<li>history 查看历史命令</li>
+<li>!命令前缀，自动匹配上一个命令<ol>
+<li><code>!py 自动搜索上面相同前缀的命令</code></li>
+<li><img src="/2024/07/07/Linux/Linux/image-20221222150710168.png" alt="image-20221222150710168"></li>
+</ol>
+</li>
+<li>ctrl + r，搜索历史命令<ol>
+<li><img src="/2024/07/07/Linux/Linux/image-20221222150745830.png" alt="image-20221222150745830"></li>
+<li>如果搜索到的内容是你需要的，那么：<br>回车键可以直接执行<br>键盘左右键，可以得到此命令（不执行）</li>
+</ol>
+</li>
+<li>ctrl + a | e，光标移动到命令开始或结束</li>
+<li>ctrl + ← | →，左右跳单词</li>
+<li>ctrl + l 或 clear命令 清屏</li>
+</ol>
+<h2 id="4-2、软件安装"><a href="#4-2、软件安装" class="headerlink" title="4.2、软件安装"></a>4.2、软件安装</h2><ul>
+<li><p>CentOS系统使用：</p>
+<ul>
+<li>yum：RPM包软件管理器，用于自动化安装配置Linux软件，并可以自动解决依赖问题。</li>
+<li>yum [-y] [install | remove | search] 软件名称<ul>
+<li>install 安装</li>
+<li>remove 卸载</li>
+<li>search 搜索</li>
+<li>-y，自动确认</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Ubuntu系统使用</p>
+<ul>
+<li>apt  [-y] [install | remove | search]软件名称<ul>
+<li>install 安装</li>
+<li>remove 卸载</li>
+<li>search 搜索</li>
+<li>-y，自动确认</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>yum 和 apt 均需要root权限</p>
+</blockquote>
+<h2 id="4-3、systemctl"><a href="#4-3、systemctl" class="headerlink" title="4.3、systemctl"></a>4.3、systemctl</h2><p>功能：控制系统服务的启动关闭等</p>
+<p>系统内置服务均可被systemctl控制<br>第三方软件，如果自动注册了可以被systemctl控制<br>第三方软件，如果没有自动注册，可以手动注册（后续学习</p>
+<p>语法：<code>systemctl start | stop | restart | disable | enable | status 服务名</code></p>
+<ul>
+<li>start，启动</li>
+<li>stop，停止</li>
+<li>status，查看状态</li>
+<li>disable，关闭开机自启</li>
+<li>enable，开启开机自启</li>
+<li>restart，重启</li>
+</ul>
+<h2 id="4-4、软链接"><a href="#4-4、软链接" class="headerlink" title="4.4、软链接"></a>4.4、软链接</h2><p>功能：创建文件、文件夹软链接（快捷方式）</p>
+<p>语法：<code>ln -s 参数1 参数2</code></p>
+<ul>
+<li>参数1：被链接的</li>
+<li>参数2：要链接去的地方（快捷方式的名称和存放位置）</li>
+</ul>
+<p><img src="/2024/07/07/Linux/Linux/image-20221222162246791.png" alt="image-20221222162246791"> </p>
+<h2 id="4-5、日期和时区"><a href="#4-5、日期和时区" class="headerlink" title="4.5、日期和时区"></a>4.5、日期和时区</h2><h3 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h3><p>语法：<code>date [-d] [+格式化字符串]</code></p>
+<ul>
+<li><p>-d 按照给定的字符串显示日期，一般用于日期计算</p>
+</li>
+<li><p>格式化字符串：通过特定的字符串标记，来控制显示的日期格式</p>
+<ul>
+<li>%Y   年%y   年份后两位数字 (00..99)</li>
+<li>%m   月份 (01..12)</li>
+<li>%d   日 (01..31)</li>
+<li>%H   小时 (00..23)</li>
+<li>%M   分钟 (00..59)</li>
+<li>%S   秒 (00..60)</li>
+<li>%s   自 1970-01-01 00:00:00 UTC 到现在的秒数</li>
+</ul>
+</li>
+</ul>
+<p>示例：</p>
+<ul>
+<li><p>按照2022-01-01的格式显示日期</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027220514.png" alt="image-20221027220514640"></p>
+</li>
+<li><p>按照2022-01-01 10:00:00的格式显示日期</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027220525.png" alt="image-20221027220525625"></p>
+</li>
+<li><p>-d选项日期计算</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027220429.png" alt="image-20221027220429831"></p>
+<ul>
+<li><p>支持的时间标记为：</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027220449.png" alt="image-20221027220449312"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="时区"><a href="#时区" class="headerlink" title="时区"></a>时区</h3><p>修改时区为中国时区</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027220554.png" alt="image-20221027220554654"></p>
+<h3 id="ntp"><a href="#ntp" class="headerlink" title="ntp"></a>ntp</h3><p>功能：同步时间</p>
+<p>安装：<code>yum install -y ntp</code></p>
+<p>启动管理：<code>systemctl start | stop | restart | status | disable | enable ntpd</code></p>
+<p>手动校准时间：<code>ntpdate -u ntp.aliyun.com</code></p>
+<h2 id="4-6、IP地址和主机名"><a href="#4-6、IP地址和主机名" class="headerlink" title="4.6、IP地址和主机名"></a>4.6、IP地址和主机名</h2><h3 id="ip地址"><a href="#ip地址" class="headerlink" title="ip地址"></a>ip地址</h3><p>格式：a.b.c.d</p>
+<ul>
+<li>abcd为0~255的数字</li>
+</ul>
+<p>特殊IP：</p>
+<ul>
+<li>127.0.0.1，表示本机</li>
+<li>0.0.0.0<ul>
+<li>可以表示本机</li>
+<li>也可以表示任意IP（看使用场景）</li>
+</ul>
+</li>
+</ul>
+<p>查看ip：<code>ifconfig</code></p>
+<h3 id="主机名"><a href="#主机名" class="headerlink" title="主机名"></a>主机名</h3><p>功能：Linux系统的名称</p>
+<p>查看：<code>hostname</code></p>
+<p>设置：<code>hostnamectl set-hostname 主机名</code></p>
+<h3 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h3><p>可以通过主机名找到对应计算机的IP地址，这就是主机名映射（域名解析）<br>先通过系统本地的记录去查找，如果找不到就联网去公开DNS服务器去查找<br>比如，我们在浏览器内打开：<a target="_blank" rel="noopener" href="http://www.baidu.com,会打开百度的网址/">www.baidu.com，会打开百度的网址</a><br>其中，<a href="http://www.baidu.com，是百度的网址，我们称之为：域名">www.baidu.com，是百度的网址，我们称之为：域名</a></p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221222173301043.png" alt="image-20221222173301043"> </p>
+<ul>
+<li>先查看本机的记录（私人地址本）<ul>
+<li>Windows看：C:\Windows\System32\drivers\etc\hosts</li>
+<li>Linux看：&#x2F;etc&#x2F;hosts</li>
+</ul>
+</li>
+<li>再联网去DNS服务器（如114.114.114.114，8.8.8.8等）询问</li>
+</ul>
+<h3 id="配置VMware固定IP"><a href="#配置VMware固定IP" class="headerlink" title="配置VMware固定IP"></a>配置VMware固定IP</h3><p>当前我们虚拟机的Linux操作系统，其IP地址是通过DHCP服务获取的。<br>DHCP：动态获取IP地址，即每次重启设备后都会获取一次，可能导致IP地址频繁变更</p>
+<p>原因1：办公电脑IP地址变化无所谓，但是我们要远程连接到Linux系统，如果IP地址经常变化我们就要频繁修改适配很麻烦</p>
+<p>原因2：在刚刚我们配置了虚拟机IP地址和主机名的映射，如果IP频繁更改，我们也需要频繁更新映射关系</p>
+<p>综上所述，我们需要IP地址固定下来，不要变化了。</p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221223103330084.png" alt="image-20221223103330084"></p>
+<ol>
+<li><p>修改VMware网络，参阅PPT，图太多</p>
+</li>
+<li><p>设置Linux内部固定IP</p>
+<p>修改文件：<code>/etc/sysconfig/network-scripts/ifcfg-ens33</code></p>
+<p>示例文件内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">TYPE=&quot;Ethernet&quot;</span><br><span class="line">PROXY_METHOD=&quot;none&quot;</span><br><span class="line">BROWSER_ONLY=&quot;no&quot;</span><br><span class="line">BOOTPROTO=&quot;static&quot;			# 改为static，固定IP</span><br><span class="line">DEFROUTE=&quot;yes&quot;</span><br><span class="line">IPV4_FAILURE_FATAL=&quot;no&quot;</span><br><span class="line">IPV6INIT=&quot;yes&quot;</span><br><span class="line">IPV6_AUTOCONF=&quot;yes&quot;</span><br><span class="line">IPV6_DEFROUTE=&quot;yes&quot;</span><br><span class="line">IPV6_FAILURE_FATAL=&quot;no&quot;</span><br><span class="line">IPV6_ADDR_GEN_MODE=&quot;stable-privacy&quot;</span><br><span class="line">NAME=&quot;ens33&quot;</span><br><span class="line">UUID=&quot;1b0011cb-0d2e-4eaa-8a11-af7d50ebc876&quot;</span><br><span class="line">DEVICE=&quot;ens33&quot;</span><br><span class="line">ONBOOT=&quot;yes&quot;</span><br><span class="line">IPADDR=&quot;192.168.152.128&quot;		# IP地址，自己设置，要匹配网络范围</span><br><span class="line">NETMASK=&quot;255.255.255.0&quot;		# 子网掩码，固定写法255.255.255.0</span><br><span class="line">GATEWAY=&quot;192.168.152.2&quot;		# 网关，要和VMware中配置的一致</span><br><span class="line">DNS1=&quot;192.168.152.2&quot;			# DNS1服务器，和网关一致即可</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="4-7、网络传输"><a href="#4-7、网络传输" class="headerlink" title="4.7、网络传输"></a>4.7、网络传输</h2><h3 id="4-7-1、下载和网络请求"><a href="#4-7-1、下载和网络请求" class="headerlink" title="4.7.1、下载和网络请求"></a>4.7.1、下载和网络请求</h3><h3 id="ping命令"><a href="#ping命令" class="headerlink" title="ping命令"></a>ping命令</h3><p>测试网络是否联通</p>
+<p>语法：<code>ping [-c num] 参数</code></p>
+<p><img src="/2024/07/07/Linux/Linux/20221027221129.png" alt="image-20221027221129782"></p>
+<h3 id="wget命令"><a href="#wget命令" class="headerlink" title="wget命令"></a>wget命令</h3><p><img src="/2024/07/07/Linux/Linux/20221027221149.png" alt="image-20221027221148964"></p>
+<h3 id="curl命令"><a href="#curl命令" class="headerlink" title="curl命令"></a>curl命令</h3><p><img src="/2024/07/07/Linux/Linux/20221027221201.png" alt="image-20221027221201079"></p>
+<p><img src="/2024/07/07/Linux/Linux/20221027221210.png" alt="image-20221027221210518"></p>
+<h3 id="4-7-2、端口"><a href="#4-7-2、端口" class="headerlink" title="4.7.2、端口"></a>4.7.2、端口</h3><p>什么是端口？</p>
+<ul>
+<li><p>端口是指计算机和外部交互的出入口，可以分为物理端口和虚拟端口</p>
+</li>
+<li><p>物理端口：USB、HDMI、DP、VGA、RJ45等</p>
+</li>
+<li><p>虚拟端口：操作系统和外部交互的出入口</p>
+</li>
+</ul>
+<p>IP只能确定计算机，通过端口才能锁定要交互的程序</p>
+<p>端口的划分</p>
+<ul>
+<li><p>公认端口：1~1023，用于系统内置或常用知名软件绑定使用</p>
+</li>
+<li><p>注册端口：1024~49151，用于松散绑定使用（用户自定义）</p>
+</li>
+<li><p>动态端口：49152~65535，用于临时使用（多用于出口）</p>
+</li>
+</ul>
+<p>查看端口占用</p>
+<p>nmap IP地址，查看指定IP的对外暴露端口<br><img src="/2024/07/07/Linux/Linux/20221027221241.png" alt="image-20221027221241123"></p>
+<p>netstat -anp | grep 端口号，查看本机指定端口号的占用情况</p>
+<p>功能：查看端口占用</p>
+<p>用法：<code>netstat -anp | grep xxx</code></p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221223110120135.png" alt="image-20221223110120135"></p>
+<h2 id="4-8、进程管理"><a href="#4-8、进程管理" class="headerlink" title="4.8、进程管理"></a>4.8、进程管理</h2><ol>
+<li>什么是进程？</li>
+</ol>
+<p>进程是指程序在操作系统内运行后被注册为系统内的一个进程，并拥有独立的进程ID（进程号）</p>
+<ol start="2">
+<li>管理进程的命令</li>
+</ol>
+<p>ps -ef 查看进程信息<br><img src="/2024/07/07/Linux/Linux/image-20221223111253580.png" alt="image-20221223111253580"></p>
+<p>ps -ef | grep 关键字 过滤指定关键字进程信息<br><img src="/2024/07/07/Linux/Linux/image-20221223111320996.png" alt="image-20221223111320996"></p>
+<p>kill [-9] 进程号 关闭指定进程号的进程<br><img src="/2024/07/07/Linux/Linux/image-20221223111332360.png" alt="image-20221223111332360"></p>
+<h2 id="4-9、主机状态监控"><a href="#4-9、主机状态监控" class="headerlink" title="4.9、主机状态监控"></a>4.9、主机状态监控</h2><h3 id="4-9-1、系统资源监控top命令"><a href="#4-9-1、系统资源监控top命令" class="headerlink" title="4.9.1、系统资源监控top命令"></a>4.9.1、系统资源监控top命令</h3><p>功能：查看主机运行状态</p>
+<p>语法：<code>top</code>，查看基础信息</p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221223145308409.png" alt="image-20221223145308409"> </p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221223145320545.png" alt="image-20221223145320545"> </p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221223145329645.png" alt="image-20221223145329645"> </p>
+<p>可用选项：</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027221340.png" alt="image-20221027221340729"></p>
+<p>交互式模式中，可用快捷键：</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027221354.png" alt="image-20221027221354137"></p>
+<h3 id="4-9-2、磁盘监控"><a href="#4-9-2、磁盘监控" class="headerlink" title="4.9.2、磁盘监控"></a>4.9.2、磁盘监控</h3><p>查看磁盘占用</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027221413.png" alt="image-20221027221413787"></p>
+<h3 id="4-9-3、网络监控"><a href="#4-9-3、网络监控" class="headerlink" title="4.9.3、网络监控"></a>4.9.3、网络监控</h3><p>iostat命令</p>
+<p>查看CPU、磁盘的相关信息</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027221440.png" alt="image-20221027221439990"></p>
+<p><img src="/2024/07/07/Linux/Linux/20221027221514.png" alt="image-20221027221514237"></p>
+<p>sar命令</p>
+<p>查看网络统计</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027221545.png" alt="image-20221027221545822"></p>
+<h2 id="4-10、环境变量"><a href="#4-10、环境变量" class="headerlink" title="4.10、环境变量"></a>4.10、环境变量</h2><h3 id="env命令"><a href="#env命令" class="headerlink" title="env命令"></a>env命令</h3><p>查看系统全部的环境变量</p>
+<p>语法：<code>env</code></p>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><p>环境变量是操作系统（Windows、Linux、Mac）在运行的时候，记录的一些关键性信息，用以辅助系统运行。<br>在Linux系统中执行：env命令即可查看当前系统中记录的环境变量</p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221223145453912.png" alt="image-20221223145453912"> </p>
+<ul>
+<li>临时设置：export 变量名&#x3D;变量值</li>
+<li>永久设置：<ul>
+<li>针对用户，设置用户HOME目录内：<code>.bashrc</code>文件</li>
+<li>针对全局，设置<code>/etc/profile</code></li>
+</ul>
+</li>
+<li><img src="/2024/07/07/Linux/Linux/image-20221223145535989.png" alt="image-20221223145535989"></li>
+</ul>
+<h3 id="PATH变量"><a href="#PATH变量" class="headerlink" title="PATH变量"></a>PATH变量</h3><p>记录了执行程序的搜索路径</p>
+<p>可以将自定义路径加入PATH内，实现自定义命令在任意地方均可执行的效果</p>
+<h3 id="符号"><a href="#符号" class="headerlink" title="$符号"></a>$符号</h3><p>可以取出指定的环境变量的值</p>
+<p>语法：<code>$变量名</code></p>
+<p>示例：</p>
+<p><code>echo $PATH</code>，输出PATH环境变量的值</p>
+<p><code>echo $&#123;PATH&#125;ABC</code>，输出PATH环境变量的值以及ABC</p>
+<p>如果变量名和其它内容混淆在一起，可以使用${}</p>
+<p><img src="/2024/07/07/Linux/Linux/image-20221223145559821.png" alt="image-20221223145559821"></p>
+<h2 id="4-11、上传、下载"><a href="#4-11、上传、下载" class="headerlink" title="4.11、上传、下载"></a>4.11、上传、下载</h2><p>我们可以通过FinalShell工具，方便的和虚拟机进行数据交换。</p>
+<p>在FinalShell软件的下方窗体中，提供了Linux的文件系统视图，可以方便的：</p>
+<ul>
+<li>浏览文件系统，找到合适的文件，右键点击下载，即可传输到本地电脑</li>
+<li>浏览文件系统，找到合适的目录，将本地电脑的文件拓展进入，即可方便的上传数据到Linux中</li>
+</ul>
+<p><img src="/2024/07/07/Linux/Linux/image-20221223150445424.png" alt="image-20221223150445424"></p>
+<p>rz、sz命令</p>
+<p>当然，除了通过FinalShell的下方窗体进行文件的传输以外，也可以通过rz、sz命令进行文件传输。</p>
+<p>rz、sz命令需要安装，可以通过：yum -y install lrzsz，即可安装。</p>
+<ul>
+<li>rz命令，进行上传，语法：直接输入rz即可</li>
+<li><img src="/2024/07/07/Linux/Linux/image-20221223150554747.png" alt="image-20221223150554747"></li>
+<li>sz命令进行下载，语法：sz 要下载的文件</li>
+<li><img src="/2024/07/07/Linux/Linux/image-20221223150610423.png" alt="image-20221223150610423"></li>
+</ul>
+<p>文件会自动下载到桌面的：fsdownload文件夹中。<br>注意，rz、sz命令需要终端软件支持才可正常运行<br>FinalShell、SecureCRT、XShell等常用终端软件均支持此操作</p>
+<h2 id="4-12、压缩解压"><a href="#4-12、压缩解压" class="headerlink" title="4.12、压缩解压"></a>4.12、压缩解压</h2><h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><p><code>tar -zcvf 压缩包 被压缩1...被压缩2...被压缩N</code></p>
+<ul>
+<li>-z表示使用gzip，可以不写</li>
+</ul>
+<p><code>zip [-r] 参数1 参数2 参数N</code></p>
+<p><img src="/2024/07/07/Linux/Linux/20221027221906-167178047054416.png" alt="image-20221027221906247"></p>
+<h3 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h3><p><code>tar -zxvf 被解压的文件 -C 要解压去的地方</code></p>
+<ul>
+<li>-z表示使用gzip，可以省略</li>
+<li>-C，可以省略，指定要解压去的地方，不写解压到当前目录</li>
+</ul>
+<p><code>unzip [-d] 参数</code></p>
+<p><img src="/2024/07/07/Linux/Linux/20221027221939.png" alt="image-20221027221939899"></p>
+<h2 id="genenv命令"><a href="#genenv命令" class="headerlink" title="genenv命令"></a>genenv命令</h2><ul>
+<li><p><code>getenv group</code>，查看系统全部的用户组</p>
+</li>
+<li><p><code>getenv passwd</code>，查看系统全部的用户</p>
+<p><img src="/2024/07/07/Linux/Linux/20221027222512-167178047054822.png" alt="image-20221027222512274"></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/07/07/Linux/Linux/" title="Linux_基础(一)">http://example.com/2024/07/07/Linux/Linux/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/07/Linux/Linux%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="prev" title="Linux_基础(二)-系统软件安装">
+      <i class="fa fa-chevron-left"></i> Linux_基础(二)-系统软件安装
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/07/Java/JavaEE/" rel="next" title="JavaEE">
+      JavaEE <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">一、基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、操作系统概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E3%80%81%E5%88%9D%E5%A7%8BLinux"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、初始Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-Linux%E7%9A%84%E8%AF%9E%E7%94%9F"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 Linux的诞生</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-Linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E6%A0%B8"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 Linux系统的内核</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-Linux%E7%B3%BB%E7%BB%9F%E5%8F%91%E8%A1%8C%E7%89%88"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 Linux系统发行版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.3.</span> <span class="nav-text">1.3、虚拟机介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4%E3%80%81VMware-WorkStation%E5%AE%89%E8%A3%85"><span class="nav-number">1.4.</span> <span class="nav-text">1.4、VMware WorkStation安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1%E3%80%81VMware-WorkStation%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1、VMware WorkStation软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2%E3%80%81%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.4.2、软件的安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5%E3%80%81%E5%9C%A8VMware%E4%B8%8A%E5%AE%89%E8%A3%85Linux"><span class="nav-number">1.5.</span> <span class="nav-text">1.5、在VMware上安装Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-%E4%B8%8B%E8%BD%BDCentOS%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.5.1 下载CentOS操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-%E5%9C%A8VMware%E4%B8%AD%E5%AE%89%E8%A3%85CentOS%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.5.2.</span> <span class="nav-text">1.5.2 在VMware中安装CentOS操作系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6%E3%80%81%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5Linux%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.6.</span> <span class="nav-text">1.6、远程连接Linux系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-1-%E5%9B%BE%E5%BD%A2%E5%8C%96%E5%92%8C%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="nav-number">1.6.1.</span> <span class="nav-text">1.6.1 图形化和命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-2-FinalShell"><span class="nav-number">1.6.2.</span> <span class="nav-text">1.6.2 FinalShell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-3-%E8%BF%9E%E6%8E%A5%E5%88%B0Linux%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.6.3.</span> <span class="nav-text">1.6.3 连接到Linux系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7%E3%80%81%E6%89%A9%E5%B1%95%EF%BC%9AWSL%EF%BC%88Windows-Subsystem-for-Linux%EF%BC%89"><span class="nav-number">1.7.</span> <span class="nav-text">1.7、扩展：WSL（Windows Subsystem for Linux）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8%E3%80%81%E5%BF%AB%E7%85%A7"><span class="nav-number">1.8.</span> <span class="nav-text">1.8、快照</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">二、Linux基础命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1%E3%80%81Linux%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、Linux的目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2%E3%80%81Linux%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、Linux命令入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-Linux%E5%91%BD%E4%BB%A4%E5%9F%BA%E7%A1%80"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 Linux命令基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-ls%E5%91%BD%E4%BB%A4%E5%85%A5%E9%97%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 ls命令入门</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3%E3%80%81%E7%9B%AE%E5%BD%95%E5%88%87%E6%8D%A2%E6%8C%87%E4%BB%A4%EF%BC%88cd-pwd"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、目录切换指令（cd&#x2F;pwd)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-cd-%E5%88%87%E6%8D%A2%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1 cd 切换工作目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-pwd-%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.3.2 pwd 查看当前工作目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3-%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E3%80%81%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">2.3.3.</span> <span class="nav-text">2.3.3 相对路径、绝对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-4-%E7%89%B9%E6%AE%8A%E8%B7%AF%E5%BE%84%E7%AC%A6"><span class="nav-number">2.3.4.</span> <span class="nav-text">2.3.4 特殊路径符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4%E3%80%81%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%E6%8C%87%E4%BB%A4%EF%BC%88mkdir%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">2.4、创建目录指令（mkdir）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5%E3%80%81%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4"><span class="nav-number">2.5.</span> <span class="nav-text">2.5、文件操作指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-1-touch%E5%91%BD%E4%BB%A4"><span class="nav-number">2.5.1.</span> <span class="nav-text">2.5.1 touch命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-2-cat%E5%91%BD%E4%BB%A4"><span class="nav-number">2.5.2.</span> <span class="nav-text">2.5.2 cat命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-3-more%E5%91%BD%E4%BB%A4"><span class="nav-number">2.5.3.</span> <span class="nav-text">2.5.3 more命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-4-cp%E5%91%BD%E4%BB%A4"><span class="nav-number">2.5.4.</span> <span class="nav-text">2.5.4 cp命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-5-mv%E5%91%BD%E4%BB%A4"><span class="nav-number">2.5.5.</span> <span class="nav-text">2.5.5 mv命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-6-rm%E5%91%BD%E4%BB%A4"><span class="nav-number">2.5.6.</span> <span class="nav-text">2.5.6 rm命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6%E3%80%81%E6%9F%A5%E6%89%BE%E5%91%BD%E4%BB%A4%EF%BC%88which%E3%80%81find%EF%BC%89"><span class="nav-number">2.6.</span> <span class="nav-text">2.6、查找命令（which、find）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-1-which%E5%91%BD%E4%BB%A4"><span class="nav-number">2.6.1.</span> <span class="nav-text">2.6.1 which命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-2-find%E5%91%BD%E4%BB%A4"><span class="nav-number">2.6.2.</span> <span class="nav-text">2.6.2 find命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-3-%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">2.6.3.</span> <span class="nav-text">2.6.3 通配符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7%E3%80%81grep%E3%80%81wc%E5%92%8C%E7%AE%A1%E9%81%93%E7%AC%A6"><span class="nav-number">2.7.</span> <span class="nav-text">2.7、grep、wc和管道符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-1-grep%E5%91%BD%E4%BB%A4"><span class="nav-number">2.7.1.</span> <span class="nav-text">2.7.1 grep命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-2-wc%E5%91%BD%E4%BB%A4"><span class="nav-number">2.7.2.</span> <span class="nav-text">2.7.2 wc命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-3-%E7%AE%A1%E9%81%93%E7%AC%A6"><span class="nav-number">2.7.3.</span> <span class="nav-text">2.7.3 管道符|</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8%E3%80%81echo%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91%E7%AC%A6"><span class="nav-number">2.8.</span> <span class="nav-text">2.8、echo和重定向符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-1-echo%E5%91%BD%E4%BB%A4"><span class="nav-number">2.8.1.</span> <span class="nav-text">2.8.1 echo命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-2-%E5%8F%8D%E5%BC%95%E5%8F%B7"><span class="nav-number">2.8.2.</span> <span class="nav-text">2.8.2 &#96;反引号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-3-tail%E5%91%BD%E4%BB%A4"><span class="nav-number">2.8.3.</span> <span class="nav-text">2.8.3 tail命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-4-head%E5%91%BD%E4%BB%A4"><span class="nav-number">2.8.4.</span> <span class="nav-text">2.8.4 head命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-5-%E9%87%8D%E5%AE%9A%E5%90%91%E7%AC%A6"><span class="nav-number">2.8.5.</span> <span class="nav-text">2.8.5 重定向符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9%E3%80%81vi%E7%BC%96%E8%BE%91%E5%99%A8"><span class="nav-number">2.9.</span> <span class="nav-text">2.9、vi编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">2.9.1.</span> <span class="nav-text">命令模式快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%95%E7%BA%BF%E5%91%BD%E4%BB%A4%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">2.9.2.</span> <span class="nav-text">底线命令快捷键</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-10-%E5%91%BD%E4%BB%A4%E7%9A%84%E9%80%89%E9%A1%B9"><span class="nav-number">2.10.</span> <span class="nav-text">2.10 命令的选项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4%E7%9A%84%E5%B8%AE%E5%8A%A9"><span class="nav-number">2.10.1.</span> <span class="nav-text">查看命令的帮助</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4%E7%9A%84%E8%AF%A6%E7%BB%86%E6%89%8B%E5%86%8C"><span class="nav-number">2.10.2.</span> <span class="nav-text">查看命令的详细手册</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%94%A8%E6%88%B7%E5%92%8C%E6%9D%83%E9%99%90"><span class="nav-number">3.</span> <span class="nav-text">三、用户和权限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1%E3%80%81root%E7%94%A8%E6%88%B7"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、root用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-root%E7%94%A8%E6%88%B7%EF%BC%88%E8%B6%85%E7%BA%A7%E7%AE%A1%E7%90%86%E5%91%98%EF%BC%89"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 root用户（超级管理员）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-su%E5%92%8Cexit%E6%8C%87%E4%BB%A4"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 su和exit指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-sudo%E5%91%BD%E4%BB%A4"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3 sudo命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2%E3%80%81%E7%94%A8%E6%88%B7%E3%80%81%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、用户、用户组管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 Linux用户管理模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 用户组管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.2.3 用户管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4-getent"><span class="nav-number">3.2.4.</span> <span class="nav-text">3.2.4 getent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3%E3%80%81%E6%9F%A5%E7%9C%8B%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="nav-number">3.3.</span> <span class="nav-text">3.3、查看权限控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-%E8%AE%A4%E7%9F%A5%E6%9D%83%E9%99%90%E4%BF%A1%E6%81%AF"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.3.1 认知权限信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-rwx"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.3.2 rwx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4%E3%80%81%E4%BF%AE%E6%94%B9%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="nav-number">3.4.</span> <span class="nav-text">3.4、修改权限控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-chmod"><span class="nav-number">3.4.1.</span> <span class="nav-text">3.4.1 chmod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2-chown"><span class="nav-number">3.4.2.</span> <span class="nav-text">3.4.2 chown</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Linux%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">四、Linux使用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1%E3%80%81%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">4.1.</span> <span class="nav-text">4.1、快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2%E3%80%81%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">4.2.</span> <span class="nav-text">4.2、软件安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3%E3%80%81systemctl"><span class="nav-number">4.3.</span> <span class="nav-text">4.3、systemctl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4%E3%80%81%E8%BD%AF%E9%93%BE%E6%8E%A5"><span class="nav-number">4.4.</span> <span class="nav-text">4.4、软链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5%E3%80%81%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E5%8C%BA"><span class="nav-number">4.5.</span> <span class="nav-text">4.5、日期和时区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F"><span class="nav-number">4.5.1.</span> <span class="nav-text">日期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E5%8C%BA"><span class="nav-number">4.5.2.</span> <span class="nav-text">时区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ntp"><span class="nav-number">4.5.3.</span> <span class="nav-text">ntp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6%E3%80%81IP%E5%9C%B0%E5%9D%80%E5%92%8C%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="nav-number">4.6.</span> <span class="nav-text">4.6、IP地址和主机名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ip%E5%9C%B0%E5%9D%80"><span class="nav-number">4.6.1.</span> <span class="nav-text">ip地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="nav-number">4.6.2.</span> <span class="nav-text">主机名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90"><span class="nav-number">4.6.3.</span> <span class="nav-text">域名解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEVMware%E5%9B%BA%E5%AE%9AIP"><span class="nav-number">4.6.4.</span> <span class="nav-text">配置VMware固定IP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7%E3%80%81%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93"><span class="nav-number">4.7.</span> <span class="nav-text">4.7、网络传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-1%E3%80%81%E4%B8%8B%E8%BD%BD%E5%92%8C%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82"><span class="nav-number">4.7.1.</span> <span class="nav-text">4.7.1、下载和网络请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ping%E5%91%BD%E4%BB%A4"><span class="nav-number">4.7.2.</span> <span class="nav-text">ping命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wget%E5%91%BD%E4%BB%A4"><span class="nav-number">4.7.3.</span> <span class="nav-text">wget命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#curl%E5%91%BD%E4%BB%A4"><span class="nav-number">4.7.4.</span> <span class="nav-text">curl命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-2%E3%80%81%E7%AB%AF%E5%8F%A3"><span class="nav-number">4.7.5.</span> <span class="nav-text">4.7.2、端口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-8%E3%80%81%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="nav-number">4.8.</span> <span class="nav-text">4.8、进程管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-9%E3%80%81%E4%B8%BB%E6%9C%BA%E7%8A%B6%E6%80%81%E7%9B%91%E6%8E%A7"><span class="nav-number">4.9.</span> <span class="nav-text">4.9、主机状态监控</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-9-1%E3%80%81%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7top%E5%91%BD%E4%BB%A4"><span class="nav-number">4.9.1.</span> <span class="nav-text">4.9.1、系统资源监控top命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-9-2%E3%80%81%E7%A3%81%E7%9B%98%E7%9B%91%E6%8E%A7"><span class="nav-number">4.9.2.</span> <span class="nav-text">4.9.2、磁盘监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-9-3%E3%80%81%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7"><span class="nav-number">4.9.3.</span> <span class="nav-text">4.9.3、网络监控</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-10%E3%80%81%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">4.10.</span> <span class="nav-text">4.10、环境变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#env%E5%91%BD%E4%BB%A4"><span class="nav-number">4.10.1.</span> <span class="nav-text">env命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">4.10.2.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PATH%E5%8F%98%E9%87%8F"><span class="nav-number">4.10.3.</span> <span class="nav-text">PATH变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7"><span class="nav-number">4.10.4.</span> <span class="nav-text">$符号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-11%E3%80%81%E4%B8%8A%E4%BC%A0%E3%80%81%E4%B8%8B%E8%BD%BD"><span class="nav-number">4.11.</span> <span class="nav-text">4.11、上传、下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-12%E3%80%81%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B"><span class="nav-number">4.12.</span> <span class="nav-text">4.12、压缩解压</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9"><span class="nav-number">4.12.1.</span> <span class="nav-text">压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B"><span class="nav-number">4.12.2.</span> <span class="nav-text">解压</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#genenv%E5%91%BD%E4%BB%A4"><span class="nav-number">4.13.</span> <span class="nav-text">genenv命令</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

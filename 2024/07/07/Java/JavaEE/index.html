@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="JavaSE: Java Standard Edition PC机上的软件，C&#x2F;S（客户端单独的软件） JavaEE：Java Enterprise Edition	企业级结构，B&#x2F;S Browser&#x2F;Server（没有软件，跑页面） JavaME：Java Micro Edition	移动终端 Android ： Java 一、JSP概述JSP: Java Serv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaEE">
+<meta property="og:url" content="http://example.com/2024/07/07/Java/JavaEE/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="JavaSE: Java Standard Edition PC机上的软件，C&#x2F;S（客户端单独的软件） JavaEE：Java Enterprise Edition	企业级结构，B&#x2F;S Browser&#x2F;Server（没有软件，跑页面） JavaME：Java Micro Edition	移动终端 Android ： Java 一、JSP概述JSP: Java Serv">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20220831163956860.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20220928113836648.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20220928092627058.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20220928092636556.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20220928092807005.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20220928092818983.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20220928092905741.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20220928093125371.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20221113102156559.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20221113102803215.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20221113103548342.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20221113111022387.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20221216093234939.png">
+<meta property="article:published_time" content="2024-07-07T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-22T09:19:00.618Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/07/07/Java/JavaEE/image-20220831163956860.png">
+
+<link rel="canonical" href="http://example.com/2024/07/07/Java/JavaEE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JavaEE | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/07/Java/JavaEE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaEE
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-07 12:00:00" itemprop="dateCreated datePublished" datetime="2024-07-07T12:00:00+08:00">2024-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-22 17:19:00" itemprop="dateModified" datetime="2024-08-22T17:19:00+08:00">2024-08-22</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>JavaSE: Java Standard Edition PC机上的软件，C&#x2F;S（客户端单独的软件）</p>
+<p>JavaEE：Java Enterprise Edition	企业级结构，B&#x2F;S Browser&#x2F;Server（没有软件，跑页面）</p>
+<p>JavaME：Java Micro Edition	移动终端</p>
+<p>Android ： Java</p>
+<h1 id="一、JSP概述"><a href="#一、JSP概述" class="headerlink" title="一、JSP概述"></a>一、JSP概述</h1><p>JSP: Java Server Pages</p>
+<ul>
+<li>给予Java的用于编写动态网页的语法，在Web服务器上运行</li>
+<li>JSP &#x3D; HTML + Java</li>
+</ul>
+<h2 id="1-1-jsp执行过程"><a href="#1-1-jsp执行过程" class="headerlink" title="1.1 jsp执行过程"></a>1.1 jsp执行过程</h2><p>JSP页面的主要成分：</p>
+<ol>
+<li>脚本元素（Scrpting Element）：嵌入Java代码</li>
+<li>指令（Directive）：从整体上控制Servlet的结构</li>
+<li>动作（Action）：引入已有的组件来控制Web容器的行为</li>
+</ol>
+<p>JSP <strong>第一次</strong>执行的过程：</p>
+<p>（1）客户端发送请求（URL地址）（jsp）</p>
+<p>（2）服务器将 JSP 文件翻译为 Java 程序（Servlet）（Java）</p>
+<p>（3）服务器将 Java程序编译为字节码（.class）</p>
+<p>（4）服务器运行字节码（.html）</p>
+<p>（5）服务器将 HTML 代码发送给客户端浏览器</p>
+<p>JSP <strong>第二次</strong>以后执行：</p>
+<p>（1）客户端发送请求（.jsp）</p>
+<p>（2）服务器运行字节码（.html）</p>
+<p>（3）服务器将HTML代码发送给客户端浏览器</p>
+<h2 id="1-2-jsp的几种形式"><a href="#1-2-jsp的几种形式" class="headerlink" title="1.2 jsp的几种形式"></a>1.2 jsp的几种形式</h2><p>1.JSP脚本</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%  java  %&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2.JSP表达式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= 表达式%&gt;</span><br></pre></td></tr></table></figure>
+
+<p>说明：在表达式的位置直接输出表达式的值</p>
+<p>3.声明标签</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%! 变量、方法、类的声明%&gt;</span><br></pre></td></tr></table></figure>
+
+<p>说明：用声明标签声明的变量、方法和类的作用范围是整个JSP页面，与位置无关</p>
+<p>原理：JSP 执行时，先执行&lt;%! %&gt;在&lt;% %&gt;和&lt;%&#x3D;%&gt;之前执行</p>
+<p>4.JSP注释</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%<span class="comment">//  %&gt; &lt;%/* */%&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>HTML注释<!-- --></p>
+<h3 id="1-2-1-jsp脚本"><a href="#1-2-1-jsp脚本" class="headerlink" title="1.2.1 jsp脚本"></a>1.2.1 jsp脚本</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%  java  %&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-2-输出表达式"><a href="#1-2-2-输出表达式" class="headerlink" title="1.2.2 输出表达式"></a>1.2.2 输出表达式</h3><p>&lt;%&#x3D;表达式%&gt;输出表达式的计算结果。表达式中的变量必须是前面已声明过的变量。</p>
+<blockquote>
+<p>注意：%与&#x3D;之间不能有空格，且表达式后面不需要分号</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span></span><br><span class="line">    pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;JSP表达式&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body bgcolor=<span class="string">&quot;#FFFFFF&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;% <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; <span class="number">5</span>; i++) &#123; %&gt;</span><br><span class="line">&lt;H&lt;%=i %&gt;&gt; 你好&lt;/H&lt;%=i %&gt;&gt;</span><br><span class="line">&lt;%&#125; %&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-3-注释"><a href="#1-2-3-注释" class="headerlink" title="1.2.3 注释"></a>1.2.3 注释</h3><p>JSP页面中有两种注释</p>
+<ol>
+<li>输出到客户端的注释，在浏览器查看源码时可以看到<code>&lt;!-comment-&gt;</code></li>
+<li>不输出到客户端在注释：<code>&lt;%--comment--%&gt;</code>，在客户端看不到</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">&lt;!-在客户端可以看到的注释-&gt;	<span class="comment">//html注释</span></span><br><span class="line">&lt;%--在客户端看不到的注释 --%&gt;		</span><br><span class="line">&lt;%<span class="comment">//zai %&gt;</span></span><br><span class="line">&lt;%<span class="comment">/**/ %&gt;</span></span><br><span class="line"><span class="comment"></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-4-声明变量、方法、类"><a href="#1-2-4-声明变量、方法、类" class="headerlink" title="1.2.4 声明变量、方法、类"></a>1.2.4 声明变量、方法、类</h3><h4 id="1-声明变量"><a href="#1-声明变量" class="headerlink" title="1. 声明变量"></a>1. 声明变量</h4><p><strong>语法：</strong><code>&lt;%! 声明代码 %&gt;</code></p>
+<blockquote>
+<p>注意：JSP声明变量的作用域是<strong>整个页面</strong>。也就是说，在整个页面中都可以访问声明的变量</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span></span><br><span class="line">    pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    </span><br><span class="line">&lt;font size=<span class="number">5</span>&gt;</span><br><span class="line">&lt;% i++; %&gt;</span><br><span class="line">&lt;p&gt;你是第&lt;%=i %&gt;个访问本站的用户&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;%!<span class="type">int</span> i=<span class="number">0</span>; %&gt;</span><br><span class="line"></span><br><span class="line">&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-声明方法"><a href="#2-声明方法" class="headerlink" title="2. 声明方法"></a>2. 声明方法</h4><p><strong>语法：</strong><code>&lt;%! 声明代码 %&gt;</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span></span><br><span class="line">    pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;%!String <span class="title function_">sayHello</span><span class="params">()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;%=sayHello() %&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：该方法在整个页面有效，但方法内的变量只在该方法内有效</p>
+</blockquote>
+<h4 id="3-声明类"><a href="#3-声明类" class="headerlink" title="3. 声明类"></a>3. 声明类</h4><p><strong>语法：</strong><code>&lt;%! 声明代码 %&gt;</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span></span><br><span class="line">    pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;%! <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">sayHello</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">boolean</span> county;</span><br><span class="line">		sayHello(<span class="type">boolean</span> county)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">this</span>.county = county;</span><br><span class="line">		&#125;</span><br><span class="line">		String <span class="title function_">Hello</span><span class="params">()</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (county)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="string">&quot;你好&quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;% <span class="type">sayHello</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">sayHello</span>(<span class="literal">false</span>); %&gt;</span><br><span class="line">&lt;%=a.Hello() %&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-3-指令"><a href="#1-3-指令" class="headerlink" title="1.3 指令"></a>1.3 指令</h2><p>格式：<code>&lt;%@ 指令名称 属性名=&quot;属性值&quot;...%&gt;</code></p>
+<p>指令名有page、include和taglib三种。taglib指令允许页面使用扩展标记。</p>
+<h3 id="1-3-1-page指令"><a href="#1-3-1-page指令" class="headerlink" title="1.3.1 page指令"></a>1.3.1 page指令</h3><h4 id="1-language属性"><a href="#1-language属性" class="headerlink" title="1. language属性"></a>1. language属性</h4><p><strong>作用：</strong>指明JSP所用的编程语言，因为一定是java语言，所以可以省略</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span>　%&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-import属性（-）"><a href="#2-import属性（-）" class="headerlink" title="2. import属性（**）"></a>2. import属性（**）</h4><p><strong>作用：</strong>用来设置JSP页面导入的Java类，相当于Java语言的import语句<br>注意：import属性是Page指令唯一可以多次设置的属性</p>
+<p><strong>代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.util.*, java.lang.*&quot;</span> %&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：包名要用引号括起来，各个包之间用逗号隔开</p>
+</blockquote>
+<h4 id="3-session属性"><a href="#3-session属性" class="headerlink" title="3. session属性"></a>3. session属性</h4><p>作用：指定JSP页面是否支持会话，默认值为true</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page session=<span class="string">&quot;true&quot;</span> %&gt;</span><br><span class="line">&lt;%@ page session=<span class="string">&quot;false&quot;</span> %&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-errorPage"><a href="#4-errorPage" class="headerlink" title="4. errorPage**"></a>4. errorPage**</h4><p><strong>作用：</strong>当JSP程序发生错误后，用于设置出错页面</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page errorPage=<span class="string">&quot;error.jsp&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例：</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--testError.jsp --%&gt;</span><br><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span></span><br><span class="line">    pageEncoding=<span class="string">&quot;UTF-8&quot;</span> errorPage=<span class="string">&quot;error.jsp&quot;</span>%&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;页面错误属性测试&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;%! <span class="type">int</span>[] a =&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;; %&gt;</span><br><span class="line">&lt;%=a[<span class="number">3</span>] %&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;%-- error.jsp--%&gt;</span><br><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span></span><br><span class="line">    pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;JSP Page&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;The Page is wrong!&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-contentType"><a href="#5-contentType" class="headerlink" title="5. contentType"></a>5. contentType</h4><p><strong>作用：</strong>用于设置JSP页面的内容类型和编码</p>
+<p>内容类型有：text&#x2F;plain、text&#x2F;html（默认类型）、image&#x2F;gif和image&#x2F;jpeg等</p>
+<p>JSP默认的字符编码方式是ISO 8859-1</p>
+<p>代码：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=utf-8&quot;</span>%&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-isThreadSafe"><a href="#6-isThreadSafe" class="headerlink" title="6. isThreadSafe"></a>6. isThreadSafe</h4><p><strong>作用：</strong>设置JSP文件是否可以多线程使用，默认为true。如果设置为false，一次只能处理一个请求。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--safe.jsp --%&gt;</span><br><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span></span><br><span class="line">    pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;%! <span class="type">int</span> number=<span class="number">0</span>;			<span class="comment">//声明一个方法</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">countPeople</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span>  <span class="number">0</span>;</span><br><span class="line">	<span class="type">double</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0.0</span>;</span><br><span class="line">	<span class="keyword">while</span> (i++ &lt; <span class="number">200000000</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		sum += i;</span><br><span class="line">	&#125;</span><br><span class="line">	number++;</span><br><span class="line">&#125;</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;%</span><br><span class="line">countPeople();	<span class="comment">//在程序片段中调用方法</span></span><br><span class="line">%&gt;</span><br><span class="line">&lt;P&gt;你是第  &lt;%=number %&gt; 个访问本站的客户。</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-3-2-include-指令"><a href="#1-3-2-include-指令" class="headerlink" title="1.3.2 include 指令"></a>1.3.2 include 指令</h3><p>include指令：<br>用于在当前页面包含另外一个页面<br><strong>语法</strong>：<code> &lt;%@ include file=“url”%&gt;</code></p>
+<p>include动作<br>用于在当前页面包含另外一个页面<br>格式：<code>&lt;jsp:include page=“url”/&gt;</code></p>
+<p>include指令和include动作之间的区别<br>include指令（静态包含）：<br>（1）语法格式：&lt;%@ include file&#x3D;“url”%&gt;<br>（2）包含时间：翻译JSP文件到Servlet时<br>（3）逻辑上：统一的</p>
+<p>include动作（动态包含）:<br>（1）语法格式：&lt;jsp:include page&#x3D;“url”&#x2F;&gt;<br>（2）包含时间：运行时<br>（3）逻辑上：独立的</p>
+<p><img src="/2024/07/07/Java/JavaEE/image-20220831163956860.png" alt="image-20220831163956860"></p>
+<h2 id="1-4-动作组件"><a href="#1-4-动作组件" class="headerlink" title="1.4 动作组件"></a>1.4 动作组件</h2><p>动作组件是一些XML语法格式的标记，被用来控制Web容器的行为。</p>
+<p>常见的jsp动作组件有以下几种：</p>
+<ul>
+<li><code>&lt;jsp:include&gt;</code>：在页面被请求时引入一个文件</li>
+<li><code>&lt;jsp:forward&gt;</code>：把请求转到一个新的页面</li>
+<li><code>&lt;jsp:param&gt;</code>：在动作组件中引入参数信息</li>
+<li><code>&lt;jsp:plugin&gt;</code>：执行一个Applet或Bean</li>
+<li><code>&lt;jsp:setProperty&gt;</code>：设置JavaBean的属性</li>
+<li><code>&lt;jsp:getProperty&gt;</code>：输出某个JavaBean的属性</li>
+<li><code>&lt;jsp:useBean&gt;</code>：寻找或者实例化一个JavaBean</li>
+</ul>
+<h3 id="1-5-1-include动作组件"><a href="#1-5-1-include动作组件" class="headerlink" title="1.5.1 include动作组件"></a>1.5.1 include动作组件</h3><p><strong>动作：</strong>把指定文件插入正在生成的页面</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:include page=<span class="string">&quot;文件名&quot;</span> flush=<span class="string">&quot;true&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5-2-forward动作组件"><a href="#1-5-2-forward动作组件" class="headerlink" title="1.5.2 forward动作组件"></a>1.5.2 forward动作组件</h3><p><strong>作用：</strong>用于将浏览器显示的网页导向至另一个HTML页面或jsp网页，浏览器网址不发生改变</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:forward page=<span class="string">&quot;网页名称&quot;</span>&gt;&lt;/jsp:forward&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例：</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--forward.jsp --%&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">	&lt;%</span><br><span class="line">    <span class="type">double</span> <span class="variable">i</span> <span class="operator">=</span> Math.random();</span><br><span class="line">    <span class="keyword">if</span> (i &gt; <span class="number">0.5</span>)</span><br><span class="line">    &#123;</span><br><span class="line">     %&gt;</span><br><span class="line">    &lt;jsp:forward page=<span class="string">&quot;catalog1.html&quot;</span>&gt;&lt;/jsp:forward&gt;</span><br><span class="line">    &lt;%</span><br><span class="line">    &#125;</span><br><span class="line">    %&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-5-3-param动作组件"><a href="#1-5-3-param动作组件" class="headerlink" title="1.5.3 param动作组件"></a>1.5.3 param动作组件</h3><p><strong>作用：</strong>用于传递参数信息，必须配合include动作组件或forward动作组件一起使用</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:param name=参数名称, value=值 /&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>和<code>&lt;jsp:include&gt;</code>一起使用，可以将param中的值传递到include动作组件中</p>
+</blockquote>
+<p><strong>实例：</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;%-- param1.jsp--%&gt;</span><br><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span></span><br><span class="line">    pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;向加载文件传递参数实例：&lt;/p&gt;</span><br><span class="line">	&lt;jsp:include page=<span class="string">&quot;add.jsp&quot;</span>&gt;</span><br><span class="line">		&lt;jsp:param name=<span class="string">&quot;start&quot;</span> value=<span class="string">&quot;0&quot;</span> /&gt;</span><br><span class="line">		&lt;jsp:param name=<span class="string">&quot;end&quot;</span> value=<span class="string">&quot;100&quot;</span> /&gt;	</span><br><span class="line">	&lt;/jsp:include&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;%-- add.jsp--%&gt;</span><br><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> contentType=<span class="string">&quot;text/html; charset=UTF-8&quot;</span></span><br><span class="line">    pageEncoding=<span class="string">&quot;UTF-8&quot;</span>%&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;%</span><br><span class="line">String start=request.getParameter(<span class="string">&quot;start&quot;</span>);	<span class="comment">//获取值</span></span><br><span class="line"><span class="type">String</span> <span class="variable">end</span> <span class="operator">=</span> request.getParameter(<span class="string">&quot;end&quot;</span>);	<span class="comment">//获取值</span></span><br><span class="line"><span class="type">int</span> <span class="variable">s</span> <span class="operator">=</span> Integer.parseInt(start);</span><br><span class="line"><span class="type">int</span> <span class="variable">e</span> <span class="operator">=</span> Integer.parseInt(end);</span><br><span class="line"><span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> s; i &lt;= e; i++)</span><br><span class="line">&#123;</span><br><span class="line">	sum = sum + i;</span><br><span class="line">&#125;</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;从&lt;%=start %&gt;到&lt;%=end %&gt;的连续和是：</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;%=sum %&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/07/07/Java/JavaEE/image-20220928113836648.png" alt="image-20220928113836648"> </p>
+<h3 id="1-5-4-plugin动作组件"><a href="#1-5-4-plugin动作组件" class="headerlink" title="1.5.4 plugin动作组件"></a>1.5.4 plugin动作组件</h3><p><strong>作用：</strong>用来执行一个Applet或Bean</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:plugin type=<span class="string">&quot;bean | applet&quot;</span> code=<span class="string">&quot;classFileName&quot;</span> codebase=<span class="string">&quot;classFileDirectoryName&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-5-内置对象"><a href="#1-5-内置对象" class="headerlink" title="1.5 内置对象"></a>1.5 内置对象</h2><p>Servlet API规范了一些接口，这些接口向开发者提供了方便的抽象，这些抽象封装了对象的实现。</p>
+<p>JSP根据Servlet API规范提供了相应的内置对象，开发者不用事先声明就可以使用标准的变量来访问这些对象</p>
+<p>JSP提供了9种内置对象：<code>request、reponse、out、session、application、config、pagecongtext、page、exception</code></p>
+<h3 id="1-5-1-request对象"><a href="#1-5-1-request对象" class="headerlink" title="1.5.1 request对象"></a>1.5.1 request对象</h3><p><strong>作用：</strong>代表来自客户端的请求，封装了用户提交的新信息。</p>
+<p><img src="/2024/07/07/Java/JavaEE/image-20220928092627058.png" alt="image-20220928092627058"> </p>
+<p><img src="/2024/07/07/Java/JavaEE/image-20220928092636556.png" alt="image-20220928092636556"> </p>
+<p><img src="/2024/07/07/Java/JavaEE/image-20220928092807005.png" alt="image-20220928092807005"> </p>
+<p><img src="/2024/07/07/Java/JavaEE/image-20220928092818983.png" alt="image-20220928092818983"> </p>
+<h3 id="4-6-2-response对象"><a href="#4-6-2-response对象" class="headerlink" title="4.6.2 response对象"></a>4.6.2 response对象</h3><p><strong>作用：</strong>向客户端发送数据。response代表的是服务器对客户端的响应。</p>
+<p><img src="/2024/07/07/Java/JavaEE/image-20220928092905741.png" alt="image-20220928092905741"> </p>
+<p>常用的方法：</p>
+<p>（1）addCookie (Cookie cookie):</p>
+<p>（2）header</p>
+<p>（3）setContentType(String )</p>
+<p>（4）sendRedirect(String url)：将请求重新定位到一个新的页面。</p>
+<p>response.sendRedirect()与&lt;jsp:forward &gt;的区别：</p>
+<p>response.sendRedirect()：在客户端浏览器跳转，客户端浏览器能看到地址变化<br>&lt;jsp:forward &gt;在服务器跳转，客户端浏览器不能看到地址变化</p>
+<h3 id="4-6-3-session对象"><a href="#4-6-3-session对象" class="headerlink" title="4.6.3 session对象"></a>4.6.3 session对象</h3><p><strong>同一个浏览器</strong>打开的<strong>同一个服务器下</strong>的<strong>所有页面</strong>共享<strong>同一个Session对象。</strong></p>
+<p><strong>作用</strong>：用于在这些页面之间实现数据共享</p>
+<p>登录成功时，系统将登录成功信息放入session对象中:在每一个其他的页面的顶端，加入验证代码，查看session对象中是否有登录成功标志，如果有，XXXXX，如果没有，YYYY</p>
+<h3 id="4-6-4-application对象"><a href="#4-6-4-application对象" class="headerlink" title="4.6.4 application对象"></a>4.6.4 application对象</h3><p><strong>作用：</strong>代表运行在服务器上的所有Web应用程序，针对所有页面，一旦创建，除非服务器关闭，否则将一直保持下去</p>
+<p>session每次浏览器的访问</p>
+<p><img src="/2024/07/07/Java/JavaEE/image-20220928093125371.png" alt="image-20220928093125371"> </p>
+<h3 id="1-6-5-内置对象的作用范围"><a href="#1-6-5-内置对象的作用范围" class="headerlink" title="1.6.5 内置对象的作用范围"></a>1.6.5 内置对象的作用范围</h3><p>JSP的内置对象一种有四种范围</p>
+<p>（1）page。page范围内的对象仅在<strong>当前JSP页面内</strong>有效</p>
+<p>（2）request。由于采用&#96;&#96;<a href="jsp:forward">jsp:forward</a><code>和</code>response.sendRedirect()&#96;等重定向技术，跳转和包含的页面。在当前request范围内的若干个页面有效</p>
+<p>（3）session。客户端与服务器的交互过程，称为session（会话）。在同一用户的所有页面（用同一浏览器、同一服务器）</p>
+<p>（4）application。部署在服务器上的Web应用程序与所有客户端的交互过程。作用在网站下的所有页面</p>
+<h2 id="1-7-JavaBean"><a href="#1-7-JavaBean" class="headerlink" title="1.7 JavaBean"></a>1.7 JavaBean</h2><p>JavaBean编写规范：</p>
+<ol>
+<li>构造方法：必须提一个无参的构造方法</li>
+<li>set和get方法：<br>对于变量XXX，应提供方法getXxx()和setXxx()<br>getXxx()用于获取变量XXX的值<br>setXxx()用于设置变量XXX的值</li>
+</ol>
+<p>JavaBean组件是一些可移植、可重用，并可以组装到应用程序中的类。</p>
+<p>在JavaBean中封装事务逻辑、数据库操作等，使用JSP调用，如果需要修改，直接修改JavaBean就可以了，不需要对JSP代码进行修改。</p>
+<h4 id="1"><a href="#1" class="headerlink" title="1. &lt;jsp:useBean&gt;"></a>1. <code>&lt;jsp:useBean&gt;</code></h4><p><strong>作用：</strong>声明一个具有一定生存范围及一个唯一id的JavaBean的实例，JSP页面通过id来识别JavaBean，并可通过id.method类似的语句来操作JavaBean。</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:useBean id=<span class="string">&quot;对象名&quot;</span> class=<span class="string">&quot;类名&quot;</span> scope=<span class="string">&quot;范围&quot;</span>/&gt;</span><br><span class="line">&lt;% 类名 对象名=<span class="keyword">new</span> 类名() %&gt;</span><br><span class="line"></span><br><span class="line">&lt;%<span class="comment">//实例 %&gt;</span></span><br><span class="line">&lt;jsp:useBean id=<span class="string">&quot;s1&quot;</span> class=<span class="string">&quot;Student&quot;</span> scope=<span class="string">&quot;application&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2"><a href="#2" class="headerlink" title="2. &lt;jsp:getProperty&gt;"></a>2. <code>&lt;jsp:getProperty&gt;</code></h4><p>**作用:**获取属性，用来返回一个已被创建的bean组件的属性值</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:getProperty name=<span class="string">&quot;对象名&quot;</span> property=<span class="string">&quot;属性名&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;jsp:getProperty name=<span class="string">&quot;s1&quot;</span> property=<span class="string">&quot; name &quot;</span> /&gt;</span><br><span class="line">&lt;%<span class="comment">// 等价于 %&gt;</span></span><br><span class="line">&lt;%=s1.getName&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3"><a href="#3" class="headerlink" title="3. &lt;jsp:setProperty&gt;"></a>3. <code>&lt;jsp:setProperty&gt;</code></h4><p><strong>作用：</strong>设定一个已被创建的bean组件的属性值</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:setProperty name=<span class="string">&quot;对象名&quot;</span> property=<span class="string">&quot;属性名&quot;</span> value=<span class="string">&quot;属性值&quot;</span> /&gt;</span><br><span class="line">&lt;jsp:setProperty name=<span class="string">&quot;对象名&quot;</span> property=<span class="string">&quot;属性名&quot;</span> param=<span class="string">&quot;参数值&quot;</span> /&gt;</span><br><span class="line">&lt;% <span class="comment">// 用表单空间的值给JavaBean对象属性赋值 %&gt;</span></span><br><span class="line">&lt;jsp:setProperty name=<span class="string">&quot;对象名&quot;</span> property=<span class="string">&quot;*&quot;</span> /&gt;</span><br><span class="line">&lt;% <span class="comment">// 用表单空间的值给JavaBean同名属性赋值 %&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-生命周期"><a href="#4-生命周期" class="headerlink" title="4. 生命周期"></a>4. 生命周期</h4><p>生存范围见内置对象</p>
+<h1 id="二、JDBC访问数据库"><a href="#二、JDBC访问数据库" class="headerlink" title="二、JDBC访问数据库"></a>二、JDBC访问数据库</h1><p>jar包放在Tomcat安装目录\lib</p>
+<h2 id="2-1-基本概念"><a href="#2-1-基本概念" class="headerlink" title="2.1 基本概念"></a>2.1 基本概念</h2><p>JDBC（Java DataBase Connection）</p>
+<p>由Sun公司制定的，用于执行SQL语句的Java API(Application Programming Interface)，由一些Java语言编写的类和接口组成。</p>
+<h2 id="2-2-使用JDBC访问数据库的基本步骤"><a href="#2-2-使用JDBC访问数据库的基本步骤" class="headerlink" title="2.2 使用JDBC访问数据库的基本步骤"></a>2.2 使用JDBC访问数据库的基本步骤</h2><p>（1）加载驱动程序</p>
+<p><code>Class.forName(“数据库驱动程序串”)；</code></p>
+<p>（2）获取数据库连接</p>
+<p><code>DriverManager.getConnection(“URL”, ”Username”, ”Password”);</code></p>
+<p>（3）创建Statement对象</p>
+<p><code>&lt;Connection对象&gt;.createStatement();</code></p>
+<p>（4）执行SQL语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Statement对象&gt;.executeQuery(“查询语句”);</span><br><span class="line">&lt;Statement对象&gt;.executeUpdate(“修改语句”);</span><br></pre></td></tr></table></figure>
+
+<p>（5）处理返回数据</p>
+<p>（6）释放对象和数据库连接</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ResultSet对象&gt;.close();</span><br><span class="line"></span><br><span class="line">&lt;Statement对象&gt;.close();</span><br><span class="line"></span><br><span class="line">&lt;Connection对象&gt;.close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-开发人员常用的JDBC-API"><a href="#2-3-开发人员常用的JDBC-API" class="headerlink" title="2.3 开发人员常用的JDBC API"></a>2.3 开发人员常用的JDBC API</h2><h3 id="（1）Class"><a href="#（1）Class" class="headerlink" title="（1）Class"></a>（1）Class</h3><p>作用：加载数据库驱动程序；</p>
+<p>用法：Class.forName(“数据库驱动程序串”)；</p>
+<p>常用驱动程序：</p>
+<p>ODBC的驱动程序：“sun.jdbc.odbc.JdbcOdbcDriver”</p>
+<p>SQL Server的驱动程序：“com.microsoft.jdbc.sqlserver. SQLServerDriver”</p>
+<p>Oracle的驱动程序：“oracle.jdbc.driver.OracleDriver”</p>
+<h3 id="（2）DriverManager"><a href="#（2）DriverManager" class="headerlink" title="（2）DriverManager"></a>（2）DriverManager</h3><p>作用：创建数据库连接；</p>
+<p>用法：<code>DriverManager.getConnection(“URL”,”Username”,”Password”);</code></p>
+<p>说明：</p>
+<p>URL为数据库统一资源定位符，即数据库的地址。URL的格式为“协议标识：驱动程序标识：数据库标识”，其中，协议标识固定为jdbc，驱动程序标识为驱动定义的类型，一般用于识别数据库服务器的地址和端口号，数据库标识用来识别某个特定的数据库，一般为数据库名称或ODBC数据源名称。</p>
+<p>Username为用户名；</p>
+<p>Password为用户密码。</p>
+<h3 id="（3）Connection"><a href="#（3）Connection" class="headerlink" title="（3）Connection"></a>（3）Connection</h3><p>用来管理JDBC和数据库之间的连接。</p>
+<p>常用方法：</p>
+<p>1）<code>void setAutoCommit(boolean autoCommit) throws SQLException</code></p>
+<p>功能：设置自动提交，参数autoCommit为true是自动提交，false是不自动提交。</p>
+<p>说明：数据库连接处于自动提交状态时，每执行一条SQL语句提交一次；否则，由程序逻辑调用commit()方法显示提交。默认状态下，连接处于自动提交状态下。</p>
+<p>2）<code>boolean getAutoCommit() throws SQLException</code></p>
+<p>功能：获取连接的自动提交模式。</p>
+<p>说明：自动提交模式返回true；否则返回false。</p>
+<p>3）<code>void rollback() throws SQLException</code></p>
+<p>功能：取消当前事务的执行的所有SQL语句，即回滚。</p>
+<p>说明：只有在连接处于非自动提交状态时，该方法才可以使用。</p>
+<p>4）<code>void commit() throws SQLException</code></p>
+<p>功能：提交当前事务，既使当前事务中的所有SQL语句对数据库的更改生效、永久化。</p>
+<p>说明：只有在连接处于非自动提交状态时，该方法才可以使用。</p>
+<p>5）<code>void close() throws SQLException</code></p>
+<p>功能：释放数据库连接和JDBC的所有资源。</p>
+<p>6）<code>boolean isClosed() throws SQLException</code></p>
+<p>功能：判断数据库连接是否释放。</p>
+<p>7）<code>Statement createStatement(int resultSetType, int resultSetConcurrency) throws SQLException</code></p>
+<p>功能：创建一个Statement对象，通过该Statement对象，能够生成给定类型和并发性的ResultSet对象。</p>
+<p>说明：</p>
+<p>resultSetType参数有三种取值：</p>
+<ul>
+<li><p>ResultSet.TYPE_FORWARD_ONLY：结果集指针只能向前移动</p>
+</li>
+<li><p>ResultSet.TYPE_SCROLL_INSENSITIVE：结果集指针可以随意移动，自从获取数据后，数据库内容的变化不会引起结果集内容的变化。</p>
+</li>
+<li><p>ResultSet.TYPE_SCROLL_SENSITIVE: 结果集指针可以随意移动，获取数据后，数据库内容的变化将引起结果集内容的变化。</p>
+</li>
+</ul>
+<p>resultSetConcurrency参数有两种取值：</p>
+<ul>
+<li><p>ResultSet.CONCUR_READ_ONLY：不能通过结果集中数据的更改来更新数据库。</p>
+</li>
+<li><p>ResultSet.CONCUR_UPDATABLE：可以通过结果集中数据的更改来更新数据库。</p>
+</li>
+</ul>
+<p>8）<code>Statement createStatement( ) throws SQLException</code></p>
+<p>功能：创建一个Statement对象，通过该Statement对象，生成ResultSet对象的类型默认为ResultSet.TYPE_FORWARD_ONLY，并发性默认为ResultSet.CONCUR_READ_ONLY。</p>
+<p>9）<code>PreparedStatement prepareStatement(String sql) throws SQLException</code></p>
+<p>功能：</p>
+<p>10）<code>PreparedStatement prepareStatement(String sql, int resultSetType,int resultSetConcurrency) throws SQLException</code></p>
+<p>11）<code>CallableStatement prepareCall(String sql) throws SQLException</code></p>
+<p>12）<code>CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency) throws SQLException</code></p>
+<h3 id="（4）Statement"><a href="#（4）Statement" class="headerlink" title="（4）Statement"></a>（4）Statement</h3><p><strong>作用</strong>：用于执行SQL语句</p>
+<p>Statement对象代表SQL语句，可用于将SQL语句发往数据库。</p>
+<p>Statement对象用于执行一条静态的SQL语句并获得它的结果，记录结果集。</p>
+<p><strong>3种Statement对象：</strong></p>
+<ul>
+<li><p>Statement：执行基本的SQL语句。</p>
+</li>
+<li><p>PreparedStatement：继承自Statement，用于提供可以与查询信息一起预编译的语句，用于执行带参数的SQL语句。</p>
+</li>
+<li><p>CallableStatement：继承自PreparedStatement ，用来执行数据库中的存储过程。</p>
+</li>
+</ul>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><p>ResultSet executeQuery(String sql) throws SQLException<br>执行一条返回单个ResultSet的SQL语句。</p>
+</li>
+<li><p>int executeUpdate(String sql) throws SQLException<br>执行INSERT、UPDATE、DELETE以及没有返回结果的SQL语句，如DDL语句。方法返回语句影响的行数。</p>
+</li>
+<li><p>boolean execute(String sql) throws SQLException<br>执行一条可能返回多个结果的SQL语句。<br>如果下一个结果是ResultSet，返回true，否则返回false。</p>
+</li>
+<li><p>ResultSet getResultSet() throws SQLException<br>得到当前的ResultSet结果。</p>
+</li>
+<li><p>int getUpdateCount() throws SQLException<br>得到更新的数量，如果结果是一个ResultSet或没有其他结果，返回-1。</p>
+</li>
+<li><p>void close() throws SQLException<br>关闭语句，同时立即释放该语句的数据库和JDBC资源，如果它有相应的ResultSet，则ResultSet也会被关闭。</p>
+</li>
+</ul>
+<h3 id="（5）ResultSet"><a href="#（5）ResultSet" class="headerlink" title="（5）ResultSet"></a>（5）ResultSet</h3><p>用来接收执行SQL查询语句后得到的记录集。</p>
+<p>用它的getXXX方法可以得到记录中不同列的数据。可通过列的索引或名字来获取值，列索引从1开始。</p>
+<p>用next()可把当前记录指针往下移动一行。</p>
+<p><strong>常用方法：</strong></p>
+<ul>
+<li><p>boolean absolute(int row) throws SQLException<br>当记录指针可以上下移动查询时移动当前记录指针到指定行。<br>参数row为正数，指针移动到正方向第row个记录；参数row为负数，指针移动到反方向第row个记录。<br>第一行行号为1。<br>当记录指针移到第一行的前面或最后一行的后面，返回值false。</p>
+</li>
+<li><p>boolean next() throws SQLException<br>当前记录指针下移一行。<br>指针初始位置为第一行之前。<br>当移动指针到最后一行之后时，返回false;否则返回true。</p>
+</li>
+<li><p>boolean previous() throws SQLException<br>previous先前的<br>当记录指针可以上下移动时，当前记录指针上移一行。<br>当移动指针到第一行之前时，返回false;否则返回true。</p>
+</li>
+<li><p>boolean relative(int rows)<br>relative 相对的<br>将记录指针相对于当前行移动rows行，正数向后移，负数向前移。</p>
+</li>
+<li><p>void beforeFirst()<br>将指针移动到第一行的前面。</p>
+</li>
+<li><p>boolean first()<br>将指针移动到第一行。</p>
+</li>
+<li><p>boolean last()<br>将指针移动到最后一行。</p>
+</li>
+<li><p>void afterLast()<br>将指针移动到最后一行的后面。</p>
+</li>
+<li><p>boolean isFirst() 判断指针是否指向第一行</p>
+</li>
+<li><p>boolean isLast() 判断指针是否指向最后一行</p>
+</li>
+<li><p>boolean isBeforeFirst()</p>
+</li>
+<li><p>boolean isAfterLast()</p>
+</li>
+</ul>
+<p><strong>注意：</strong></p>
+<p>使用所有除了next()以外的指针移动方法有一个前提条件，记录指针必须是可以上下移动的，即产生ResultSet的Statement的创建应该如下：</p>
+<p>createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, XXXX) 或</p>
+<p>createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, XXXX)</p>
+<p>用它的getXXX方法可以得到记录中不同列的数据。可通过列的索引或名字来获取值，列索引从1开始。</p>
+<p>XXX代表数据类型</p>
+<p>xxx getXxx(int columnIndex)</p>
+<p>xxx getXxx(String  columnLabel)</p>
+<p>参数columnIndex为列索引，第一列索引号为1；参数columnLabel为列名。</p>
+<p>xxx可以是boolean、byte、short、int、long、float、double、String、……</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">byte</span> <span class="title function_">getByte</span><span class="params">(<span class="type">int</span> columnIndex | String columnLabel)</span></span><br><span class="line"></span><br><span class="line"><span class="type">short</span> <span class="title function_">getShort</span><span class="params">(<span class="type">int</span> columnIndex | String columnLabel)</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">getInt</span><span class="params">(<span class="type">int</span> columnIndex | String columnLabel)</span></span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="title function_">getLong</span><span class="params">(<span class="type">int</span> columnIndex | String columnLabel)</span></span><br><span class="line"></span><br><span class="line"><span class="type">float</span> <span class="title function_">getFloat</span><span class="params">(<span class="type">int</span> columnIndex | String columnLabel)</span></span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">getDouble</span><span class="params">(<span class="type">int</span> columnIndex | String columnLabel)</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">getBoolean</span><span class="params">(<span class="type">int</span> columnIndex | String columnLabel)</span></span><br><span class="line"></span><br><span class="line"><span class="type">byte</span>[] getBytes(<span class="type">int</span> columnIndex | String columnLabel)</span><br><span class="line"></span><br><span class="line">Date <span class="title function_">getDate</span><span class="params">(<span class="type">int</span> columnIndex | String columnLabel)</span></span><br><span class="line"></span><br><span class="line">Time <span class="title function_">getTime</span><span class="params">(<span class="type">int</span> columnIndex | String columnLabel)</span> </span><br><span class="line"></span><br><span class="line">String <span class="title function_">getString</span><span class="params">(<span class="type">int</span> columnIndex | String columnLabel)</span><span class="comment">//最常用</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">getRow</span><span class="params">()</span></span><br><span class="line"><span class="comment">// 获取当前行的行号，从1开始。如果没有当前行，返回0。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">close</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span><br><span class="line"><span class="comment">// 关闭ResultSet对象，立即释放该语句的数据库和JDBC资源。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-4-JDBC实验"><a href="#2-4-JDBC实验" class="headerlink" title="2.4 JDBC实验"></a>2.4 JDBC实验</h2><h3 id="2-4-1-编写JSP程序，输出学生数据库的学生基本信息。"><a href="#2-4-1-编写JSP程序，输出学生数据库的学生基本信息。" class="headerlink" title="2.4.1 编写JSP程序，输出学生数据库的学生基本信息。"></a>2.4.1 编写JSP程序，输出学生数据库的学生基本信息。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.sql.*&quot;</span> pageEncoding=<span class="string">&quot;GB2312&quot;</span>%&gt;<span class="comment">//import必须引入这个包</span></span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line"></span><br><span class="line"> &lt;head&gt;  </span><br><span class="line"></span><br><span class="line">  &lt;title&gt;output the student<span class="string">&#x27;s information&lt;/title&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> &lt;/head&gt; </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> &lt;body&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> &lt;%</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> String url = &quot;jdbc:mysql://127.0.0.1:3306/mis?</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8&quot;;//东八区</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> Connection conn = DriverManager.getConnection(url, &quot;root&quot;,&quot;123456&quot;);//建立数据库连接</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> Statement stmt = conn.createStatement();</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> ResultSet rs = stmt.executeQuery(&quot;select * from student&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;table width=800 border=1 align=&#x27;</span>center<span class="string">&#x27;&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;tr&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;td&gt;学号&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;td&gt;用户名&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;td&gt;密码&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;td&gt;姓名&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;td&gt;性别&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;td&gt;出生日期&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;td&gt;专业&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;td&gt;年级&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;td&gt;电话号码&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;/tr&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> while(rs.next())&#123;  //rs结果集</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   out.println(&quot;&lt;tr&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   out.println(&quot;&lt;td&gt;&quot;+rs.getString(&quot;sno&quot;)+&quot;&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   out.println(&quot;&lt;td&gt;&quot;+rs.getString(&quot;susername&quot;)+&quot;&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   out.println(&quot;&lt;td&gt;&quot;+rs.getString(&quot;spassword&quot;)+&quot;&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   out.println(&quot;&lt;td&gt;&quot;+rs.getString(&quot;sname&quot;)+&quot;&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   out.println(&quot;&lt;td&gt;&quot;+rs.getString(&quot;ssex&quot;)+&quot;&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   out.println(&quot;&lt;td&gt;&quot;+rs.getString(&quot;sbirthday&quot;)+&quot;&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   out.println(&quot;&lt;td&gt;&quot;+rs.getString(&quot;smajor&quot;)+&quot;&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   out.println(&quot;&lt;td&gt;&quot;+rs.getString(&quot;sgrade&quot;)+&quot;&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   out.println(&quot;&lt;td&gt;&quot;+rs.getString(&quot;sphone&quot;)+&quot;&lt;/td&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   out.println(&quot;&lt;/tr&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;&lt;/table&gt;&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> rs.close();</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> stmt.close();</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> conn.close();    //释放资源</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  %&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> &lt;/body&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-2-编写JSP程序，向数据库添加学生信息。"><a href="#2-4-2-编写JSP程序，向数据库添加学生信息。" class="headerlink" title="2.4.2 编写JSP程序，向数据库添加学生信息。"></a>2.4.2 编写JSP程序，向数据库添加学生信息。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//input.jsp</span></span><br><span class="line"></span><br><span class="line">&lt;%@ page language=<span class="string">&quot;java&quot;</span> <span class="keyword">import</span>=<span class="string">&quot;java.util.*&quot;</span> pageEncoding=<span class="string">&quot;gb2312&quot;</span>%&gt;</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;title&gt;输入学生基本信息&lt;/title&gt;</span><br><span class="line"></span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;h2&gt;请输入学生基本信息:&lt;/h2&gt;</span><br><span class="line"></span><br><span class="line">&lt;form action=<span class="string">&quot;add.jsp&quot;</span> method=<span class="string">&quot;get&quot;</span>&gt;   <span class="comment">//提交到add.jsp</span></span><br><span class="line"></span><br><span class="line">用户名：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;susername&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;密码：&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;spassword&quot;</span>/&gt; </span><br><span class="line"></span><br><span class="line">&lt;p&gt;学号：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;sno&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;姓名：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;sname&quot;</span>/&gt; </span><br><span class="line"></span><br><span class="line">&lt;p&gt;性别：男&lt;input type=<span class="string">&quot;radio&quot;</span> name=<span class="string">&quot;ssex&quot;</span> value=<span class="string">&quot;m&quot;</span> checked/&gt;</span><br><span class="line"></span><br><span class="line">​     女&lt;input type=<span class="string">&quot;radio&quot;</span> name=<span class="string">&quot;ssex&quot;</span> value=<span class="string">&quot;f&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;出生日期：</span><br><span class="line"></span><br><span class="line">  &lt;select name=<span class="string">&quot;year&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">  &lt;%</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1980</span>;i&lt;=<span class="number">2000</span>;i++)&#123;</span><br><span class="line"></span><br><span class="line">   out.println(<span class="string">&quot;&lt;option value=&#x27;&quot;</span>+i+<span class="string">&quot;&#x27;&gt;&quot;</span>+i+<span class="string">&quot;&lt;/option&gt;&quot;</span>);</span><br><span class="line"></span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line">   %&gt;   </span><br><span class="line"></span><br><span class="line">  &lt;/select&gt;年</span><br><span class="line"></span><br><span class="line">  &lt;select name=<span class="string">&quot;month&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">  &lt;%</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">12</span>;i++)&#123;</span><br><span class="line"></span><br><span class="line">   out.println(<span class="string">&quot;&lt;option value=&#x27;&quot;</span>+i+<span class="string">&quot;&#x27;&gt;&quot;</span>+i+<span class="string">&quot;&lt;/option&gt;&quot;</span>);</span><br><span class="line"></span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line">   %&gt;    </span><br><span class="line"></span><br><span class="line">  &lt;/select&gt;月</span><br><span class="line"></span><br><span class="line">  &lt;select name=<span class="string">&quot;day&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">  &lt;%</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">31</span>;i++)&#123;</span><br><span class="line"></span><br><span class="line">   out.println(<span class="string">&quot;&lt;option value=&#x27;&quot;</span>+i+<span class="string">&quot;&#x27;&gt;&quot;</span>+i+<span class="string">&quot;&lt;/option&gt;&quot;</span>);</span><br><span class="line"></span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line">   %&gt;     </span><br><span class="line"></span><br><span class="line">  &lt;/select&gt;日</span><br><span class="line"></span><br><span class="line">&lt;p&gt;电话号码：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;sphone&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;年级：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;sgrade&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;专业：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;smajor&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;</span><br><span class="line"></span><br><span class="line">  &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;提交&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">  &lt;input type=<span class="string">&quot;reset&quot;</span> value=<span class="string">&quot;重写&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//add.jsp</span></span><br><span class="line"></span><br><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">&quot;java.sql.*&quot;</span> pageEncoding=<span class="string">&quot;GB2312&quot;</span>%&gt;</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line"></span><br><span class="line"> &lt;head&gt;  </span><br><span class="line"></span><br><span class="line">  &lt;title&gt;output the student<span class="string">&#x27;s information&lt;/title&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> &lt;/head&gt; </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> &lt;body&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> &lt;%</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> String sno = request.getParameter(&quot;sno&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> String susername = request.getParameter(&quot;susername&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> String spassword = request.getParameter(&quot;spassword&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> String sname = request.getParameter(&quot;sname&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> String ssex = request.getParameter(&quot;ssex&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> String sbirthday = request.getParameter(&quot;year&quot;)+&quot;-&quot;+</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">​           request.getParameter(&quot;month&quot;)+&quot;-&quot;+</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">​           request.getParameter(&quot;day&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> String smajor = request.getParameter(&quot;smajor&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> String sgrade = request.getParameter(&quot;sgrade&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> String sphone = request.getParameter(&quot;sphone&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> String url = &quot;jdbc:mysql://127.0.0.1:3306/mis?</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8&quot;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> Connection conn = DriverManager.getConnection(url, &quot;root&quot;,&quot;123456&quot;);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> Statement stmt = conn.createStatement();</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> String sql=&quot;insert into student &quot;+</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">​    &quot;(sno,sname,ssex,sbirthday,smajor,sgrade,sphone,susername,spassword)&quot;+</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">​    &quot; values(&#x27;</span><span class="string">&quot;+sno+&quot;</span><span class="string">&#x27;,&#x27;</span><span class="string">&quot;+sname+&quot;</span><span class="string">&#x27;,&#x27;</span><span class="string">&quot;+ssex+&quot;</span><span class="string">&#x27;,&#x27;</span><span class="string">&quot;+sbirthday+&quot;</span><span class="string">&#x27;,&#x27;</span><span class="string">&quot;+smajor+</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">​    &quot;</span><span class="string">&#x27;,&#x27;</span><span class="string">&quot;+sgrade+&quot;</span><span class="string">&#x27;,&#x27;</span><span class="string">&quot;+sphone+&quot;</span><span class="string">&#x27;,&#x27;</span><span class="string">&quot;+susername+&quot;</span><span class="string">&#x27;,&#x27;</span><span class="string">&quot;+spassword+&quot;</span><span class="string">&#x27;)&quot;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> stmt.executeUpdate(sql);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> out.println(&quot;数据已成功添加到数据库中。&quot;); </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> stmt.close();</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> conn.close();  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  %&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> &lt;/body&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-4-3-编写JaveBean，对数据库中的数据进行查询、删除和修改。"><a href="#2-4-3-编写JaveBean，对数据库中的数据进行查询、删除和修改。" class="headerlink" title="2.4.3 编写JaveBean，对数据库中的数据进行查询、删除和修改。"></a>2.4.3 编写JaveBean，对数据库中的数据进行查询、删除和修改。</h3><p>功能：加载驱动程序；建立数据库连接</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.sql.*;    <span class="comment">//JDBC有关的包都在这里面</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DBConn</span> &#123;</span><br><span class="line"></span><br><span class="line">​    <span class="keyword">private</span> Connection conn=<span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">private</span> String driver,url,username,password;</span><br><span class="line"></span><br><span class="line">​     <span class="comment">//String connectionUrl = //&quot;jdbc:sqlserver://localhost:1433;databaseName=test;user=sa;password=sa;&quot;;</span></span><br><span class="line"></span><br><span class="line">​     <span class="keyword">public</span> <span class="title function_">DBConn</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">​     <span class="built_in">this</span>.driver= <span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">this</span>.url= <span class="string">&quot;jdbc:mysql://127.0.0.1:3306/mis? characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8&quot;</span></span><br><span class="line"></span><br><span class="line">​     <span class="built_in">this</span>.username=<span class="string">&quot;root&quot;</span>;</span><br><span class="line"></span><br><span class="line">​     <span class="built_in">this</span>.password=<span class="string">&quot;123456&quot;</span>;</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">​      Class.forName(driver);</span><br><span class="line"></span><br><span class="line">​      conn=DriverManager.getConnection(url,username,password);</span><br><span class="line"></span><br><span class="line">​     &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line"></span><br><span class="line">​      System.out.println(<span class="string">&quot;不能加载数据库驱动。&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      e.printStackTrace();</span><br><span class="line"></span><br><span class="line">​     &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line"></span><br><span class="line">​      System.out.println(<span class="string">&quot;不能建立数据库连接。&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      e.printStackTrace();</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">​     </span><br><span class="line"></span><br><span class="line">​     <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">add</span><span class="params">(String username,String password,</span></span><br><span class="line"><span class="params"></span></span><br><span class="line"><span class="params">​           String realname,String sex,String email)</span>&#123;</span><br><span class="line"></span><br><span class="line">​     <span class="type">boolean</span> temp=<span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">​     PreparedStatement stmt=<span class="literal">null</span>;  <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">​    String sql=<span class="string">&quot;insert into reginfor(username,password,realname,sex,email) &quot;</span>;</span><br><span class="line"></span><br><span class="line">​        sql=sql+<span class="string">&quot;values(?,?,?,?,?)&quot;</span>;</span><br><span class="line"></span><br><span class="line">​        <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">​      stmt=conn.prepareStatement(sql);</span><br><span class="line"></span><br><span class="line">​      stmt.setString(<span class="number">1</span>,username);</span><br><span class="line"></span><br><span class="line">​      stmt.setString(<span class="number">2</span>,password);</span><br><span class="line"></span><br><span class="line">​      stmt.setString(<span class="number">3</span>,realname);</span><br><span class="line"></span><br><span class="line">​      stmt.setString(<span class="number">4</span>,sex);</span><br><span class="line"></span><br><span class="line">​      stmt.setString(<span class="number">5</span>,email);</span><br><span class="line"></span><br><span class="line">​      stmt.execute();</span><br><span class="line"></span><br><span class="line">​      temp=<span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">​     &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line"></span><br><span class="line">​      System.out.println(<span class="string">&quot;添加数据异常．&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      e.printStackTrace();</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">return</span> temp;</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">​     </span><br><span class="line"></span><br><span class="line">​     <span class="keyword">public</span> ResultSet <span class="title function_">find</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">​     Statement stmt=<span class="literal">null</span>;  <span class="comment">//定义语句对象，用statement不用传参数</span></span><br><span class="line"></span><br><span class="line">​     ResultSet rs=<span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">​      stmt=conn.createStatement();</span><br><span class="line"></span><br><span class="line">​      rs=stmt.executeQuery(<span class="string">&quot;select * from reginfor&quot;</span>);  </span><br><span class="line"></span><br><span class="line">​     &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line"></span><br><span class="line">​      System.out.println(<span class="string">&quot;查询异常．&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      e.printStackTrace();</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">return</span> rs;</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">public</span> ResultSet <span class="title function_">find</span><span class="params">(String username,String password)</span>&#123;</span><br><span class="line"></span><br><span class="line">​     PreparedStatement stmt=<span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">​     ResultSet rs=<span class="literal">null</span>; <span class="comment">//定义结果集</span></span><br><span class="line"></span><br><span class="line">​     String sql=<span class="string">&quot;select * from reginfor &quot;</span> +</span><br><span class="line"></span><br><span class="line">​        <span class="string">&quot;where username=? and password=?&quot;</span>;</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">​      stmt=conn.prepareStatement(sql);<span class="comment">//创建语句对象</span></span><br><span class="line"></span><br><span class="line">​      stmt.setString(<span class="number">1</span>,username);</span><br><span class="line"></span><br><span class="line">​      stmt.setString(<span class="number">2</span>,password);</span><br><span class="line"></span><br><span class="line">​      rs=stmt.executeQuery();  <span class="comment">//执行SQL语句</span></span><br><span class="line"></span><br><span class="line">​     &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line"></span><br><span class="line">​      System.out.println(<span class="string">&quot;查询异常．&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      e.printStackTrace();</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">return</span> rs;</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">​     <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">delete</span><span class="params">(<span class="type">int</span> id)</span>&#123;</span><br><span class="line"></span><br><span class="line">​     <span class="type">boolean</span> temp=<span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">​     PreparedStatement stmt=<span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">​     String sql=<span class="string">&quot;delete from reginfor where id=?&quot;</span>;</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">​      stmt=conn.prepareStatement(sql);</span><br><span class="line"></span><br><span class="line">​      stmt.setInt(<span class="number">1</span>,id);</span><br><span class="line"></span><br><span class="line">​      stmt.execute();</span><br><span class="line"></span><br><span class="line">​      temp=<span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">​     &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line"></span><br><span class="line">​      System.out.println(<span class="string">&quot;删除异常．&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      e.printStackTrace();</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">return</span> temp;</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">​     </span><br><span class="line"></span><br><span class="line">​     <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">update</span><span class="params">(<span class="type">int</span> id,String username,String password,</span></span><br><span class="line"><span class="params"></span></span><br><span class="line"><span class="params">​          String realname,String sex,String email)</span>&#123;</span><br><span class="line"></span><br><span class="line">​     <span class="type">boolean</span> temp=<span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">​     PreparedStatement stmt=<span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">​     String sql=<span class="string">&quot;update reginfor &quot;</span> +</span><br><span class="line"></span><br><span class="line">​        <span class="string">&quot;set username=?,password=?,realname=?,&quot;</span> +</span><br><span class="line"></span><br><span class="line">​        <span class="string">&quot;sex=?,email=? where id=?&quot;</span>;</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">​      stmt=conn.prepareStatement(sql);</span><br><span class="line"></span><br><span class="line">​      stmt.setString(<span class="number">1</span>,username);</span><br><span class="line"></span><br><span class="line">​      stmt.setString(<span class="number">2</span>,password);</span><br><span class="line"></span><br><span class="line">​      stmt.setString(<span class="number">3</span>,realname);</span><br><span class="line"></span><br><span class="line">​      stmt.setString(<span class="number">4</span>,sex);</span><br><span class="line"></span><br><span class="line">​      stmt.setString(<span class="number">5</span>,email);  </span><br><span class="line"></span><br><span class="line">​      stmt.setInt(<span class="number">6</span>,id);</span><br><span class="line"></span><br><span class="line">​      stmt.execute();</span><br><span class="line"></span><br><span class="line">​      temp=<span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">​     &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line"></span><br><span class="line">​      System.out.println(<span class="string">&quot;更新异常．&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      e.printStackTrace();</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">return</span> temp;</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">​     </span><br><span class="line"></span><br><span class="line">​     <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">print</span><span class="params">(ResultSet rs)</span>&#123;</span><br><span class="line"></span><br><span class="line">​     System.out.print(<span class="string">&quot;ID&quot;</span>+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">​     System.out.print(<span class="string">&quot;用户名&quot;</span>+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">​     System.out.print(<span class="string">&quot;密　码&quot;</span>+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">​     System.out.print(<span class="string">&quot;姓　名&quot;</span>+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">​     System.out.print(<span class="string">&quot;性　别&quot;</span>+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">​     System.out.println(<span class="string">&quot;邮　箱&quot;</span>+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">​     <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">​      <span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line"></span><br><span class="line">​      System.out.print(rs.getString(<span class="string">&quot;id&quot;</span>)+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      System.out.print(rs.getString(<span class="string">&quot;username&quot;</span>)+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      System.out.print(rs.getString(<span class="string">&quot;password&quot;</span>)+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      System.out.print(rs.getString(<span class="string">&quot;realname&quot;</span>)+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      System.out.print(rs.getString(<span class="string">&quot;sex&quot;</span>)+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      System.out.println(rs.getString(<span class="string">&quot;email&quot;</span>)+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      &#125;</span><br><span class="line"></span><br><span class="line">​     &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line"></span><br><span class="line">​      System.out.println(<span class="string">&quot;输出异常．&quot;</span>);</span><br><span class="line"></span><br><span class="line">​      e.printStackTrace();</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">​     &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、Servlet"><a href="#三、Servlet" class="headerlink" title="三、Servlet"></a>三、Servlet</h1><h2 id="3-1-Web应用模型"><a href="#3-1-Web应用模型" class="headerlink" title="3.1 Web应用模型"></a>3.1 Web应用模型</h2><p>一次请求处理过程：</p>
+<ol>
+<li>客户端向服务器发出一个请求</li>
+<li>建立连接</li>
+<li>服务器对客户端的请求进行响应</li>
+<li>断开连接</li>
+</ol>
+<p><img src="/2024/07/07/Java/JavaEE/image-20221113102156559.png" alt="image-20221113102156559"> </p>
+<p>HTTP协议的两个重要特性：</p>
+<ul>
+<li>无状态：服务器不会记录和保持客户端的任何信息</li>
+<li>无连接：服务器不会保持与客户端的永久性连接</li>
+</ul>
+<h2 id="3-2-Servlet基础"><a href="#3-2-Servlet基础" class="headerlink" title="3.2 Servlet基础"></a>3.2 Servlet基础</h2><p>Servlet是服务器端的Java应用程序，用来扩展服务器的功能，运行在Web服务器里。</p>
+<h3 id="3-2-1-Servlet工作流程"><a href="#3-2-1-Servlet工作流程" class="headerlink" title="3.2.1 Servlet工作流程"></a>3.2.1 Servlet工作流程</h3><h4 id="1、服务器、容器与Servlet之间的关系"><a href="#1、服务器、容器与Servlet之间的关系" class="headerlink" title="1、服务器、容器与Servlet之间的关系"></a>1、服务器、容器与Servlet之间的关系</h4><p>（1）Web服务器包含多个容器，一个容器对应于一个Web应用</p>
+<p>（2）一个Web容器可以运行多个Servlet实例</p>
+<p>（3）一个Servlet实例以多线程的形式运行</p>
+<p> <img src="/2024/07/07/Java/JavaEE/image-20221113102803215.png" alt="image-20221113102803215"> </p>
+<h4 id="2、Servlet的工作流程"><a href="#2、Servlet的工作流程" class="headerlink" title="2、Servlet的工作流程"></a>2、Servlet的工作流程</h4><p>（1）客户端向Web服务器发送请求</p>
+<p>（2）Web服务器将请求发给Web容器</p>
+<p>（3）Web容器将Servlet实例化，创建线程，调用init()方法</p>
+<p>（4）Web容器将客户端请求发给Servlet，调用对应的do方法（doGet、doPost、doPut、doDelete）</p>
+<p>（5）Servlet创建一个响应，并将响应返回给Web容器</p>
+<p>（6）Web容器将响应返回给Web服务器</p>
+<p>（7）Web服务器将响应返回给客户端</p>
+<p>（8）当服务器关闭或者Servlet空闲时间超过一定限度时，Web容器将Servlet实例从内存移除，调用destroy()方法</p>
+<p> <strong>注意：</strong></p>
+<ul>
+<li>init()方法只执行一次，Web容器将Servlet实例化时执行</li>
+<li>destroy()方法只执行一次，当服务器关闭或者Servlet空闲时间超过一定限度时执行</li>
+<li>do方法执行很多次，客户端每请求一次就执行一次</li>
+</ul>
+<h3 id="3-2-2-Servlet编程接口"><a href="#3-2-2-Servlet编程接口" class="headerlink" title="3.2.2 Servlet编程接口"></a>3.2.2 Servlet编程接口</h3><p><img src="/2024/07/07/Java/JavaEE/image-20221113103548342.png" alt="image-20221113103548342"> </p>
+<h4 id="HttpServlet"><a href="#HttpServlet" class="headerlink" title="HttpServlet"></a>HttpServlet</h4><p>所有Servlet应用必须继承HttpServlet，常用的方法如下：</p>
+<p>（1）<code>void doGet(HttpServletRequest req, HttpServletResponse resp)</code><br>当客户端发出get请求时，Web服务器调用该方法</p>
+<p>（2）<code>void doPost(HttpServletRequest req, HttpServletResponse resp)</code><br>当客户端发出post请求时，Web服务器调用该方法</p>
+<h4 id="HttpServletRequest"><a href="#HttpServletRequest" class="headerlink" title="HttpServletRequest"></a>HttpServletRequest</h4><p>代表发送到HttpServlet的请求，封装了客户端环境和从客户端发送到Servlet的数据。</p>
+<p>常用方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HttpSession <span class="title function_">getSession</span><span class="params">()</span></span><br><span class="line">String <span class="title function_">getParameter</span><span class="params">(String name)</span></span><br><span class="line">String[] getParameterValues(String name)</span><br><span class="line">RequestDispatcher <span class="title function_">getRequestDispatcher</span><span class="params">(String path)</span></span><br><span class="line">ServletContext <span class="title function_">getServletContext</span><span class="params">()</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">setCharacterEncoding</span><span class="params">(String env)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="HttpServletResponse"><a href="#HttpServletResponse" class="headerlink" title="HttpServletResponse"></a>HttpServletResponse</h4><p>代表HttpServlet返回给客户端的响应，常用方法如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">sendRedirect</span><span class="params">(String location)</span></span><br><span class="line">PrintWriter <span class="title function_">getWriter</span><span class="params">()</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">setCharacterEncoding</span><span class="params">(String charset)</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">setContentType</span><span class="params">(String type)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="HttpSession"><a href="#HttpSession" class="headerlink" title="HttpSession"></a>HttpSession</h4><p>用来在无状态的HTTP协议下跨越多个请求页面来维持状态和识别用户。</p>
+<p>常用方法如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ServletContext <span class="title function_">getServlet</span><span class="params">()</span></span><br><span class="line">Object <span class="title function_">getAttribute</span><span class="params">(java.lang.String name)</span></span><br><span class="line">Enumeration&lt;java.lang.String&gt; getAttributeNames()</span><br><span class="line"><span class="keyword">void</span> <span class="title function_">setAttribute</span><span class="params">(java.lang.String name, java.lang.Object value)</span></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">isNew</span><span class="params">()</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="ServletConfig"><a href="#ServletConfig" class="headerlink" title="ServletConfig"></a>ServletConfig</h4><p>代表Servlet的配置信息（在Web.xml中设置）</p>
+<p>常用方法如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String <span class="title function_">getInitParameter</span><span class="params">(java.lang.String name)</span></span><br><span class="line">Enumeration&lt;java.lang.String&gt; getInitParameterNames()</span><br><span class="line">ServletContet <span class="title function_">getServletContext</span><span class="params">()</span></span><br><span class="line">String <span class="title function_">getServletName</span><span class="params">()</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="RequestDispatcher"><a href="#RequestDispatcher" class="headerlink" title="RequestDispatcher"></a>RequestDispatcher</h4><p>请求转发器，可将客户端的请求转发到另一个程序</p>
+<p>常用方法如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">forward</span><span class="params">(ServletRequest request, ServletResponse response)</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">include</span><span class="params">(ServletRequest request, ServletResponse response)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="ServletContext"><a href="#ServletContext" class="headerlink" title="ServletContext"></a>ServletContext</h4><p>代表Servlet的运行环境信息</p>
+<h4 id="ServletException"><a href="#ServletException" class="headerlink" title="ServletException"></a>ServletException</h4><p>代表Servlet运行过程中抛出的例外</p>
+<h2 id="3-3-编写Servlet"><a href="#3-3-编写Servlet" class="headerlink" title="3.3 编写Servlet"></a>3.3 编写Servlet</h2><p>（1）定义Servlet类，继承HttpServlet</p>
+<p>（2）定义doGet()、doPost()、init()、destroy()等方法</p>
+<p>（3）建立Servlet与URL之间的映射</p>
+<ul>
+<li><p>在web.xml中配置<br><img src="/2024/07/07/Java/JavaEE/image-20221113111022387.png" alt="image-20221113111022387"><br>URL与Servlet实例之间的映射：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>Servlet实例名称<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>URL<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Servlet实例与Servlet类之间的映射</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>Servlet实例名称<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>Servlet类名称<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注解@WebServlet</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet(name=&quot;实例名称&quot;, urlPatterns=&quot;URL&quot;)</span></span><br><span class="line"><span class="comment">//或者</span></span><br><span class="line"><span class="meta">@WebS</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="期末考试"><a href="#期末考试" class="headerlink" title="期末考试"></a>期末考试</h1><p>简答题<br>1.请简要解释HTML、JavaEE、JSP、JDBC的英文含义和中文含义。<br>2.请简要叙述Servlet和JSP在软件开发时的作用与地位。。<br>3.请简要说明JSP页面第一次运行时的过程。<br>4.请简要叙述MVC设计模式，JSP、JavaBean和Servlet在MVC设计模式中的作用。<br>5.请简要叙述include指令和include动作的功能，以及它们的区别。<br>6.请简要叙述JavaBean的四种生存范围。<br>7.请简要描述Servlet的基本工作流程。<br>8.请简要说明JDBC访问数据库的基本步骤。<br>9.请简要叙述利用JDBC访问数据库时常用的类和接口有哪些。<br>10.请简要解释下列JSP内置对象的主要用途：request、response、session、application。</p>
+<p>材料分析题考点（填空）<br>1.表单<br>    一个表单，用于学生的信息</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=gb2312&quot;</span>%&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;&lt;titile&gt;<span class="built_in">this</span> is a form&lt;/titile&gt;&lt;/head&gt;</span><br><span class="line">&lt;%!</span><br><span class="line">    String origins[]=&#123;<span class="string">&quot;黑龙江&quot;</span>,<span class="string">&quot;吉林&quot;</span>,<span class="string">&quot;辽宁&quot;</span>,<span class="string">&quot;山东&quot;</span>,<span class="string">&quot;江苏&quot;</span>,<span class="string">&quot;上海&quot;</span>,<span class="string">&quot;浙江&quot;</span>,<span class="string">&quot;福建&quot;</span>&#125;;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h2&gt;请输入学生基本信息&lt;/h2&gt;</span><br><span class="line">    &lt;form action=<span class="string">&quot;/hello/servlet/print&quot;</span> method=<span class="string">&quot;get&quot;</span>&gt;</span><br><span class="line">        &lt;p&gt;姓名：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;realname&quot;</span>/&gt;</span><br><span class="line">        &lt;p&gt;性别：</span><br><span class="line">            男：&lt;input type=<span class="string">&quot;radio&quot;</span> name=<span class="string">&quot;sex&quot;</span> value=<span class="string">&quot;male&quot;</span> checked/&gt;</span><br><span class="line">            女：&lt;input type=<span class="string">&quot;radio&quot;</span> name=<span class="string">&quot;sex&quot;</span> value=<span class="string">&quot;femle&quot;</span>/&gt;</span><br><span class="line">        &lt;p&gt;爱好：</span><br><span class="line">            文学&lt;input type=<span class="string">&quot;checkbox&quot;</span> name=<span class="string">&quot;hobby&quot;</span> value=<span class="string">&quot;art&quot;</span>/&gt;</span><br><span class="line">            体育&lt;input type=<span class="string">&quot;checkbox&quot;</span> name=<span class="string">&quot;hobby&quot;</span> value=<span class="string">&quot;sports&quot;</span>/&gt;</span><br><span class="line">        &lt;p&gt;籍贯：</span><br><span class="line">            &lt;select name=<span class="string">&quot;origin&quot;</span>&gt;</span><br><span class="line">            &lt;%</span><br><span class="line">                <span class="keyword">for</span>(<span class="type">inti</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;origins.length; i++) &#123;</span><br><span class="line">                    out.println(<span class="string">&quot;&lt;option value=&quot;</span>+origins[i]+<span class="string">&quot;&gt;&quot;</span>+origins[i]+<span class="string">&quot;&lt;/option&gt;&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            %&gt;</span><br><span class="line">            &lt;/select&gt;</span><br><span class="line">        &lt;p&gt;备注：&lt;br&gt;</span><br><span class="line">            &lt;textarea name=<span class="string">&quot;memo&quot;</span> rows=<span class="number">5</span> cols=<span class="number">50</span>&gt;&lt;/textarea&gt;</span><br><span class="line">        &lt;p&gt;&lt;input type=<span class="string">&quot;sbumit&quot;</span> value=<span class="string">&quot;提交&quot;</span>/&gt;</span><br><span class="line">            &lt;input type=<span class="string">&quot;reset&quot;</span> value=<span class="string">&quot;重置&quot;</span>/&gt;</span><br><span class="line">   </span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2.JSP脚本<br>3.request对象、session对象、application对象<br>4.JavaBean及在JSP中使用JavaBean<br>5.基于JDBC访问数据库<br>6.Servlet</p>
+<p>编程题</p>
+<p>1.编写JavaBean<br>2.JSP脚本</p>
+<h2 id="简答题"><a href="#简答题" class="headerlink" title="简答题"></a>简答题</h2><p>**1.请简要解释HTML、JavaEE、JSP、JDBC的英文含义和中文含义。</p>
+<p>HTML：Hyper Text Markup Language，超文本标记语言<br>JavaEE：Java Enterprise Edition	java企业版<br>JSP：Java Server Pages 	java服务器端页面<br>JDBC：Java Database Connection	java数据库连接</p>
+<p><strong>2.请简要叙述Servlet和JSP在软件开发时的作用与地位。</strong></p>
+<p>Servlet和JSP都是J2EE的组件。<br>Servlet主要用于实现软件和组成系统的控制。<br>JSP主要用于实现软件的界面。</p>
+<p><strong>3.请简要说明JSP页面第一次运行时的过程。</strong></p>
+<p>（1）客户端发送请求（URL地址）（jsp）</p>
+<p>（2）服务器将 JSP 文件翻译为 Java 程序（Servlet）（Java）</p>
+<p>（3）服务器将 Java程序编译为字节码（.class）</p>
+<p>（4）服务器运行字节码（.html）</p>
+<p>（5）服务器将 HTML 代码发送给客户端浏览器</p>
+<p><strong>4.请简要叙述MVC设计模式，JSP、JavaBean和Servlet在MVC设计模式中的作用。</strong></p>
+<p>JavaBean用来业务处理 model<br>JSP用来显示数据 view<br>Servlet用来控制页面转移 control</p>
+<p><strong>5.请简要叙述include指令和include动作的功能，以及它们的区别。</strong></p>
+<p>include指令：用于在当前页面包含另外一个页面<br>include动作：用于在当前页面包含另外一个页面</p>
+<p>区别<br>include指令（静态包含）：<br>（1）语法格式：&lt;%@ include file&#x3D;“url”%&gt;<br>（2）包含时间：翻译JSP文件到Servlet时<br>（3）逻辑上：统一的</p>
+<p>include动作（动态包含）:<br>（1）语法格式：&lt;jsp:include page&#x3D;“url”&#x2F;&gt;<br>（2）包含时间：运行时<br>（3）逻辑上：独立的</p>
+<p><strong>6.请简要叙述JavaBean的四种生存范围。</strong></p>
+<p>（1）page：当前JSP页面内<br>（2）request：①当前拥有相同请求的JSP文件②以及用include动作和forward动作和当前页面连接在一起的页面。<br>（3）session：同一用户的所有页面<br>（4）application：服务器下的所有页面<br><strong>7.请简要描述Servlet的基本工作流程。</strong></p>
+<p>（1）客户端向Web服务器发送请求</p>
+<p>（2）Web服务器将请求发给Web容器</p>
+<p>（3）Web容器将Servlet实例化，创建线程，调用init()方法</p>
+<p>（4）Web容器将客户端请求发给Servlet，调用对应的do方法（doGet、doPost、doPut、doDelete）</p>
+<p>（5）Servlet创建一个响应，并将响应返回给Web容器</p>
+<p>（6）Web容器将响应返回给Web服务器</p>
+<p>（7）Web服务器将响应返回给客户端</p>
+<p>（8）当服务器关闭或者Servlet空闲时间超过一定限度时，Web容器将Servlet实例从内存移除，调用destroy()方法</p>
+<p><strong>8.请简要说明JDBC访问数据库的基本步骤。</strong></p>
+<p>（1）加载驱动程序<code>Class.forName(“数据库驱动程序串”)；</code></p>
+<p>（2）获取数据库连接<code>DriverManager.getConnection(“URL”, ”Username”, ”Password”);</code></p>
+<p>（3）创建Statement对象<code>&lt;Connection对象&gt;.createStatement();</code></p>
+<p>（4）执行SQL语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Statement对象&gt;.executeQuery(“查询语句”);</span><br><span class="line">&lt;Statement对象&gt;.executeUpdate(“修改语句”);</span><br></pre></td></tr></table></figure>
+
+<p>（5）处理返回数据</p>
+<p>（6）释放对象和数据库连接</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ResultSet对象&gt;.close();</span><br><span class="line"></span><br><span class="line">&lt;Statement对象&gt;.close();</span><br><span class="line"></span><br><span class="line">&lt;Connection对象&gt;.close();</span><br></pre></td></tr></table></figure>
+
+<p><strong>9.请简要叙述利用JDBC访问数据库时常用的类和接口有哪些。</strong>（任意四个就给4分，1个1分）</p>
+<ul>
+<li>Class</li>
+<li>DriverManager</li>
+<li>Connection</li>
+<li>Statement</li>
+<li>ResultSet</li>
+<li>PreparedStatement</li>
+</ul>
+<p><strong>10.请简要解释下列JSP内置对象的主要用途：request、response、session、application。</strong></p>
+<p>request:代表来自客户端的请求，用于从客户端向服务器端发送信息<br>response:代表服务器端的回复信息，用于从服务器向客户端发送信息。<br>session:代表一次会话，用于识别同一用户<br>application:用于全局共享数据</p>
+<p>选择题</p>
+<ol>
+<li><p>关于类成员与实例成员，下列说法正确的是（BC)(多选)</p>
+<p>A 在类外，类成员只能通过类进行访问，实例成员只能通过实例进行访问（类成员也可以通过实例访问）</p>
+<p>B 类方法中只能调用类成员，实例方法中既能调用类成员，也能调用实例成员</p>
+<p>C 类成员属于类，实例成员属于对象</p>
+<p>D 类成员不用static修饰，实例成员用static修饰（反了）</p>
+</li>
+<li><p>param动作用于传递参数，关于param动作，下列说法错误的是（B）（单选）</p>
+<p>A。param动作的语法格式为&lt;jsp:param name&#x3D;参数名称 value&#x3D;值&gt;</p>
+<p>B. parama动作只能和include动作配合使用</p>
+<p>C。param动作不能单独使用</p>
+<p>D。param动作传递参数的类型只能为字符串</p>
+</li>
+<li><p>Java中，所有异常类的父类是<strong>Throwable</strong></p>
+</li>
+<li><p>Java程序默认有java.lang这个类</p>
+</li>
+<li><p>用一个jsp程序access.jsp和一个java类Counter，用于实现网站访问的计数，统一用户不重复计数</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//access.jsp</span></span><br><span class="line">&lt;%<span class="meta">@page</span> <span class="keyword">import</span>=<span class="string">&quot;bean.Counter&quot;</span>%&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;logon page&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;jsp:useBean id=<span class="string">&quot;counter&quot;</span> class=<span class="string">&quot;bean.Counter&quot;</span> scope=<span class="string">&quot;application&quot;</span>/&gt;</span><br><span class="line">        &lt;% out.println(<span class="string">&quot;你是第&quot;</span>+counter.getCount(session)+<span class="string">&quot;位来访者&quot;</span>);%&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Counter.java</span></span><br><span class="line"><span class="keyword">package</span> bean;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpSession;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Counter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> count;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Counter</span><span class="params">()</span> &#123;</span><br><span class="line">        count = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getCount</span><span class="params">(HttpSession session)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(session.isNew()) &#123;</span><br><span class="line">            count = count + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/07/07/Java/JavaEE/image-20221216093234939.png" alt="image-20221216093234939"></p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/07/07/Java/JavaEE/" title="JavaEE">http://example.com/2024/07/07/Java/JavaEE/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/07/Linux/Linux/" rel="prev" title="Linux_基础(一)">
+      <i class="fa fa-chevron-left"></i> Linux_基础(一)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/07/Java/Java/" rel="next" title="Java基础">
+      Java基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81JSP%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">一、JSP概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-jsp%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 jsp执行过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-jsp%E7%9A%84%E5%87%A0%E7%A7%8D%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 jsp的几种形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-jsp%E8%84%9A%E6%9C%AC"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 jsp脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-%E8%BE%93%E5%87%BA%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 输出表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3-%E6%B3%A8%E9%87%8A"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-4-%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F%E3%80%81%E6%96%B9%E6%B3%95%E3%80%81%E7%B1%BB"><span class="nav-number">1.2.4.</span> <span class="nav-text">1.2.4 声明变量、方法、类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">1. 声明变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%A3%B0%E6%98%8E%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">2. 声明方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%A3%B0%E6%98%8E%E7%B1%BB"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">3. 声明类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-page%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1 page指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-language%E5%B1%9E%E6%80%A7"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">1. language属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-import%E5%B1%9E%E6%80%A7%EF%BC%88-%EF%BC%89"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">2. import属性（**）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-session%E5%B1%9E%E6%80%A7"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">3. session属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-errorPage"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">4. errorPage**</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-contentType"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">5. contentType</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-isThreadSafe"><span class="nav-number">1.3.1.6.</span> <span class="nav-text">6. isThreadSafe</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-include-%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2 include 指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E5%8A%A8%E4%BD%9C%E7%BB%84%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 动作组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-include%E5%8A%A8%E4%BD%9C%E7%BB%84%E4%BB%B6"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.5.1 include动作组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-forward%E5%8A%A8%E4%BD%9C%E7%BB%84%E4%BB%B6"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.5.2 forward动作组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-3-param%E5%8A%A8%E4%BD%9C%E7%BB%84%E4%BB%B6"><span class="nav-number">1.4.3.</span> <span class="nav-text">1.5.3 param动作组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-4-plugin%E5%8A%A8%E4%BD%9C%E7%BB%84%E4%BB%B6"><span class="nav-number">1.4.4.</span> <span class="nav-text">1.5.4 plugin动作组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-request%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.5.1 request对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-2-response%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.5.2.</span> <span class="nav-text">4.6.2 response对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-3-session%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.5.3.</span> <span class="nav-text">4.6.3 session对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-4-application%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.5.4.</span> <span class="nav-text">4.6.4 application对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-5-%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%9C%E7%94%A8%E8%8C%83%E5%9B%B4"><span class="nav-number">1.5.5.</span> <span class="nav-text">1.6.5 内置对象的作用范围</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-JavaBean"><span class="nav-number">1.6.</span> <span class="nav-text">1.7 JavaBean</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">1. &lt;jsp:useBean&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2"><span class="nav-number">1.6.0.2.</span> <span class="nav-text">2. &lt;jsp:getProperty&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3"><span class="nav-number">1.6.0.3.</span> <span class="nav-text">3. &lt;jsp:setProperty&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.6.0.4.</span> <span class="nav-text">4. 生命周期</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81JDBC%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">二、JDBC访问数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E4%BD%BF%E7%94%A8JDBC%E8%AE%BF%E9%97%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 使用JDBC访问数据库的基本步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E5%B8%B8%E7%94%A8%E7%9A%84JDBC-API"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 开发人员常用的JDBC API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89Class"><span class="nav-number">2.3.1.</span> <span class="nav-text">（1）Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89DriverManager"><span class="nav-number">2.3.2.</span> <span class="nav-text">（2）DriverManager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89Connection"><span class="nav-number">2.3.3.</span> <span class="nav-text">（3）Connection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%884%EF%BC%89Statement"><span class="nav-number">2.3.4.</span> <span class="nav-text">（4）Statement</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%885%EF%BC%89ResultSet"><span class="nav-number">2.3.5.</span> <span class="nav-text">（5）ResultSet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-JDBC%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 JDBC实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-%E7%BC%96%E5%86%99JSP%E7%A8%8B%E5%BA%8F%EF%BC%8C%E8%BE%93%E5%87%BA%E5%AD%A6%E7%94%9F%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AD%A6%E7%94%9F%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF%E3%80%82"><span class="nav-number">2.4.1.</span> <span class="nav-text">2.4.1 编写JSP程序，输出学生数据库的学生基本信息。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-%E7%BC%96%E5%86%99JSP%E7%A8%8B%E5%BA%8F%EF%BC%8C%E5%90%91%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B7%BB%E5%8A%A0%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E3%80%82"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.4.2 编写JSP程序，向数据库添加学生信息。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-3-%E7%BC%96%E5%86%99JaveBean%EF%BC%8C%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E6%9F%A5%E8%AF%A2%E3%80%81%E5%88%A0%E9%99%A4%E5%92%8C%E4%BF%AE%E6%94%B9%E3%80%82"><span class="nav-number">2.4.3.</span> <span class="nav-text">2.4.3 编写JaveBean，对数据库中的数据进行查询、删除和修改。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81Servlet"><span class="nav-number">3.</span> <span class="nav-text">三、Servlet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-Web%E5%BA%94%E7%94%A8%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 Web应用模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Servlet%E5%9F%BA%E7%A1%80"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 Servlet基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-Servlet%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 Servlet工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%81%E5%AE%B9%E5%99%A8%E4%B8%8EServlet%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">1、服务器、容器与Servlet之间的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81Servlet%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">2、Servlet的工作流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-Servlet%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 Servlet编程接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HttpServlet"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">HttpServlet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HttpServletRequest"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">HttpServletRequest</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HttpServletResponse"><span class="nav-number">3.2.2.3.</span> <span class="nav-text">HttpServletResponse</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HttpSession"><span class="nav-number">3.2.2.4.</span> <span class="nav-text">HttpSession</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ServletConfig"><span class="nav-number">3.2.2.5.</span> <span class="nav-text">ServletConfig</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RequestDispatcher"><span class="nav-number">3.2.2.6.</span> <span class="nav-text">RequestDispatcher</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ServletContext"><span class="nav-number">3.2.2.7.</span> <span class="nav-text">ServletContext</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ServletException"><span class="nav-number">3.2.2.8.</span> <span class="nav-text">ServletException</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E7%BC%96%E5%86%99Servlet"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 编写Servlet</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%9F%E6%9C%AB%E8%80%83%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">期末考试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E7%AD%94%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">简答题</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
