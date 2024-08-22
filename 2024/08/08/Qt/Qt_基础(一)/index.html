@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、QT概述1.1、介绍 跨平台的图形用户界面应用程序框架 面向对象 可以扩展  1.2、优点 跨平台 接口简单，容易上手 简化了内存回收  1.3、版本 商业版 开源版  1.4、历史 1991年，奇趣科技 1996年，进入商业领域， 成功案例：Linux的桌面环境  1.5、下载官方下载地址：http:&#x2F;&#x2F;download.qt.io&#x2F;archive&#x2F;qt&#x2F;  清华大学镜像站：Index of">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QT_基础(一)">
+<meta property="og:url" content="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="一、QT概述1.1、介绍 跨平台的图形用户界面应用程序框架 面向对象 可以扩展  1.2、优点 跨平台 接口简单，容易上手 简化了内存回收  1.3、版本 商业版 开源版  1.4、历史 1991年，奇趣科技 1996年，进入商业领域， 成功案例：Linux的桌面环境  1.5、下载官方下载地址：http:&#x2F;&#x2F;download.qt.io&#x2F;archive&#x2F;qt&#x2F;  清华大学镜像站：Index of">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805101610765.png">
+<meta property="og:image" content="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805102541909.png">
+<meta property="og:image" content="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805103945902.png">
+<meta property="og:image" content="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805104342958.png">
+<meta property="og:image" content="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805104619462.png">
+<meta property="og:image" content="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805104639477.png">
+<meta property="og:image" content="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805105338326.png">
+<meta property="og:image" content="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80">
+<meta property="article:published_time" content="2024-08-08T08:48:00.000Z">
+<meta property="article:modified_time" content="2024-08-22T05:40:19.003Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="QT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805101610765.png">
+
+<link rel="canonical" href="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>QT_基础(一) | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          QT_基础(一)
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-08-08 16:48:00" itemprop="dateCreated datePublished" datetime="2024-08-08T16:48:00+08:00">2024-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-22 13:40:19" itemprop="dateModified" datetime="2024-08-22T13:40:19+08:00">2024-08-22</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、QT概述"><a href="#一、QT概述" class="headerlink" title="一、QT概述"></a>一、QT概述</h1><h2 id="1-1、介绍"><a href="#1-1、介绍" class="headerlink" title="1.1、介绍"></a>1.1、介绍</h2><ul>
+<li>跨平台的图形用户界面应用程序框架</li>
+<li>面向对象</li>
+<li>可以扩展</li>
+</ul>
+<h2 id="1-2、优点"><a href="#1-2、优点" class="headerlink" title="1.2、优点"></a>1.2、优点</h2><ol>
+<li>跨平台</li>
+<li>接口简单，容易上手</li>
+<li>简化了内存回收</li>
+</ol>
+<h2 id="1-3、版本"><a href="#1-3、版本" class="headerlink" title="1.3、版本"></a>1.3、版本</h2><ul>
+<li>商业版</li>
+<li>开源版</li>
+</ul>
+<h2 id="1-4、历史"><a href="#1-4、历史" class="headerlink" title="1.4、历史"></a>1.4、历史</h2><ul>
+<li>1991年，奇趣科技</li>
+<li>1996年，进入商业领域， 成功案例：Linux的桌面环境</li>
+</ul>
+<h2 id="1-5、下载"><a href="#1-5、下载" class="headerlink" title="1.5、下载"></a>1.5、下载</h2><p>官方下载地址：<a target="_blank" rel="noopener" href="http://download.qt.io/archive/qt/">http://download.qt.io/archive/qt/</a> </p>
+<p>清华大学镜像站：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/qt/development_releases/online_installers/">Index of &#x2F;qt&#x2F;development_releases&#x2F;online_installers&#x2F; | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror</a></p>
+<p>下载教程（先在powershell输入第11条命令）：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40296728/article/details/131917751">QT下载安装教程_qt安装教程-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40296728/category_12531577.html">QT_在巴厘岛冲浪的阿k的博客-CSDN博客</a></p>
+<h2 id="1-6、成功案例"><a href="#1-6、成功案例" class="headerlink" title="1.6、成功案例"></a>1.6、成功案例</h2><ul>
+<li>Linux桌面环境KDE</li>
+<li>WPS Office办公软件</li>
+</ul>
+<h1 id="二、新建项目"><a href="#二、新建项目" class="headerlink" title="二、新建项目"></a>二、新建项目</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40296728/article/details/132202132">QT工程创建及串口调试工具实现_qt 串口-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40296728/article/details/132202132">QT工程创建及串口调试工具实现_qt 串口-CSDN博客</a></p>
+<h2 id="2-1、新建"><a href="#2-1、新建" class="headerlink" title="2.1、新建"></a>2.1、新建</h2><p>点击新建项目(open project)，选择Qt Widgets Application，它会提供一个包含主窗口的项目</p>
+<p><img src="/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805101610765.png" alt="image-20240805101610765"></p>
+<h2 id="2-2、Location"><a href="#2-2、Location" class="headerlink" title="2.2、Location"></a>2.2、Location</h2><p>选择项目名称和保存路径，注意都不可以包含中文和空格</p>
+<p><img src="/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805102541909.png" alt="image-20240805102541909"></p>
+<h2 id="2-3、构建系统"><a href="#2-3、构建系统" class="headerlink" title="2.3、构建系统"></a>2.3、构建系统</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/secondtonone1/article/details/137644031">QT系列教程(2) 创建项目和编译_qt构建系统选哪个-CSDN博客</a></p>
+<p><img src="/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805103945902.png" alt="image-20240805103945902"></p>
+<h2 id="2-4、Details"><a href="#2-4、Details" class="headerlink" title="2.4、Details"></a>2.4、Details</h2><p>QWidget是父类，空窗口，可以直接使用ui拖动进行设计</p>
+<p>QMainWindow（窗口）,QDialog都是子类。QDialog是对话框。</p>
+<p><img src="/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805104342958.png" alt="image-20240805104342958"></p>
+<h2 id="2-5、Translation"><a href="#2-5、Translation" class="headerlink" title="2.5、Translation"></a>2.5、Translation</h2><p>翻译语言选择：无</p>
+<h2 id="2-6、构建套件"><a href="#2-6、构建套件" class="headerlink" title="2.6、构建套件"></a>2.6、构建套件</h2><p>构建套件：</p>
+<p><img src="/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805104619462.png" alt="image-20240805104619462"></p>
+<h2 id="2-7、汇总"><a href="#2-7、汇总" class="headerlink" title="2.7、汇总"></a>2.7、汇总</h2><p><img src="/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805104639477.png" alt="image-20240805104639477"></p>
+<p>.pro 工程文件，类似VS中的.sln，可以双击打开文件</p>
+<p>main.cpp 程序入口</p>
+<p>mywidget.cpp,mywidget.h是窗口文件</p>
+<h2 id="2-8、结果"><a href="#2-8、结果" class="headerlink" title="2.8、结果"></a>2.8、结果</h2><p>点击完成之后，获得项目</p>
+<p><img src="/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/image-20240805105338326.png" alt="image-20240805105338326"></p>
+<p>main.cpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;mywidget.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span> <span class="comment">// 包含一个应用程序类的头文件</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// main程序入口</span></span><br><span class="line"><span class="comment">// argc命令行变量的数量</span></span><br><span class="line"><span class="comment">// argv 命令行变量的数组</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// a 应用程序对象，在Qt中，应用程序对象，有且仅有一个</span></span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">    <span class="comment">// 窗口对象 myWidget父类 -&gt; QWidget</span></span><br><span class="line">    myWidget w;</span><br><span class="line">    <span class="comment">// 窗口对象，默认不会显示，必须要调用show方法显示窗口</span></span><br><span class="line">    w.<span class="built_in">show</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 让应用程序对象进入消息循环</span></span><br><span class="line">    <span class="comment">// 让代码阻塞到这行</span></span><br><span class="line">    <span class="keyword">return</span> a.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="三、项目文件"><a href="#三、项目文件" class="headerlink" title="三、项目文件"></a>三、项目文件</h1><h2 id="3-1、-pro文件"><a href="#3-1、-pro文件" class="headerlink" title="3.1、.pro文件"></a>3.1、.pro文件</h2><p><img src="/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80" alt="Qt5 模块">&#x2F;Qt5 模块.png)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">QT       += core gui		Qt包含的模块</span><br><span class="line"></span><br><span class="line"><span class="built_in">greaterThan</span>(QT_MAJOR_VERSION, <span class="number">4</span>): QT += widgets	<span class="comment">// 大于4版本以上，包含Qt的widgets模块</span></span><br><span class="line"></span><br><span class="line">CONFIG += c+<span class="number">+17</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以通过取消注释来禁用所有在QT6.0之前已弃用的API</span></span><br><span class="line"># You can make your code fail to compile <span class="keyword">if</span> it uses deprecated APIs.</span><br><span class="line"># In order to <span class="keyword">do</span> so, uncomment the following line.</span><br><span class="line">#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=<span class="number">0x060000</span>    <span class="meta"># disables all the APIs deprecated before Qt 6.0.0</span></span><br><span class="line"></span><br><span class="line">SOURCES += \	<span class="comment">// 源文件</span></span><br><span class="line">    main.cpp \</span><br><span class="line">    mywidget.cpp</span><br><span class="line"></span><br><span class="line">HEADERS += \	<span class="comment">// 头文件</span></span><br><span class="line">    mywidget.h</span><br><span class="line"></span><br><span class="line"># Default rules <span class="keyword">for</span> deployment.</span><br><span class="line">qnx: target.path = /tmp/$$&#123;TARGET&#125;/bin</span><br><span class="line"><span class="keyword">else</span>: unix:!android: target.path = /opt/$$&#123;TARGET&#125;/bin</span><br><span class="line">!<span class="built_in">isEmpty</span>(target.path): INSTALLS += target</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-2、main-cpp"><a href="#3-2、main-cpp" class="headerlink" title="3.2、main.cpp"></a>3.2、main.cpp</h2><p>项目的开始文件</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;mywidget.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span> <span class="comment">// 包含一个应用程序类的头文件</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// main程序入口</span></span><br><span class="line"><span class="comment">// argc命令行变量的数量</span></span><br><span class="line"><span class="comment">// argv 命令行变量的数组</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// a 应用程序对象，在Qt中，应用程序对象，有且仅有一个</span></span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">    <span class="comment">// 窗口对象 myWidget父类 -&gt; QWidget</span></span><br><span class="line">    myWidget w;</span><br><span class="line">    <span class="comment">// 窗口对象，默认不会显示，必须要调用show方法显示窗口</span></span><br><span class="line">    w.<span class="built_in">show</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 让应用程序对象进入消息循环</span></span><br><span class="line">    <span class="comment">// 让代码阻塞到这行</span></span><br><span class="line">    <span class="keyword">return</span> a.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3、-h文件"><a href="#3-3、-h文件" class="headerlink" title="3.3、.h文件"></a>3.3、.h文件</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> MYWIDGET_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MYWIDGET_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QWidget&gt;</span>  <span class="comment">// 包含头文件 QWidget 窗口类</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">myWidget</span> : <span class="keyword">public</span> QWidget</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT    <span class="comment">// Q_OBJECT宏，允许类中使用信号和槽的机制</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">myWidget</span>(QWidget *parent = <span class="literal">nullptr</span>);    <span class="comment">// 构造函数</span></span><br><span class="line">    ~<span class="built_in">myWidget</span>();</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// MYWIDGET_H</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4、-cpp文件"><a href="#3-4、-cpp文件" class="headerlink" title="3.4、.cpp文件"></a>3.4、.cpp文件</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;mywidget.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 快捷键</span></span><br><span class="line"><span class="comment">// 注释 Ctrl + /</span></span><br><span class="line"><span class="comment">// 运行 ctrl + r</span></span><br><span class="line"><span class="comment">// 编译 ctrl + b</span></span><br><span class="line"><span class="comment">// 字体缩放 ctrl + 鼠标滚轮</span></span><br><span class="line"><span class="comment">// 查找 ctrl + f</span></span><br><span class="line"><span class="comment">// 整行移动 ctrl + shift + ↑或者↓</span></span><br><span class="line"><span class="comment">// 帮助文档 F1</span></span><br><span class="line"><span class="comment">// 自动对齐 ctrl + i</span></span><br><span class="line"><span class="comment">// 同名之间的.h 和 .cpp切换 F4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 帮助文档</span></span><br><span class="line"><span class="comment">// 第一种方式 F1</span></span><br><span class="line"><span class="comment">// 第二种 左侧按钮</span></span><br><span class="line"><span class="comment">// 第三种 assistant.exe E:\Qt\6.6.3\mingw_64\bin</span></span><br><span class="line"></span><br><span class="line">myWidget::<span class="built_in">myWidget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">myWidget::~<span class="built_in">myWidget</span>() &#123;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%80)/" title="QT_基础(一)">http://example.com/2024/08/08/Qt/Qt_基础(一)/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/QT/" rel="tag"># QT</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/08/08/Qt/Qt_%E5%9F%BA%E7%A1%80(%E4%B8%89)/" rel="prev" title="QT_基础(三)-窗口与布局">
+      <i class="fa fa-chevron-left"></i> QT_基础(三)-窗口与布局
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81QT%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">一、QT概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E3%80%81%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E3%80%81%E4%BC%98%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3%E3%80%81%E7%89%88%E6%9C%AC"><span class="nav-number">1.3.</span> <span class="nav-text">1.3、版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4%E3%80%81%E5%8E%86%E5%8F%B2"><span class="nav-number">1.4.</span> <span class="nav-text">1.4、历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5%E3%80%81%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.5.</span> <span class="nav-text">1.5、下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6%E3%80%81%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B"><span class="nav-number">1.6.</span> <span class="nav-text">1.6、成功案例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.</span> <span class="nav-text">二、新建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1%E3%80%81%E6%96%B0%E5%BB%BA"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、新建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2%E3%80%81Location"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、Location</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3%E3%80%81%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、构建系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4%E3%80%81Details"><span class="nav-number">2.4.</span> <span class="nav-text">2.4、Details</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5%E3%80%81Translation"><span class="nav-number">2.5.</span> <span class="nav-text">2.5、Translation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6%E3%80%81%E6%9E%84%E5%BB%BA%E5%A5%97%E4%BB%B6"><span class="nav-number">2.6.</span> <span class="nav-text">2.6、构建套件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7%E3%80%81%E6%B1%87%E6%80%BB"><span class="nav-number">2.7.</span> <span class="nav-text">2.7、汇总</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8%E3%80%81%E7%BB%93%E6%9E%9C"><span class="nav-number">2.8.</span> <span class="nav-text">2.8、结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">三、项目文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1%E3%80%81-pro%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、.pro文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2%E3%80%81main-cpp"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、main.cpp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3%E3%80%81-h%E6%96%87%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">3.3、.h文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4%E3%80%81-cpp%E6%96%87%E4%BB%B6"><span class="nav-number">3.4.</span> <span class="nav-text">3.4、.cpp文件</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
