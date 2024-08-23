@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="第一章、概述1.0 网页的本质1.0.1、网页的本质就是文本文件（1）所见即所得（F5、Ctrl+F5)、主要内容就是 BOM（浏览器对象模型）+DOM（文档对象模型）、纯文本 （2）一堆标签（元素）的组合、标签间可以嵌套，有属性继承关系 （3）HTML与CSS没有语言结构 （4）Chrome 浏览器下，按F12，可以跟组超链接 a 等标签 （5）一堆网页，通过 a 超链接这个标签（元素）进行关">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网页">
+<meta property="og:url" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="第一章、概述1.0 网页的本质1.0.1、网页的本质就是文本文件（1）所见即所得（F5、Ctrl+F5)、主要内容就是 BOM（浏览器对象模型）+DOM（文档对象模型）、纯文本 （2）一堆标签（元素）的组合、标签间可以嵌套，有属性继承关系 （3）HTML与CSS没有语言结构 （4）Chrome 浏览器下，按F12，可以跟组超链接 a 等标签 （5）一堆网页，通过 a 超链接这个标签（元素）进行关">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20211110174552885-1165403906.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211110174617181.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210917091837363-1641051759.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211110175049028.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211110175248266.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211110175550207.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211110182753442.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20211107111837253-173431748.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210917113649515-897394337.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20211111143139225-1280786605.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111143251533.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111143606074.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111143846687.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210917114207416-702908882.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930154257094-1947262908.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930154332411-195920252.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930154359058-357103820.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930154413482-1150678983.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930154423337-1451162829.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111144200830.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111144235686.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111144817456.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111144858313.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111144921468.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111145320772.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111145430699.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111145723740.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111145942587.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111150024573.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111150239288.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111150342007.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111150412712.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151010398.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151037329.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151229855.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151551144.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151655821.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151739043.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151804578.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151940697.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111152003523.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111152021021.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111152140454.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111152325502.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111152357112.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111154615665.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111154645361.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111154729166.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111154822873.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111154835810.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111155005483.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111155307018.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111155325917.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111155425844.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111155717895.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111155732636.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20211111155855989-1839814110.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160006246.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160028912.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160124087.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160245119.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160522242.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930164311615-1389641920.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930164342045-699252132.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160703816.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160854051.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160957781.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161046629.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161204994.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161253406.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161338369.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161457975.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161602843.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161654057.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161757027.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161825501.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111163358822.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111163500566.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111163604005.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111163636030.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111164444309.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111164918105.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165053506.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165133721.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165214575.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165309415.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165332458.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165425373.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165516792.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165632355.png">
+<meta property="article:published_time" content="2024-07-07T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-23T06:13:24.309Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20211110174552885-1165403906.png">
+
+<link rel="canonical" href="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>网页 | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网页
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-07 12:00:00" itemprop="dateCreated datePublished" datetime="2024-07-07T12:00:00+08:00">2024-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-23 14:13:24" itemprop="dateModified" datetime="2024-08-23T14:13:24+08:00">2024-08-23</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr>
+<h1 id="第一章、概述"><a href="#第一章、概述" class="headerlink" title="第一章、概述"></a>第一章、概述</h1><h2 id="1-0-网页的本质"><a href="#1-0-网页的本质" class="headerlink" title="1.0 网页的本质"></a>1.0 网页的本质</h2><h3 id="1-0-1、网页的本质就是文本文件"><a href="#1-0-1、网页的本质就是文本文件" class="headerlink" title="1.0.1、网页的本质就是文本文件"></a>1.0.1、网页的本质就是文本文件</h3><p>（1）所见即所得（F5、Ctrl+F5)、主要内容就是 BOM（浏览器对象模型）+DOM（文档对象模型）、纯文本</p>
+<p>（2）一堆标签（元素）的组合、标签间可以嵌套，有属性继承关系</p>
+<p>（3）HTML与CSS没有语言结构</p>
+<p>（4）Chrome 浏览器下，按F12，可以跟组超链接 a 等标签</p>
+<p>（5）一堆网页，通过 a 超链接这个标签（元素）进行关联、跳转</p>
+<p>（6）一切皆文件、一切皆增删查改、最有用的是行列二维表</p>
+<h3 id="1-0-2、网站就是一个链接的页面集合"><a href="#1-0-2、网站就是一个链接的页面集合" class="headerlink" title="1.0.2、网站就是一个链接的页面集合"></a>1.0.2、网站就是一个链接的页面集合</h3><h3 id="1-0-3、记事本可以用来编写HTML文件"><a href="#1-0-3、记事本可以用来编写HTML文件" class="headerlink" title="1.0.3、记事本可以用来编写HTML文件"></a>1.0.3、记事本可以用来编写HTML文件</h3><p>（1）文本编辑器：记事本可以用来编写HTML文件</p>
+<p>（2）文件夹结构</p>
+<p>（3）Web浏览器</p>
+<table>
+<thead>
+<tr>
+<th><strong>缩写HTML</strong></th>
+<th>中文名称</th>
+<th>英文名称</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HTML</td>
+<td>超文本标记语言</td>
+<td>Hyper Text Markup Language</td>
+<td>骨架、房屋框架</td>
+</tr>
+<tr>
+<td>CSS</td>
+<td>层叠样式表（或级联样式表）</td>
+<td>Cascading Style Sheets</td>
+<td>血肉、装修</td>
+</tr>
+<tr>
+<td>ECMAScript 6、ES6、JavaScript 2015</td>
+<td>javaScript编程语言（网页脚本语言)</td>
+<td>JavaScript Programming Language</td>
+<td>行动、交互</td>
+</tr>
+<tr>
+<td>BOM</td>
+<td>浏览器对象模型</td>
+<td>Browser Object Model</td>
+<td></td>
+</tr>
+<tr>
+<td>DOM</td>
+<td>文档对象模型</td>
+<td>Document Object Model</td>
+<td></td>
+</tr>
+<tr>
+<td>URL</td>
+<td>统一资源定位符</td>
+<td>Uniform Resoure Locator</td>
+<td></td>
+</tr>
+<tr>
+<td>浏览器 API</td>
+<td>Web 应用程序接口</td>
+<td>Web API</td>
+<td></td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>超文本传输协议</td>
+<td>Hyper Text Transfer Protocol</td>
+<td></td>
+</tr>
+<tr>
+<td>jSON</td>
+<td>JavaScript对象表示</td>
+<td>JavaScript Object Notation</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20211110174552885-1165403906.png" alt="image-20211110174515478"></p>
+<p>DOM的英文全称是DocumentObjectModel，表示文件对象模型，是W3C组织推荐的处理可扩展置标语言的标准编程接口；</p>
+<p>DOM是HTML文档的内存中对象表示，它提供了使用JavaScript与网页交互的方式。</p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211110174617181.png" alt="image-20211110174617181"></p>
+<h2 id="1-1用记事本写一个网页，用浏览器打开这个网页（Markdown、LaTeX"><a href="#1-1用记事本写一个网页，用浏览器打开这个网页（Markdown、LaTeX" class="headerlink" title="1.1用记事本写一个网页，用浏览器打开这个网页（Markdown、LaTeX)"></a>1.1用记事本写一个网页，用浏览器打开这个网页（Markdown、LaTeX)</h2><h3 id="1-1-1、显示文件扩展名"><a href="#1-1-1、显示文件扩展名" class="headerlink" title="1.1.1、显示文件扩展名"></a>1.1.1、显示文件扩展名</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210917091837363-1641051759.png" alt="image-20210917091834339"></p>
+<h3 id="1-1-2、开发工具"><a href="#1-1-2、开发工具" class="headerlink" title="1.1.2、开发工具"></a>1.1.2、开发工具</h3><p>（1）VSCode:  <a target="_blank" rel="noopener" href="https://code.vidualstudio.com/%E3%80%81%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6%EF%BC%88MacOS%E4%B8%8B%E5%AE%89%E8%A3%85VSCode.doc)%E3%80%81Emmet%E3%80%81%E5%BF%AB%E6%8D%B7%E9%94%AE">https://code.vidualstudio.com/、配置插件（MacOS下安装VSCode.doc)、Emmet、快捷键</a><br><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211110175049028.png" alt="image-20211110175049028"></p>
+<p>（2）Sublime Text、<a target="_blank" rel="noopener" href="http://www.sublimetext.cn/">http://www.sublimetext.cn/</a> (Sublime Text 3 基础配置、插件.doc)</p>
+<h3 id="1-1-3、自学、写作工具"><a href="#1-1-3、自学、写作工具" class="headerlink" title="1.1.3、自学、写作工具"></a>1.1.3、自学、写作工具</h3><p>（1）菜鸟教程：<a target="_blank" rel="noopener" href="https://www.runoob.com/">https://www.runoob.com/</a><br>（2）Markdown 写作工具 ：<a target="_blank" rel="noopener" href="https://typora.io/">https://typora.io/</a></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211110175248266.png" alt="image-20211110175248266"></p>
+<img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211110175550207.png" alt="image-20211110175550207" style="zoom:200%;">
+
+<h3 id="1-1-4、思维导图工具"><a href="#1-1-4、思维导图工具" class="headerlink" title="1.1.4、思维导图工具"></a>1.1.4、思维导图工具</h3><p>（1）Pandoc：<a target="_blank" rel="noopener" href="https://github.com/jpm/pandoc/releases%EF%BC%88%E6%94%AF%E6%8C%81OPML%EF%BC%89">https://github.com/jpm/pandoc/releases（支持OPML）</a></p>
+<p>（2）幕布：<a target="_blank" rel="noopener" href="https://mubu.com/%EF%BC%88199%E5%85%83/3%E5%B9%B4%EF%BC%89">https://mubu.com/（199元/3年）</a></p>
+<p>（3）Xmind：<a target="_blank" rel="noopener" href="https://www.xmind.cn/%EF%BC%88388%E5%85%83/%E5%B9%B4%EF%BC%89">https://www.xmind.cn/（388元/年）</a></p>
+<h3 id="1-1-5、开源代码托管"><a href="#1-1-5、开源代码托管" class="headerlink" title="1.1.5、开源代码托管"></a>1.1.5、开源代码托管</h3><p>（1）Github：<a target="_blank" rel="noopener" href="https://github.com/">https://github.com/</a></p>
+<p>（2）码云：<a target="_blank" rel="noopener" href="https://gittee.com/">https://gittee.com/</a></p>
+<p>（3）开放原子开源基金会：<a target="_blank" rel="noopener" href="https://www.openatom.org/%EF%BC%88%E5%8D%8E%E4%B8%BA%E9%B8%BF%E8%92%99%E4%BB%A3%E7%A0%81%E6%8D%90%E8%B5%A0%EF%BC%89">https://www.openatom.org/（华为鸿蒙代码捐赠）</a></p>
+<h3 id="1-1-6、程序调试、去除BUG、代码质量"><a href="#1-1-6、程序调试、去除BUG、代码质量" class="headerlink" title="1.1.6、程序调试、去除BUG、代码质量"></a>1.1.6、程序调试、去除BUG、代码质量</h3><p>（1）程序调试<br>        （1.1）Chrome，F12调试模式，修改元素和样式——Element面板<br>        （1.2）Chrome，F12调试模式，Header，看请求参数和返回数据<br>        （1.3）Chrome，F12调试模式，Source，打断点<br>        （1.4）Chrome，F12调试模式，Console，状态栏<br>        （1.5）在html文件里的<code>&lt;script&gt;</code>代码块里，加 console.log()、控制台打印日志<br>        （1.6）<code>console.dir</code>(显示一个对象的所有属性和方法）、<code>console.table</code>（用表格形式显示<br>        （1.7）在 html 文件里的<code>&lt;script&gt;</code>代码块里，加 alert()<br>                     不推荐，alert 会阻碍页面的继续渲染。调试完成后，必须手动清除这些调试代码，有些麻烦。<br>                    alert 只能打印出字符串，如果打印的对象不是 String，则会调用 toString() 方法将该对象转换成字符串（比如转成[object Object]这种）</p>
+<p>​					所以除非你打印 String 类型的对象，其他什么信息都获取不到<br>​					在 html 文件里的<code>&lt;script&gt;</code>代码质量，写如下方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="keyword">function</span>(<span class="params"></span>)&#123;<span class="comment">//此方法相当于初始化（必定会执行）</span></span><br><span class="line">		<span class="keyword">debugger</span>;<span class="comment">//写下此语句，浏览器会自动进入断电</span></span><br><span class="line">    	$(<span class="string">&#x27;:radio[name=&quot;NTP_SYNC_ONOFF&quot;][value=&quot;ON&quot;]&#x27;</span>).<span class="title function_">attr</span>(<span class="string">&quot;checked&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>​		（1.8）浏览器控制台 js 断电测试，在浏览器开发者工具中为 js 代码添加断点，让 js 执行到某一特定位置停住，方便开发者对该处代码段的分析与逻辑处理<br>​		（1.9）VSCode 安装 debugger for chrome 插件， launch.json 配置好相关参数，在 vscode 左侧活动栏开始调试<br>​		（1.10）抓包<br>​		（1.11）多看看代码、找逻辑 bug<br>​		（1.12）百度、百度开发者搜索、google、必应、夸克搜索、头条搜索<br>​		（1.13）上国内各大技术社区、QQ群搜索、请教<br>​		（1.14）关键字转为英文，上 Stack Overflow 搜索，请教<br>（2）去除 BUG<br>​		（2.1）<br>​		（2.2）</p>
+<p>（3）代码质量</p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211110182753442.png" alt="image-20211110182753442"></p>
+<h3 id="1-1-7、程序-bug-的常见分类"><a href="#1-1-7、程序-bug-的常见分类" class="headerlink" title="1.1.7、程序 bug 的常见分类"></a>1.1.7、程序 bug 的常见分类</h3><p>（1）不能服务、连接拒绝、404、500</p>
+<p>（2）严重影响用户体验、功能不好使</p>
+<p>（3）某概率下出问题、给用户不好的体验（兼容）</p>
+<p>（4）某概率的后端数据问题</p>
+<p>（5）现阶段可不支持、后续升级解决</p>
+<h3 id="1-1-8、各种快捷键"><a href="#1-1-8、各种快捷键" class="headerlink" title="1.1.8、各种快捷键"></a>1.1.8、各种快捷键</h3><p>（1）目录	</p>
+<p>​				Ctrl+A（全选）、Ctrl+F（查找）、Ctrl+H（隐藏和显示额外内容）、Ctrl+G（页面查找）、</p>
+<p>（2）文件	</p>
+<p>​				Ctrl+N（打开文件或新页面）、Ctrl+鼠标滚轮（改变大小）、Alt+F（打开文件菜单）、Shift+F10（选中文件，打开右键菜单）、Alt+回车（查看文件属性）、Ctrl+Shift+N（新建文件夹）</p>
+<p>（3）窗口	</p>
+<p>​				Ctrl+Tab（浏览器页面切换）、Ctrl+W（关闭）、Ctrl+D（收藏当前页面）、Alt+Tab（切换窗口）、Alt+F4（关闭当前窗口）、Alt+Tab（切换页面）、Ctrl+Tab（切换浏览器标签页）、</p>
+<p>（4）资源	</p>
+<p>​				F5（刷新）、Ctrl+F5（强制刷新）、Ctrl+Esc（打开开始菜单）Ctrl+Shift+Esc（任务管理器）、Win+R（打开运行框）、</p>
+<p>（5）网络</p>
+<p>（6）快捷<br>                Ctrl+O（打开）、Ctrl+S（保存）、Ctrl+C（复制）、Ctrl+V（粘贴）、Ctrl+Z（撤销）</p>
+<p>（7）其他</p>
+<p>​			Ctrl+P（打印）、Shift（中英文切换）、Win+空格（切换输入法）Win+D（隐藏所有页面）、Win+M（回到桌面）、Win+E（资源管理器）、Win+P（投屏）、Win+上下左右箭头（分屏）、</p>
+<h3 id="1-1-9、程序员分类"><a href="#1-1-9、程序员分类" class="headerlink" title="1.1.9、程序员分类"></a>1.1.9、程序员分类</h3><p>（1）面向简历编程、面向监狱编程（爬虫、黑客、外挂、破解、删库跑路、赌博、乱抽奖、虚拟定位）（背锅、降薪、降职、劳动仲裁）</p>
+<p>（2）面向CV编程</p>
+<p>（3）面向百度编程、面向CSDN、面向博客园编程</p>
+<p>（4）面向SO编程（堆栈溢出是全世界最大的技术社区）、面向Github编程</p>
+<p>（5）面向开源项目编程、面向开发框架编程</p>
+<p>（6）面向兴趣编程、面向防偷编程（防伪艺术化、全栈）（LNMP、LAMP、LNAMP）</p>
+<p>（1）一流程序员：数学</p>
+<p>（2）二流程序员：算法；leetcode,牛客</p>
+<p>（3）三流程序员：逻辑</p>
+<p>（4）四流程序员：SDK</p>
+<p>（5）五流程序员：Google、StackOverFlow</p>
+<p>（6）六流程序员：百度、CSDN</p>
+<h3 id="1-1-10、浏览器历史"><a href="#1-1-10、浏览器历史" class="headerlink" title="1.1.10、浏览器历史"></a>1.1.10、浏览器历史</h3><p>（1）网景浏览器（1994年10月13日）</p>
+<p>（2）互联网真正走入家庭是1994年以后，TCP&#x2F;IP 协议可以在电话线上运行，导致 modern 的真正大范围使用（拨号上网）</p>
+<h3 id="1-1-11、浏览器访问本地-HTML-页面与远程-HTTP-页面的区别"><a href="#1-1-11、浏览器访问本地-HTML-页面与远程-HTTP-页面的区别" class="headerlink" title="1.1.11、浏览器访问本地 HTML 页面与远程 HTTP 页面的区别"></a>1.1.11、浏览器访问本地 HTML 页面与远程 HTTP 页面的区别</h3><p>（1）file 协议是访问你本机的文件资源</p>
+<p>​			file协议用于访问本机计算机中的文件，就如同在 Windows 资源管理区中打开文件一样，注意它是针对本地（本机）的。</p>
+<p>​			file 协议只能在本地访问。file 只是简单的请求本地文件，与在 Windows 中找到文件，右键，打开方式，用浏览器打开看到的效果是一致的</p>
+<p>（2）HTTP 是搭建了服务器</p>
+<p>​			HTTP访问本地 HTML，是在本地起了一台 HTTP 服务器，然后你访问自己电脑上的本地服务器，HTTP服务区再去访问你本机的文件资源。</p>
+<p>​			本地搭建了 HTTP 服务器，开放端口之后，别人也可以通过 HTTP 访问到你电脑里的页面，但是 file 协议做不到</p>
+<h3 id="1-1-12、网站"><a href="#1-1-12、网站" class="headerlink" title="1.1.12、网站"></a>1.1.12、网站</h3><p>（1）MDN官方文档：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web">https://developer.mozilla.org/zh-CN/docs/Web</a></p>
+<p>（1）兼容测试：<a target="_blank" rel="noopener" href="https://caniuse.com/">https://caniuse.com/</a></p>
+<h3 id="1-1-13、在线论文"><a href="#1-1-13、在线论文" class="headerlink" title="1.1.13、在线论文"></a>1.1.13、在线论文</h3><p>（1）<a target="_blank" rel="noopener" href="https://www.oalib.com/">https://www.oalib.com/</a></p>
+<p>（2）<a target="_blank" rel="noopener" href="https://www.sci-hub.ren/">https://www.sci-hub.ren/</a></p>
+<h3 id="1-1-14、版权信息"><a href="#1-1-14、版权信息" class="headerlink" title="1.1.14、版权信息"></a>1.1.14、版权信息</h3><p>（1）中华人民共和国自然资源部：<a target="_blank" rel="noopener" href="http://bzdt.ch.mnr.gov.cn/">http://bzdt.ch.mnr.gov.cn/</a></p>
+<p>（2）阿里巴巴普惠体：<a target="_blank" rel="noopener" href="https://alibabafont.taobao.com/">https://alibabafont.taobao.com/</a></p>
+<h2 id="1-2HTML骨架"><a href="#1-2HTML骨架" class="headerlink" title="1.2HTML骨架"></a>1.2HTML骨架</h2><h3 id="1-2-1、HTML骨架标签分类"><a href="#1-2-1、HTML骨架标签分类" class="headerlink" title="1.2.1、HTML骨架标签分类"></a>1.2.1、HTML骨架标签分类</h3><table>
+    <tr>
+        <th>标签名</th>
+        <th>定义</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>&lt;html&gt;&lt;/html&gt;</td>
+        <td>HTML标签</td>
+        <td>页面中最大的标签</td>
+    </tr>
+    <tr>
+        <td>&lt;head&gt;&lt;/head&gt;</td>
+        <td>文档的头部</td>
+        <td>注意在head标签中我们必须要设置的标签是title</td>
+    </tr>
+    <tr>
+        <td>&lt;title&gt;&lt;/title&gt;</td>
+        <td>文档的标题</td>
+        <td>让页面拥有一个自己的网页标题</td>
+    </tr>
+    <tr>
+        <td>&lt;body&gt;&lt;/body&gt;</td>
+        <td>文档的主体</td>
+        <td>元素包含文档的所有内容，页面内容一般是放到body里面的</td>
+    </tr>
+</table>
+
+
+
+
+<h3 id="1-2-2、快速生成-HTML的骨架"><a href="#1-2-2、快速生成-HTML的骨架" class="headerlink" title="1.2.2、快速生成 HTML的骨架"></a>1.2.2、快速生成 HTML的骨架</h3><p>（1）在VS Code 中，新建一个 html 文件，保存（先选扩展名，再输入文件名，再选择保存位置），输入<code>html:5</code>，然后按 Tab 键</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（2）在 Sublime Text 中安装 Emmet 插件。新建 html文件，输入<code>html:5</code> ，按 Tab 键</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（3）在 Sublime Text 中安装 Emmet 插件。新建 html文件，输入<code>html:xt</code>，按 Tab</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;</span> <span class="string">&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.w3.org/1999/xhtml&quot;</span> <span class="attr">xml:lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Type&quot;</span> <span class="attr">content</span>=<span class="string">&quot;text/html;charset=UTF-8&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3-基础元素标签、基础属性、style元素、布局类元素"><a href="#1-3-基础元素标签、基础属性、style元素、布局类元素" class="headerlink" title="1.3 基础元素标签、基础属性、style元素、布局类元素"></a>1.3 基础元素标签、基础属性、style元素、布局类元素</h2><p>（1）所有 dom 分 3 类：标签&#x2F;元素，属性，值</p>
+<p>（2）标签名大小写不敏感，CSS class 大小写敏感</p>
+<h3 id="1-3-1、基础元素标签"><a href="#1-3-1、基础元素标签" class="headerlink" title="1.3.1、基础元素标签"></a>1.3.1、基础元素标签</h3><p>table、div、form（表单）、img、a、hr（水平线）、br（换行）</p>
+<h3 id="1-3-2、基础属性"><a href="#1-3-2、基础属性" class="headerlink" title="1.3.2、基础属性"></a>1.3.2、基础属性</h3><p>（1）id、name、class、style、title、align（水平对齐）、valign（数值对齐）、bgcolor（背景颜色）</p>
+<p>​		每一个标签、每一个属性、每一个值，都是一个DOM</p>
+<p>（2）getElementByld()（返回指定ID的元素）、getElementsByName()（返回带有指定名称的对象的集合）</p>
+<h3 id="1-3-3、style元素"><a href="#1-3-3、style元素" class="headerlink" title="1.3.3、style元素"></a>1.3.3、style元素</h3><p>大幅减少 DOM 的数量，初步代码封装（多次引用、修改方便）、进一步代码管理（多人协作）</p>
+<p>（1）style满天飞（标签自己使用）</p>
+<p>（2）<code>&lt;style&gt;&lt;/style&gt;</code> （单页面内共享，自己提高开发效率）</p>
+<p>（3）<code>&lt;link&gt;</code>（多页面共享，团队合作）</p>
+<h3 id="1-3-4、布局类元素"><a href="#1-3-4、布局类元素" class="headerlink" title="1.3.4、布局类元素"></a>1.3.4、布局类元素</h3><p>（1）table 标签</p>
+<p>（2）div 标签</p>
+<h3 id="1-3-5、为什么要使用-CSS"><a href="#1-3-5、为什么要使用-CSS" class="headerlink" title="1.3.5、为什么要使用 CSS"></a>1.3.5、为什么要使用 CSS</h3><p>（1）HTML 的缺陷：<br>        （1.1）不能使用多种设备<br>        （1.2）要求浏览器必需智能化足够庞大<br>        （1.3）数据和显示没有分开<br>        （1.4）功能不够强大</p>
+<p>（2）CSS 优点<br>        （2.1）使数据和显示分开<br>        （2.2）降低网络流量<br>        （2.3）使整个网站视觉效果一致<br>        （2.4）使开发效率提高了（耦合性降低，一个人负责写 html,一个人负责写 CSS）</p>
+<h3 id="1-3-6、为什么要初始化-CSS-格式"><a href="#1-3-6、为什么要初始化-CSS-格式" class="headerlink" title="1.3.6、为什么要初始化 CSS 格式"></a>1.3.6、为什么要初始化 CSS 格式</h3><p>因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对CSS初始化往往会出现浏览器之间的页面显示差异</p>
+<p>当然，初始化样式会对SEO（搜索引擎优化）有一定的影响，但鱼与熊掌不可兼得，但力求影响最小的情况下初始化</p>
+<p>最简单的初始化方法：*{padding: 0 ;margin: 0;}（强烈不建议）</p>
+<p>淘宝的样式初始化代码</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>,<span class="selector-tag">h1</span>,<span class="selector-tag">h2</span>,<span class="selector-tag">h3</span>,<span class="selector-tag">h4</span>,<span class="selector-tag">h5</span>,<span class="selector-tag">h6</span>,hr,<span class="selector-tag">p</span>,<span class="selector-tag">blockquote</span>,<span class="selector-tag">dl</span>,<span class="selector-tag">dt</span>,<span class="selector-tag">dd</span>,<span class="selector-tag">ul</span>,<span class="selector-tag">ol</span>,<span class="selector-tag">li</span>,pre,filedest,<span class="selector-tag">legend</span>,<span class="selector-tag">button</span>,<span class="selector-tag">input</span>,<span class="selector-tag">textarea</span>,<span class="selector-tag">th</span>,<span class="selector-tag">td</span>&#123;marging:<span class="number">0</span>;<span class="attribute">padding</span>:<span class="number">0</span>;&#125;</span><br><span class="line"><span class="selector-tag">body</span>,<span class="selector-tag">button</span>,<span class="selector-tag">input</span>,<span class="selector-tag">select</span>,<span class="selector-tag">textarea</span>&#123;<span class="attribute">font</span>:<span class="number">12px</span>/<span class="number">1.5</span>tahoma,arial,\<span class="number">5</span>b8b\<span class="number">4</span>f53;&#125;</span><br><span class="line"><span class="selector-tag">h1</span>,<span class="selector-tag">h2</span>,<span class="selector-tag">h3</span>,<span class="selector-tag">h4</span>,<span class="selector-tag">h5</span>,<span class="selector-tag">h6</span>&#123;<span class="attribute">font-size</span>: <span class="number">100%</span>;&#125;</span><br><span class="line"><span class="selector-tag">address</span>,<span class="selector-tag">cite</span>,<span class="selector-tag">dfn</span>,<span class="selector-tag">em</span>,<span class="selector-tag">var</span>&#123;<span class="attribute">font-style</span>: norma;&#125;</span><br><span class="line"><span class="selector-tag">code</span>,<span class="selector-tag">kbd</span>,pre,<span class="selector-tag">samp</span>&#123;<span class="attribute">font-family</span>:couriernew,courier,monospace;&#125;</span><br><span class="line">small&#123;<span class="attribute">font-size</span>: <span class="number">12px</span>;&#125;</span><br><span class="line"><span class="selector-tag">ul</span>,<span class="selector-tag">ol</span>&#123;<span class="attribute">list-style</span>: none;&#125;</span><br><span class="line"><span class="selector-tag">a</span>&#123;<span class="attribute">text-decoration</span>:none;&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;<span class="attribute">text-decoration</span>:underline;&#125;</span><br><span class="line"><span class="selector-tag">sup</span>&#123;<span class="attribute">vertical-align</span>:text-top;&#125;</span><br><span class="line">sub&#123;<span class="attribute">vertical-align</span>:text-bottom;&#125;</span><br><span class="line"><span class="selector-tag">legend</span>&#123;<span class="attribute">color</span>:<span class="number">#000</span>;&#125;</span><br><span class="line">fieldse,<span class="selector-tag">img</span>&#123;<span class="attribute">border</span>:<span class="number">0</span>;&#125;</span><br><span class="line"><span class="selector-tag">button</span>,<span class="selector-tag">input</span>,<span class="selector-tag">select</span>,<span class="selector-tag">textarea</span>&#123;<span class="attribute">font-size</span>: <span class="number">100%</span>;&#125;</span><br><span class="line"><span class="selector-tag">table</span>&#123;<span class="attribute">border-collapse</span>:collapse;<span class="attribute">border-spacing</span>:<span class="number">0</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="1-4-认识浏览器第一部分"><a href="#1-4-认识浏览器第一部分" class="headerlink" title="1.4 认识浏览器第一部分"></a>1.4 认识浏览器第一部分</h2><h3 id="1-4-1、浏览器分类"><a href="#1-4-1、浏览器分类" class="headerlink" title="1.4.1、浏览器分类"></a>1.4.1、浏览器分类</h3><p>（1）普通浏览器：Chrome、Edge、Firefox、Safari、Internet Explorer</p>
+<p>（2）无壳浏览器（前端自动化测试工具）：PhantomJS、SlimerJS、CasperJS</p>
+<p>（3）Webview：被本地 OS （操作系统）用来运行网页。把 Web 视图当做 Web 浏览器中的 iframe （在当前HTML页面插入一个文档）或者单个的 Tab运行在移动设备上的本地应用程序中（Hybird，如：iOS、Android、鸿蒙、Windows Mobile）</p>
+<p>（4）常见的五大浏览器：IE、火狐（Firefox）、谷歌（Chrome）、Safari、欧朋（Opera）     </p>
+<p>（5）浏览器份额（2021）<br><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20211107111837253-173431748.png" alt="image-20211107111835517"></p>
+<p>（6）渲染引擎<br>            渲染引擎（浏览器内核）：浏览器中专门对代码进行解析渲染的部分<br>            不同公司推出的浏览器，内核也是不同的</p>
+<table>
+    <tr>
+        <td>浏览器
+        </td>
+        <td>内核
+        </td>
+        <td>备注
+        </td>
+    </tr>
+    <tr>
+        <td>IE
+        </td>
+        <td>Trident
+        </td>
+        <td>IE、猎豹、360、百度
+        </td>
+    </tr>
+    <tr>
+        <td>FireFox
+        </td>
+        <td>Gecko
+        </td>
+        <td>火狐
+        </td>
+    </tr>
+    <tr>
+        <td>Safari
+        </td>
+        <td>Webkit
+        </td>
+        <td>苹果浏览器内核
+        </td>
+    </tr>
+    <tr>
+        <td>Chrome/Opera
+        </td>
+        <td>Blink
+        </td>
+        <td>Blink其实是Webkit
+        </td>
+    </tr>
+</table>
+
+
+
+
+<h3 id="1-4-2、Chrome浏览器"><a href="#1-4-2、Chrome浏览器" class="headerlink" title="1.4.2、Chrome浏览器"></a>1.4.2、Chrome浏览器</h3><p>（1）F12调试（追踪CSS样式、查看API（应用程序接口）返回数据的大小、禁用JS、显示已保存登录密码）  </p>
+<p>​				<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e1010ead8c96">https://www.jianshu.com/p/e1010ead8c96</a></p>
+<p>​				<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lxhbky/p/9959587.html">https://www.cnblogs.com/lxhbky/p/9959587.html</a> </p>
+<p>  (2)	手机模式浏览（不同的手机浏览器有不同的HTTP_USER_AGENT,爬虫善于伪装这个值）</p>
+<p>  (3)	插件、离线安装插件、开发插件</p>
+<p>（4)	快捷键：收藏到收藏夹Ctrl+D、显示收藏夹Ctrl+Shift+B</p>
+<p>（5）浏览器代理技术</p>
+<p>（6）浏览器缓存、Web缓存机制（强缓存、协商缓存）</p>
+<h3 id="1-4-3、HTTP的操作过程：从输入网址到获取页面发生了什么？"><a href="#1-4-3、HTTP的操作过程：从输入网址到获取页面发生了什么？" class="headerlink" title="1.4.3、HTTP的操作过程：从输入网址到获取页面发生了什么？"></a>1.4.3、HTTP的操作过程：从输入网址到获取页面发生了什么？</h3><p>（net.cn——&gt;<a href="http://www.net.cn(301)——>https://wanwang.aliyun.com/">www.net.cn(301)——&gt;https://wanwang.aliyun.com/</a>)</p>
+<p>把域名解析位IP</p>
+<p>(1)浏览器分析URL，搜索自己的页面缓存</p>
+<p>(2)查询hosts文件(本机DNS服务)，是否有对应的特定IP</p>
+<p>(3)浏览器搜索自己的DNS缓存，解析目标IP地址</p>
+<p>(4)发起一个本地DNS系统调用</p>
+<p>(5)浏览器以一个随机端口(软件端口号)向目标server发起了TCP连接请求，建立TCP连接(默认80端口)</p>
+<p>(6)如果发起域名不是www开头，Sever给浏览器响应一个301重定向</p>
+<p>(7)Web服务器收到请求，分析http header和http body,找出路由及参数，后端程序开始运行</p>
+<p><strong>返回一个值200成功404地址不对500服务器的API、错了</strong></p>
+<p>(8)后端程序给出一个return (HTML、json、字符串、int)</p>
+<p>(9)负载均衡服务器将http请求发给反向代理服务器web集群</p>
+<p><strong>把返回的结果存到缓存</strong></p>
+<p>(10)Web服务器将结果返回给浏览器，并返回一个http响应(将HTML发送给浏览器)，释放TCP连接</p>
+<p>(11)浏览器将结果放入自己的浏览器缓存</p>
+<p>(12)浏览器分析结果，构建dom树</p>
+<p><strong>渲染</strong></p>
+<p>(13)构建渲染树</p>
+<p>(14)布局渲染树</p>
+<p>(15)绘制到屏幕上(将Web页面显示在显示器的当前浏览器的当前标签页中)</p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210917113649515-897394337.png" alt="image-20210917113646493"></p>
+<h3 id="1-4-4、浏览器缓存、缓存机制"><a href="#1-4-4、浏览器缓存、缓存机制" class="headerlink" title="1.4.4、浏览器缓存、缓存机制"></a>1.4.4、浏览器缓存、缓存机制</h3><p>（1）强缓存</p>
+<p>（2）协商缓存</p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20211111143139225-1280786605.png" alt="image-20211111143138201"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111143251533.png" alt="image-20211111143251533"></p>
+<h3 id="1-4-5、HTTP-的特点"><a href="#1-4-5、HTTP-的特点" class="headerlink" title="1.4.5、HTTP 的特点"></a>1.4.5、HTTP 的特点</h3><p>(1)C&#x2F;S模式：B&#x2F;S（Server)（服务端模式）是C&#x2F;S（客户端模式）的特例</p>
+<p>(2)无连接：遵从TCP协议、但不进行三次握手</p>
+<p>(3)无状态：</p>
+<p>(4)高可靠</p>
+<p>(5)无状态特性简化了服务器设计</p>
+<p>(6)面向文本的：不会被防火墙拦截</p>
+<p>六个地址：任何一个数据包有两个网卡地址，两个IP地址、两个网口地址、</p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111143606074.png" alt="image-20211111143606074"></p>
+<h3 id="1-4-6、URL与URI"><a href="#1-4-6、URL与URI" class="headerlink" title="1.4.6、URL与URI"></a>1.4.6、URL与URI</h3><p>（1）URL：统一资源定位符(俗称网址)、协议</p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111143846687.png" alt="image-20211111143846687"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210917114207416-702908882.png" alt="image-20210917114204609"></p>
+<h3 id="1-4-7、MAC地址、IP地址、端口"><a href="#1-4-7、MAC地址、IP地址、端口" class="headerlink" title="1.4.7、MAC地址、IP地址、端口"></a>1.4.7、MAC地址、IP地址、端口</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930154257094-1947262908.png" alt="image-20210930154253425"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930154332411-195920252.png" alt="image-20210930154329373"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930154359058-357103820.png" alt="image-20210930154355978"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930154413482-1150678983.png" alt="image-20210930154410321">统一URL</p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930154423337-1451162829.png" alt="image-20210930154419824"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111144200830.png" alt="image-20211111144200830"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111144235686.png" alt="image-20211111144235686"></p>
+<h3 id="1-4-8、Cookie与Session（如何记住回话？HTTP是无状态的）"><a href="#1-4-8、Cookie与Session（如何记住回话？HTTP是无状态的）" class="headerlink" title="1.4.8、Cookie与Session（如何记住回话？HTTP是无状态的）"></a>1.4.8、Cookie与Session（如何记住回话？HTTP是无状态的）</h3><p>Cookie 主要用于以下三个页面：</p>
+<ul>
+<li><p>回话状态管理（如用户登录状态、购物车、或其他需要记录的消息）</p>
+</li>
+<li><p>个性化设置（如用户自定义设置、主题等）</p>
+</li>
+<li><p>浏览器行为跟踪（如跟踪分析用户行为等）<br><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111144817456.png" alt="image-20211111144817456"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111144858313.png" alt="image-20211111144858313"><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111144921468.png" alt="image-20211111144921468"></p>
+</li>
+</ul>
+<h3 id="1-5-前端页面数据渲染（网页数据展示方式）"><a href="#1-5-前端页面数据渲染（网页数据展示方式）" class="headerlink" title="1.5 前端页面数据渲染（网页数据展示方式）"></a>1.5 前端页面数据渲染（网页数据展示方式）</h3><h3 id="1-5-1、后端渲染（SSR）"><a href="#1-5-1、后端渲染（SSR）" class="headerlink" title="1.5.1、后端渲染（SSR）"></a>1.5.1、后端渲染（SSR）</h3><p>（1）后端连接 DB 、执行 SQL,生成 RS</p>
+<p>（2）传 RS 给前端</p>
+<p>（3）前端渲染 </p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111145320772.png" alt="image-20211111145320772"></p>
+<h3 id="1-5-2、前端渲染（CSR）"><a href="#1-5-2、前端渲染（CSR）" class="headerlink" title="1.5.2、前端渲染（CSR）"></a>1.5.2、前端渲染（CSR）</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111145430699.png" alt="image-20211111145430699"></p>
+<h2 id="1-6-项目开发岗位分工（开发组织、项目文档中经常要用到）"><a href="#1-6-项目开发岗位分工（开发组织、项目文档中经常要用到）" class="headerlink" title="1.6 项目开发岗位分工（开发组织、项目文档中经常要用到）"></a>1.6 项目开发岗位分工（开发组织、项目文档中经常要用到）</h2><p>（产品、开发、测试、运营）</p>
+<h3 id="1-6-1、管理类"><a href="#1-6-1、管理类" class="headerlink" title="1.6.1、管理类"></a>1.6.1、管理类</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111145723740.png" alt="image-20211111145723740"></p>
+<h3 id="1-6-4、系统类、综合类"><a href="#1-6-4、系统类、综合类" class="headerlink" title="1.6.4、系统类、综合类"></a>1.6.4、系统类、综合类</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111145942587.png" alt="image-20211111145942587"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111150024573.png" alt="image-20211111150024573"></p>
+<h2 id="1-7-开发人员公共能力、公共素质"><a href="#1-7-开发人员公共能力、公共素质" class="headerlink" title="1.7 开发人员公共能力、公共素质"></a>1.7 开发人员公共能力、公共素质</h2><h3 id="1-7-1、道"><a href="#1-7-1、道" class="headerlink" title="1.7.1、道"></a>1.7.1、道</h3><p>（1）坐住板凳</p>
+<p>（2）备份</p>
+<p>（3）自学能力、解决问题的能力</p>
+<h3 id="1-7-2、术"><a href="#1-7-2、术" class="headerlink" title="1.7.2、术"></a>1.7.2、术</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111150239288.png" alt="image-20211111150239288"></p>
+<h2 id="1-8-一个合格前端-Coder的应有技能点"><a href="#1-8-一个合格前端-Coder的应有技能点" class="headerlink" title="1.8 一个合格前端 Coder的应有技能点"></a>1.8 一个合格前端 Coder的应有技能点</h2><h3 id="1-8-1、基本功"><a href="#1-8-1、基本功" class="headerlink" title="1.8.1、基本功"></a>1.8.1、基本功</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111150342007.png" alt="image-20211111150342007"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111150412712.png" alt="image-20211111150412712"></p>
+<p>（6）常见 Web 安全漏洞：SQL 注入、XSS</p>
+<h3 id="1-8-2、基本功加强基础版"><a href="#1-8-2、基本功加强基础版" class="headerlink" title="1.8.2、基本功加强基础版"></a>1.8.2、基本功加强基础版</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151010398.png" alt="image-20211111151010398"></p>
+<h3 id="1-8-3、进阶"><a href="#1-8-3、进阶" class="headerlink" title="1.8.3、进阶"></a>1.8.3、进阶</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151037329.png" alt="image-20211111151037329"></p>
+<h3 id="1-8-4、加分项"><a href="#1-8-4、加分项" class="headerlink" title="1.8.4、加分项"></a>1.8.4、加分项</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151229855.png" alt="image-20211111151229855"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151551144.png" alt="image-20211111151551144"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151655821.png" alt="image-20211111151655821"><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151739043.png" alt="image-20211111151739043"><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151804578.png" alt="image-20211111151804578"><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111151940697.png" alt="image-20211111151940697"><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111152003523.png" alt="image-20211111152003523"><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111152021021.png" alt="image-20211111152021021"><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111152140454.png" alt="image-20211111152140454"></p>
+<h3 id="1-8-5、国内以-BAT-为首的各大互联网公司所用技术基本分析"><a href="#1-8-5、国内以-BAT-为首的各大互联网公司所用技术基本分析" class="headerlink" title="1.8.5、国内以 BAT 为首的各大互联网公司所用技术基本分析"></a>1.8.5、国内以 BAT 为首的各大互联网公司所用技术基本分析</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111152325502.png" alt="image-20211111152325502"><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111152357112.png" alt="image-20211111152357112"></p>
+<h3 id="1-9-前端工作流程"><a href="#1-9-前端工作流程" class="headerlink" title="1.9 前端工作流程"></a>1.9 前端工作流程</h3><h3 id="1-9-1、项目开发流程"><a href="#1-9-1、项目开发流程" class="headerlink" title="1.9.1、项目开发流程"></a>1.9.1、项目开发流程</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111154615665.png" alt="image-20211111154615665"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111154645361.png" alt="image-20211111154645361"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111154729166.png" alt="image-20211111154729166"><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111154822873.png" alt="image-20211111154822873"><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111154835810.png" alt="image-20211111154835810"></p>
+<h3 id="1-9-2、前端切页面的主要工作内容"><a href="#1-9-2、前端切页面的主要工作内容" class="headerlink" title="1.9.2、前端切页面的主要工作内容"></a>1.9.2、前端切页面的主要工作内容</h3><p>（1）与后端约定接口</p>
+<p>（2）基础工作</p>
+<p>（3）命名规范</p>
+<p>（4）公共样式提取</p>
+<p>（5）公共组件封装</p>
+<p>（6）界面分析</p>
+<p>（7）切图、切页面</p>
+<p>（8）PC版：PSD—&gt;HTML、CSS、JS</p>
+<p>（9）手机版：PSD—&gt;HTML、CSS、JS</p>
+<p>（10）Android版、iOS版：PSD—&gt;XML</p>
+<p>（11）微信小程序版：PSD—&gt;HTML、CSS、JS （HTML—&gt;WHTML）、阿里生活号</p>
+<p>（12）响应式设计</p>
+<p>（13）交互UI设计</p>
+<p>（14）浏览器兼容设计</p>
+<p>（15）逻辑交互设计</p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111155005483.png" alt="image-20211111155005483"></p>
+<h1 id="第二章、网页开发基础"><a href="#第二章、网页开发基础" class="headerlink" title="第二章、网页开发基础"></a>第二章、网页开发基础</h1><h2 id="2-1-项目开发基础概念（基础知识）（全栈）"><a href="#2-1-项目开发基础概念（基础知识）（全栈）" class="headerlink" title="2.1 项目开发基础概念（基础知识）（全栈）"></a>2.1 项目开发基础概念（基础知识）（全栈）</h2><h3 id="2-1-1、网络基础"><a href="#2-1-1、网络基础" class="headerlink" title="2.1.1、网络基础"></a>2.1.1、网络基础</h3><p>（1）IP（每一个数据包都拥有2个MAC地址、2个IP地址、2个端口号）、域名、备案（CNNIC、GFW）、解析、CDN（内容分发网络）</p>
+<table>
+<thead>
+<tr>
+<th>数据库</th>
+<th>URI</th>
+<th>网络</th>
+<th>服务</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Oracle、1521</td>
+<td>http、80</td>
+<td>telnet、23</td>
+<td>Nginx、80</td>
+<td>git、9418</td>
+</tr>
+<tr>
+<td>mysql、3306</td>
+<td>https、443</td>
+<td>windows远程桌面、3389</td>
+<td>Apache、80</td>
+<td>svn、3690</td>
+</tr>
+<tr>
+<td>SQL Server、1433</td>
+<td>ftp、20&#x2F;21</td>
+<td>dns、53</td>
+<td>Tomcat、8080</td>
+<td>pcAnywhere、5632</td>
+</tr>
+<tr>
+<td>DB2、5000</td>
+<td></td>
+<td>ssh、22</td>
+<td>Weblogic、7001</td>
+<td>QQ服务端、8000</td>
+</tr>
+<tr>
+<td>PostgreSQL、5432</td>
+<td></td>
+<td>dhcp、546&#x2F;547</td>
+<td>Elasticsearch、9200</td>
+<td>QQ客户端、4000+、5000+</td>
+</tr>
+<tr>
+<td>redis、6379</td>
+<td></td>
+<td>snmp、161</td>
+<td>FastDFS、22122</td>
+<td></td>
+</tr>
+<tr>
+<td>memcached、11211</td>
+<td></td>
+<td>Socks代理服务、1080</td>
+<td>ZooKeeper、2181</td>
+<td></td>
+</tr>
+<tr>
+<td>mongodb、27017</td>
+<td></td>
+<td>smtp、25(发)</td>
+<td>ActiveMQ、8161</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>pop3、110(收)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>（2）域名主机记录就是域名前缀，常见用法有：</p>
+<p>​		（2.1）www:	解析后的域名为<a target="_blank" rel="noopener" href="http://www.aliyun.com/">www.aliyun.com</a></p>
+<p>​		（2.2）@：直接解析主域名 aliyun.com</p>
+<p>​		（2.3）*：泛解析，匹配其他所有域名 *.aliyun.com</p>
+<p>​		（2.4）mail:	将域名解析为mail.aliyun.com，通常用于解析邮箱服务器</p>
+<p>​		（2.5）二级域名：如：abc.aliyun.com，填写abc</p>
+<p>​		（2.6）手机网站：如：m.aliyun.com，填写m</p>
+<p>（3）域名记录类型：A(将域名指向一个IPV4地址)、CNAME（将域名指向另外一个域名）</p>
+<p>（4）IP 设置（子网掩码、DNS、网关、DHCP）、代理</p>
+<p>（5）局域网访问、目录共享、内网访问</p>
+<p>（6）hosts文件（本机DNS服务，C：\Windows\System32\drivers\etc)、localhost、127.0.0.1</p>
+<p>（7）防火墙、各种常用端口号（TCP、UDP）、入站规则、出站规则</p>
+<p>（8）基础网络命令（shell&#x2F;CMD）：ping、iponfig&#x2F;Ifonfig、netstat（服务器已启动服务统计）、route print（列出路由表）、</p>
+<p>​															   netsh winsock reset（重置winsock目录，恢复网络，重启计算机后，需重新配置IP）、</p>
+<p>​															   net user administrator &#x2F;active:yes（启用Windows的超级管理员账号）、net start、net stop、</p>
+<p>​															   tracert（查看路由过程）、nslookup（域名解析）、arp</p>
+<p>（9）套接字Socket编程：Socket库，用于调用网络功能的程序组件集合</p>
+<p>（10）其他：NAT</p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111155307018.png" alt="image-20211111155307018"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111155325917.png" alt="image-20211111155325917"></p>
+<h3 id="2-2-2系统服务配置"><a href="#2-2-2系统服务配置" class="headerlink" title="2.2.2系统服务配置"></a>2.2.2系统服务配置</h3><p>（配置OS的各种系统服务）（Windows、Linux、MacOS）</p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111155425844.png" alt="image-20211111155425844"></p>
+<p>服务器分类：</p>
+<ol>
+<li>本机开发环境部署</li>
+<li>线上开发服务器(内网、外网)、S V N、GIT</li>
+<li>线上测试服务器</li>
+<li>线上体验服务器(兼做灰度发布服务器)</li>
+<li>正式服务器集群（4大Linux:RedHat、<strong>CentOS</strong>、Debian、<strong>Ubuntu</strong>）</li>
+</ol>
+<h3 id="2-2-3、数据库、后端、前端（JS）所使用语言的常用共性知识点"><a href="#2-2-3、数据库、后端、前端（JS）所使用语言的常用共性知识点" class="headerlink" title="2.2.3、数据库、后端、前端（JS）所使用语言的常用共性知识点"></a>2.2.3、数据库、后端、前端（JS）所使用语言的常用共性知识点</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111155717895.png" alt="image-20211111155717895"><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111155732636.png" alt="image-20211111155732636"></p>
+<h3 id="2-2-4、前后端交互"><a href="#2-2-4、前后端交互" class="headerlink" title="2.2.4、前后端交互"></a>2.2.4、前后端交互</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20211111155855989-1839814110.png" alt="image-20211111155837372"></p>
+<h3 id="2-2-5、安全"><a href="#2-2-5、安全" class="headerlink" title="2.2.5、安全"></a>2.2.5、安全</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160006246.png" alt="image-20211111160006246"></p>
+<h3 id="2-2-6、性能"><a href="#2-2-6、性能" class="headerlink" title="2.2.6、性能"></a>2.2.6、性能</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160028912.png" alt="image-20211111160028912"></p>
+<h3 id="2-2-7、其他"><a href="#2-2-7、其他" class="headerlink" title="2.2.7、其他"></a>2.2.7、其他</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160124087.png" alt="image-20211111160124087"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160245119.png"></p>
+<h2 id="2-2-网页开发基础概念"><a href="#2-2-网页开发基础概念" class="headerlink" title="2.2 网页开发基础概念"></a>2.2 网页开发基础概念</h2><h3 id="2-2-1、网页分类（网页拓展名）"><a href="#2-2-1、网页分类（网页拓展名）" class="headerlink" title="2.2.1、网页分类（网页拓展名）"></a>2.2.1、网页分类（网页拓展名）</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160522242.png" alt="image-20211111160522242"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930164311615-1389641920.png" alt="image-20210930164308263"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/2510762-20210930164342045-699252132.png" alt="image-20210930164339045"></p>
+<h3 id="2-2-2、正斜杠（-）与反斜杠（-）"><a href="#2-2-2、正斜杠（-）与反斜杠（-）" class="headerlink" title="2.2.2、正斜杠（&#x2F;）与反斜杠（\）"></a>2.2.2、正斜杠（&#x2F;）与反斜杠（\）</h3><h3 id><a href="#" class="headerlink" title></a></h3><table>
+<thead>
+<tr>
+<th>正斜杠（forward slash）（&#x2F;)</th>
+<th>反斜杠（backslash）（\）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>在Windows中，正斜杠&#x2F;表示除法，用来进行整除运算</td>
+<td>Windows文件浏览器（资源管理器）上使用 反斜杠 \</td>
+</tr>
+<tr>
+<td>在unix系统中，&#x2F;表示目录</td>
+<td>在Windows系统中，\用来表示目录</td>
+</tr>
+<tr>
+<td>由于web遵循unix命名，所以在网址（URL）中，&#x2F;表示目录</td>
+<td>\双反斜线 在Windows里表示绝对地址的第一项，比如后面跟上IP地址的话，就是需要打开这个IP地址的网络共享资源</td>
+</tr>
+<tr>
+<td>http就是正斜杠</td>
+<td>反斜杠”\“是电脑出现了之后为了表示程序设计里的特殊含义才发明的专用标点，就是说，除了程序设计领域外，任何地方你都不应该使用反斜杠的时候，请永远使用正斜杠”&#x2F;“</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-3、绝对路径、相对路径"><a href="#2-2-3、绝对路径、相对路径" class="headerlink" title="2.2.3、绝对路径、相对路径"></a>2.2.3、绝对路径、相对路径</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160703816.png" alt="image-20211111160703816"></p>
+<h3 id="2-2-4、Web-图片格式"><a href="#2-2-4、Web-图片格式" class="headerlink" title="2.2.4、Web 图片格式"></a>2.2.4、Web 图片格式</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160854051.png" alt="image-20211111160854051"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111160957781.png" alt="image-20211111160957781"></p>
+<h3 id="2-2-5、图像技术"><a href="#2-2-5、图像技术" class="headerlink" title="2.2.5、图像技术"></a>2.2.5、图像技术</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161046629.png" alt="image-20211111161046629"></p>
+<h3 id="2-2-6、动图"><a href="#2-2-6、动图" class="headerlink" title="2.2.6、动图"></a>2.2.6、动图</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161204994.png" alt="image-20211111161204994"></p>
+<h3 id="2-2-7、语义化标签及优点"><a href="#2-2-7、语义化标签及优点" class="headerlink" title="2.2.7、语义化标签及优点"></a>2.2.7、语义化标签及优点</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161253406.png" alt="image-20211111161253406"></p>
+<h3 id="2-2-8、网页中的特殊符号"><a href="#2-2-8、网页中的特殊符号" class="headerlink" title="2.2.8、网页中的特殊符号"></a>2.2.8、网页中的特殊符号</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161338369.png" alt="image-20211111161338369"></p>
+<h3 id="2-2-9、长度单位（WebAPP、H5）"><a href="#2-2-9、长度单位（WebAPP、H5）" class="headerlink" title="2.2.9、长度单位（WebAPP、H5）"></a>2.2.9、长度单位（WebAPP、H5）</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161457975.png" alt="image-20211111161457975"></p>
+<h3 id="2-2-10、Android、iOS、鸿蒙中的长度单位（NativeAPP）"><a href="#2-2-10、Android、iOS、鸿蒙中的长度单位（NativeAPP）" class="headerlink" title="2.2.10、Android、iOS、鸿蒙中的长度单位（NativeAPP）"></a>2.2.10、Android、iOS、鸿蒙中的长度单位（NativeAPP）</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161602843.png" alt="image-20211111161602843"></p>
+<h3 id="2-2-11、网页颜色、web-安全色"><a href="#2-2-11、网页颜色、web-安全色" class="headerlink" title="2.2.11、网页颜色、web 安全色"></a>2.2.11、网页颜色、web 安全色</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161654057.png" alt="image-20211111161654057"></p>
+<h3 id="2-2-12、HTML与CSS-的结合方式"><a href="#2-2-12、HTML与CSS-的结合方式" class="headerlink" title="2.2.12、HTML与CSS 的结合方式"></a>2.2.12、HTML与CSS 的结合方式</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161757027.png" alt="image-20211111161757027"><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111161825501.png" alt="image-20211111161825501"></p>
+<h3 id="2-2-13、其他"><a href="#2-2-13、其他" class="headerlink" title="2.2.13、其他"></a>2.2.13、其他</h3><p>（1）注释</p>
+<table>
+<thead>
+<tr>
+<th>HTML注释</th>
+<th><!-- 注释内容--></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CSS注释</td>
+<td>&#x2F;* 注释内容*&#x2F;</td>
+</tr>
+<tr>
+<td>Javascript 单行注释</td>
+<td>&#x2F;&#x2F;注释内容</td>
+</tr>
+<tr>
+<td>Javascript 多行注释</td>
+<td>&#x2F;* 注释内容 *&#x2F;</td>
+</tr>
+</tbody></table>
+<p>（2）驼峰命名法</p>
+<p>​		(2.1)大驼峰：每个单词首字母均大写。（常用于类名、属性、命名空间等、public class DataBaseUser）</p>
+<p>​		(2.2)小驼峰：除第一个单词之外，其他单词首字母大写。（变量一般用小驼峰标识、int myStudentCount）</p>
+<p>（3）单引号、双引号、转义符、多重引号</p>
+<p>（4）代码风格：统一命名，非中文、非空格、缩进、格式化</p>
+<p>（5）W3C标准：是一系列标准的集合。网页主要由三部分组成：结构（Structure)、表现（Presentation）和行为（Behavior）</p>
+<h2 id="2-3-HTML"><a href="#2-3-HTML" class="headerlink" title="2.3 HTML"></a>2.3 HTML</h2><h3 id="2-3-1、单标签（自闭和）和双标签"><a href="#2-3-1、单标签（自闭和）和双标签" class="headerlink" title="2.3.1、单标签（自闭和）和双标签"></a>2.3.1、单标签（自闭和）和双标签</h3><p>（1）HTML常见的单标签有</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta&gt;		&lt;!--可提供有关某个 HTML 元素的元信息 (meta-information)，比如描述、针对搜索引擎的关键词以及刷新频率。--&gt;</span><br><span class="line">&lt;link&gt;		&lt;!--定义两个链接文档之间的联系--&gt;</span><br><span class="line">&lt;br&gt;	&lt;!--换行--&gt;</span><br><span class="line">&lt;hr&gt;	&lt;!--水平线--&gt;</span><br><span class="line">&lt;img&gt;	&lt;!--图片--&gt;</span><br><span class="line">&lt;input&gt;	&lt;!--规定了用户可以在其中输入数据的输入字段--&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（2）HTML常见双标签有</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span>		<span class="comment">&lt;!--CSS的样式表，一般写在head标签内--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>	<span class="comment">&lt;!--在其中写入JavaScript代码--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span>	<span class="comment">&lt;!--标题--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span><span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h5</span>&gt;</span><span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h6</span>&gt;</span><span class="tag">&lt;/<span class="name">h6</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span>	<span class="comment">&lt;!--段落--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">b</span>&gt;</span>	<span class="comment">&lt;!--加粗--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>	<span class="comment">&lt;!--斜体--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">u</span>&gt;</span><span class="tag">&lt;/<span class="name">u</span>&gt;</span>	<span class="comment">&lt;!--添加下划线--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">s</span>&gt;</span><span class="tag">&lt;/<span class="name">s</span>&gt;</span>	<span class="comment">&lt;!--删除线，在文本中间--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span>	<span class="comment">&lt;!--超链接--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>	<span class="comment">&lt;!--定义文本中的一个部分--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span>	<span class="comment">&lt;!--对行内元素进行组合--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span>	<span class="comment">&lt;!--图表--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span>	<span class="comment">&lt;!--图表中的行--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span>	<span class="comment">&lt;!--图表中的单元格--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">th</span>&gt;</span><span class="tag">&lt;/<span class="name">th</span>&gt;</span>	<span class="comment">&lt;!--表头单元格--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span>	<span class="comment">&lt;!--表单--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-2、块-行元素和行内-内联元素"><a href="#2-3-2、块-行元素和行内-内联元素" class="headerlink" title="2.3.2、块&#x2F;行元素和行内&#x2F;内联元素"></a>2.3.2、块&#x2F;行元素和行内&#x2F;内联元素</h3><p>（1）常见块&#x2F;行元素 一个标签占一行，自动换行</p>
+<table>
+    <tr>
+        <td><strong>块元素的特点</strong></td>
+    </tr>
+    <tr>
+        <td><strong>（1.1）块元素一行一个，独占一行，自动换行。大多数为结构性标签。</strong></td>
+    </tr>
+    <tr>
+        <td><strong>（1.2）不给宽度时，，默认是父亲的100%</strong></td>
+    </tr>
+    <tr>
+        <td><strong>（1.3）可设置宽、高、边距</strong></td>
+    </tr>
+    <tr>
+        <td><strong>（1.4）可以容纳其他块级标签和行内标签（p标签除外），p标签不可以包裹块级标签</strong></td>
+    </tr>
+</table>
+
+
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span><span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h5</span>&gt;</span><span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h6</span>&gt;</span><span class="tag">&lt;/<span class="name">h6</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br><span class="line"></span><br><span class="line">ul 无序列表 </span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>11<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>12<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">ol 有序列表</span><br><span class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>21<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>22<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line">dl 自定义列表</span><br><span class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dt</span>&gt;</span><span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span><span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">marquee</span>&gt;</span><span class="tag">&lt;/<span class="name">marquee</span>&gt;</span>	<span class="comment">&lt;!--滑动--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（2）常见行内&#x2F;内联元素：一行可以有多个同类型标签 <strong>display:inline</strong></p>
+<table>
+<thead>
+<tr>
+<th>行内元素的特点：</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>（2.1）相邻行内元素在水平直线上横排显示，一行可以显示多个</td>
+</tr>
+<tr>
+<td>（2.2）width无效，height无效，margin上下无效，padding上下无效（只对自身有效，不影响其他元素）。可以设置 line-height</td>
+</tr>
+<tr>
+<td>（2.3）默认宽度就是它本身内容的宽度，由内容撑开</td>
+</tr>
+<tr>
+<td>（2.4）块级元素可以包含行内元素和块级元素。行内元素不能包含块级元素（a 标签除外）</td>
+</tr>
+<tr>
+<td>（2.5） a 标签不能包含 a 标签</td>
+</tr>
+</tbody></table>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">sub</span>&gt;</span><span class="tag">&lt;/<span class="name">sub</span>&gt;</span>下标</span><br><span class="line"><span class="tag">&lt;<span class="name">sup</span>&gt;</span><span class="tag">&lt;/<span class="name">sup</span>&gt;</span>上标</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">b</span>&gt;</span>		<span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>		<span class="tag">&lt;<span class="name">em</span>&gt;</span><span class="tag">&lt;/<span class="name">em</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">u</span>&gt;</span><span class="tag">&lt;/<span class="name">u</span>&gt;</span>		<span class="tag">&lt;<span class="name">ins</span>&gt;</span><span class="tag">&lt;/<span class="name">ins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">s</span>&gt;</span><span class="tag">&lt;/<span class="name">s</span>&gt;</span>		<span class="tag">&lt;<span class="name">del</span>&gt;</span><span class="tag">&lt;/<span class="name">del</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span><span class="tag">&lt;/<span class="name">label</span>&gt;</span>	<span class="comment">&lt;!--为input元素定义标注--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">textarea</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span>	<span class="comment">&lt;!--定义一个多行的文本输入控件--&gt;</span></span><br><span class="line">下拉列表：<span class="tag">&lt;<span class="name">select</span>&gt;</span><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（3）行内块元素：<strong>display:inline-block</strong></p>
+<table>
+<thead>
+<tr>
+<th>行内块元素 的特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>（1）和相邻行内元素（行内块）在一行上，但是之间会有空白滤掉，一行可以显示多个</td>
+</tr>
+<tr>
+<td>（2）默认宽度就是它本身内容的宽度</td>
+</tr>
+<tr>
+<td>（3）高度、行高、外边距（margin)以及内边框（padding）都可以控制</td>
+</tr>
+</tbody></table>
+<p>（4）总结</p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111163358822.png" alt="image-20211111163358822"></p>
+<p>（5）display 的各种值</p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111163500566.png" alt="image-20211111163500566"></p>
+<h3 id="2-3-3、表格"><a href="#2-3-3、表格" class="headerlink" title="2.3.3、表格"></a>2.3.3、表格</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111163604005.png" alt="image-20211111163604005"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111163636030.png" alt="image-20211111163636030"></p>
+<h3 id="2-3-4、DIV-标签"><a href="#2-3-4、DIV-标签" class="headerlink" title="2.3.4、DIV 标签"></a>2.3.4、DIV 标签</h3><p>（1）空的 div 是没有高度的（如果子元素全部浮动，则父盒子会高度塌陷）</p>
+<p>（2）有内容的 div 其高度取决于内容的高度</p>
+<p>（3）如果没有指定 float 属性，div 的宽度将和沾满父元素的宽度（不管是不是空的）</p>
+<p>（4）如果指定了 float 属性，div 的宽度将取决于内部元素的宽度（所以，空的div指定了float属性后既没有高度也没有宽度）</p>
+<h3 id="2-3-5、图像标签img"><a href="#2-3-5、图像标签img" class="headerlink" title="2.3.5、图像标签img"></a>2.3.5、图像标签img</h3><p>&lt;img&gt;是一个可替换元素，它的 display 属性的默认值是 inline。但是它的默认分辨率是由被嵌入的图片的原始高度来确定的，使得它就像 inline-block 一样。</p>
+<p>你可以设置为 border&#x2F;border-radius、padding&#x2F;margin、width、height等CSS属性。</p>
+<p>&lt;img&gt;没有基线（baseline），这意味着，当在一个行内格式的上下文中使用 vertical-align:baseline 时，图像的底部将会与容器的文字基线对齐。</p>
+<p>（1）alt属性指定替代文本，title指的是鼠标移到元素上时给的提示信息</p>
+<p>（2）讲鼠标移至图片位置时显示“提示2”</p>
+<p>（3）当图片路径错误或网速太慢时，图片位置就会显示“提示1”</p>
+<h3 id="2-3-6、超链接、锚点"><a href="#2-3-6、超链接、锚点" class="headerlink" title="2.3.6、超链接、锚点"></a>2.3.6、超链接、锚点</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;a.php&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/a.php&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://www.baidu.com/&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#锚点1&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:alert(1);&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:func_a();&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:void(0);&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;mailto:a@qq.com&quot;</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;tel:10086&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;url&quot;</span> <span class="attr">target</span>=<span class="string">&quot;&quot;</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（1）_blank 在新窗口中打开被链接文档</p>
+<p>（2）_self 默认，在相同的框架中打开被链接文档</p>
+<p>（3）_parent 	在父框架集中打开被链接文档</p>
+<p>（4）_top 	在整个窗口中打开被链接文档</p>
+<h3 id="2-3-7、表单、表单基本验证、正则表达式"><a href="#2-3-7、表单、表单基本验证、正则表达式" class="headerlink" title="2.3.7、表单、表单基本验证、正则表达式"></a>2.3.7、表单、表单基本验证、正则表达式</h3><table>
+    <tr>
+        <th>form标签</th>
+        <th>供用户输入的HTML表单</th>
+    </tr>
+    <tr>
+        <td>&lt;input&gt;标签</td>
+        <td>用户可以在其中输入数据的输入字段</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>text<br>
+            password<br>
+            hidden<br>
+            reset<br>
+            submit<br>
+            button<br>
+            file<br>
+            checkbox<br>
+            radio<br>
+            <br>
+            <br>
+            color<br>
+            date<br>
+            datemine<br>
+            email<br>
+            image<br>
+            month<br>
+            number<br>
+            range<br>
+            search<br>
+            tel<br>
+            time<br>
+            url<br>
+            week
+        </td>
+    </tr>
+    <tr>
+        <td>&lt;select&gt;&lt;/select&gt;标签<br>
+            &lt;option&gt;&lt;/option&gt;标签
+        </td>
+        <td>下拉列表，标签定义了列表中的可用选项</td>
+    </tr>
+    <tr>
+        <td>&lt;textarea&gt;&lt;/textarea&gt;标签</td>
+        <td>多行的文本输入控件</td>
+    </tr>
+    <tr>
+        <td>&lt;button&gt;&lt;/button&gt;标签</td>
+        <td>按钮</td>
+    </tr>
+    <tr>
+        <td>&lt;label&gt;&lt;/label&gt;标签</td>
+        <td>为&lt;input&gt;元素定义标注</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>label元素不会向用户呈现任何特殊效果。不过，它为鼠标用户改进了可用性<br>
+            如果说你在label元素内点击文本，就会触发此控件。<br>
+            就是说，当用户选择该标签时，浏览器就会自动将焦点转到和标签相关的表单控件上。
+        </td>
+    </tr>
+</table>
+
+
+
+<h3 id="2-3-8、列表"><a href="#2-3-8、列表" class="headerlink" title="2.3.8、列表"></a>2.3.8、列表</h3><p>（1）ul 无序列表</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>11<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>12<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+    <li>11</li>
+    <li>12</li>
+</ul>
+
+
+<p>（2）ol 有序列表</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>21<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>22<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+    <li>21</li>
+    <li>22</li>
+</ol>
+
+
+<p>（3）dl 自定义列表</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dt</span>&gt;</span><span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<dl>
+    <dt>31</dt>
+</dl>
+
+
+<p>导航条常见方案（历史包袱、习惯、兼容、语义化）</p>
+<p>（1）ul&gt;li&gt;a</p>
+<p>（2）nav&gt;a</p>
+<h3 id="2-3-9、iframe-标签"><a href="#2-3-9、iframe-标签" class="headerlink" title="2.3.9、iframe 标签"></a>2.3.9、iframe 标签</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111164444309.png" alt="image-20211111164444309"></p>
+<h3 id="2-4-认识浏览器的第二部分"><a href="#2-4-认识浏览器的第二部分" class="headerlink" title="2.4 认识浏览器的第二部分"></a>2.4 认识浏览器的第二部分</h3><h3 id="2-4-1、浏览器的组成"><a href="#2-4-1、浏览器的组成" class="headerlink" title="2.4.1、浏览器的组成"></a>2.4.1、浏览器的组成</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111164918105.png" alt="image-20211111164918105"></p>
+<h3 id="2-4-2、常见浏览器内核（渲染引擎）"><a href="#2-4-2、常见浏览器内核（渲染引擎）" class="headerlink" title="2.4.2、常见浏览器内核（渲染引擎）"></a>2.4.2、常见浏览器内核（渲染引擎）</h3><table>
+    <tr>
+        <td>浏览器
+        </td>
+        <td>内核
+        </td>
+        <td>备注
+        </td>
+    </tr>
+    <tr>
+        <td>IE
+        </td>
+        <td>Trident
+        </td>
+        <td>IE、猎豹、360、百度
+        </td>
+    </tr>
+    <tr>
+        <td>FireFox
+        </td>
+        <td>Gecko
+        </td>
+        <td>火狐
+        </td>
+    </tr>
+    <tr>
+        <td>Safari
+        </td>
+        <td>Webkit
+        </td>
+        <td>苹果浏览器内核
+        </td>
+    </tr>
+    <tr>
+        <td>Chrome/Opera
+        </td>
+        <td>Blink
+        </td>
+        <td>Blink其实是Webkit
+        </td>
+    </tr>
+</table>
+
+
+<table>
+<thead>
+<tr>
+<th>浏览器</th>
+<th>原内核</th>
+<th>现内核</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Safari</td>
+<td>Webkit</td>
+<td>Webkit</td>
+<td>苹果开源项目<br>Safari、脚本使用 JavaScriptCore引擎<br>Chrome、脚本使用Chrome自己的V8引擎</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165053506.png" alt="image-20211111165053506"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165133721.png" alt="image-20211111165133721"></p>
+<h3 id="2-4-3、浏览器工作原理"><a href="#2-4-3、浏览器工作原理" class="headerlink" title="2.4.3、浏览器工作原理"></a>2.4.3、浏览器工作原理</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165214575.png" alt="image-20211111165214575"></p>
+<h3 id="2-4-4、屏幕、浏览器、document的body，三种不同的宽高"><a href="#2-4-4、屏幕、浏览器、document的body，三种不同的宽高" class="headerlink" title="2.4.4、屏幕、浏览器、document的body，三种不同的宽高"></a>2.4.4、屏幕、浏览器、document的body，三种不同的宽高</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165309415.png" alt="image-20211111165309415"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165332458.png" alt="image-20211111165332458"></p>
+<h3 id="2-4-5、请求报文与浏览器响应信息。"><a href="#2-4-5、请求报文与浏览器响应信息。" class="headerlink" title="2.4.5、请求报文与浏览器响应信息。"></a>2.4.5、请求报文与浏览器响应信息。</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165425373.png" alt="image-20211111165425373"></p>
+<p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165516792.png" alt="image-20211111165516792"></p>
+<h3 id="2-4-6、HTTP-状态码"><a href="#2-4-6、HTTP-状态码" class="headerlink" title="2.4.6、HTTP 状态码"></a>2.4.6、HTTP 状态码</h3><p><img src="/2024/07/07/Web/%E7%BD%91%E9%A1%B5/image-20211111165632355.png" alt="image-20211111165632355"></p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/07/07/Web/%E7%BD%91%E9%A1%B5/" title="网页">http://example.com/2024/07/07/Web/网页/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/07/Web/%E8%80%83%E8%AF%95/" rel="prev" title="考试">
+      <i class="fa fa-chevron-left"></i> 考试
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/07/Web/html/" rel="next" title="html">
+      html <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%80%81%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">第一章、概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-0-%E7%BD%91%E9%A1%B5%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">1.1.</span> <span class="nav-text">1.0 网页的本质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-0-1%E3%80%81%E7%BD%91%E9%A1%B5%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%B0%B1%E6%98%AF%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.0.1、网页的本质就是文本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-0-2%E3%80%81%E7%BD%91%E7%AB%99%E5%B0%B1%E6%98%AF%E4%B8%80%E4%B8%AA%E9%93%BE%E6%8E%A5%E7%9A%84%E9%A1%B5%E9%9D%A2%E9%9B%86%E5%90%88"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.0.2、网站就是一个链接的页面集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-0-3%E3%80%81%E8%AE%B0%E4%BA%8B%E6%9C%AC%E5%8F%AF%E4%BB%A5%E7%94%A8%E6%9D%A5%E7%BC%96%E5%86%99HTML%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.0.3、记事本可以用来编写HTML文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E7%94%A8%E8%AE%B0%E4%BA%8B%E6%9C%AC%E5%86%99%E4%B8%80%E4%B8%AA%E7%BD%91%E9%A1%B5%EF%BC%8C%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%BC%80%E8%BF%99%E4%B8%AA%E7%BD%91%E9%A1%B5%EF%BC%88Markdown%E3%80%81LaTeX"><span class="nav-number">1.2.</span> <span class="nav-text">1.1用记事本写一个网页，用浏览器打开这个网页（Markdown、LaTeX)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1%E3%80%81%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.1.1、显示文件扩展名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2%E3%80%81%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.1.2、开发工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3%E3%80%81%E8%87%AA%E5%AD%A6%E3%80%81%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.1.3、自学、写作工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-4%E3%80%81%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.4.</span> <span class="nav-text">1.1.4、思维导图工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-5%E3%80%81%E5%BC%80%E6%BA%90%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1"><span class="nav-number">1.2.5.</span> <span class="nav-text">1.1.5、开源代码托管</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-6%E3%80%81%E7%A8%8B%E5%BA%8F%E8%B0%83%E8%AF%95%E3%80%81%E5%8E%BB%E9%99%A4BUG%E3%80%81%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F"><span class="nav-number">1.2.6.</span> <span class="nav-text">1.1.6、程序调试、去除BUG、代码质量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-7%E3%80%81%E7%A8%8B%E5%BA%8F-bug-%E7%9A%84%E5%B8%B8%E8%A7%81%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.7.</span> <span class="nav-text">1.1.7、程序 bug 的常见分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-8%E3%80%81%E5%90%84%E7%A7%8D%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.2.8.</span> <span class="nav-text">1.1.8、各种快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-9%E3%80%81%E7%A8%8B%E5%BA%8F%E5%91%98%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.9.</span> <span class="nav-text">1.1.9、程序员分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-10%E3%80%81%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%86%E5%8F%B2"><span class="nav-number">1.2.10.</span> <span class="nav-text">1.1.10、浏览器历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-11%E3%80%81%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E6%9C%AC%E5%9C%B0-HTML-%E9%A1%B5%E9%9D%A2%E4%B8%8E%E8%BF%9C%E7%A8%8B-HTTP-%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.11.</span> <span class="nav-text">1.1.11、浏览器访问本地 HTML 页面与远程 HTTP 页面的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-12%E3%80%81%E7%BD%91%E7%AB%99"><span class="nav-number">1.2.12.</span> <span class="nav-text">1.1.12、网站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-13%E3%80%81%E5%9C%A8%E7%BA%BF%E8%AE%BA%E6%96%87"><span class="nav-number">1.2.13.</span> <span class="nav-text">1.1.13、在线论文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-14%E3%80%81%E7%89%88%E6%9D%83%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.14.</span> <span class="nav-text">1.1.14、版权信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2HTML%E9%AA%A8%E6%9E%B6"><span class="nav-number">1.3.</span> <span class="nav-text">1.2HTML骨架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1%E3%80%81HTML%E9%AA%A8%E6%9E%B6%E6%A0%87%E7%AD%BE%E5%88%86%E7%B1%BB"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.2.1、HTML骨架标签分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2%E3%80%81%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90-HTML%E7%9A%84%E9%AA%A8%E6%9E%B6"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.2.2、快速生成 HTML的骨架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%9F%BA%E7%A1%80%E5%85%83%E7%B4%A0%E6%A0%87%E7%AD%BE%E3%80%81%E5%9F%BA%E7%A1%80%E5%B1%9E%E6%80%A7%E3%80%81style%E5%85%83%E7%B4%A0%E3%80%81%E5%B8%83%E5%B1%80%E7%B1%BB%E5%85%83%E7%B4%A0"><span class="nav-number">1.4.</span> <span class="nav-text">1.3 基础元素标签、基础属性、style元素、布局类元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1%E3%80%81%E5%9F%BA%E7%A1%80%E5%85%83%E7%B4%A0%E6%A0%87%E7%AD%BE"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.3.1、基础元素标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2%E3%80%81%E5%9F%BA%E7%A1%80%E5%B1%9E%E6%80%A7"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.3.2、基础属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3%E3%80%81style%E5%85%83%E7%B4%A0"><span class="nav-number">1.4.3.</span> <span class="nav-text">1.3.3、style元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-4%E3%80%81%E5%B8%83%E5%B1%80%E7%B1%BB%E5%85%83%E7%B4%A0"><span class="nav-number">1.4.4.</span> <span class="nav-text">1.3.4、布局类元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-5%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8-CSS"><span class="nav-number">1.4.5.</span> <span class="nav-text">1.3.5、为什么要使用 CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-6%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%9D%E5%A7%8B%E5%8C%96-CSS-%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.4.6.</span> <span class="nav-text">1.3.6、为什么要初始化 CSS 格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E8%AE%A4%E8%AF%86%E6%B5%8F%E8%A7%88%E5%99%A8%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86"><span class="nav-number">1.5.</span> <span class="nav-text">1.4 认识浏览器第一部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1%E3%80%81%E6%B5%8F%E8%A7%88%E5%99%A8%E5%88%86%E7%B1%BB"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.4.1、浏览器分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2%E3%80%81Chrome%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="nav-number">1.5.2.</span> <span class="nav-text">1.4.2、Chrome浏览器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-3%E3%80%81HTTP%E7%9A%84%E6%93%8D%E4%BD%9C%E8%BF%87%E7%A8%8B%EF%BC%9A%E4%BB%8E%E8%BE%93%E5%85%A5%E7%BD%91%E5%9D%80%E5%88%B0%E8%8E%B7%E5%8F%96%E9%A1%B5%E9%9D%A2%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.5.3.</span> <span class="nav-text">1.4.3、HTTP的操作过程：从输入网址到获取页面发生了什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-4%E3%80%81%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E3%80%81%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6"><span class="nav-number">1.5.4.</span> <span class="nav-text">1.4.4、浏览器缓存、缓存机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-5%E3%80%81HTTP-%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">1.5.5.</span> <span class="nav-text">1.4.5、HTTP 的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-6%E3%80%81URL%E4%B8%8EURI"><span class="nav-number">1.5.6.</span> <span class="nav-text">1.4.6、URL与URI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-7%E3%80%81MAC%E5%9C%B0%E5%9D%80%E3%80%81IP%E5%9C%B0%E5%9D%80%E3%80%81%E7%AB%AF%E5%8F%A3"><span class="nav-number">1.5.7.</span> <span class="nav-text">1.4.7、MAC地址、IP地址、端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-8%E3%80%81Cookie%E4%B8%8ESession%EF%BC%88%E5%A6%82%E4%BD%95%E8%AE%B0%E4%BD%8F%E5%9B%9E%E8%AF%9D%EF%BC%9FHTTP%E6%98%AF%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84%EF%BC%89"><span class="nav-number">1.5.8.</span> <span class="nav-text">1.4.8、Cookie与Session（如何记住回话？HTTP是无状态的）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%EF%BC%88%E7%BD%91%E9%A1%B5%E6%95%B0%E6%8D%AE%E5%B1%95%E7%A4%BA%E6%96%B9%E5%BC%8F%EF%BC%89"><span class="nav-number">1.5.9.</span> <span class="nav-text">1.5 前端页面数据渲染（网页数据展示方式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1%E3%80%81%E5%90%8E%E7%AB%AF%E6%B8%B2%E6%9F%93%EF%BC%88SSR%EF%BC%89"><span class="nav-number">1.5.10.</span> <span class="nav-text">1.5.1、后端渲染（SSR）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2%E3%80%81%E5%89%8D%E7%AB%AF%E6%B8%B2%E6%9F%93%EF%BC%88CSR%EF%BC%89"><span class="nav-number">1.5.11.</span> <span class="nav-text">1.5.2、前端渲染（CSR）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%B2%97%E4%BD%8D%E5%88%86%E5%B7%A5%EF%BC%88%E5%BC%80%E5%8F%91%E7%BB%84%E7%BB%87%E3%80%81%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3%E4%B8%AD%E7%BB%8F%E5%B8%B8%E8%A6%81%E7%94%A8%E5%88%B0%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 项目开发岗位分工（开发组织、项目文档中经常要用到）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-1%E3%80%81%E7%AE%A1%E7%90%86%E7%B1%BB"><span class="nav-number">1.6.1.</span> <span class="nav-text">1.6.1、管理类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-4%E3%80%81%E7%B3%BB%E7%BB%9F%E7%B1%BB%E3%80%81%E7%BB%BC%E5%90%88%E7%B1%BB"><span class="nav-number">1.6.2.</span> <span class="nav-text">1.6.4、系统类、综合类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E5%85%AC%E5%85%B1%E8%83%BD%E5%8A%9B%E3%80%81%E5%85%AC%E5%85%B1%E7%B4%A0%E8%B4%A8"><span class="nav-number">1.7.</span> <span class="nav-text">1.7 开发人员公共能力、公共素质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-1%E3%80%81%E9%81%93"><span class="nav-number">1.7.1.</span> <span class="nav-text">1.7.1、道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-2%E3%80%81%E6%9C%AF"><span class="nav-number">1.7.2.</span> <span class="nav-text">1.7.2、术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-8-%E4%B8%80%E4%B8%AA%E5%90%88%E6%A0%BC%E5%89%8D%E7%AB%AF-Coder%E7%9A%84%E5%BA%94%E6%9C%89%E6%8A%80%E8%83%BD%E7%82%B9"><span class="nav-number">1.8.</span> <span class="nav-text">1.8 一个合格前端 Coder的应有技能点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-1%E3%80%81%E5%9F%BA%E6%9C%AC%E5%8A%9F"><span class="nav-number">1.8.1.</span> <span class="nav-text">1.8.1、基本功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-2%E3%80%81%E5%9F%BA%E6%9C%AC%E5%8A%9F%E5%8A%A0%E5%BC%BA%E5%9F%BA%E7%A1%80%E7%89%88"><span class="nav-number">1.8.2.</span> <span class="nav-text">1.8.2、基本功加强基础版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-3%E3%80%81%E8%BF%9B%E9%98%B6"><span class="nav-number">1.8.3.</span> <span class="nav-text">1.8.3、进阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-4%E3%80%81%E5%8A%A0%E5%88%86%E9%A1%B9"><span class="nav-number">1.8.4.</span> <span class="nav-text">1.8.4、加分项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-5%E3%80%81%E5%9B%BD%E5%86%85%E4%BB%A5-BAT-%E4%B8%BA%E9%A6%96%E7%9A%84%E5%90%84%E5%A4%A7%E4%BA%92%E8%81%94%E7%BD%91%E5%85%AC%E5%8F%B8%E6%89%80%E7%94%A8%E6%8A%80%E6%9C%AF%E5%9F%BA%E6%9C%AC%E5%88%86%E6%9E%90"><span class="nav-number">1.8.5.</span> <span class="nav-text">1.8.5、国内以 BAT 为首的各大互联网公司所用技术基本分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-%E5%89%8D%E7%AB%AF%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.8.6.</span> <span class="nav-text">1.9 前端工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-1%E3%80%81%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="nav-number">1.8.7.</span> <span class="nav-text">1.9.1、项目开发流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-2%E3%80%81%E5%89%8D%E7%AB%AF%E5%88%87%E9%A1%B5%E9%9D%A2%E7%9A%84%E4%B8%BB%E8%A6%81%E5%B7%A5%E4%BD%9C%E5%86%85%E5%AE%B9"><span class="nav-number">1.8.8.</span> <span class="nav-text">1.9.2、前端切页面的主要工作内容</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E7%BD%91%E9%A1%B5%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">第二章、网页开发基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%EF%BC%88%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%EF%BC%89%EF%BC%88%E5%85%A8%E6%A0%88%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 项目开发基础概念（基础知识）（全栈）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1%E3%80%81%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1、网络基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.2.2系统服务配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%81%E5%90%8E%E7%AB%AF%E3%80%81%E5%89%8D%E7%AB%AF%EF%BC%88JS%EF%BC%89%E6%89%80%E4%BD%BF%E7%94%A8%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B8%B8%E7%94%A8%E5%85%B1%E6%80%A7%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.2.3、数据库、后端、前端（JS）所使用语言的常用共性知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4%E3%80%81%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92"><span class="nav-number">2.1.4.</span> <span class="nav-text">2.2.4、前后端交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-5%E3%80%81%E5%AE%89%E5%85%A8"><span class="nav-number">2.1.5.</span> <span class="nav-text">2.2.5、安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-6%E3%80%81%E6%80%A7%E8%83%BD"><span class="nav-number">2.1.6.</span> <span class="nav-text">2.2.6、性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-7%E3%80%81%E5%85%B6%E4%BB%96"><span class="nav-number">2.1.7.</span> <span class="nav-text">2.2.7、其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E7%BD%91%E9%A1%B5%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 网页开发基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1%E3%80%81%E7%BD%91%E9%A1%B5%E5%88%86%E7%B1%BB%EF%BC%88%E7%BD%91%E9%A1%B5%E6%8B%93%E5%B1%95%E5%90%8D%EF%BC%89"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1、网页分类（网页拓展名）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2%E3%80%81%E6%AD%A3%E6%96%9C%E6%9D%A0%EF%BC%88-%EF%BC%89%E4%B8%8E%E5%8F%8D%E6%96%9C%E6%9D%A0%EF%BC%88-%EF%BC%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2、正斜杠（&#x2F;）与反斜杠（\）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.2.3.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3%E3%80%81%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E3%80%81%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.2.3、绝对路径、相对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4%E3%80%81Web-%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.2.5.</span> <span class="nav-text">2.2.4、Web 图片格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-5%E3%80%81%E5%9B%BE%E5%83%8F%E6%8A%80%E6%9C%AF"><span class="nav-number">2.2.6.</span> <span class="nav-text">2.2.5、图像技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-6%E3%80%81%E5%8A%A8%E5%9B%BE"><span class="nav-number">2.2.7.</span> <span class="nav-text">2.2.6、动图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-7%E3%80%81%E8%AF%AD%E4%B9%89%E5%8C%96%E6%A0%87%E7%AD%BE%E5%8F%8A%E4%BC%98%E7%82%B9"><span class="nav-number">2.2.8.</span> <span class="nav-text">2.2.7、语义化标签及优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-8%E3%80%81%E7%BD%91%E9%A1%B5%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7"><span class="nav-number">2.2.9.</span> <span class="nav-text">2.2.8、网页中的特殊符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-9%E3%80%81%E9%95%BF%E5%BA%A6%E5%8D%95%E4%BD%8D%EF%BC%88WebAPP%E3%80%81H5%EF%BC%89"><span class="nav-number">2.2.10.</span> <span class="nav-text">2.2.9、长度单位（WebAPP、H5）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-10%E3%80%81Android%E3%80%81iOS%E3%80%81%E9%B8%BF%E8%92%99%E4%B8%AD%E7%9A%84%E9%95%BF%E5%BA%A6%E5%8D%95%E4%BD%8D%EF%BC%88NativeAPP%EF%BC%89"><span class="nav-number">2.2.11.</span> <span class="nav-text">2.2.10、Android、iOS、鸿蒙中的长度单位（NativeAPP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-11%E3%80%81%E7%BD%91%E9%A1%B5%E9%A2%9C%E8%89%B2%E3%80%81web-%E5%AE%89%E5%85%A8%E8%89%B2"><span class="nav-number">2.2.12.</span> <span class="nav-text">2.2.11、网页颜色、web 安全色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-12%E3%80%81HTML%E4%B8%8ECSS-%E7%9A%84%E7%BB%93%E5%90%88%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.13.</span> <span class="nav-text">2.2.12、HTML与CSS 的结合方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-13%E3%80%81%E5%85%B6%E4%BB%96"><span class="nav-number">2.2.14.</span> <span class="nav-text">2.2.13、其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-HTML"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1%E3%80%81%E5%8D%95%E6%A0%87%E7%AD%BE%EF%BC%88%E8%87%AA%E9%97%AD%E5%92%8C%EF%BC%89%E5%92%8C%E5%8F%8C%E6%A0%87%E7%AD%BE"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1、单标签（自闭和）和双标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2%E3%80%81%E5%9D%97-%E8%A1%8C%E5%85%83%E7%B4%A0%E5%92%8C%E8%A1%8C%E5%86%85-%E5%86%85%E8%81%94%E5%85%83%E7%B4%A0"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.3.2、块&#x2F;行元素和行内&#x2F;内联元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3%E3%80%81%E8%A1%A8%E6%A0%BC"><span class="nav-number">2.3.3.</span> <span class="nav-text">2.3.3、表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-4%E3%80%81DIV-%E6%A0%87%E7%AD%BE"><span class="nav-number">2.3.4.</span> <span class="nav-text">2.3.4、DIV 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-5%E3%80%81%E5%9B%BE%E5%83%8F%E6%A0%87%E7%AD%BEimg"><span class="nav-number">2.3.5.</span> <span class="nav-text">2.3.5、图像标签img</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-6%E3%80%81%E8%B6%85%E9%93%BE%E6%8E%A5%E3%80%81%E9%94%9A%E7%82%B9"><span class="nav-number">2.3.6.</span> <span class="nav-text">2.3.6、超链接、锚点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-7%E3%80%81%E8%A1%A8%E5%8D%95%E3%80%81%E8%A1%A8%E5%8D%95%E5%9F%BA%E6%9C%AC%E9%AA%8C%E8%AF%81%E3%80%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">2.3.7.</span> <span class="nav-text">2.3.7、表单、表单基本验证、正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-8%E3%80%81%E5%88%97%E8%A1%A8"><span class="nav-number">2.3.8.</span> <span class="nav-text">2.3.8、列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-9%E3%80%81iframe-%E6%A0%87%E7%AD%BE"><span class="nav-number">2.3.9.</span> <span class="nav-text">2.3.9、iframe 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E8%AE%A4%E8%AF%86%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86"><span class="nav-number">2.3.10.</span> <span class="nav-text">2.4 认识浏览器的第二部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1%E3%80%81%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E7%BB%84%E6%88%90"><span class="nav-number">2.3.11.</span> <span class="nav-text">2.4.1、浏览器的组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2%E3%80%81%E5%B8%B8%E8%A7%81%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8%EF%BC%88%E6%B8%B2%E6%9F%93%E5%BC%95%E6%93%8E%EF%BC%89"><span class="nav-number">2.3.12.</span> <span class="nav-text">2.4.2、常见浏览器内核（渲染引擎）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-3%E3%80%81%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">2.3.13.</span> <span class="nav-text">2.4.3、浏览器工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-4%E3%80%81%E5%B1%8F%E5%B9%95%E3%80%81%E6%B5%8F%E8%A7%88%E5%99%A8%E3%80%81document%E7%9A%84body%EF%BC%8C%E4%B8%89%E7%A7%8D%E4%B8%8D%E5%90%8C%E7%9A%84%E5%AE%BD%E9%AB%98"><span class="nav-number">2.3.14.</span> <span class="nav-text">2.4.4、屏幕、浏览器、document的body，三种不同的宽高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-5%E3%80%81%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%E4%B8%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E5%93%8D%E5%BA%94%E4%BF%A1%E6%81%AF%E3%80%82"><span class="nav-number">2.3.15.</span> <span class="nav-text">2.4.5、请求报文与浏览器响应信息。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-6%E3%80%81HTTP-%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">2.3.16.</span> <span class="nav-text">2.4.6、HTTP 状态码</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

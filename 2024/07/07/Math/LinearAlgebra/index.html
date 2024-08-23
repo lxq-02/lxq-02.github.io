@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、 行列式1.1 二阶与三阶行列式一、二阶行列式$$定义1 记号\begin{vmatrix}{a_{11}}&amp;{a_{12}}\{a_{21}}&amp;{a_{22}}\\end{vmatrix}表示代数和a_{11}a_{22}-a_{12}a_{21}，称为二阶行列式，$$ ​		行：r (row) ​		列：c (colum) ​	横排的叫做行，竖排的叫做列$$a_{ij}:称">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性代数">
+<meta property="og:url" content="http://example.com/2024/07/07/Math/LinearAlgebra/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="一、 行列式1.1 二阶与三阶行列式一、二阶行列式$$定义1 记号\begin{vmatrix}{a_{11}}&amp;{a_{12}}\{a_{21}}&amp;{a_{22}}\\end{vmatrix}表示代数和a_{11}a_{22}-a_{12}a_{21}，称为二阶行列式，$$ ​		行：r (row) ​		列：c (colum) ​	横排的叫做行，竖排的叫做列$$a_{ij}:称">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210829184332790-229136264-1636859270965.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210829184329326-924801769-1636859296680.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210829184326410-1606284104.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210829184323716-1470129178.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210829184322690-1845013800.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210829184318110-41639491.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210829184140528-222521719.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906114831697-1764775323.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906114830282-783940912.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906114830623-129695872.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906114829883-606542904.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906114832407-677516032.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906114829753-572133640.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906114831063-6013832.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115048098-1921223527.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115048356-1261654420.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115048752-788899470.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115049458-1287997578.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115050037-1431429415.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115050566-1291067812.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115051213-1182809478.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115051442-859840553.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115052192-1409634942.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115052670-2122642108.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115053273-1692078092.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115053745-1779146468.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115054270-1146897779.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115054724-1436144891.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115055319-971895294.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115055465-764538217.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115056682-892118019.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115056077-1461630831.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115057089-568342429.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115057636-886538880.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115058142-1421745715.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115058577-704372471.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115059474-774486903.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906115059069-1636993888.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120010174-871483823.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120048996-1725354831.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120131322-1501285673.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120145743-1490335798.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120227246-380787238.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120303246-1793273967.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120347636-458149479.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120356356-2070302541.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120421136-1639744559.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120440453-2121066412.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120555676-1231868932.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120611970-1400999060.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120622368-2038506449.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120748116-1444240657.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120758560-1871066589.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120813416-1643820931.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210906120824699-495254316.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210908090427922-1145245857.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210912170022767-1559045238.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210912165829469-1469704398.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210908091431455-1746176193.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210908091523191-876805599.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210908091942697-333178719.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210908092012593-296902267.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210908092412522-1715841431.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210908092824385-1600645566.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210908180345765-813785459.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210908092839305-893526887.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913211959009-1946524261.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913212258180-1178413052.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913212546830-833644108.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913212659268-1074185391.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913212743908-1879671058.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913212800710-1567245727.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913212852875-84932287.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913212933035-1620846946.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913212958138-1516070923.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913213055675-1217083477.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913213115474-2097808223.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913213143748-1325267159.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913213157329-1520982546.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915105319467-1306879722.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913213225025-1118864787.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915200115549-894750516.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211011211125411-1867395527.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913213534724-1088522329.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913213654449-1324881551.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913213713536-1137244513.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913213805067-581779878.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913214006944-2022278040.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913214032512-785075205.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913214055543-1275535991.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913214144383-1288984993.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913214222623-637440272.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913214440526-1654034916.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913214514887-2136578053.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913214542810-1210358934.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210913214605350-63912193.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915105803531-330801887.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915111313558-1516470394.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915111609427-897793182.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915111736210-445711883.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915111854648-1409407160.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915112026340-352401779.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915112858749-528500414.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915112922825-769005808.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915113306655-95571310.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915113523377-1757132211.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915113703294-1875923221.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915113727762-458084569.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915113859253-175205911.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915203130924-1888897080.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915174049528-586590749.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915174234461-652271245.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915174312773-2099872557.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915174431874-1612761707.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915174510353-422075844.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915175126480-1543068909.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915175241347-1218892202.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915175320878-1369974414.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915175409633-1749312029.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915175743796-465391141.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915175757738-1605245381.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210915175916201-2080345259.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210918084442688-168227225.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210918084525309-1179047280.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210918085748732-1687789472.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210918085903885-1959822751.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210918090000481-1408316397.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210918090034672-1990698439.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210918090122622-810802536.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210919091359466-1901606696.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210919091618805-2031881212.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210919091907519-1341373488.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210919092713989-318635125.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210919092950629-1449204082.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210919093318790-1828114058.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210919093408845-2015368516.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210919093550756-1621786625.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210927103330619-1145870475.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205615437-563609115.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210927103721735-716611784.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205622299-416054817.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205625004-456545067.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205801028-2108473265.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205804090-2019391270.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205806255-1704085886.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205808664-2141874105.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205810478-1127671236.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205814524-1718069650.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205820090-1448865384.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205822843-1295467395.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205826327-1931476097.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205835294-386497241.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205831253-436047697.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205846583-1704795679.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205849761-1374010356.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205853426-105090029.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205857421-291406807.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205901193-21574897.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205907247-1467252482.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205911702-1386416846.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205919690-212675769.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205915526-1427844294.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205922692-165382921.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205926627-1202028142.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205928872-613699017.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205933313-875201450.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012205936552-302652028.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210402271-57202340.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210408551-723034327.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210414866-887564520.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210418817-170973762.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210421486-1349197644.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210423655-1663357493.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210426100-585741121.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210436179-1759950983.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210431016-1940018929.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210450477-489921328.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210455703-1782398229.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210501061-61714255.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210507156-1743535457.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210509632-1078507777.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210512183-1867288613.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210515188-1007947653.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210517922-1631856758.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210644435-1387203481.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210648097-378788019.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210651322-856781923.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210656174-1222838059.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012210701187-2100273772.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012211521388-281818059.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012211546996-1265270125.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012211640482-289267226.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012211815156-1241975953.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012211938173-565618387.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012212839110-1881710068.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012212231719-1407698763.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012212423036-206826965.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012212605464-550350665.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211012212627495-932183758.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211017084606218-1132709201.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211017084934172-1621913580.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211017092121029-2060600622.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211017092137922-748600176.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211017092251894-649713936.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211017092403557-319829287.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211017092710816-12264354.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211017092745373-1511145064.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211017092858970-1142220258.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211019221415099.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211019221749101.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211019221919379.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211019221957313.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211019222232277.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211019222415161.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211019222457180.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211030200718089-182612954.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211030200809636-891468729.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211030201153639-553822030.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211030201317738-1271730639.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211030201418759-755475624.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211030201746654-1192654821.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211101102149850.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211101102331854.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211101102537069.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211101102712478.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211101102932502.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211101103044274.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211101103308414.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211101103516859.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211101103601098.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211101113118812.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211106192936957.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107094213149-730912678.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107094513540-1097684105.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107094706280-2086136440.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107094825838-543670458.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107094923234-2043618761.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107095102546-584211156.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107095444728-358662037.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107095634785-2073837183.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107100047174-308566976.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107100129344-845092771.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107100149418-299016245.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107101718455-1541390612.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211107114348617.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107163257386-1240283923.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107163331564-1329879300.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211107163517004-1418845023.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211110160416968-799505008.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211110160442150-1500253291.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211110160514805-2026246822.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211108103630982-426370321.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211110160743914-1584646249.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211111192516542-1999999364.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211111193238510-1047392178.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211111193850272-1982955637.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211111194615455-2095705344.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211111195410000-1749540284.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211111195812252-847866663.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211111201513134-1720286143.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211111202656535-834578983.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211111205051944-834533555.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211112180201965-593192303.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211112180317549-1683303458.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211116162715515.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211116162721411.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211116162727570.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20211123155002720-1234568396.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/image-20211127110130731.png">
+<meta property="article:published_time" content="2024-07-07T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-23T06:28:24.562Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="Math">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/07/07/Math/LinearAlgebra/2510762-20210829184332790-229136264-1636859270965.png">
+
+<link rel="canonical" href="http://example.com/2024/07/07/Math/LinearAlgebra/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>线性代数 | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/07/Math/LinearAlgebra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          线性代数
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-07 12:00:00" itemprop="dateCreated datePublished" datetime="2024-07-07T12:00:00+08:00">2024-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-23 14:28:24" itemprop="dateModified" datetime="2024-08-23T14:28:24+08:00">2024-08-23</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、-行列式"><a href="#一、-行列式" class="headerlink" title="一、 行列式"></a>一、 行列式</h1><h2 id="1-1-二阶与三阶行列式"><a href="#1-1-二阶与三阶行列式" class="headerlink" title="1.1 二阶与三阶行列式"></a>1.1 二阶与三阶行列式</h2><h3 id="一、二阶行列式"><a href="#一、二阶行列式" class="headerlink" title="一、二阶行列式"></a>一、二阶行列式</h3><p>$$<br>定义1 记号<br>\begin{vmatrix}<br>{a_{11}}&amp;{a_{12}}\<br>{a_{21}}&amp;{a_{22}}\<br>\end{vmatrix}<br>表示代数和a_{11}a_{22}-a_{12}a_{21}，称为二阶行列式，<br>$$</p>
+<p>​		行：r (row)</p>
+<p>​		列：c (colum)</p>
+<p>​	横排的叫做行，竖排的叫做列<br>$$<br>a_{ij}:称为（i,j)元素；i:行标；j:列标<br>$$<br><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210829184332790-229136264-1636859270965.png"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210829184329326-924801769-1636859296680.png" alt="image-20210829183143524"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210829184326410-1606284104.png" alt="image-20210829183227764"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210829184323716-1470129178.png" alt="image-20210829183312659"></p>
+<h3 id="二、三阶行列式"><a href="#二、三阶行列式" class="headerlink" title="二、三阶行列式"></a>二、三阶行列式</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210829184322690-1845013800.png" alt="image-20210829183527199"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210829184318110-41639491.png" alt="image-20210829183627379"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210829184140528-222521719.png" alt="image-20210829183706646"></p>
+<h2 id="1-2-全排列"><a href="#1-2-全排列" class="headerlink" title="1.2 全排列"></a>1.2 全排列</h2><p>定义：把n个不同的元素排成的一列，称为这n个元素的一个全排列，简称排列。</p>
+<p>​		把n个不同的元素排成一列，共有P<sub>n</sub>种排法。</p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906114831697-1764775323.png" alt="image-20210830104631864"></p>
+<h2 id="1-3-逆序数"><a href="#1-3-逆序数" class="headerlink" title="1.3 逆序数"></a>1.3 逆序数</h2><p>​	规定 <strong>标准次序</strong> 标号由小到大的排列</p>
+<p>​	<em>定义</em>：在n个元素的一个排列中，若<strong>某两个元素排列的次序与标准次序不同，</strong>就称这两个数构成一个<strong>逆序</strong>，一个排列中所有逆序的总和称为这个排列的逆序数。</p>
+<p>​	记:	<em><strong>N(p<sub>1</sub>p<sub>2</sub>···p<sub>n</sub>)</strong></em>	或	<em><strong>t(p<sub>1</sub>p<sub>2</sub>···p<sub>n</sub>)</strong></em></p>
+<p>​	例如：N（1234）&#x3D; 0，N（1243） &#x3D; 1</p>
+<h3 id="1-3-1一个排列的逆序数的计算方法："><a href="#1-3-1一个排列的逆序数的计算方法：" class="headerlink" title="1.3.1一个排列的逆序数的计算方法："></a>1.3.1一个排列的逆序数的计算方法：</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906114830282-783940912.png" alt="image-20210830105737508">  </p>
+<img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906114830623-129695872.png" alt="image-20210830105852638" style="zoom: 50%;">
+
+<h3 id="1-3-2-排列的奇偶性"><a href="#1-3-2-排列的奇偶性" class="headerlink" title="1.3.2 排列的奇偶性"></a>1.3.2 排列的奇偶性</h3><p>​	定义：逆序数为<strong>奇数</strong>的排列为<strong>奇排列</strong></p>
+<p>​				逆序数为<strong>偶数</strong>的排列为<strong>偶排列</strong></p>
+<img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906114829883-606542904.png" alt="image-20210830110323333" style="zoom: 67%;">
+
+<p>在n级排列的所有n!种排列中，奇偶排列各占一半</p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906114832407-677516032.png" alt="image-20210830110602029"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906114829753-572133640.png" alt="image-20210830113557058"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906114831063-6013832.png" alt="image-20210830113727346"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115048098-1921223527.png" alt="image-20210901081646357"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115048356-1261654420.png" alt="image-20210901082440181"></p>
+<p>主对角行列式</p>
+<p>副对角行列式</p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115048752-788899470.png" alt="image-20210901082513052"></p>
+<h2 id="1-4-行列式的性质"><a href="#1-4-行列式的性质" class="headerlink" title="1.4 行列式的性质"></a>1.4 行列式的性质</h2><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115049458-1287997578.png" alt="image-20210901083115987"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115050037-1431429415.png" alt="image-20210901083202105"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115050566-1291067812.png" alt="image-20210901083339127"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115051213-1182809478.png" alt="image-20210901083816606"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115051442-859840553.png" alt="image-20210901092524025"></p>
+<p><strong>推论：</strong>若行列式有两行（列）相同，则行列式为0</p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115052192-1409634942.png" alt="image-20210901083949499"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115052670-2122642108.png" alt="image-20210901084104267"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115053273-1692078092.png" alt="image-20210901084150420"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115053745-1779146468.png" alt="image-20210901084512506"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115054270-1146897779.png" alt="image-20210901084452661"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115054724-1436144891.png" alt="image-20210901084557118"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115055319-971895294.png" alt="image-20210901084827042"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115055465-764538217.png" alt="image-20210901084805613"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115056682-892118019.png" alt="image-20210901085223856"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115056077-1461630831.png" alt="image-20210901085451149"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115057089-568342429.png" alt="image-20210901085619061"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115057636-886538880.png" alt="image-20210901085709923"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115058142-1421745715.png" alt="image-20210901085753296"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115058577-704372471.png" alt="image-20210901085902268"></p>
+<h3 id="行列式性质的应用"><a href="#行列式性质的应用" class="headerlink" title="行列式性质的应用"></a>行列式性质的应用</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115059474-774486903.png" alt="image-20210901100211145"></p>
+<p><strong>奇数阶反对称行列式值为0</strong></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906115059069-1636993888.png" alt="image-20210901100953551"></p>
+<h2 id="1-5-行列式按行-列-展开"><a href="#1-5-行列式按行-列-展开" class="headerlink" title="1.5 行列式按行(列)展开"></a>1.5 行列式按行(列)展开</h2><p>​        一、余子式与代数余子式<br>​        二、行列式按一行(列)展开<br>​        三、行列式按某 k 行（列）展开*</p>
+<p><strong>定义1.9</strong>  在n阶行列式<em><strong>D</strong></em> &#x3D; |a<sub>ij</sub>|中，去掉元素<strong>*a<sub>ij</sub><em><strong>所在的第</strong>i</em>*行和第</strong>j<strong>列后，余下的</strong>n-1<strong>阶行列式，称为D中元素a<sub>ij</sub>的</strong>余子式**, 记为M<sub>ij</sub>．称 ***A<sub>ij</sub>&#x3D; (-1)<sup>i+j</sup>M<sub>ij</sub>***为元素 <strong>a<sub>ij</sub></strong> 的代数余子式．</p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120010174-871483823.png" alt="image-20210906120007843"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120048996-1725354831.png" alt="image-20210906120047017"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120131322-1501285673.png" alt="image-20210906120129404"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120145743-1490335798.png" alt="image-20210906120143698"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120227246-380787238.png" alt="image-20210906120225396"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120303246-1793273967.png" alt="image-20210906120301360"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120347636-458149479.png" alt="image-20210906120345706"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120356356-2070302541.png" alt="image-20210906120354718"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120421136-1639744559.png" alt="image-20210906120419254"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120440453-2121066412.png" alt="image-20210906120438676"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120555676-1231868932.png" alt="image-20210906120553825"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120611970-1400999060.png" alt="image-20210906120610137"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120622368-2038506449.png" alt="image-20210906120620582"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120748116-1444240657.png" alt="image-20210906120746138"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120758560-1871066589.png" alt="image-20210906120756727"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120813416-1643820931.png" alt="image-20210906120811592"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210906120824699-495254316.png" alt="image-20210906120822852"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210908090427922-1145245857.png" alt="image-20210908090425191"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210912170022767-1559045238.png" alt="image-20210912170020166"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210912165829469-1469704398.png" alt="image-20210912165822782"></p>
+<p>奇数阶的反对称行列式的值一定为0。</p>
+<h2 id="1-6-克拉默（Cramer-法则"><a href="#1-6-克拉默（Cramer-法则" class="headerlink" title="1.6 克拉默（Cramer)法则"></a>1.6 克拉默（Cramer)法则</h2><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210908091431455-1746176193.png" alt="image-20210908091429349"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210908091523191-876805599.png" alt="image-20210908091521709"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210908091942697-333178719.png" alt="image-20210908091941315"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210908092012593-296902267.png" alt="image-20210908092011062"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210908092412522-1715841431.png" alt="image-20210908092411101"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210908092824385-1600645566.png" alt="image-20210908092822834"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210908180345765-813785459.png" alt="image-20210908180342863"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210908092839305-893526887.png" alt="image-20210908092837885"></p>
+<h1 id="第二章-矩阵"><a href="#第二章-矩阵" class="headerlink" title="第二章 矩阵"></a>第二章 矩阵</h1><h2 id="2-1-矩阵的定义"><a href="#2-1-矩阵的定义" class="headerlink" title="2.1 矩阵的定义"></a>2.1 矩阵的定义</h2><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913211959009-1946524261.png" alt="image-20210913211956531"></p>
+<p>实数是有限小数和无限小数的合集，实数和数轴上的点一一对应。</p>
+<p><strong>注：</strong></p>
+<ol>
+<li>元素是实数的矩阵称为<strong>实矩阵</strong>，元素是复数的矩阵称为<strong>复矩阵</strong></li>
+<li>只有一行的矩阵称为<strong>行矩阵</strong>，只有一列的矩阵称为<strong>列矩阵</strong>。</li>
+<li>行数与列数相等的矩阵称为<strong>n阶方阵</strong></li>
+<li>|<em>A</em>|称为<strong>方阵的行列式</strong></li>
+<li>若<em><strong>A&#x3D;(a<sub>ij</sub>)<sub>m×n</sub>   ,B&#x3D;(b<sub>ij</sub>)<sub>s×t</sub></strong></em>  ,且  <strong>m &#x3D;  s, n &#x3D; t ,<strong>称</strong>两矩阵同型</strong>。</li>
+<li>若<em><strong>A&#x3D;(a<sub>ij</sub>)<sub>m×n</sub>   ,B&#x3D;(b<sub>ij</sub>)<sub>s×t</sub></strong></em>  ，且  **<em>a<sub>ij</sub> &#x3D; b<sub>ij</sub></em>,称 **两矩阵相等。</li>
+</ol>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913212258180-1178413052.png" alt="image-20210913212255894"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913212546830-833644108.png" alt="image-20210913212544581"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913212659268-1074185391.png" alt="image-20210913212657157"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913212743908-1879671058.png" alt="image-20210913212741760"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913212800710-1567245727.png" alt="image-20210913212758652"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913212852875-84932287.png" alt="image-20210913212850815"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913212933035-1620846946.png" alt="image-20210913212930966"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913212958138-1516070923.png" alt="image-20210913212956038"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913213055675-1217083477.png" alt="image-20210913213053622"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913213115474-2097808223.png" alt="image-20210913213113423"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913213143748-1325267159.png" alt="image-20210913213141579"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913213157329-1520982546.png" alt="image-20210913213155437"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915105319467-1306879722.png" alt="image-20210915105314717"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913213225025-1118864787.png" alt="image-20210913213222927"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915200115549-894750516.png" alt="image-20210915200113316"></p>
+<h2 id="2-2-矩阵的运算"><a href="#2-2-矩阵的运算" class="headerlink" title="2.2 矩阵的运算"></a>2.2 矩阵的运算</h2><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211011211125411-1867395527.png" alt="image-20210913213419286"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913213534724-1088522329.png" alt="image-20210913213532552"></p>
+<p><strong>矩阵的乘法</strong></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913213654449-1324881551.png" alt="image-20210913213652480"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913213713536-1137244513.png" alt="image-20210913213711425"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913213805067-581779878.png" alt="image-20210913213802807"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913214006944-2022278040.png"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913214032512-785075205.png" alt="image-20210913214030313"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913214055543-1275535991.png" alt="image-20210913214053373"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913214144383-1288984993.png" alt="image-20210913214142337"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913214222623-637440272.png" alt="image-20210913214220591"></p>
+<p>矩阵的乘法无交换律</p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913214440526-1654034916.png" alt="image-20210913214438398"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913214514887-2136578053.png" alt="image-20210913214512665"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913214542810-1210358934.png" alt="image-20210913214540568"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210913214605350-63912193.png"></p>
+<h2 id="2-3-矩阵的行列式"><a href="#2-3-矩阵的行列式" class="headerlink" title="2.3 矩阵的行列式"></a>2.3 矩阵的行列式</h2><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915105803531-330801887.png" alt="image-20210915105759448"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915111313558-1516470394.png" alt="image-20210915111308988"></p>
+<h2 id="2-4-逆矩阵"><a href="#2-4-逆矩阵" class="headerlink" title="2.4 逆矩阵"></a>2.4 逆矩阵</h2><h3 id="2-4-1-定义"><a href="#2-4-1-定义" class="headerlink" title="2.4.1 定义"></a>2.4.1 定义</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915111609427-897793182.png" alt="image-20210915111604853"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915111736210-445711883.png" alt="image-20210915111731135"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915111854648-1409407160.png" alt="image-20210915111850524"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915112026340-352401779.png" alt="image-20210915112021402"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915112858749-528500414.png" alt="image-20210915112853325"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915112922825-769005808.png" alt="image-20210915112918173"></p>
+<h3 id="2-4-2-计算"><a href="#2-4-2-计算" class="headerlink" title="2.4.2 计算"></a>2.4.2 计算</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915113306655-95571310.png" alt="image-20210915113301816"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915113523377-1757132211.png" alt="image-20210915113518632"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915113703294-1875923221.png" alt="image-20210915113658600"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915113727762-458084569.png" alt="image-20210915113722637"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915113859253-175205911.png" alt="image-20210915113854283"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915203130924-1888897080.png" alt="image-20210915203129438"></p>
+<h2 id="2-5-分块矩阵"><a href="#2-5-分块矩阵" class="headerlink" title="2.5 分块矩阵"></a>2.5 分块矩阵</h2><h3 id="2-5-1-定义"><a href="#2-5-1-定义" class="headerlink" title="2.5.1 定义"></a>2.5.1 定义</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915174049528-586590749.png" alt="image-20210915174044548"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915174234461-652271245.png" alt="image-20210915174228247"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915174312773-2099872557.png" alt="image-20210915174308305"></p>
+<h3 id="2-5-2-计算"><a href="#2-5-2-计算" class="headerlink" title="2.5.2 计算"></a>2.5.2 计算</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915174431874-1612761707.png" alt="image-20210915174426265"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915174510353-422075844.png" alt="image-20210915174505364"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915175126480-1543068909.png" alt="image-20210915175121263"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915175241347-1218892202.png" alt="image-20210915175234794"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915175320878-1369974414.png" alt="image-20210915175315911"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915175409633-1749312029.png" alt="image-20210915175404989"></p>
+<h3 id="2-5-3-例子"><a href="#2-5-3-例子" class="headerlink" title="2.5.3 例子"></a>2.5.3 例子</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915175743796-465391141.png" alt="image-20210915175739151"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915175757738-1605245381.png" alt="image-20210915175753065"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210915175916201-2080345259.png" alt="image-20210915175911324"></p>
+<h2 id="2-6-矩阵初等变换"><a href="#2-6-矩阵初等变换" class="headerlink" title="2.6 矩阵初等变换"></a>2.6 矩阵初等变换</h2><h3 id="2-6-1-定义"><a href="#2-6-1-定义" class="headerlink" title="2.6.1 定义"></a>2.6.1 定义</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210918084442688-168227225.png" alt="image-20210918084438843"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210918084525309-1179047280.png" alt="image-20210918084521430"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210918085748732-1687789472.png" alt="image-20210918085743999"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210918085903885-1959822751.png" alt="image-20210918085901537"></p>
+<h3 id="2-6-2-等价矩阵"><a href="#2-6-2-等价矩阵" class="headerlink" title="2.6.2 等价矩阵"></a>2.6.2 等价矩阵</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210918090000481-1408316397.png" alt="image-20210918085957999"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210918090034672-1990698439.png" alt="image-20210918090033166"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210918090122622-810802536.png" alt="image-20210918090120675"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210919091359466-1901606696.png" alt="image-20210919091354908"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210919091618805-2031881212.png" alt="image-20210919091614817"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210919091907519-1341373488.png" alt="image-20210919091903439"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210919092713989-318635125.png" alt="image-20210919092710241"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210919092950629-1449204082.png" alt="image-20210919092946523"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210919093318790-1828114058.png" alt="image-20210919093313802"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210919093408845-2015368516.png" alt="image-20210919093404803"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210919093550756-1621786625.png" alt="image-20210919093547151"></p>
+<p>左边是行，右边是列，</p>
+<p>每一步操作都是紧挨着哪个矩阵</p>
+<p>左边或者右边想乘的矩阵有什么变化，就是对原来的矩阵有什么操作</p>
+<h2 id="2-7-矩阵的秩"><a href="#2-7-矩阵的秩" class="headerlink" title="2.7 矩阵的秩"></a>2.7 矩阵的秩</h2><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210927103330619-1145870475.png" alt="image-20210927103325819"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205615437-563609115.png" alt="image-20210927103444834"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20210927103721735-716611784.png" alt="image-20210927103718790"></p>
+<p>行阶梯型矩阵的行数就是非零行的行数</p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205622299-416054817.png" alt="image-20210927104031452"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205625004-456545067.png" alt="image-20210927105103252"></p>
+<h1 id="三、线性方程组"><a href="#三、线性方程组" class="headerlink" title="三、线性方程组"></a>三、线性方程组</h1><h2 id="3-1-n维向量与向量组的线性相关性"><a href="#3-1-n维向量与向量组的线性相关性" class="headerlink" title="3.1 n维向量与向量组的线性相关性"></a>3.1 n维向量与向量组的线性相关性</h2><h3 id="3-1-1-n维向量"><a href="#3-1-1-n维向量" class="headerlink" title="3.1.1 n维向量"></a>3.1.1 n维向量</h3><p><strong>定义：</strong>n个数 a<sub>1</sub> ,a<sub>2</sub> ,···, a<sub>n</sub> 所组成的数组称为 <strong>n维向量</strong></p>
+<p>​			这n个数称为该向量的n个分量，第i个数a<sub>i</sub>称为第i个分量</p>
+<p>​			分量全为实数的向量称为<strong>实向量</strong></p>
+<p>​			分量全为复数的向量称为<strong>复向量</strong></p>
+<p>n 维向量可写成一行，也可写成一列，分别称为行向量和列向量，即<strong>行矩阵</strong>和<strong>列矩阵</strong>，并规定行向量和列向量都按矩阵的运算规则进行运算。<br>$$<br>n维列向量<br>\alpha&#x3D;\left(<br>\matrix{<br>a_1\<br>a_2\<br>a_3<br>}<br>\right),<br>n维行向量<br>\alpha^T&#x3D;\left(<br>a_1,a_2,···,a_n<br>\right)<br>\<br>\mathbf{规定：}列向量用黑体小写字母a, b, \alpha,\beta等表示\<br>     行向量则用字母a^T,b^T,\alpha^T,\beta^T等表示\<br>     除特别说明外，向量都当做列向量<br>$$<br>向量是矩阵的特殊形式，因此向量也有下列概念和性质<br>$$<br>\mathbf{定义：}设\alpha&#x3D;\left( b_i\right)_n是二个n维向量\<br>1.\mathbf{向量相等}若a_i&#x3D;b_i,i&#x3D;1,···		,n,称向量\alpha和\beta相等\<br>2.\mathbf{零向量}所以分量都为零的向量，一般记作\theta,\theta_n或O\<br>3.\mathbf{负向量}称向量-\alpha&#x3D;\left{<br>-a_i<br>\right}_n,为向量\alpha 的负向量\<br>4.\mathbf{向量加法}称向量\gamma&#x3D;\alpha+\beta&#x3D;<br>\left{<br>a_i+b_i<br>\right}_n<br>为向量\alpha和向量\beta的和\<br>\mathbf{向量减法}向量\alpha和向量\beta的减法定义为\alpha和-\beta的加法：\gamma&#x3D;\alpha-\beta&#x3D;\alpha+(-\beta)<br>\<br>5.\mathbf{数乘向量}设k是一个数，称向量 k\alpha&#x3D;\alpha k&#x3D;<br>\left{<br>k \alpha_i<br>\right}_n,为向量\alpha和数k的数乘向量<br>$$<br><strong>注意：</strong>矩阵的加法、数乘等运算法则对于向量同样成立</p>
+<p>​			零向量不相等</p>
+<h3 id="3-1-2-线性组合"><a href="#3-1-2-线性组合" class="headerlink" title="3.1.2 线性组合"></a>3.1.2 线性组合</h3><p><strong>定义：</strong>若干个同维数的列向量(或行向量)所组成的集合称为<strong>向量组</strong></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205801028-2108473265.png" alt="image-20211004142352229"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205804090-2019391270.png" alt="image-20211004142939993"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205806255-1704085886.png" alt="image-20211004143111983"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205808664-2141874105.png" alt="image-20211004143441640"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205810478-1127671236.png" alt="image-20211004143601645"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205814524-1718069650.png" alt="image-20211004143714645"></p>
+<h3 id="3-1-3-线性相关与线性无关"><a href="#3-1-3-线性相关与线性无关" class="headerlink" title="3.1.3 线性相关与线性无关"></a>3.1.3 线性相关与线性无关</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205820090-1448865384.png" alt="image-20211006101407191"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205822843-1295467395.png" alt="image-20211006101515609"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205826327-1931476097.png" alt="image-20211006101601632"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205835294-386497241.png" alt="image-20211006101948627"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205831253-436047697.png" alt="image-20211006102149558"></p>
+<h3 id="3-1-4-向量组的线性相关性的判断"><a href="#3-1-4-向量组的线性相关性的判断" class="headerlink" title="3.1.4 向量组的线性相关性的判断"></a>3.1.4 向量组的线性相关性的判断</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205846583-1704795679.png" alt="image-20211006120854290"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205849761-1374010356.png" alt="image-20211006121038664"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205853426-105090029.png" alt="image-20211006121107495"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205857421-291406807.png" alt="image-20211006121209768"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205901193-21574897.png" alt="image-20211006121356191"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205907247-1467252482.png" alt="image-20211006121556151"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205911702-1386416846.png" alt="image-20211006121833211"></p>
+<p>下标写错了</p>
+<h3 id="3-1-5-向量组的线性相关性的性质"><a href="#3-1-5-向量组的线性相关性的性质" class="headerlink" title="3.1.5 向量组的线性相关性的性质"></a>3.1.5 向量组的线性相关性的性质</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205919690-212675769.png" alt="image-20211007192833860"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205915526-1427844294.png" alt="image-20211007192949162"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205922692-165382921.png" alt="image-20211007193020774"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205926627-1202028142.png" alt="image-20211007193237295"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205928872-613699017.png" alt="image-20211007193407649"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205933313-875201450.png" alt="image-20211007193519894"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012205936552-302652028.png" alt="image-20211007193620756"></p>
+<h2 id="3-2-向量组的极大无关组及秩"><a href="#3-2-向量组的极大无关组及秩" class="headerlink" title="3.2 向量组的极大无关组及秩"></a>3.2 向量组的极大无关组及秩</h2><h3 id="3-2-1-向量组的极大无关组"><a href="#3-2-1-向量组的极大无关组" class="headerlink" title="3.2.1 向量组的极大无关组"></a>3.2.1 向量组的极大无关组</h3><p>向量组的秩：在二维、三维几何空间中，坐标系是不唯一的，但任一坐标系中所含向量的个数是一个不变的量，向量组的秩正是这一几何事实的一般化。</p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210402271-57202340.png" alt="image-20211008203707658"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210408551-723034327.png" alt="image-20211008203753893"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210414866-887564520.png" alt="image-20211008204006811"></p>
+<h3 id="3-2-2-向量组的秩"><a href="#3-2-2-向量组的秩" class="headerlink" title="3.2.2 向量组的秩"></a>3.2.2 向量组的秩</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210418817-170973762.png" alt="image-20211009205641649"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210421486-1349197644.png"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210423655-1663357493.png" alt="image-20211009205848787"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210426100-585741121.png" alt="image-20211009210051052"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210436179-1759950983.png" alt="image-20211009210100081"></p>
+<h3 id="3-2-3-向量组的秩和极大无关组求法"><a href="#3-2-3-向量组的秩和极大无关组求法" class="headerlink" title="3.2.3 向量组的秩和极大无关组求法"></a>3.2.3 向量组的秩和极大无关组求法</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210431016-1940018929.png" alt="image-20211010152603259"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210450477-489921328.png" alt="image-20211010152754765"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210455703-1782398229.png" alt="image-20211010153441547"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210501061-61714255.png" alt="image-20211010153504768"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210507156-1743535457.png" alt="image-20211010153523497"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210509632-1078507777.png" alt="image-20211010153539304"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210512183-1867288613.png" alt="image-20211010153652886"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210515188-1007947653.png" alt="image-20211010153719419"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210517922-1631856758.png" alt="image-20211010153744207"></p>
+<h2 id="3-3-线性方程组有解的判定"><a href="#3-3-线性方程组有解的判定" class="headerlink" title="3.3 线性方程组有解的判定"></a>3.3 线性方程组有解的判定</h2><h3 id="3-3-1-非齐次线性方程组解的判定"><a href="#3-3-1-非齐次线性方程组解的判定" class="headerlink" title="3.3.1 非齐次线性方程组解的判定"></a>3.3.1 非齐次线性方程组解的判定</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210644435-1387203481.png" alt="image-20211011205152003"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210648097-378788019.png" alt="image-20211011205307918"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210651322-856781923.png"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210656174-1222838059.png" alt="image-20211011205419449"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012210701187-2100273772.png" alt="image-20211011205455265"></p>
+<h3 id="3-3-2-齐次线性方程组解的判定"><a href="#3-3-2-齐次线性方程组解的判定" class="headerlink" title="3.3.2 齐次线性方程组解的判定"></a>3.3.2 齐次线性方程组解的判定</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012211521388-281818059.png" alt="image-20211012211516570"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012211546996-1265270125.png" alt="image-20211012211539265"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012211640482-289267226.png" alt="image-20211012211636608"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012211815156-1241975953.png" alt="image-20211012211811438"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012211938173-565618387.png" alt="image-20211012211934203"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012212839110-1881710068.png" alt="image-20211012212030279"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012212231719-1407698763.png" alt="image-20211012212227520"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012212423036-206826965.png" alt="image-20211012212419032"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012212605464-550350665.png" alt="image-20211012212601511"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211012212627495-932183758.png" alt="image-20211012212622482"></p>
+<h2 id="3-4-线性方程组解的结构"><a href="#3-4-线性方程组解的结构" class="headerlink" title="3.4 线性方程组解的结构"></a>3.4 线性方程组解的结构</h2><h3 id="（1）齐次线性方程组解的结构"><a href="#（1）齐次线性方程组解的结构" class="headerlink" title="（1）齐次线性方程组解的结构"></a>（1）齐次线性方程组解的结构</h3><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211017084606218-1132709201.png" alt="image-20211017084559600"></p>
+<p><strong>什么是线性方程组的解的结构？</strong></p>
+<p>所谓线性方程组解的结构，就是当线性方程组有五穷多个解时，解与解之间的关系。</p>
+<p><em>备注：当方程组存在唯一解时，无须讨论解的结构</em></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211017084934172-1621913580.png" alt="image-20211017084931267"></p>
+<p><strong>性质1：</strong>若x&#x3D;&sect;<sub>1</sub>, x &#x3D; &sect;<sub>2</sub> 是齐次线性方程组 <em>Ax &#x3D; 0</em> 的解，则 <em><strong>x &#x3D; &sect;<sub>1</sub> + &sect;<sub>2</sub></strong></em> 还是<em><strong>Ax &#x3D; 0</strong></em> 的解</p>
+<p><em>证明：</em> <em>A(&sect;<sub>1</sub> + &sect;<sub>2</sub>) &#x3D; A&sect;<sub>1</sub> + A &sect;<sub>2</sub> &#x3D; 0 + 0 &#x3D; 0</em></p>
+<p><strong>性质2：</strong> 若 <em>x &#x3D; &sect;</em> 是齐次线性方程组 <em>Ax &#x3D; 0</em> 的解，k 为实数，则 <em><strong>x &#x3D; k&sect;</strong></em> 还是 <em>Ax &#x3D; 0</em> 的解</p>
+<p><em>证明：A(k&sect;)&#x3D;k (A&sect;) &#x3D; k</em> 0 &#x3D; 0</p>
+<p><strong>性质3：</strong> 若 <em>x &#x3D; &sect;<sub>1</sub> , x &#x3D; &sect;<sub>2</sub> ,……，x &#x3D; &sect;<sub>t</sub></em> 是齐次线性方程组 <em>Ax &#x3D; 0</em> 的解，则 <em><strong>x&#x3D; k<sub>1</sub>&sect;<sub>1</sub>+k<sub>2</sub>&sect;<sub>2</sub>+ …… +k<sub>t</sub>&sect;<sub>t</sub></strong></em> 还是 <em>Ax &#x3D; 0</em>  的解</p>
+<p>把 <em>Ax &#x3D; 0</em> 的全体解组成的集合记作<em>S</em>，若求得 <em>S</em> 的一个极大无关组<em>S<sub>0</sub></em>:<em>x &#x3D; &sect;<sub>1</sub> , x &#x3D; &sect;<sub>2</sub> ,……，x &#x3D; &sect;<sub>t</sub></em> ,那么 <em>Ax &#x3D; 0</em>  的通解可表示为<em><strong>x&#x3D; k<sub>1</sub>&sect;<sub>1</sub>+k<sub>2</sub>&sect;<sub>2</sub>+ …… +k<sub>t</sub>&sect;<sub>t</sub></strong></em></p>
+<p>齐次线性方程组的解集的极大无关组成为该齐次线性方程组的<strong>基础解系</strong>（不唯一）</p>
+<hr>
+<p><strong>基础解系的概念</strong></p>
+<p><strong>定义：</strong>齐次线性方程组  <em>Ax &#x3D; 0</em> 的一组解向量：&sect;<sub>1</sub> , &sect;<sub>2</sub>,…, &sect;<sub>r</sub></p>
+<p>如果满足</p>
+<p>①&sect;<sub>1</sub> , &sect;<sub>2</sub>,…, &sect;<sub>r</sub> 线性无关；</p>
+<p>②方程组中任意一个解都可以表示&sect;<sub>1</sub> , &sect;<sub>2</sub>,…, &sect;<sub>r</sub> 的线性组合，那么称这组解是齐次线性方程组的一个<strong>基础解系</strong></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211017092121029-2060600622.png" alt="image-20211017092118047"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211017092137922-748600176.png" alt="image-20211017092135845"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211017092251894-649713936.png" alt="image-20211017092245895"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211017092403557-319829287.png"></p>
+<p><strong>定理1：</strong>如果齐次线性方程组有非零解，则它一定有基础解系，并且基础解系含有 n-r 个解向量。其中 n 是未知量的个数，r 是系数矩阵的秩</p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211017092710816-12264354.png" alt="image-20211017092707805"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211017092745373-1511145064.png" alt="image-20211017092742310"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211017092858970-1142220258.png" alt="image-20211017092855264"></p>
+<h3 id="（二）非齐次线性方程组解的结构"><a href="#（二）非齐次线性方程组解的结构" class="headerlink" title="（二）非齐次线性方程组解的结构"></a>（二）非齐次线性方程组解的结构</h3><p><img src="/2024/07/07/Math/LinearAlgebra/image-20211019221415099.png" alt="image-20211019221415099"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211019221749101.png" alt="image-20211019221749101"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211019221919379.png" alt="image-20211019221919379"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211019221957313.png" alt="image-20211019221957313"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211019222232277.png" alt="image-20211019222232277"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211019222415161.png" alt="image-20211019222415161"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211019222457180.png" alt="image-20211019222457180"></p>
+<h2 id="3-5-向量空间"><a href="#3-5-向量空间" class="headerlink" title="3.5 向量空间"></a>3.5 向量空间</h2><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211030200718089-182612954.png" alt="image-20211030200710683"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211030200809636-891468729.png" alt="image-20211030200805219"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211030201153639-553822030.png" alt="image-20211030201149782"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211030201317738-1271730639.png" alt="image-20211030201314171"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211030201418759-755475624.png" alt="image-20211030201415406"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211030201746654-1192654821.png" alt="image-20211030201742694"></p>
+<h1 id="四、特征值与特征向量"><a href="#四、特征值与特征向量" class="headerlink" title="四、特征值与特征向量"></a>四、特征值与特征向量</h1><h2 id="4-1-向量的内积"><a href="#4-1-向量的内积" class="headerlink" title="4.1 向量的内积"></a>4.1 向量的内积</h2><p><img src="/2024/07/07/Math/LinearAlgebra/image-20211101102149850.png" alt="image-20211101102149850"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211101102331854.png" alt="image-20211101102331854"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211101102537069.png" alt="image-20211101102537069"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211101102712478.png" alt="image-20211101102712478"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211101102932502.png" alt="image-20211101102932502"></p>
+<img src="/2024/07/07/Math/LinearAlgebra/image-20211101103044274.png" alt="image-20211101103044274">
+
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211101103308414.png" alt="image-20211101103308414"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211101103516859.png" alt="image-20211101103516859"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211101103601098.png" alt="image-20211101103601098"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211101113118812.png" alt="image-20211101113118812"></p>
+<h2 id="4-2-方阵的特征值与特征向量"><a href="#4-2-方阵的特征值与特征向量" class="headerlink" title="4.2 方阵的特征值与特征向量"></a>4.2 方阵的特征值与特征向量</h2><p>$$<br>定义： 设A是n阶方阵，如果存在数\lambda 和 n 维非零向量 x使关系式\<br>Ax&#x3D;\lambda x \<br>成立，那么称数\lambda为矩阵A的特征值，非零向量x称为A的对应于特征值\lambda的特征向量<br>$$</p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211106192936957.png" alt="image-20211106192936957"></p>
+<h2 id="4-3-相似矩阵"><a href="#4-3-相似矩阵" class="headerlink" title="4.3 相似矩阵"></a>4.3 相似矩阵</h2><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107094213149-730912678.png" alt="image-20211107094207407"></p>
+<p>与A相似的矩阵不唯一，也未必是对角阵</p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107094513540-1097684105.png" alt="image-20211107094508608"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107094706280-2086136440.png" alt="image-20211107094701198"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107094825838-543670458.png" alt="image-20211107094817617"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107094923234-2043618761.png" alt="image-20211107094918130"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107095102546-584211156.png" alt="image-20211107095057149"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107095444728-358662037.png" alt="image-20211107095439620"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107095634785-2073837183.png" alt="image-20211107095629842"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107100047174-308566976.png" alt="image-20211107100042107"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107100129344-845092771.png" alt="image-20211107100124329"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107100149418-299016245.png" alt="image-20211107100144557"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107101718455-1541390612.png" alt="image-20211107100212584"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211107114348617.png" alt="image-20211107114348617"></p>
+<h2 id="4-4-实对称矩阵对角化"><a href="#4-4-实对称矩阵对角化" class="headerlink" title="4.4 实对称矩阵对角化"></a>4.4 实对称矩阵对角化</h2><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107163257386-1240283923.png" alt="image-20211107163250774"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107163331564-1329879300.png" alt="image-20211107163322393"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211107163517004-1418845023.png" alt="image-20211107163515170"></p>
+<p>合同矩阵有相同的特征值</p>
+<p>相似的两个矩阵，行列式的值相等</p>
+<h1 id="五、二次型"><a href="#五、二次型" class="headerlink" title="五、二次型"></a>五、二次型</h1><h2 id="5-1-二次型的基本概念"><a href="#5-1-二次型的基本概念" class="headerlink" title="5.1 二次型的基本概念"></a>5.1 二次型的基本概念</h2><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211110160416968-799505008.png"></p>
+<p>（1）二次型转化为矩阵表达式</p>
+<ol>
+<li>平方项是主对角线上的元素</li>
+<li>交叉项的系数除以2 放到两个对称的相应位置</li>
+</ol>
+<p>A：二次型的矩阵</p>
+<p>X<sup>T</sup> AX	二次型的矩阵一定对称</p>
+<p>（2）矩阵转化为二次型<br>$$<br>已知二次型的矩阵\ A&#x3D;\begin{bmatrix}<br>{1}&amp;{0}&amp;{-1}\<br>{0}&amp;{2}&amp;{\frac{1}{2}}\<br>{-1}&amp;{\frac{1}{2}}&amp;{3}<br>\end{bmatrix}<br>$$</p>
+<ol>
+<li>主对角线直接作为平方项的系数</li>
+<li>取主对角线右上角元素 乘以2 作为交叉项的系数</li>
+</ol>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211110160442150-1500253291.png" alt="image-20211110160440547"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211110160514805-2026246822.png" alt="image-20211110160513139"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211108103630982-426370321.png" alt="image-20211108103628743"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211110160743914-1584646249.png" alt="image-20211110160742197"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211111192516542-1999999364.png" alt="image-20211111192514430"></p>
+<p>合同：A.B是n阶方阵，存在可以矩阵 C，则 C<sup>T</sup>AC&#x3D;B</p>
+<p>判断两矩阵是否是合同矩阵：看正负惯性系数是否相同，也就是先把特征值算出来，看正负个数是否相同</p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211111193238510-1047392178.png" alt="image-20211111193237712"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211111193850272-1982955637.png" alt="image-20211111193849261"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211111194615455-2095705344.png" alt="image-20211111194612973"></p>
+<h2 id="5-2-化二次型为标准型"><a href="#5-2-化二次型为标准型" class="headerlink" title="5.2 化二次型为标准型"></a>5.2 化二次型为标准型</h2><p>三种方法：</p>
+<ol>
+<li>配方法</li>
+<li>初等变换</li>
+<li>正交替换</li>
+</ol>
+<p><strong>配方法</strong></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211111195410000-1749540284.png" alt="image-20211111195407300"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211111195812252-847866663.png" alt="image-20211111195810553"></p>
+<p><strong>初等变换</strong></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211111201513134-1720286143.png" alt="image-20211111201510003"></p>
+<p><strong>正交</strong></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211111202656535-834578983.png" alt="image-20211111202654895"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211111205051944-834533555.png" alt="image-20211111205051068"></p>
+<h2 id="5-3、"><a href="#5-3、" class="headerlink" title="5.3、"></a>5.3、</h2><p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211112180201965-593192303.png" alt="image-20211112180159212"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211112180317549-1683303458.png" alt="image-20211112180314168"></p>
+<h1 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h1><p><img src="/2024/07/07/Math/LinearAlgebra/image-20211116162715515.png" alt="image-20211116162715515"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211116162721411.png" alt="image-20211116162721411"><img src="/2024/07/07/Math/LinearAlgebra/image-20211116162727570.png" alt="image-20211116162727570"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/2510762-20211123155002720-1234568396.png" alt="image-20211123155001929"></p>
+<p><img src="/2024/07/07/Math/LinearAlgebra/image-20211127110130731.png" alt="image-20211127110130731"><strong>D</strong></p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/07/07/Math/LinearAlgebra/" title="线性代数">http://example.com/2024/07/07/Math/LinearAlgebra/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Math/" rel="tag"># Math</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/07/Math/ProbabilityAndStatistics/" rel="prev" title="概率论与数理统计">
+      <i class="fa fa-chevron-left"></i> 概率论与数理统计
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/07/Java/JavaEE/" rel="next" title="JavaEE">
+      JavaEE <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">一、 行列式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E4%BA%8C%E9%98%B6%E4%B8%8E%E4%B8%89%E9%98%B6%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 二阶与三阶行列式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BA%8C%E9%98%B6%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、二阶行列式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%B8%89%E9%98%B6%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、三阶行列式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%85%A8%E6%8E%92%E5%88%97"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 全排列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E9%80%86%E5%BA%8F%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 逆序数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97%E7%9A%84%E9%80%86%E5%BA%8F%E6%95%B0%E7%9A%84%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1一个排列的逆序数的计算方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-%E6%8E%92%E5%88%97%E7%9A%84%E5%A5%87%E5%81%B6%E6%80%A7"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2 排列的奇偶性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 行列式的性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E6%80%A7%E8%B4%A8%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.4.1.</span> <span class="nav-text">行列式性质的应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E8%A1%8C%E5%88%97%E5%BC%8F%E6%8C%89%E8%A1%8C-%E5%88%97-%E5%B1%95%E5%BC%80"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 行列式按行(列)展开</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-%E5%85%8B%E6%8B%89%E9%BB%98%EF%BC%88Cramer-%E6%B3%95%E5%88%99"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 克拉默（Cramer)法则</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%9F%A9%E9%98%B5"><span class="nav-number">2.</span> <span class="nav-text">第二章 矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 矩阵的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BF%90%E7%AE%97"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 矩阵的运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E7%9F%A9%E9%98%B5%E7%9A%84%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 矩阵的行列式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E9%80%86%E7%9F%A9%E9%98%B5"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 逆矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-%E5%AE%9A%E4%B9%89"><span class="nav-number">2.4.1.</span> <span class="nav-text">2.4.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-%E8%AE%A1%E7%AE%97"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.4.2 计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-%E5%88%86%E5%9D%97%E7%9F%A9%E9%98%B5"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 分块矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-1-%E5%AE%9A%E4%B9%89"><span class="nav-number">2.5.1.</span> <span class="nav-text">2.5.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-2-%E8%AE%A1%E7%AE%97"><span class="nav-number">2.5.2.</span> <span class="nav-text">2.5.2 计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-3-%E4%BE%8B%E5%AD%90"><span class="nav-number">2.5.3.</span> <span class="nav-text">2.5.3 例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-%E7%9F%A9%E9%98%B5%E5%88%9D%E7%AD%89%E5%8F%98%E6%8D%A2"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 矩阵初等变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-1-%E5%AE%9A%E4%B9%89"><span class="nav-number">2.6.1.</span> <span class="nav-text">2.6.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-2-%E7%AD%89%E4%BB%B7%E7%9F%A9%E9%98%B5"><span class="nav-number">2.6.2.</span> <span class="nav-text">2.6.2 等价矩阵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-%E7%9F%A9%E9%98%B5%E7%9A%84%E7%A7%A9"><span class="nav-number">2.7.</span> <span class="nav-text">2.7 矩阵的秩</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">3.</span> <span class="nav-text">三、线性方程组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-n%E7%BB%B4%E5%90%91%E9%87%8F%E4%B8%8E%E5%90%91%E9%87%8F%E7%BB%84%E7%9A%84%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 n维向量与向量组的线性相关性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-n%E7%BB%B4%E5%90%91%E9%87%8F"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 n维向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-%E7%BA%BF%E6%80%A7%E7%BB%84%E5%90%88"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 线性组合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E4%B8%8E%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3 线性相关与线性无关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-4-%E5%90%91%E9%87%8F%E7%BB%84%E7%9A%84%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%80%A7%E7%9A%84%E5%88%A4%E6%96%AD"><span class="nav-number">3.1.4.</span> <span class="nav-text">3.1.4 向量组的线性相关性的判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-5-%E5%90%91%E9%87%8F%E7%BB%84%E7%9A%84%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E6%80%A7%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">3.1.5.</span> <span class="nav-text">3.1.5 向量组的线性相关性的性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%90%91%E9%87%8F%E7%BB%84%E7%9A%84%E6%9E%81%E5%A4%A7%E6%97%A0%E5%85%B3%E7%BB%84%E5%8F%8A%E7%A7%A9"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 向量组的极大无关组及秩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-%E5%90%91%E9%87%8F%E7%BB%84%E7%9A%84%E6%9E%81%E5%A4%A7%E6%97%A0%E5%85%B3%E7%BB%84"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 向量组的极大无关组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E5%90%91%E9%87%8F%E7%BB%84%E7%9A%84%E7%A7%A9"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 向量组的秩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E5%90%91%E9%87%8F%E7%BB%84%E7%9A%84%E7%A7%A9%E5%92%8C%E6%9E%81%E5%A4%A7%E6%97%A0%E5%85%B3%E7%BB%84%E6%B1%82%E6%B3%95"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.2.3 向量组的秩和极大无关组求法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E6%9C%89%E8%A7%A3%E7%9A%84%E5%88%A4%E5%AE%9A"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 线性方程组有解的判定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E5%88%A4%E5%AE%9A"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.3.1 非齐次线性方程组解的判定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E5%88%A4%E5%AE%9A"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.3.2 齐次线性方程组解的判定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 线性方程组解的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">3.4.1.</span> <span class="nav-text">（1）齐次线性方程组解的结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E9%9D%9E%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E8%A7%A3%E7%9A%84%E7%BB%93%E6%9E%84"><span class="nav-number">3.4.2.</span> <span class="nav-text">（二）非齐次线性方程组解的结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 向量空间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%8E%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-number">4.</span> <span class="nav-text">四、特征值与特征向量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%90%91%E9%87%8F%E7%9A%84%E5%86%85%E7%A7%AF"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 向量的内积</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E6%96%B9%E9%98%B5%E7%9A%84%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%8E%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 方阵的特征值与特征向量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E7%9B%B8%E4%BC%BC%E7%9F%A9%E9%98%B5"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 相似矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-%E5%AE%9E%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5%E5%AF%B9%E8%A7%92%E5%8C%96"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 实对称矩阵对角化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%BA%8C%E6%AC%A1%E5%9E%8B"><span class="nav-number">5.</span> <span class="nav-text">五、二次型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E4%BA%8C%E6%AC%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 二次型的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E5%8C%96%E4%BA%8C%E6%AC%A1%E5%9E%8B%E4%B8%BA%E6%A0%87%E5%87%86%E5%9E%8B"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 化二次型为标准型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3%E3%80%81"><span class="nav-number">5.3.</span> <span class="nav-text">5.3、</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">习题</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

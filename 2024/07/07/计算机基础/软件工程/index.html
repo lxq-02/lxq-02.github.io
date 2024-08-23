@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="第一章：软件生命周期、软件生命周期模型（大点）、每一种开发模型和开发方法的对应关系第二章：纯收入、投资回收期、需求分析的问题识别（11点，课件上好像没有，老教材好像有）、流程图第三章：耦合性和内聚性（大点、定义、每一种的特点强弱）、软件结构准则（5条）、算法描述（4个工具）、模块的属性第五章：白盒测试（大点、定义、3方法掌握两个循环不用掌握）、黑盒测试（定义、方法，5个掌握三个）    系统测试（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件工程">
+<meta property="og:url" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="第一章：软件生命周期、软件生命周期模型（大点）、每一种开发模型和开发方法的对应关系第二章：纯收入、投资回收期、需求分析的问题识别（11点，课件上好像没有，老教材好像有）、流程图第三章：耦合性和内聚性（大点、定义、每一种的特点强弱）、软件结构准则（5条）、算法描述（4个工具）、模块的属性第五章：白盒测试（大点、定义、3方法掌握两个循环不用掌握）、黑盒测试（定义、方法，5个掌握三个）    系统测试（">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509194002698.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509163927202.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509163938844.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230506083228859.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230506083241034.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509201035663.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509201057391.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509201110576.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204116135.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204103381.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204050433.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204027230.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204013370.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509203949395.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509203936002.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230506085215479.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204452201.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204331036.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204426251.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509211418577.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230506085429926.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509211440914.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509211458429.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230506085505315.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204704256.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509211923556.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230506094907601.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509212002202.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509211723161.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509212052461.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509211832558.png">
+<meta property="og:image" content="http://example.com/2024/07/Blogs/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B.assets/image-20230509212218744.png">
+<meta property="article:published_time" content="2024-07-07T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-23T06:50:35.824Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="计算机基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509194002698.png">
+
+<link rel="canonical" href="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>软件工程 | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          软件工程
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-07 12:00:00" itemprop="dateCreated datePublished" datetime="2024-07-07T12:00:00+08:00">2024-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-23 14:50:35" itemprop="dateModified" datetime="2024-08-23T14:50:35+08:00">2024-08-23</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>第一章：软件生命周期、软件生命周期模型（大点）、每一种开发模型和开发方法的对应关系<br>第二章：纯收入、投资回收期、需求分析的问题识别（11点，课件上好像没有，老教材好像有）、流程图<br>第三章：耦合性和内聚性（大点、定义、每一种的特点强弱）、软件结构准则（5条）、算法描述（4个工具）、模块的属性<br>第五章：白盒测试（大点、定义、3方法掌握两个循环不用掌握）、黑盒测试（定义、方法，5个掌握三个）<br>    系统测试（幻灯片一页、每种类型）<br>    测试用例的定义（<br>    软件错误的类型（有哪几种）<br>    软件可测试性可具备的特性（课件上好像没有）<br>    测试组件<br>    调试时修改错误的原则（课件有）<br>第六章：维护的副作用（数据文档什么什么三个，每一个副作用有一页，有啥内容）<br>第八章：数据流图（大点）<br>    结构化语言判定表判定树（大点）<br>    变换型、事务型咋映射为软件结构图的过程</p>
+<p>第一章：软件生命周期、软件生命周期模型（大点）、每一种开发模型和开发方法的对应关系</p>
+<ul>
+<li><p>软件生命周期：（七个阶段）</p>
+<ul>
+<li>软件生命周期是指一个软件从提出开发要求直到该软件报废为止的整个时期，分为可行性分析和项目开发计划、需求分析、概要设计、详细设计、编码、测试和维护7个阶段。</li>
+<li>可行性分析和项目开发计划（数据流图）</li>
+<li>需求分析（流程图）</li>
+<li>概要设计（映射成软件结构图、功能模块图）（任务：确定系统的结构）</li>
+<li>详细设计</li>
+<li>编码</li>
+<li>测试（单元测试、集成测试、确认测试、系统测试、验收测试）</li>
+<li>维护</li>
+</ul>
+</li>
+<li><p>软件生命周期模型（大点）、每一种开发模型和开发方法的对应关系</p>
+</li>
+<li><p>软件生命周期模型是描述软件开发过程中各种活动如何执行的模型。</p>
+<ol>
+<li>瀑布模型——结构化方法、Jackson方法</li>
+<li>增量模型——结构化方法、Jackson方法</li>
+<li>螺旋模型——结构化方法</li>
+<li>喷泉模型——面向对象的开发方法</li>
+<li>基于知识的模型——结构化方法</li>
+<li>变换模型——形式化的维也纳方法</li>
+<li>统一过程——面向对象的开发方法</li>
+</ol>
+<p>结构化方法可使用瀑布模型、增量模型和螺旋模型、基于知识的模型</p>
+<p>Jackson方法可使用瀑布模型、增量模型</p>
+<p>面向对象的开发方法可使用喷泉模型和统一过程</p>
+<p>形式化的维也纳方法只能用变换模型进行开发</p>
+</li>
+</ul>
+<p>第二章：纯收入、投资回收期、需求分析的问题识别（11点，课件上好像没有，老教材好像有）、流程图</p>
+<p>纯收入：在软件生命周期内，累计的经济收益与最初的投资之差</p>
+<p>投资回收期：累计的经济效益等于最初投资所用的时间</p>
+<p><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509194002698.png" alt="image-20230509194002698"></p>
+<ul>
+<li>问题识别：（不一定对）<ol>
+<li>功能需求</li>
+<li>性能需求</li>
+<li>环境需求</li>
+<li>用户界面需求</li>
+<li>可靠性</li>
+<li>安全性</li>
+<li>保密性</li>
+<li>可移植性</li>
+<li>可维护性</li>
+<li>资源使用需求</li>
+<li>软件成本消耗与开发进度需求</li>
+</ol>
+</li>
+</ul>
+<p>流程图：</p>
+<p><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509163927202.png" alt="image-20230509163927202"></p>
+<p><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509163938844.png" alt="image-20230509163938844"></p>
+<p>第三章：耦合性和内聚性（大点、定义、每一种的特点强弱）、软件结构准则（5条）、算法描述（4个工具）、模块的属性</p>
+<ul>
+<li><p><strong>耦合性（也称块间联系，指软件系统结构中各模块间相互联系紧密程度的一种度量</strong></p>
+<ol>
+<li>无直接耦合：指两个模块之间没有直接的联系</li>
+<li>数据耦合：两个模块之间有调用关系，传递的是简单的数据值（最想要）</li>
+<li>标记耦合：指两个模块之间传递的是数据结构</li>
+<li>控制耦合：指一个模块调用另一个模块时，传递的是控制变量（如开关、标识等）</li>
+<li>公共耦合：指通过一个公告数据环境相互左右的那些模块间的耦合（使用全局数据变量或公用的数据区）</li>
+<li>内容耦合：最高程度的耦合，也是最差的耦合。模块之间有公用的部分</li>
+</ol>
+</li>
+<li><p><strong>内聚性：也称为块内联系，指模块的功能强度的度量，即一个模块内部各个元素彼此结合的紧密程度的度量</strong></p>
+<ol>
+<li>偶然内聚：指一个模块内的各处理元素之间没有任何联系</li>
+<li>逻辑内聚：指模块内执行几个逻辑上相似的功能，通过参数确定该模块完成哪一步的功能</li>
+<li>时间内聚：把需要同时执行的动作组合在一起形成的模块。</li>
+<li>过程内聚：</li>
+<li>通信内聚：指模块内所有处理元素都在同一个数据结构上操作，或者指各处理使用相同的输入数据或者产生相同的输出数据</li>
+<li>信息内聚：使用相同的数据结构（几个加工同时引用一个共同的数据）</li>
+<li>功能内聚：指模块内所有元素共同完成一个功能，缺一不可。</li>
+</ol>
+</li>
+<li><p>软件结构准则（5条）</p>
+<ol>
+<li>模块独立性准则</li>
+<li>控制范围与作用范围之间的准则</li>
+<li>软件结构的形态特征准则</li>
+<li>模块的大小准则</li>
+<li>模块的接口准则</li>
+</ol>
+</li>
+<li><p>算法描述（4个工具）、</p>
+<ol>
+<li>流程图</li>
+<li>PAD图（问题分析图）</li>
+<li>盒图</li>
+<li>PDL语言<br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230506083228859.png" alt="image-20230506083228859"></li>
+<li><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230506083241034.png" alt="image-20230506083241034"></li>
+</ol>
+<p><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509201035663.png" alt="image-20230509201035663"></p>
+<p><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509201057391.png" alt="image-20230509201057391"> </p>
+<p><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509201110576.png" alt="image-20230509201110576"></p>
+</li>
+<li><p>模块的属性</p>
+<ol>
+<li>接口：指模块的输入与输出</li>
+<li>功能：指模块实现什么功能</li>
+<li>逻辑：描述内部如何实现要求的功能及所需的数据</li>
+<li>状态：指该模块的运行环境，即模块的调用与被调用关系</li>
+</ol>
+</li>
+</ul>
+<hr>
+<p>第五章：</p>
+<ul>
+<li><p>白盒测试（大点、定义、3方法掌握两个循环不用掌握）、</p>
+<ol>
+<li><p>逻辑覆盖（先画图）</p>
+<ol>
+<li><p>语句覆盖：使程序中每个语句至少执行一次。（真假分支中的语句）<br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204116135.png" alt="image-20230509204116135"></p>
+</li>
+<li><p>判定覆盖（分支覆盖）：使每个判定的真假分支都至少执行一次。<br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204103381.png" alt="image-20230509204103381"></p>
+</li>
+<li><p>条件覆盖：使每个判定的每个条件的可能取值至少执行一次。<br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204050433.png" alt="image-20230509204050433"></p>
+<p><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204027230.png" alt="image-20230509204027230"></p>
+</li>
+<li><p>判定&#x2F;条件覆盖：选取足够多的测试用例，使判断中的每个条件的所有可能取值至少执行一次，同时每个判断本身的所有可能判断结果至少执行一次。<br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204013370.png" alt="image-20230509204013370"></p>
+</li>
+<li><p>条件组合覆盖：所有可能的条件取值组合至少执行一次<br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509203949395.png" alt="image-20230509203949395"></p>
+</li>
+<li><p>路径覆盖：覆盖每一个可能的路径<br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509203936002.png" alt="image-20230509203936002"></p>
+</li>
+</ol>
+</li>
+<li><p>基本路径测试法：<br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230506085215479.png" alt="image-20230506085215479"><br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204452201.png" alt="image-20230509204452201"></p>
+<p><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204331036.png" alt="image-20230509204331036"><br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204426251.png" alt="image-20230509204426251"></p>
+</li>
+</ol>
+</li>
+<li><p>黑盒测试（定义、方法，5个掌握三个）</p>
+<ol>
+<li><p>等价类划分<br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509211418577.png" alt="image-20230509211418577"></p>
+<p><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230506085429926.png" alt="image-20230506085429926"><br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509211440914.png" alt="image-20230509211440914"><br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509211458429.png" alt="image-20230509211458429"></p>
+</li>
+<li><p>边界值分析<br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230506085505315.png" alt="image-20230506085505315"></p>
+</li>
+<li><p>错误推测</p>
+</li>
+<li><p>因果图</p>
+</li>
+<li><p>综合策略</p>
+</li>
+</ol>
+<p><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509204704256.png" alt="image-20230509204704256"></p>
+</li>
+<li><p>​	系统测试（幻灯片一页、每种类型）</p>
+<ol>
+<li>恢复测试：以不同的方式强使软件出现故障，检测软件能否恰当地完成恢复<br>自动恢复：检测重新初始化、监测点设置、数据恢复、重新启动等是否正确<br>人工干预恢复：检测平均恢复时间是否在允许范围内</li>
+<li>安全性测试：设计测试用例，突破软件安全机构的安全保密措施，检验系统预防机制的漏洞</li>
+<li>强度测试：设计测试用例，检验系统能i最高能达到的实际限度，让系统处于资源的异常数量、异常频率、异常批量的条件下测试系统的承受能力。一般比平常限度高5-10倍的限度做测试用例</li>
+<li>性能测试：设计测试用例，并记录软件运行性能，与性能要求比较，检验是否达到性能要求规格。</li>
+</ol>
+</li>
+<li><p>​	测试用例的定义（<br>测试用例是一组输入和期待的结果，它根据引起故障和检查的目的来使用组件。</p>
+</li>
+<li><p>​	软件错误的类型（有哪几种）</p>
+<ol>
+<li>功能错(需求分析错误)</li>
+<li>软件结构错</li>
+<li>数据错</li>
+<li>编码错</li>
+<li>软件集成错</li>
+<li>测试定义与测试执行错误</li>
+</ol>
+</li>
+<li><p>​	软件可测试性可具备的特性（课件上好像没有）</p>
+<ol>
+<li>可操作性</li>
+<li>可观察性</li>
+<li>可控制性</li>
+<li>可分解性</li>
+<li>稳定性</li>
+<li>简单易理解</li>
+</ol>
+</li>
+<li><p>​	测试组件</p>
+<ul>
+<li>是系统中可以孤立进行测试的部分，一个组件可以是对象，一组对象，一个或多个子系统。</li>
+</ul>
+</li>
+<li><p>​	调试时修改错误的原则</p>
+<ol>
+<li>注意错误的群集现象、在错误近邻检查</li>
+<li>找到错误的本质并修改</li>
+<li>采用回归测试，避免因修改而引起的新错误</li>
+</ol>
+</li>
+</ul>
+<hr>
+<ul>
+<li>第六章：</li>
+<li>维护的副作用（数据文档什么什么三个，每一个副作用有一页，有啥内容）<ol>
+<li><p>编码副作用</p>
+<ol>
+<li>删除或修改一个子程序、一个标号和一个标识符</li>
+<li>改变程序代码的时序关系、改变占用存储的大小、改变逻辑运算符</li>
+<li>修改文件的打开或关闭</li>
+<li>改进程序的执行效率</li>
+<li><strong>把设计上的改变翻译成代码的改变</strong></li>
+<li>为边界条件的逻辑测试做出改变</li>
+</ol>
+</li>
+<li><p>数据副作用</p>
+<ol>
+<li><strong>重新定义局部或全局的常量、记录或文件格式</strong></li>
+<li>增加或减少一个数组或高层数据结构的大小</li>
+<li>修改全局或公共数据</li>
+<li>重新初始化控制标志或指针</li>
+<li>重新排列输入、输出或子程序的参数</li>
+</ol>
+</li>
+<li><p>文档副作用</p>
+<ol>
+<li><strong>修改交互输入的顺序或格式，没有正确的记入文档中</strong></li>
+<li>过时的文档内容、索引和文本可能造成冲突等</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<p>第八章：</p>
+<ul>
+<li><p>数据流图（大点）</p>
+<ul>
+<li><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509211923556.png" alt="image-20230509211923556"><br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230506094907601.png" alt="image-20230506094907601"><br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509212002202.png" alt="image-20230509212002202"><br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509211723161.png" alt="image-20230509211723161"></li>
+</ul>
+</li>
+<li><p>​	结构化语言判定表判定树（大点）<br><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509212052461.png" alt="image-20230509212052461"></p>
+<p><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/image-20230509211832558.png" alt="image-20230509211832558"></p>
+</li>
+<li><p>​	变换型、事务型咋映射为软件结构图的过程</p>
+</li>
+</ul>
+<p>事务型</p>
+<p><img src="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/../../../Blogs/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B.assets/image-20230509212218744.png" alt="image-20230509212218744"></p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" title="软件工程">http://example.com/2024/07/07/计算机基础/软件工程/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" rel="tag"># 计算机基础</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/07/%E8%AE%BA%E6%96%87/Oxidized/" rel="next" title="oxidized">
+      oxidized <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

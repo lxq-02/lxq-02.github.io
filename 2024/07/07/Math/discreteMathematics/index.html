@@ -1,0 +1,2319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="A：选择 B：大题 C：没题型 考试时间：十三周（待定） 一、命题逻辑基本概念 命题与联结词 命题及其分类 联结词与符合命题   命题公式及其赋值  1.1、命题与联结词命题：判断结果惟一的陈述句 命题的真值：判断的结果 真值的取值：真与假 真命题与假命题 注意： 感叹句、祈使句、疑问句都不是命题 陈述句中的悖论，判断结果不惟一确定的不是命题   有可能和联结词在一起出  否定联结词、合取联结词">
+<meta property="og:type" content="article">
+<meta property="og:title" content="离散数学">
+<meta property="og:url" content="http://example.com/2024/07/07/Math/discreteMathematics/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="A：选择 B：大题 C：没题型 考试时间：十三周（待定） 一、命题逻辑基本概念 命题与联结词 命题及其分类 联结词与符合命题   命题公式及其赋值  1.1、命题与联结词命题：判断结果惟一的陈述句 命题的真值：判断的结果 真值的取值：真与假 真命题与假命题 注意： 感叹句、祈使句、疑问句都不是命题 陈述句中的悖论，判断结果不惟一确定的不是命题   有可能和联结词在一起出  否定联结词、合取联结词">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220301104309949.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220301104701712.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220301110909458.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220319160159521.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220301111526205.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220301112324698-16461051299441.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220505091737346.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220301114311709.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220301115435031.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220505092409331.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220303083450913.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220505092951479.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220303085306503.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220303091302200.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220505094105883.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220303091956541.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220303092724953.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220303093100836.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220303093214086.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220319155614438.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220301104309949.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220319160159521.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220319160225093.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220301115435031.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220505140224507.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220303085306503.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220303094353470.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220303091302200.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220320150623436.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308102232362.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308102330391.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308102432955.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308103220566.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308103724258.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308104048089.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308104622569.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308105231790.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308105327971.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308110550847.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308112927575.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308113823698.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308114012419.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308114128050.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220308114555947.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310081939513.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310082213464.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310083410082.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310084048667.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310084507269.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310085454907.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310085517757.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310091510696.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310091607018.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310092839575.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310093621087.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310093958616.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310094049756.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310094124759.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220310094430551.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220320193601747.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220320194442330.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220320194820595.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220320194930891.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220320195550114.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317081537462-16474761843211.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317081629008.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317082219288.png">
+<meta property="og:image" content="http://example.com/2024/07/Software/Typora/discreteMathematics.assets/image-20220317082820043.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317083216519.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317083601073.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322110519573.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322110534860.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322110611106.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317083801942.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317083826948.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322110721668.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317083912739.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317084001440.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317084246322.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317084259600.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317084454589.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317084546448.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317084730880.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317084631006.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317084916611.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317085010153.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317085112804.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317085228206.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317085302568.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317085314440.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317090827874.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510153817614.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317092229746.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317093352694.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317094002333.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317094217879.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220317094515012.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322102258013.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322102935834.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322103221575.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322103748547.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322104007861.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322104152745.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322104345100.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510163004714.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322141119272.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322141614887.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322142245094.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322143235182.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322143731538.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220322150643081.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220324092318433.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220324094106002.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329101923713.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329102005653.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329102029629.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329102038823.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329102045330.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329102103584.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329102140395.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329102219057.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329102314841.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329102334839.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329102401913.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329103816008.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329104246595.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329104743598.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329111031402.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329112450960.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220329113000906.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220331090706752.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220331090614022.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220331090837442.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220331093414975.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220331093513277.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220331093609701.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220331094846120.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405102958982.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220407081354843.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405104001647.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405104450609.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405104830186.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405105137778.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405110904825.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405112906647.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405113227358.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405113454214.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405113804163.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405113742028.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405113857084.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405114206156.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405114327957.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405114400090.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405114431415.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405114516656.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220405114525628.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220407081318737.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220407081916665.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220407082048904.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220407084009284.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220407091242360.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220412101855952.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220407092350141.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220407093037714.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220407093522500.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220407094123831.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220412102402847.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220412102720800.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220412104224253.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220412110835023.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220412111054518.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220412111838430.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220412112942424.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220412113814255.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220412115012877.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414134602890.png">
+<meta property="og:image" content="http://example.com/2024/07/Software/Typora/discreteMathematics.assets/image-20220414135730735.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414140046108.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414140325697.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414140537362.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414140558937.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414140646481.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414140713845.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414140834998.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414140956780.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414141012549.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414141024187.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414141220384.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414141314781.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414141511384.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414141528902.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414141655492.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414141943327.png">
+<meta property="og:image" content="http://example.com/2024/07/Software/Typora/discreteMathematics.assets/image-20220414141916766.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414142009981.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414142018408.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210831133406162-1837869085-1634453530388.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210831135511029-953909993.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210831140038288-1259282133.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210831140529671-72072801.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210831140639103-1962127639.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210831140953199-122115476.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210831141600914-1797905525.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210831142311648-601409589.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210831142512497-1209856841.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210831144510071-2001780816.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210831145131650-702002692.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210831145535866-2071458499.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012092004524-1125120544.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012092010898-2143120493.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012092015646-1456309559.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012092020667-221671408.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012092023460-1479242716.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012092026188-1106094076.jpg">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012092028763-2021635066.jpg">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012092030635-1693704995.jpg">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210928134057502-1097940792.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210928134645627-1193549118.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210928135302200-1465310260.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210928142209672-129892220.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20210928142640802-1696873131.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012093023747-2017629153.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012093020531-1373381842.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012093017029-2062885330.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012092956262-196119442.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012093157288-1479830696.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012093252311-1203799393.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012093200477-1787238884.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012093207386-1348877694.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012093210053-1254693089.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012093237744-414704695.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012093212730-733799769.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012093222061-1987800662.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211012093226716-1490458445.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211013221414313-301060987.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211013221425193-2025282276.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211013221432747-916224202.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211013221441200-162014362.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211013221448754-1494402863.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211013221455495-423626427.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211013221503008-1803196291.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211013221509168-226866676-1634455539576.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211019214115701.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211019214156142.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211019214242709.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211019214324721.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211019214335182.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211019214345154.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211019214353199.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211019214525420-1635259050266.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211026214617065-402123390-1635259048860.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211026214952728-796555232-1635509801836.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211026215029690-1277271337-1635259055699.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211026215041900-827433171-1635259067979.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211026215049660-815248524-1635508782126.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211026215105257-1916205497-1635508787873.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211026215122567-299725995-1635508793920.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211026215137070-525687196-1636031809605.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211026215142961-279194588-1636031789583.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104211504577-1261893519.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211029202852981-584343403.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211029202904273-1849639818.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104212214202-1679212826.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104212218161-1389502528.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211102133816222.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211029202930160-1333726588.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104212302914-1615346733.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102134950857-589711757.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102134458438-808864587.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102141218456-156574397.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102141546784-443231923.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102141955003-375797778.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102142358530-49574775.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102144112266-41970998.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145013012-1207810696.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145144597-1875338014.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145224580-791054056.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145254332-886899461.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145313176-608336032.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145326642-366681601.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145418895-368640788.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145442328-663742558.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145510056-945016369.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145522368-2113927141.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145551375-963530330.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145700859-1842635797.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145724292-2010447952.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145736254-326138627.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211102145757229.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145845917-729474521.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102145920089-1626422527.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102150006655-83311209.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102150047744-23341012.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102150116206-902495064.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102150144432-1494524993.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102150158658-844635331.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102150222236-966885274.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102150253289-792188646.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102150326264-869203706.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102150403508-718586871.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102150418749-347559527.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102150446223-1656104153.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211102150507893-1912473254.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200112675-552669916.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200133121-2135948020.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200224445-138576336.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200258806-417413824.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200327418-1784644290.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200341058-1906538356.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200353736-350931823.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200408119-167036458.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200421015-146736404.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200436073-500941235.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200450473-1491857260.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200503850-836094306.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200526697-1380638761.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200609930-1924044162.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104200627444-1715065517.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104191322339-1702184718.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104191921326-1804424734.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104193856857-1086028267.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104194038890-1421065458.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104194344800-2062021364.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104205023465-367550027.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104205109520-2094784508.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104205208552-1226330722.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104205851190-1321892940.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211104205818167-2078655881.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211109134811751-876369246.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211109140140690-1770752030.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211109142434181-1346814730.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211109144407097-1008558161.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211109143637095-638001222.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211109144643195-1669518971.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211111081817642.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211111081847377.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211111081931009.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211111081956073.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211111082027072.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211111082117022.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211111082140964.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211111082155688.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211111082211721.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211111082242436.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211111082335760.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211111082411984.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/2510762-20211109150716655-1501894036.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124204755185.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124205056579.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124205348344.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124205601694.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124205815943.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124210347642.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124210510257.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124210537686.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124210718532.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124210800328.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124210909968.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124211031945.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124211423558.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124211612638.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211124212142615.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116133803537.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116134525063.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116134807379.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116135746738.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116140229957.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116141343791.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116143452826.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116143723254.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116144338872.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116144945071.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116145521793.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116150120978.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118083621856.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118084211827.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118084857520.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118090815500.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118091203032.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118091237781.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118092444748.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118092523701.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118092559312.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118092656762.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118092735222.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118092749303.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118092804571.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118092821587.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118092831444.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118092940295.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093014552.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093041789.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093050476.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093126201.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093201162.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093212693.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093223638.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093339298.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093403249.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093506767.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213164949844.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093617919.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211116141343791.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093631550.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093640330.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093711935.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093735561.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213172530849.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118090815500.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118091203032.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118093808457.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118094607175.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211118095200371.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204131646.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204121672.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204102045.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204050792.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204036781.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204010811.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204158731.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204221093.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204229209.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204236631.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204245133.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204302914.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211213204310696.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219101041723.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219102035895.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219102225069.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219102326759.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219103426638.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219104017271.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219104402706.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219105450915.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219105554737.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219110003903.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219110547520.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219112708616.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219113920454.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219113947449.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219114107564.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219114358359.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219114437889.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219114854596.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219115451445.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219135457703.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219135534549.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219135756572.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219135811347.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219135911383.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219141402334.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219141433573.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219141531433.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219142624178.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219142925649.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219143617706.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219143814714.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219144211271.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219144420422.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219144558781.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219150239588.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219150407391.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219150844587.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219150920878.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219151108568.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219151348423.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219151443560.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219152220123.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219152619871.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219152722006.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219152828581.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219152907633.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219152938610.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153003641.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153020301.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153038166.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153049409.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153119054.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153129098.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153148091.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153239552.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153357229.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153446103.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153541478.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153631286.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153657284.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153707579.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153722170.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153740391.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153806763.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153830924.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153850875.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219153913931.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219154005627.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219154036260.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219154048080-1639899648356.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219154103919.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219154155705.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219154356796.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219154233084.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20211219154256076.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414192209474.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414192221028.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414193842964.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414193918082.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414194419213.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419102039946.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419102930764.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419103556555.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419103847664.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419104643641.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419105516504.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419112144269.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419113029202.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419113347216.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419113657073.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419114340628.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419114443722.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220421083943197.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220421083956172.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220421084007579.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220421085744792.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220421091014176.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220421093219429.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220513102745976.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220426102321881.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220426104438699.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220426105053149.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220426110908500.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220426111457154.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220419114443722.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220426112637756.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220426114639728.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220428083035893.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220428082910195.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220428083006777.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220505083749099.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220505084719361.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220505093532708.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220505094839592.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510101544058.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510103333475.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510104906703.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510105208596.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510105255120.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510111933516.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510112014167.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510112525196.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510112712351.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510113746549.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220510114703330.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220512083257598.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220512083530154.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220512083635470.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220512084952652.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517111541243.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220512092056048.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220512092231830.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220512094544202.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517105926410.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517102941994.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220414192221028.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517103030139.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517103246368.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517103352753.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517103443840.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517103554182.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517103713077.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517103802085.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517103837939.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517103900193.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517103909609.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517103934893.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104000164.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104029734.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104049459.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104102418.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104117954.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104216744.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104310848.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104413948.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104603252.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104615348.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104642557.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104717229.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104818762.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517104915592.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220517105053903.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220503104039710.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220503105452845.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220503112349087.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220503112451219.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220503113408602.png">
+<meta property="article:published_time" content="2024-07-07T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-23T06:34:06.878Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="Math">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/07/07/Math/discreteMathematics/image-20220301104309949.png">
+
+<link rel="canonical" href="http://example.com/2024/07/07/Math/discreteMathematics/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>离散数学 | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/07/Math/discreteMathematics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          离散数学
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-07 12:00:00" itemprop="dateCreated datePublished" datetime="2024-07-07T12:00:00+08:00">2024-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-23 14:34:06" itemprop="dateModified" datetime="2024-08-23T14:34:06+08:00">2024-08-23</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> A：选择</p>
+<p>B：大题</p>
+<p>C：没题型</p>
+<p>考试时间：十三周（待定）</p>
+<h1 id="一、命题逻辑基本概念"><a href="#一、命题逻辑基本概念" class="headerlink" title="一、命题逻辑基本概念"></a>一、命题逻辑基本概念</h1><ul>
+<li>命题与联结词<ul>
+<li>命题及其分类</li>
+<li>联结词与符合命题</li>
+</ul>
+</li>
+<li>命题公式及其赋值</li>
+</ul>
+<h2 id="1-1、命题与联结词"><a href="#1-1、命题与联结词" class="headerlink" title="1.1、命题与联结词"></a>1.1、命题与联结词</h2><p>命题：判断结果惟一的陈述句</p>
+<p>命题的真值：判断的结果</p>
+<p>真值的取值：真与假</p>
+<p>真命题与假命题</p>
+<p><strong>注意：</strong></p>
+<p>感叹句、祈使句、疑问句都不是命题</p>
+<p>陈述句中的悖论，判断结果不惟一确定的不是命题 </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220301104309949.png" alt="image-20220301104309949"></p>
+<p>有可能和联结词在一起出</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220301104701712.png"></p>
+<p><strong>否定联结词、合取联结词</strong></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220301110909458.png" alt="image-20220301110909458"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220319160159521.png" alt="image-20220319160159521"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220301111526205.png" alt="image-20220301111526205"></p>
+<p><strong>析取联结词</strong></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220301112324698-16461051299441.png"></p>
+<p>例子：将下列命题符号化</p>
+<p>（1）张晓静爱唱歌或爱听音乐</p>
+<p>令p:张晓静爱唱歌，q：张晓静爱听音乐， p&vee;q</p>
+<p><strong>蕴涵联结词</strong></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220505091737346.png" alt="image-20220505091737346"> </p>
+<p>P为范围宽的，是充分条件；q为范围小的，是必要条件</p>
+<p>取值方法</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220301114311709.png" alt="image-20220301114311709"></p>
+<p>如果地球是方的，则火星上有水。（真命题）</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220301115435031.png"></p>
+<p><strong>等价联结词</strong></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220505092409331.png" alt="image-20220505092409331"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220303083450913.png" alt="image-20220303083450913"></p>
+<p>例题：将下列命题符号化，并讨论他们的真值</p>
+<p>（1）$\sqrt{3}$是无理数当且仅当加拿大位于亚洲	1&leftrightarrow;0 &#x3D; 0</p>
+<p>（2）2+3 &#x3D; 5 的充要条件是$\sqrt{3}$是无理数			1&leftrightarrow;1 &#x3D; 1</p>
+<p>p等价于q</p>
+<p>小结：</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220505092951479.png"></p>
+<p>优先级：非、合取、析取、蕴涵、等价，同级从左到右顺序进行</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220303085306503.png" alt="image-20220303085306503"></p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220303091302200.png"></p>
+<h2 id="1-２、命题变项与合式公式"><a href="#1-２、命题变项与合式公式" class="headerlink" title="1.２、命题变项与合式公式"></a>1.２、命题变项与合式公式</h2><p>命题常项</p>
+<p>命题变项（命题变元）</p>
+<p>常项与变项均用 p,q,r,…,p<sub>i</sub>,q<sub>i</sub>,r<sub>i</sub>…等表示</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220505094105883.png" alt="image-20220505094105883"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220303091956541.png" alt="image-20220303091956541"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220303092724953.png" alt="image-20220303092724953"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220303093100836.png" alt="image-20220303093100836"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220303093214086.png" alt="image-20220303093214086"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220319155614438.png" alt="image-20220319155614438"></p>
+<p>中间的几列是步骤，可有可无</p>
+<p>公式的类型</p>
+<p><strong>重言式</strong>（或<strong>永真式</strong>）：任何赋值下均为真</p>
+<p><strong>矛盾式</strong>（或<strong>永假式</strong>）：任何赋值下均为假</p>
+<p><strong>可满足式</strong>；该公式不是矛盾式</p>
+<p>重言式是可满足式，但可满足式不一定为重言式</p>
+<p>真值表的用途：</p>
+<p>求出公式的全部成真赋值与成假赋值，判断公式的类型。</p>
+<h2 id="1-3、题目"><a href="#1-3、题目" class="headerlink" title="1.3、题目"></a>1.3、题目</h2><p>例1.1 判断下列句子是否为命题。若是，判断真假命题。</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220301104309949.png" alt="image-20220301104309949"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220319160159521.png" alt="image-20220319160159521"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220319160225093.png" alt="image-20220319160225093"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220301115435031.png">  </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220505140224507.png" alt="image-20220505140224507"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220303085306503.png" alt="image-20220303085306503"></p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220303094353470.png" alt="image-20220303094353470"></p>
+<p>（1）0（有理数：整数和分数）</p>
+<p>（2）1</p>
+<p>（3）0（非负整数）</p>
+<p>（4）1</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220303091302200.png"></p>
+<h1 id="二、命题逻辑等值演算"><a href="#二、命题逻辑等值演算" class="headerlink" title="二、命题逻辑等值演算"></a>二、命题逻辑等值演算</h1><ul>
+<li>等值式等值演算</li>
+<li>析取范式与合取范式，主析取范式与主合取范式</li>
+<li>联结词完备集</li>
+</ul>
+<h2 id="2-1、等值式"><a href="#2-1、等值式" class="headerlink" title="2.1、等值式"></a>2.1、等值式</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220320150623436.png" alt="image-20220320150623436"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308102232362.png" alt="image-20220308102232362"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308102330391.png" alt="image-20220308102330391"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308102432955.png" alt="image-20220308102432955"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308103220566.png" alt="image-20220308103220566"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308103724258.png" alt="image-20220308103724258"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308104048089.png" alt="image-20220308104048089"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308104622569.png" alt="image-20220308104622569"></p>
+<p>等值演算的应用：都是<strong>选择</strong></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308105231790.png" alt="image-20220308105231790"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308105327971.png" alt="image-20220308105327971"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308110550847.png" alt="image-20220308110550847"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308112927575.png" alt="image-20220308112927575"></p>
+<p>后两个是结论</p>
+<h2 id="2-2、析取范式与合取范式"><a href="#2-2、析取范式与合取范式" class="headerlink" title="2.2、析取范式与合取范式"></a>2.2、析取范式与合取范式</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220308113823698.png" alt="image-20220308113823698"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308114012419.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308114128050.png" alt="image-20220308114128050"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220308114555947.png" alt="image-20220308114555947"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310081939513.png" alt="image-20220310081939513"></p>
+<p>右边的注释有问题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310082213464.png" alt="image-20220310082213464"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310083410082.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310084048667.png" alt="image-20220310084048667"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310084507269.png" alt="image-20220310084507269"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310085454907.png" alt="image-20220310085454907"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310085517757.png" alt="image-20220310085517757"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310091510696.png" alt="image-20220310091510696"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310091607018.png" alt="image-20220310091607018"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310092839575.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310093621087.png" alt="image-20220310093621087"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310093958616.png" alt="image-20220310093958616"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310094049756.png" alt="image-20220310094049756"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310094124759.png" alt="image-20220310094124759"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220310094430551.png" alt="image-20220310094430551"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220320193601747.png" alt="image-20220320193601747"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220320194442330.png" alt="image-20220320194442330"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220320194820595.png" alt="image-20220320194820595"> </p>
+<h2 id="2-3、联结词的完备集"><a href="#2-3、联结词的完备集" class="headerlink" title="2.3、联结词的完备集"></a>2.3、联结词的完备集</h2><p>要求记住</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220320194930891.png" alt="image-20220320194930891"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220320195550114.png" alt="image-20220320195550114"></p>
+<p>完备集都有非</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317081537462-16474761843211.png" alt="image-20220317081537462"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317081629008.png" alt="image-20220317081629008"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317082219288.png" alt="image-20220317082219288"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/../../../Software/Typora/discreteMathematics.assets/image-20220317082820043.png" alt="image-20220317082820043"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317083216519.png" alt="image-20220317083216519"></p>
+<h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220317083601073.png" alt="image-20220317083601073"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322110519573.png" alt="image-20220322110519573"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322110534860.png" alt="image-20220322110534860"></p>
+<p>C</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322110611106.png" alt="image-20220322110611106"></p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317083801942.png" alt="image-20220317083801942"></p>
+<p>后面的文字不需要</p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317083826948.png" alt="image-20220317083826948"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322110721668.png" alt="image-20220322110721668"></p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317083912739.png" alt="image-20220317083912739"></p>
+<p>C</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317084001440.png" alt="image-20220317084001440"></p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317084246322.png" alt="image-20220317084246322"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317084259600.png" alt="image-20220317084259600"> </p>
+<p>C</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317084454589.png" alt="image-20220317084454589"><img src="/2024/07/07/Math/discreteMathematics/image-20220317084546448.png" alt="image-20220317084546448"></p>
+<p>这个题目计算过程不要这么写，按照上课，合成一个，不要劈开</p>
+<p>合取过程不要，直接写答案</p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317084730880.png" alt="image-20220317084730880"></p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317084631006.png" alt="image-20220317084631006"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317084916611.png" alt="image-20220317084916611"></p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317085010153.png" alt="image-20220317085010153"></p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317085112804.png" alt="image-20220317085112804"></p>
+<p>求成真赋值，成假赋值</p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317085228206.png" alt="image-20220317085228206"></p>
+<p>求成真赋值，成假赋值</p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317085302568.png" alt="image-20220317085302568"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317085314440.png" alt="image-20220317085314440"></p>
+<p>BBBB</p>
+<h1 id="三、命题逻辑的推理理论"><a href="#三、命题逻辑的推理理论" class="headerlink" title="三、命题逻辑的推理理论"></a>三、命题逻辑的推理理论</h1><p>重点在3.2</p>
+<h2 id="3-1、推理的形式结构"><a href="#3-1、推理的形式结构" class="headerlink" title="3.1、推理的形式结构"></a>3.1、推理的形式结构</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220317090827874.png" alt="image-20220317090827874"> </p>
+<p>推理的形式结构：</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220510153817614.png" alt="image-20220510153817614"> </p>
+<p>判断推理是否正确的方法：</p>
+<ol>
+<li>真值表法</li>
+<li>等值演算法</li>
+<li>主析取范式法</li>
+</ol>
+<p><strong>推理实例</strong></p>
+<p>例1：判断下面推理是否正确</p>
+<p>（1）若a能被4整除，则a能被2整除。a能被4整除。所以，a能被2整除</p>
+<p>解：设p：a能被4整除， q：a能被2整除</p>
+<p>推理的形式结构：<br>    前提：p&rightarrow;q,p<br>    结论：q</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317092229746.png"></p>
+<h2 id="3-2、自然推理系统P"><a href="#3-2、自然推理系统P" class="headerlink" title="3.2、自然推理系统P"></a>3.2、自然推理系统P</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220317093352694.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317094002333.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317094217879.png" alt="image-20220317094217879"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220317094515012.png" alt="image-20220317094515012"></p>
+<p>10、11不要</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322102258013.png" alt="image-20220322102258013"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322102935834.png" alt="image-20220322102935834"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322103221575.png" alt="image-20220322103221575"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322103748547.png" alt="image-20220322103748547"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322104007861.png"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322104152745.png" alt="image-20220322104152745"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322104345100.png" alt="image-20220322104345100"></p>
+<p>归谬法（反证法）</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220510163004714.png" alt="image-20220510163004714"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322141119272.png"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322141614887.png" alt="image-20220322141614887"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322142245094.png" alt="image-20220322142245094"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322143235182.png" alt="image-20220322143235182"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322143731538.png" alt="image-20220322143731538"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220322150643081.png" alt="image-20220322150643081"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220324092318433.png" alt="image-20220324092318433"> </p>
+<p>证明压轴题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220324094106002.png" alt="image-20220324094106002"> </p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220329101923713.png" alt="image-20220329101923713"> </p>
+<p>3</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329102005653.png" alt="image-20220329102005653"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329102029629.png" alt="image-20220329102029629"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329102038823.png" alt="image-20220329102038823"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329102045330.png" alt="image-20220329102045330"> </p>
+<p>3</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329102103584.png" alt="image-20220329102103584"> </p>
+<p>2</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329102140395.png" alt="image-20220329102140395"> </p>
+<p>2</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329102219057.png" alt="image-20220329102219057"> </p>
+<p>3</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329102314841.png" alt="image-20220329102314841"> </p>
+<p>2</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329102334839.png" alt="image-20220329102334839"> </p>
+<p>3</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329102401913.png" alt="image-20220329102401913"> </p>
+<p>2</p>
+<h1 id="四、一阶逻辑基本概念"><a href="#四、一阶逻辑基本概念" class="headerlink" title="四、一阶逻辑基本概念"></a>四、一阶逻辑基本概念</h1><h2 id="4-1、一阶逻辑命题符号化"><a href="#4-1、一阶逻辑命题符号化" class="headerlink" title="4.1、一阶逻辑命题符号化"></a>4.1、一阶逻辑命题符号化</h2><p>个体词——所研究对象中可以独立存在的具体或抽象的客体</p>
+<p>个体常项：具体的事务，用a,b,c等表示</p>
+<p>个体变项：抽象的事物，用x,y,z等表示</p>
+<p>个体域（论域）——个体变项的取值范围</p>
+<p>有限个体域，如{a,b,c},{1,2}</p>
+<p>无限个体域，如N,Z,R</p>
+<p>全总个体域——由宇宙间一切事物组成</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329103816008.png"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329104246595.png" alt="image-20220329104246595"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329104743598.png"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329111031402.png"> </p>
+<p>当成公式，记住 </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329112450960.png" alt="image-20220329112450960"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220329113000906.png"> </p>
+<p>两种写法都要掌握</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220331090706752.png" alt="image-20220331090706752"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220331090614022.png" alt="image-20220331090614022"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220331090837442.png" alt="image-20220331090837442"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220331093414975.png" alt="image-20220331093414975"></p>
+<p>第四章第4小题的第一题，第一种写法，G(x)前面应加非号。</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220331093513277.png" alt="image-20220331093513277"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220331093609701.png" alt="image-20220331093609701"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220331094846120.png" alt="image-20220331094846120"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405102958982.png" alt="image-20220405102958982"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220407081354843.png" alt="image-20220407081354843"> </p>
+<h2 id="4-2、一阶逻辑公式及解释"><a href="#4-2、一阶逻辑公式及解释" class="headerlink" title="4.2、一阶逻辑公式及解释"></a>4.2、一阶逻辑公式及解释</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220405104001647.png" alt="image-20220405104001647"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405104450609.png" alt="image-20220405104450609"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405104830186.png" alt="image-20220405104830186"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405105137778.png" alt="image-20220405105137778"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405110904825.png" alt="image-20220405110904825"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405112906647.png" alt="image-20220405112906647"> </p>
+<h2 id="习题-1"><a href="#习题-1" class="headerlink" title="习题"></a>习题</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220405113227358.png" alt="image-20220405113227358"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405113454214.png" alt="image-20220405113454214"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405113804163.png" alt="image-20220405113804163"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405113742028.png" alt="image-20220405113742028"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405113857084.png" alt="image-20220405113857084"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405114206156.png" alt="image-20220405114206156"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405114327957.png" alt="image-20220405114327957"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405114400090.png" alt="image-20220405114400090"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405114431415.png" alt="image-20220405114431415"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405114516656.png" alt="image-20220405114516656"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220405114525628.png" alt="image-20220405114525628"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220407081318737.png" alt="image-20220407081318737"></p>
+<h1 id="五、一阶逻辑等值演算"><a href="#五、一阶逻辑等值演算" class="headerlink" title="五、一阶逻辑等值演算"></a>五、一阶逻辑等值演算</h1><ul>
+<li>一阶逻辑等值式与基本的等值式</li>
+<li>置换规则、换名规则、代替规则</li>
+<li>前束范式</li>
+</ul>
+<h2 id="5-1、一阶逻辑等值式与置换规则"><a href="#5-1、一阶逻辑等值式与置换规则" class="headerlink" title="5.1、一阶逻辑等值式与置换规则"></a>5.1、一阶逻辑等值式与置换规则</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220407081916665.png" alt="image-20220407081916665"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220407082048904.png" alt="image-20220407082048904"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220407084009284.png"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220407091242360.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220412101855952.png" alt="image-20220412101855952"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220407092350141.png" alt="image-20220407092350141"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220407093037714.png" alt="image-20220407093037714"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220407093522500.png" alt="image-20220407093522500"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220407094123831.png" alt="image-20220407094123831"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220412102402847.png" alt="image-20220412102402847"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220412102720800.png" alt="image-20220412102720800"></p>
+<h2 id="5-2、一阶逻辑前束范式"><a href="#5-2、一阶逻辑前束范式" class="headerlink" title="5.2、一阶逻辑前束范式"></a>5.2、一阶逻辑前束范式</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220412104224253.png"></p>
+<p>量词前面有非号，也不是前束范式</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220412110835023.png" alt="image-20220412110835023"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220412111054518.png" alt="image-20220412111054518"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220412111838430.png" alt="image-20220412111838430"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220412112942424.png" alt="image-20220412112942424"> </p>
+<p>存在y好像应该变为存在t</p>
+<p>每个步骤用什么规则，不需要写</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220412113814255.png" alt="image-20220412113814255"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220412115012877.png" alt="image-20220412115012877"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414134602890.png" alt="image-20220414134602890"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/../../../Software/Typora/discreteMathematics.assets/image-20220414135730735.png" alt="image-20220414135730735"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414140046108.png" alt="image-20220414140046108"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414140325697.png" alt="image-20220414140325697"> </p>
+<h2 id="题型"><a href="#题型" class="headerlink" title="题型"></a>题型</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220414140537362.png" alt="image-20220414140537362"> </p>
+<p>C</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414140558937.png" alt="image-20220414140558937"> </p>
+<p>C</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414140646481.png" alt="image-20220414140646481"></p>
+<p>C</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414140713845.png" alt="image-20220414140713845"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414140834998.png" alt="image-20220414140834998"> </p>
+<p>C C</p>
+<p> <img src="/2024/07/07/Math/discreteMathematics/image-20220414140956780.png" alt="image-20220414140956780"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414141012549.png" alt="image-20220414141012549"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414141024187.png" alt="image-20220414141024187"> </p>
+<p>B</p>
+<p>逐步进行，不能跳步</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414141220384.png" alt="image-20220414141220384"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414141314781.png" alt="image-20220414141314781"> </p>
+<p>B</p>
+<p>不写规则，式子写对就可以</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414141511384.png" alt="image-20220414141511384"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414141528902.png" alt="image-20220414141528902"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414141655492.png" alt="image-20220414141655492"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414141943327.png" alt="image-20220414141943327"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/../../../Software/Typora/discreteMathematics.assets/image-20220414141916766.png" alt="image-20220414141916766"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414142009981.png" alt="image-20220414142009981"> </p>
+<p>ABB</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414142018408.png" alt="image-20220414142018408"> </p>
+<p>B</p>
+<h1 id="六、集合代数"><a href="#六、集合代数" class="headerlink" title="六、集合代数"></a>六、集合代数</h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210831133406162-1837869085-1634453530388.png" alt="image-20210831133402148"></p>
+<p>平时30分，期中（讲完集合论，第8、9周后）10分，课堂表现20分，</p>
+<hr>
+<p><strong>重点6.1</strong></p>
+<p><strong>集合的表示方法（谓词表示法、）</strong></p>
+<p><strong>6.3（有几个集合符合这个，符合哪个）</strong></p>
+<p><strong>6.4（证明）</strong></p>
+<p>选择题、大题、</p>
+<hr>
+<h2 id="6-1集合的基本概念"><a href="#6-1集合的基本概念" class="headerlink" title="6.1集合的基本概念"></a>6.1集合的基本概念</h2><h3 id="1-集合定义"><a href="#1-集合定义" class="headerlink" title="1.集合定义"></a><strong>1.集合定义</strong></h3><p>​	集合没有精确的数学定义</p>
+<p>​	理解：由离散个体构成的整体称为<strong>集合</strong>，称这些个体为集合的<strong>元素</strong></p>
+<p>​	常见的书籍：</p>
+<p>​			<strong>N（自然数）（非负整数）包含0</strong></p>
+<p>​			Z 整数集合</p>
+<p>​			Q 有理数是<strong>整数（正整数、0、负整数）和分数的统称，是整数和分数的集合</strong>。</p>
+<p>​			R 实数（有理数和无理数）</p>
+<p>​			C 复数</p>
+<p>​			Z<sup>+</sup>正整数集</p>
+<h3 id="2-集合表示法"><a href="#2-集合表示法" class="headerlink" title="2.集合表示法"></a><strong>2.集合表示法</strong></h3><p>​	<strong>枚举法</strong>————通过列出全体元素来表示集合</p>
+<p>​	<strong>谓词表示法</strong>————通过谓词概括集合元素的性质</p>
+<p>​		实例：</p>
+<p>​				枚举法 自然数集合 N&#x3D;{0，1，2，3，···}</p>
+<p>​				谓词法 S&#x3D;{x|x 是实数，x<sub>2</sub>—1&#x3D;0}</p>
+<h3 id="3-元素与集合"><a href="#3-元素与集合" class="headerlink" title="3.元素与集合"></a>3.元素与集合</h3><p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210831135511029-953909993.png"></p>
+<p>大集合中的小集合中的元素不属于大集合</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210831140038288-1259282133.png"></p>
+<p>​		&sube; 包含于（可以等于)	^而且</p>
+<p>​		&sub; 真包含 </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210831140529671-72072801.png" alt="image-20210831140527313"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210831140639103-1962127639.png" alt="image-20210831140636661"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210831140953199-122115476.png" alt="image-20210831140950782"></p>
+<p>​					集合加个绝对值，表示集合内元素的个数</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210831141600914-1797905525.png" alt="image-20210831141553239"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210831142311648-601409589.png" alt="image-20210831142307595"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210831142512497-1209856841.png" alt="image-20210831142510028"></p>
+<ol>
+<li><p>(1) 	      {x|x∈N  且  x&lt;5}</p>
+<p>（2）	{x|x&#x3D; 2k+1，k∈Z}</p>
+<p>（3）	{x| x &#x3D; 10k,   k∈Z}</p>
+<ol start="2">
+<li><p>(1)	{0,1,2,3,4,5,6,7,8,9}</p>
+<p>(2)	{2,5}</p>
+<p>开口向上为或，向下为且</p>
+<p>(3)	{4,5,6,7,8,9,10,11}</p>
+<p>(4) &empty; （或{}）</p>
+<p>(5)	{&lt;0,-1&gt;,&lt;0,0&gt;,&lt;1,-1&gt;,&lt;1,0&gt;,&lt;2,-1&gt;,&lt;2,0&gt;}</p>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210831144510071-2001780816.png" alt="image-20210831144507737"></p>
+<p>​	<strong>5.(1)	真</strong></p>
+<p>​		(2)	<strong>假</strong></p>
+<p>​		(3)	真</p>
+<p>​		(4)	真</p>
+<p>​		(5)	<strong>真</strong></p>
+<p>​		(6)	真</p>
+<p>​		(7)	真</p>
+<p>​		(8)	<strong>假</strong></p>
+<p>空集是一个集合，按集合算</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210831145131650-702002692.png"> </p>
+<p>6.成立的是（2）</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210831145535866-2071458499.png" alt="image-20210831145533444"></p>
+<p>8.（1） {<em>Ø，{a},{b},{c},{a,b},{a,c},{b,c},{a,b,c}</em> }</p>
+<p>​	（2）*{Ø，{1}，，{1，{2，3}} }*</p>
+<p>​	（3）*{Ø，{Ø} }*</p>
+<p>​	（4）*{Ø，{Ø}，，{Ø，{Ø}} }*</p>
+<h2 id="6-2-集合的运算"><a href="#6-2-集合的运算" class="headerlink" title="6.2 集合的运算"></a>6.2 集合的运算</h2><p>初级运算</p>
+<p>集合的基本运算有∨ ∧</p>
+<p>​        <strong>并              <em>A</em>∪<em>B</em>&#x3D;{x | x ∈ <em>A</em> ∨ x ∈ <em>B</em>}</strong></p>
+<p>​    <strong>交                      A∩B &#x3D; {x | x ∈ <em>A</em> ∧ x ∈ <em>B</em>}</strong></p>
+<p> <strong>相对补             A-B  &#x3D; {x | x ∈ <em>A</em> ∧ x ∉ <em>B</em>}</strong></p>
+<p><strong>对称差              A⊕B  &#x3D;(A-B)∪（B-A)</strong></p>
+<p><strong>9              ~A  &#x3D; E-A</strong></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012092004524-1125120544.png" alt="image-20210907134013868"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012092010898-2143120493.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012092015646-1456309559.png"></p>
+<p>(1)假</p>
+<p><strong>(2)真</strong></p>
+<p>(3)真</p>
+<p>(4)真</p>
+<p>(5)假</p>
+<p>(6)假</p>
+<p>(7)假</p>
+<p>(8)真</p>
+<p>(9)假</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012092020667-221671408.png" alt="image-20211010210045228"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012092023460-1479242716.png" alt="image-20211010210545679"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012092026188-1106094076.jpg" alt="微信图片_20210918100204"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012092028763-2021635066.jpg" alt="微信图片_20210918100307"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012092030635-1693704995.jpg" alt="微信图片_20210918100256"></p>
+<h1 id="七、二元关系"><a href="#七、二元关系" class="headerlink" title="七、二元关系"></a>七、二元关系</h1><ul>
+<li>有序对与笛卡尔积</li>
+<li>二元关系的定义与表示法</li>
+<li>关系的运算</li>
+<li>关系的性质</li>
+<li>关系的闭包</li>
+<li>等价关系与划分</li>
+<li>偏序关系</li>
+</ul>
+<h2 id="7-1-有序对与笛卡尔积"><a href="#7-1-有序对与笛卡尔积" class="headerlink" title="7.1 有序对与笛卡尔积"></a>7.1 有序对与笛卡尔积</h2><p><strong>定义7.1：</strong>有两个元素x 和 y ，按照一定的顺序组成的二元组称为有序对，记作&lt;x,y&gt;</p>
+<p><strong>性质：</strong></p>
+<ol>
+<li><p>有序性&lt; x, y&gt;≠ &lt;y , x&gt;(当x ≠ y 时 )</p>
+</li>
+<li><p>&lt; x, y&gt;与&lt; u, v&gt;相等的充分必要条件是</p>
+<p>​	&lt; x, y&gt; &#x3D; &lt; u, v&gt; <img src="/2024/07/07/Math/discreteMathematics/2510762-20210928134057502-1097940792.png" alt="image-20210928134053626"></p>
+</li>
+</ol>
+<h2 id="7-2-二元关系"><a href="#7-2-二元关系" class="headerlink" title="7.2 二元关系"></a>7.2 二元关系</h2><p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210928134645627-1193549118.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210928135302200-1465310260.png" alt="image-20210928135258221"></p>
+<h3 id="A到B的关系与A上的关系"><a href="#A到B的关系与A上的关系" class="headerlink" title="A到B的关系与A上的关系"></a>A到B的关系与A上的关系</h3><p><strong>定义：</strong>设<em><strong>A,B</strong></em>为集合，<em>A</em>×<em>B</em>的任何子集所定义的二元关系叫做<strong>从<em>A</em>到<em>B</em>的二元关系</strong>，当A&#x3D;B时则叫做<strong><em>A</em>上的二元关系</strong></p>
+<p><strong>例：</strong></p>
+<p>A&#x3D;{0,1} , B&#x3D;{1,2,3} , 那么R<sub>1</sub>&#x3D;{&lt;0,2&gt;} , R<sub>2</sub> &#x3D;A×B,R<sub>3</sub>&#x3D; ∅</p>
+<p><strong>定义：</strong>⋁⋀</p>
+<p>设A为集合，</p>
+<ol>
+<li><p>∅ 是A 上的关系，称为空关系</p>
+</li>
+<li><p>全域关系E<sub>A</sub>&#x3D;{&lt; x, y&gt;|x ∈A ∧ y ∈ A}&#x3D;A×A</p>
+<p>恒等关系I<sub>A</sub> &#x3D; {&lt; x, x&gt;|x ∈A }</p>
+<p>小于等于关系L<sub>A</sub> &#x3D;{&lt; x, y&gt;|x , y ∈ A∧ x≤y}，A为实数子集</p>
+<p>整除关系D<sub>B</sub> &#x3D; {&lt; x, y&gt;|x , y ∈ B  ⋀ x整除y},B 为非0整数子集，y是被除数，y除以x</p>
+<p>包含关系R<sub>&sube;</sub> &#x3D; {&lt;x,y&gt;| x,y &isin; A  ⋀ x&sube;y }，A是集合族。</p>
+</li>
+</ol>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210928142209672-129892220.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20210928142640802-1696873131.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012093023747-2017629153.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012093020531-1373381842.png"></p>
+<p>素数：除了1和它本身之外没有其他的因数</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012093017029-2062885330.png" alt="image-20211005140112567"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012092956262-196119442.png" alt="image-20211005141045920"></p>
+<h2 id="7-3-关系的运算"><a href="#7-3-关系的运算" class="headerlink" title="7.3 关系的运算"></a>7.3 关系的运算</h2><p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012093157288-1479830696.png" alt="image-20211005141507180"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012093252311-1203799393.png" alt="image-20211005142512660"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012093200477-1787238884.png" alt="image-20211005143101395"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012093207386-1348877694.png" alt="image-20211005143930399"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012093210053-1254693089.png" alt="image-20211005144202163"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012093237744-414704695.png" alt="image-20211005144617163"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012093212730-733799769.png" alt="image-20211005144803692"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012093222061-1987800662.png" alt="image-20211005144934368"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211012093226716-1490458445.png" alt="image-20211005150044517"></p>
+<h2 id="7-4-关系的性质"><a href="#7-4-关系的性质" class="headerlink" title="7.4 关系的性质"></a>7.4 关系的性质</h2><p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211013221414313-301060987.png" alt="image-20211013221413204"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211013221425193-2025282276.png" alt="image-20211013221424057"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211013221432747-916224202.png" alt="image-20211013221431645"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211013221441200-162014362.png" alt="image-20211013221440094"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211013221448754-1494402863.png" alt="image-20211013221447794"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211013221455495-423626427.png" alt="image-20211013221454407"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211013221503008-1803196291.png" alt="image-20211013221500782"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211013221509168-226866676-1634455539576.png" alt="image-20211013221508114"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211019214115701.png" alt="image-20211019214115701"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211019214156142.png" alt="image-20211019214156142"></p>
+<h2 id="7-5-闭包"><a href="#7-5-闭包" class="headerlink" title="7.5 闭包"></a>7.5 闭包</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211019214242709.png" alt="image-20211019214242709"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211019214324721.png" alt="image-20211019214324721"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211019214335182.png" alt="image-20211019214335182"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211019214345154.png" alt="image-20211019214345154"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211019214353199.png" alt="image-20211019214353199"></p>
+<h2 id="7-6-等价关系与划分"><a href="#7-6-等价关系与划分" class="headerlink" title="7.6 等价关系与划分"></a>7.6 等价关系与划分</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211019214525420-1635259050266.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211026214617065-402123390-1635259048860.png" alt="image-20211026214548774"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211026214952728-796555232-1635509801836.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211026215029690-1277271337-1635259055699.png" alt="image-20211026215028572"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211026215041900-827433171-1635259067979.png" alt="image-20211026215039981"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211026215049660-815248524-1635508782126.png" alt="image-20211026215047665"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211026215105257-1916205497-1635508787873.png" alt="image-20211026215103032"></p>
+<h2 id="7-7-偏序关系"><a href="#7-7-偏序关系" class="headerlink" title="7.7 偏序关系"></a>7.7 偏序关系</h2><p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211026215122567-299725995-1635508793920.png" alt="image-20211026215121472"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211026215137070-525687196-1636031809605.png" alt="image-20211026215135816"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211026215142961-279194588-1636031789583.png" alt="image-20211026215141809"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104211504577-1261893519.png" alt="image-20211029202827098"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211029202852981-584343403.png" alt="image-20211029202850621"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211029202904273-1849639818.png" alt="image-20211029202902779"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104212214202-1679212826.png" alt="image-20211029202910089"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104212218161-1389502528.png" alt="image-20211102133739082"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211102133816222.png" alt="image-20211102133816222"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211029202930160-1333726588.png" alt="image-20211029202928761"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104212302914-1615346733.png" alt="image-20211102134003401"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102134950857-589711757.png" alt="image-20211102134949577"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102134458438-808864587.png" alt="image-20211102134452266"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102141218456-156574397.png" alt="image-20211102141217285"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102141546784-443231923.png" alt="image-20211102141545710"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102141955003-375797778.png" alt="image-20211102141952878"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102142358530-49574775.png" alt="image-20211102142357402"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102144112266-41970998.png" alt="image-20211102144110356"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145013012-1207810696.png" alt="image-20211102145011203"></p>
+<h2 id="第七章-题型"><a href="#第七章-题型" class="headerlink" title="第七章 题型"></a>第七章 题型</h2><p>100页</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145144597-1875338014.png"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145224580-791054056.png" alt="image-20211102145223268"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145254332-886899461.png" alt="image-20211102145253249"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145313176-608336032.png" alt="image-20211102145312110"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145326642-366681601.png" alt="image-20211102145325530"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145418895-368640788.png" alt="image-20211102145417750">大题</p>
+<p>102</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145442328-663742558.png">选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145510056-945016369.png" alt="image-20211102145509037"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145522368-2113927141.png" alt="image-20211102145521286"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145551375-963530330.png" alt="image-20211102145550224"></p>
+<p> M 平方都会算</p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145700859-1842635797.png">选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145724292-2010447952.png">选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145736254-326138627.png" alt="image-20211102145735122"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211102145757229.png"></p>
+<p>a.  对称   </p>
+<p>b.反自反 反对称 传递</p>
+<p>c.自反  反对称  </p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145845917-729474521.png">大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102145920089-1626422527.png">选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102150006655-83311209.png"></p>
+<p>大题 会背</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102150047744-23341012.png"></p>
+<p>大题（求等价关系的关系图）</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102150116206-902495064.png" alt="image-20211102150115084"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102150144432-1494524993.png" alt="image-20211102150143428">选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102150158658-844635331.png" alt="image-20211102150157515"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102150222236-966885274.png" alt="image-20211102150221198"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102150253289-792188646.png" alt="image-20211102150252065"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102150326264-869203706.png" alt="image-20211102150325146"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102150403508-718586871.png" alt="image-20211102150402425"><strong>选择</strong></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102150418749-347559527.png" alt="image-20211102150417441"></p>
+<p><strong>选择</strong></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102150446223-1656104153.png" alt="image-20211102150445086"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211102150507893-1912473254.png" alt="image-20211102150506720"></p>
+<p>大题<br><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200112675-552669916.png" alt="image-20211104200109959"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200133121-2135948020.png" alt="image-20211104200131244"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200224445-138576336.png" alt="image-20211104200222587">大题（列出集合，所有形式)</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200258806-417413824.png" alt="image-20211104200256568"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200327418-1784644290.png" alt="image-20211104200325555"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200341058-1906538356.png" alt="image-20211104200339163"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200353736-350931823.png" alt="image-20211104200351809">选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200408119-167036458.png" alt="image-20211104200406284"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200421015-146736404.png" alt="image-20211104200419090"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200436073-500941235.png" alt="image-20211104200434211"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200450473-1491857260.png" alt="image-20211104200448571"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200503850-836094306.png"></p>
+<p>关系图</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200526697-1380638761.png" alt="image-20211104200524992"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200609930-1924044162.png" alt="image-20211104200607042"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104200627444-1715065517.png" alt="image-20211104200625412"></p>
+<p>大题</p>
+<h1 id="八、函数"><a href="#八、函数" class="headerlink" title="八、函数"></a>八、函数</h1><h2 id="8-1函数的定义与性质（重点）"><a href="#8-1函数的定义与性质（重点）" class="headerlink" title="8.1函数的定义与性质（重点）"></a>8.1函数的定义与性质（重点）</h2><p>主要是双射函数的证明</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104191322339-1702184718.png" alt="image-20211104191320046"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104191921326-1804424734.png" alt="image-20211104191918320"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104193856857-1086028267.png" alt="image-20211104193838665"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104194038890-1421065458.png" alt="image-20211104194036608"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104194344800-2062021364.png" alt="image-20211104194341361"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104205023465-367550027.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104205109520-2094784508.png" alt="image-20211104205106560"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104205208552-1226330722.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104205851190-1321892940.png" alt="image-20211104205849305"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211104205818167-2078655881.png" alt="image-20211104205814820"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211109134811751-876369246.png"></p>
+<p>（1）单、满、双射</p>
+<p>（2）单、满、双射</p>
+<p>（3）单、不满、不双射</p>
+<p>（4）单、不满、不双射</p>
+<p>（5）不单、满、不双射</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211109140140690-1770752030.png" alt="image-20211109140137936"></p>
+<p>（1）单、不满、不双射</p>
+<p>（2）不单、不满、不双射</p>
+<p>（3）不单、不满、不双射</p>
+<p>（4）不单、满、不双射</p>
+<p>（5）单、不满、不双射</p>
+<p>（6）不单、不满、不双射                        </p>
+<h2 id="8-2-、推论"><a href="#8-2-、推论" class="headerlink" title="8.2 、推论"></a>8.2 、推论</h2><p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211109142434181-1346814730.png" alt="image-20211109142431495"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211109144407097-1008558161.png" alt="image-20211109144359330"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211109143637095-638001222.png" alt="image-20211109143633814"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/2510762-20211109144643195-1669518971.png" alt="image-20211109144640586"></p>
+<h2 id="习题-2"><a href="#习题-2" class="headerlink" title="习题"></a>习题</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211111081817642.png"></p>
+<p>F1是函数，F2不是函数，函数是对定义域来说，有唯一的一个值</p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211111081847377.png"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211111081931009.png"></p>
+<p>单射：对值域中的每个数在定义域中都有唯一一个值</p>
+<p>满射：函数的值域等于它定义的值域</p>
+<p>（1）不单射，不满射，不双射</p>
+<p>（2）单射，不满射，不双射</p>
+<p>（3）不单射，满射，不双射</p>
+<p>（4）单射，满射，双射</p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211111081956073.png"></p>
+<p>函数：定义域相等，值域包含</p>
+<p>（1）构成，不单射，不满射，不双射</p>
+<p>（2）不构成</p>
+<p>（3）不构成</p>
+<p>（4）构成：单射，满射，双射</p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211111082027072.png" alt="image-20211111082027072"></p>
+<p>没题型</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211111082117022.png"></p>
+<p>1.选择 2.大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211111082140964.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211111082155688.png" alt="image-20211111082155688"></p>
+<p>（1）单射，满射，双射</p>
+<p>（2）单射，满射，双射</p>
+<p>（3）单射，不满射，不双射</p>
+<p>（4）单射，不满射，不双射</p>
+<p>（5）不单射，满射，不双射</p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211111082211721.png"></p>
+<p>（1）单射，不满射，不双射</p>
+<p>（2）不单射，不满射，不双射</p>
+<p>（3）不单射，不满射，不双射</p>
+<p>（4）不单射，满射，不双射</p>
+<p>（5）单射，不双射，不满射</p>
+<p>（6）不单射，不双射，不满射</p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211111082242436.png"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211111082335760.png"></p>
+<p>单射，不满射</p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211111082411984.png" alt="image-20211111082411984"></p>
+<p>重要：<img src="/2024/07/07/Math/discreteMathematics/2510762-20211109150716655-1501894036.png"></p>
+<p>所以函数 f 为双射</p>
+<p>大题</p>
+<h1 id="九、图的基本概念"><a href="#九、图的基本概念" class="headerlink" title="九、图的基本概念"></a>九、图的基本概念</h1><h2 id="9-1（重点）"><a href="#9-1（重点）" class="headerlink" title="9.1（重点）"></a>9.1（重点）</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211124204755185.png"></p>
+<p>多重意思是 边允许重复</p>
+<p>无向图：允许两个顶点之间有多个边，像e<sub>5</sub>，e<sub>6</sub></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124205056579.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124205348344.png" alt="image-20211124205348344"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124205601694.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124205815943.png"></p>
+<p>含平行边的图为多重图</p>
+<p>不含平行边和环的图为简单图</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124210347642.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124210510257.png" alt="image-20211124210510257"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124210537686.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124210718532.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124210800328.png" alt="image-20211124210800328"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124210909968.png" alt="image-20211124210909968"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124211031945.png" alt="image-20211124211031945"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124211423558.png" alt="image-20211124211423558"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124211612638.png" alt="image-20211124211612638"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211124212142615.png" alt="image-20211124212142615"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211116133803537.png" alt="image-20211116133803537"></p>
+<p>导出子图不考</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211116134525063.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211116134807379.png" alt="image-20211116134807379"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211116135746738.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211116140229957.png" alt="image-20211116140229957"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211116141343791.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211116143452826.png" alt="image-20211116143452826"></p>
+<h2 id="9-2-通路与回路"><a href="#9-2-通路与回路" class="headerlink" title="9.2 通路与回路"></a>9.2 通路与回路</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211116143723254.png" alt="image-20211116143723254"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211116144338872.png" alt="image-20211116144338872"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211116144945071.png" alt="image-20211116144945071"></p>
+<h2 id="9-3图的连通性"><a href="#9-3图的连通性" class="headerlink" title="9.3图的连通性"></a>9.3图的连通性</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211116145521793.png" alt="image-20211116145521793"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211116150120978.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118083621856.png" alt="image-20211118083621856"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118084211827.png" alt="image-20211118084211827"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118084857520.png" alt="image-20211118084857520"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118090815500.png" alt="image-20211118090815500"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118091203032.png" alt="image-20211118091203032"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118091237781.png" alt="image-20211118091237781"></p>
+<p>$28. \kappa(G) &#x3D; 2,,,,,, \lambda&#x3D;3$</p>
+<h2 id="知识点-全部都是选择题"><a href="#知识点-全部都是选择题" class="headerlink" title="知识点-全部都是选择题"></a>知识点-全部都是选择题</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211118092444748.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118092523701.png" alt="image-20211118092523701"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118092559312.png" alt="image-20211118092559312"><img src="/2024/07/07/Math/discreteMathematics/image-20211118092656762.png"><img src="/2024/07/07/Math/discreteMathematics/image-20211118092735222.png"><img src="/2024/07/07/Math/discreteMathematics/image-20211118092749303.png" alt="image-20211118092749303"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118092804571.png"><img src="/2024/07/07/Math/discreteMathematics/image-20211118092821587.png" alt="image-20211118092821587"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118092831444.png" alt="image-20211118092831444"></p>
+<p>彼得松图</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118092940295.png" alt="image-20211118092940295"></p>
+<p>简单图：不含平行边和环的图</p>
+<p>n阶无向完全图：每个顶点均与其余 n-1个顶点相邻</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093014552.png" alt="image-20211118093014552"><img src="/2024/07/07/Math/discreteMathematics/image-20211118093041789.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093050476.png" alt="image-20211118093050476"><img src="/2024/07/07/Math/discreteMathematics/image-20211118093126201.png"></p>
+<p>生成子图：点集相等</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093201162.png"></p>
+<p>带权图：对每一个边给定了一个数W（e）</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093212693.png"></p>
+<p>最短路径算法：Dijkstra标号法</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093223638.png" alt="image-20211118093223638"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093339298.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093403249.png" alt="image-20211118093403249"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093506767.png"></p>
+<p>点连通度：就是去除几个点后可以将原图分成两个</p>
+<p>边连通度：就是去除几条边之后可以将原图分为两个</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211213164949844.png" alt="image-20211213164949844"></p>
+<p>2.$V&#x3D;\lbrace v_1,v_2,v_3,v_4,v_5\rbrace\E&#x3D;{\lbrace(v_1,v_2),(v_2,v_3),(v_2,v_4),v_3,v_5),(v_4,v_5)\rbrace}$</p>
+<p>   $V&#x3D;\lbrace v_1,v_2,v_3,v_4,v_5 \rbrace\E&#x3D;\lbrace(v_1,v_2),(v_1,v_2),(v_2,v_3),(v_3,v_4),(v_4,v_5)\rbrace$</p>
+<p>3.$d(v_1)&#x3D;1,d(v_2)&#x3D;3,d(v_3)&#x3D;2,d(v_4)&#x3D;2,d(v_5)&#x3D;2\d(v_1)&#x3D;2,d(v_2)&#x3D;3,d(v_3)&#x3D;2,d(v_4)&#x3D;2,d(v_5)&#x3D;1$</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093617919.png"></p>
+<p>n阶非连通的简单图的边数最多可为$\frac{(n-1)(n-2)}{2}$，最少为 0</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211116141343791.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093631550.png"></p>
+<p>9.由握手定理可知，顶点的度数：6*2&#x3D;12，12-3-5&#x3D;4&#x3D;2 * 2，有4个顶点  </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093640330.png" alt="image-20211118093640330"></p>
+<p>由握手定理得：顶点的度数是边数的2倍，</p>
+<p>（1）5+5+3+2+2&#x3D;17，不是2的倍数 否</p>
+<p>（2）3+3+3+3+2&#x3D;14，是2的倍数     是</p>
+<p>（3）1+2+3+4+5&#x3D;15，不是2的倍数   否</p>
+<p>（4）4*5&#x3D;20，是2的倍数，               是</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093711935.png"><br>$$<br>G的边数 &#x3D; \frac{n(n-1)}{4}\Rightarrow n&#x3D;4k或n&#x3D;4k+1<br>$$</p>
+<p>$$<br>18.m’&#x3D;\frac{n(n-1)}{2}-m<br>$$</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093735561.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211213172530849.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118090815500.png" alt="image-20211118090815500"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118091203032.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118093808457.png"></p>
+<p>$28. \kappa(G) &#x3D; 2,,,,,, \lambda(G)&#x3D;3,,,,\delta(G)&#x3D;4$</p>
+<h1 id="十、树（大题）"><a href="#十、树（大题）" class="headerlink" title="十、树（大题）"></a>十、树（大题）</h1><h2 id="10-1、无向树"><a href="#10-1、无向树" class="headerlink" title="10.1、无向树"></a>10.1、无向树</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211118094607175.png" alt="image-20211118094607175"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211118095200371.png" alt="image-20211118095200371"></p>
+<p>前缀码：A的任意两个互不为前缀：前缀码</p>
+<p>2叉树生成前缀码：左0右1，只有1个分支，按0表示</p>
+<p>入度为0的是树根</p>
+<p>入度为1，出度为0，是树叶</p>
+<p>入度为1，出度不为0，是内点</p>
+<p>分支点：内点和树根</p>
+<p>从树根到顶点的路径长度称为 层数</p>
+<p>所有顶点的最大层数称为 树高</p>
+<p>每个分支点最多有r个儿子，r叉树</p>
+<p>​					都有r个儿子,r叉正则树</p>
+<p>Huffman算法——求最优二叉树</p>
+<p>W（T）等于所有分支点的权之和，也等于树叶的大小乘以层数</p>
+<p>生成子图：顶点一样，边数是子集</p>
+<p>生成树：无向图的生成子图是树</p>
+<p>实现称为子图的树枝，不在子图中的为权</p>
+<p>最小生成树：无向连通带权图G&#x3D;&lt;V,E,W&gt;,T是G的生成树，T各边权之和为T的权 W（T)</p>
+<p>​								G中权最小的生成树为G的最小生成树</p>
+<p>避圈法（Kruskal算法）</p>
+<p>波兰符合法：前序排列</p>
+<p>逆波兰符号法：后序排列</p>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>{1，00，011，0101，01001，0 000}为前缀码</p>
+<p>{1，00，011，0101，0100，01001，01000}不是前缀码，因为0100是01001（01000）的前缀</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211213204131646.png"></p>
+<p>由握手定理得：顶点的度数之和是边数的2倍，</p>
+<p>​                           无向树的边数 等于 阶数（顶点数）减1</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211213204121672.png" alt="image-20211213204121672"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211213204102045.png" alt="image-20211213204102045"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211213204050792.png" alt="image-20211213204050792"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211213204036781.png" alt="image-20211213204036781"></p>
+<p>求最小生成树的算法：避图法（Kruskal算法）</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211213204010811.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211213204158731.png" alt="image-20211213204158731"><img src="/2024/07/07/Math/discreteMathematics/image-20211213204221093.png" alt="image-20211213204221093"><img src="/2024/07/07/Math/discreteMathematics/image-20211213204229209.png" alt="image-20211213204229209"><img src="/2024/07/07/Math/discreteMathematics/image-20211213204236631.png" alt="image-20211213204236631"><img src="/2024/07/07/Math/discreteMathematics/image-20211213204245133.png" alt="image-20211213204245133"><img src="/2024/07/07/Math/discreteMathematics/image-20211213204302914.png" alt="image-20211213204302914"><img src="/2024/07/07/Math/discreteMathematics/image-20211213204310696.png" alt="image-20211213204310696"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219101041723.png" alt="image-20211219101041723"></p>
+<h1 id="十一、几种特殊的图"><a href="#十一、几种特殊的图" class="headerlink" title="十一、几种特殊的图"></a>十一、几种特殊的图</h1><p>大题：哈密顿图，平面图</p>
+<p>选择：欧拉图，二部图</p>
+<p>欧拉图：经过每条边一次</p>
+<p>哈密顿图：经过每个顶点一次</p>
+<p>半欧拉图，半哈密顿图：不存在回路，存在通路</p>
+<h2 id="11-1、欧拉图"><a href="#11-1、欧拉图" class="headerlink" title="11.1、欧拉图"></a>11.1、欧拉图</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211219102035895.png" alt="image-20211219102035895"></p>
+<p>既不是欧拉图，也不是半欧拉图</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219102225069.png" alt="image-20211219102225069"><img src="/2024/07/07/Math/discreteMathematics/image-20211219102326759.png" alt="image-20211219102326759"><img src="/2024/07/07/Math/discreteMathematics/image-20211219103426638.png" alt="image-20211219103426638"></p>
+<p>欧拉图：度数都是偶数，连通</p>
+<p>半欧拉图：恰有2个顶点度数是奇数</p>
+<p>既不是欧拉图，也不是半欧拉图：四个顶点度数都是3</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219104017271.png" alt="image-20211219104017271"></p>
+<p>找欧拉回路</p>
+<h2 id="11-2、哈密顿图"><a href="#11-2、哈密顿图" class="headerlink" title="11.2、哈密顿图"></a>11.2、哈密顿图</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211219104402706.png" alt="image-20211219104402706"></p>
+<p>有经过每个顶点的回路</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219105450915.png" alt="image-20211219105450915"><img src="/2024/07/07/Math/discreteMathematics/image-20211219105554737.png" alt="image-20211219105554737"><img src="/2024/07/07/Math/discreteMathematics/image-20211219110003903.png" alt="image-20211219110003903"><img src="/2024/07/07/Math/discreteMathematics/image-20211219110547520.png" alt="image-20211219110547520"><img src="/2024/07/07/Math/discreteMathematics/image-20211219112708616.png" alt="image-20211219112708616"><img src="/2024/07/07/Math/discreteMathematics/image-20211219113920454.png" alt="image-20211219113920454"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219113947449.png" alt="image-20211219113947449"><img src="/2024/07/07/Math/discreteMathematics/image-20211219114107564.png" alt="image-20211219114107564"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219114358359.png" alt="image-20211219114358359"><img src="/2024/07/07/Math/discreteMathematics/image-20211219114437889.png" alt="image-20211219114437889"></p>
+<p>a.欧拉图 </p>
+<p>b.半欧拉图</p>
+<p>c.欧拉图</p>
+<p>d.既不是欧拉图，也不是半欧拉图</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219114854596.png" alt="image-20211219114854596"></p>
+<p>a.半哈密顿图</p>
+<p>b.哈密顿图</p>
+<p>c.半哈密顿图</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219115451445.png" alt="image-20211219115451445"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219135457703.png" alt="image-20211219135457703"><img src="/2024/07/07/Math/discreteMathematics/image-20211219135534549.png" alt="image-20211219135534549"><img src="/2024/07/07/Math/discreteMathematics/image-20211219135756572.png" alt="image-20211219135756572"><img src="/2024/07/07/Math/discreteMathematics/image-20211219135811347.png"></p>
+<p>删去顶点后的图不用画，其他的都要写</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219135911383.png" alt="image-20211219135911383"></p>
+<h2 id="11-3、二部图与匹配"><a href="#11-3、二部图与匹配" class="headerlink" title="11.3、二部图与匹配"></a>11.3、二部图与匹配</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211219141402334.png" alt="image-20211219141402334"></p>
+<p>只能上下连，不能左右连</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219141433573.png" alt="image-20211219141433573"><img src="/2024/07/07/Math/discreteMathematics/image-20211219141531433.png" alt="image-20211219141531433"><img src="/2024/07/07/Math/discreteMathematics/image-20211219142624178.png" alt="image-20211219142624178"><img src="/2024/07/07/Math/discreteMathematics/image-20211219142925649.png" alt="image-20211219142925649"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219143617706.png" alt="image-20211219143617706"></p>
+<p>3.（1）错 要求N为奇数</p>
+<p>​		（2）对</p>
+<h2 id="11-4、平面图"><a href="#11-4、平面图" class="headerlink" title="11.4、平面图"></a>11.4、平面图</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211219143814714.png" alt="image-20211219143814714"><img src="/2024/07/07/Math/discreteMathematics/image-20211219144211271.png" alt="image-20211219144211271"><img src="/2024/07/07/Math/discreteMathematics/image-20211219144420422.png" alt="image-20211219144420422"><img src="/2024/07/07/Math/discreteMathematics/image-20211219144558781.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219150239588.png" alt="image-20211219150239588"></p>
+<p>只属于R<sub>0</sub>的边，需要算两次，如i，其他的算一次，</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219150407391.png" alt="image-20211219150407391"><img src="/2024/07/07/Math/discreteMathematics/image-20211219150844587.png" alt="image-20211219150844587"></p>
+<p>极大平面图：每个面的次数均为3，包括无限面</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219150920878.png" alt="image-20211219150920878"><img src="/2024/07/07/Math/discreteMathematics/image-20211219151108568.png" alt="image-20211219151108568"><img src="/2024/07/07/Math/discreteMathematics/image-20211219151348423.png" alt="image-20211219151348423"><img src="/2024/07/07/Math/discreteMathematics/image-20211219151443560.png" alt="image-20211219151443560"></p>
+<p>什么图都不是</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219152220123.png" alt="image-20211219152220123"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219152619871.png" alt="image-20211219152619871"></p>
+<p>非连通图，需要验证推广</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219152722006.png" alt="image-20211219152722006"></p>
+<p>是		不是		C不要</p>
+<h2 id="题型-1"><a href="#题型-1" class="headerlink" title="题型"></a>题型</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20211219152828581.png" alt="image-20211219152828581"></p>
+<p>没有题型</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219152907633.png" alt="image-20211219152907633"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219152938610.png" alt="image-20211219152938610"> 	选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153003641.png" alt="image-20211219153003641"></p>
+<p>没有</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153020301.png" alt="image-20211219153020301"></p>
+<p>没有</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153038166.png" alt="image-20211219153038166"><img src="/2024/07/07/Math/discreteMathematics/image-20211219153049409.png" alt="image-20211219153049409"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153119054.png" alt="image-20211219153119054"><img src="/2024/07/07/Math/discreteMathematics/image-20211219153129098.png" alt="image-20211219153129098"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153148091.png" alt="image-20211219153148091"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153239552.png" alt="image-20211219153239552"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153357229.png" alt="image-20211219153357229"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153446103.png" alt="image-20211219153446103"></p>
+<p>上面平面图     下面平面嵌入</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153541478.png" alt="image-20211219153541478"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153631286.png" alt="image-20211219153631286"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153657284.png" alt="image-20211219153657284"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153707579.png" alt="image-20211219153707579"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153722170.png" alt="image-20211219153722170"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153740391.png" alt="image-20211219153740391"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153806763.png" alt="image-20211219153806763"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153830924.png" alt="image-20211219153830924"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153850875.png" alt="image-20211219153850875"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219153913931.png" alt="image-20211219153913931"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219154005627.png" alt="image-20211219154005627"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219154036260.png" alt="image-20211219154036260"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219154048080-1639899648356.png" alt="image-20211219154048080"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219154103919.png" alt="image-20211219154103919"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219154155705.png" alt="image-20211219154155705"></p>
+<p>验证面的次数之和是边的二倍</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219154356796.png" alt="image-20211219154356796"></p>
+<p>大题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219154233084.png" alt="image-20211219154233084"></p>
+<p>选择</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20211219154256076.png" alt="image-20211219154256076"></p>
+<p>大题</p>
+<h1 id="十四、代数系统概论"><a href="#十四、代数系统概论" class="headerlink" title="十四、代数系统概论"></a>十四、代数系统概论</h1><ul>
+<li>二元运算及其性质<br>二元运算和一元运算、二元运算性质、特意元素</li>
+<li>代数系统的概念</li>
+<li>几个典型的代数系统<br>半群、独异点、群<br>环与域<br>格与布尔代数</li>
+<li>代数系统的同构与同态</li>
+</ul>
+<h2 id="14-1、代数系统的基本概念"><a href="#14-1、代数系统的基本概念" class="headerlink" title="14.1、代数系统的基本概念"></a>14.1、代数系统的基本概念</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220414192209474.png"></p>
+<p>（1）自然数集合N上的加法和乘法是N上的二元运算，但加法和除法不是</p>
+<p>（2）整数集合Z上的加法、减法和乘法都是Z上的二元运算，而除法不是。</p>
+<p>（3）非零实数集R<em>上的乘法和除法都是 R * 上的二元运算，而加法和减法不是（1+ （-1）&#x3D; 0）。求倒数是R</em>上的一元运算。</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414192221028.png"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414193842964.png" alt="image-20220414193842964"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414193918082.png" alt="image-20220414193918082"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414194419213.png" alt="image-20220414194419213"> </p>
+<p>我觉得绝对补有问题</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419102039946.png" alt="image-20220419102039946"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419102930764.png" alt="image-20220419102930764"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419103556555.png" alt="image-20220419103556555"></p>
+<p>特异元素：单位元、零元 </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419103847664.png" alt="image-20220419103847664"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419104643641.png" alt="image-20220419104643641"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419105516504.png" alt="image-20220419105516504"> </p>
+<h2 id="14-2、代数系统"><a href="#14-2、代数系统" class="headerlink" title="14.2、代数系统"></a>14.2、代数系统</h2><p>满足条件：二元运算</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419112144269.png" alt="image-20220419112144269"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419113029202.png" alt="image-20220419113029202"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419113347216.png" alt="image-20220419113347216"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419113657073.png" alt="image-20220419113657073"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419114340628.png" alt="image-20220419114340628"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419114443722.png" alt="image-20220419114443722"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220421083943197.png" alt="image-20220421083943197"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220421083956172.png" alt="image-20220421083956172"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220421084007579.png" alt="image-20220421084007579"></p>
+<p>第一问选择，只记结论    </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220421085744792.png" alt="image-20220421085744792"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220421091014176.png" alt="image-20220421091014176"></p>
+<table>
+<thead>
+<tr>
+<th>9.</th>
+<th>交换律</th>
+<th>结合律</th>
+<th>单位元</th>
+<th>零元</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>x+y</td>
+<td>是</td>
+<td>是</td>
+<td>0</td>
+<td>无</td>
+</tr>
+<tr>
+<td>x-y</td>
+<td>否</td>
+<td>否</td>
+<td>无</td>
+<td>无</td>
+</tr>
+<tr>
+<td>x*y</td>
+<td>是</td>
+<td>是</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>max(x,y)</td>
+<td>是</td>
+<td>是</td>
+<td>无</td>
+<td>无</td>
+</tr>
+<tr>
+<td>min(x,y)</td>
+<td>是</td>
+<td>是</td>
+<td>无</td>
+<td>无</td>
+</tr>
+<tr>
+<td>|x-y|</td>
+<td>是</td>
+<td>否</td>
+<td>无（负数）</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220421093219429.png"></p>
+<p>（1）是二元运算。交换律是、结合律是、单位元无、零元1</p>
+<p>（2）不是二元运算</p>
+<p>（3）max(x,y)是二元运算。交换律是、结合律是、单位元1、零元10</p>
+<p>（4）不是二元运算。x&#x3D; 8, y&#x3D;5, 0 </p>
+<h2 id="14-3-几个典型的代数系统"><a href="#14-3-几个典型的代数系统" class="headerlink" title="14.3 几个典型的代数系统"></a>14.3 几个典型的代数系统</h2><p>0没有逆元</p>
+<table>
+<thead>
+<tr>
+<th>半群</th>
+<th>可结合</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>含幺半群</td>
+<td>有单位元，独异点</td>
+</tr>
+<tr>
+<td>群</td>
+<td>有单位元，逆元</td>
+</tr>
+<tr>
+<td>有限群</td>
+<td>群G是有穷集</td>
+</tr>
+<tr>
+<td>交换器或阿贝尔群</td>
+<td>群中运算可交换</td>
+</tr>
+<tr>
+<td>格</td>
+<td>任意两个节点都有最大上界或最小下界</td>
+</tr>
+</tbody></table>
+<h3 id="1、半群、独异点与群"><a href="#1、半群、独异点与群" class="headerlink" title="1、半群、独异点与群"></a>1、半群、独异点与群</h3><p><img src="/2024/07/07/Math/discreteMathematics/image-20220513102745976.png"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220426102321881.png"></p>
+<p>可逆实矩阵才有乘法逆元 </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220426104438699.png" alt="image-20220426104438699"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220426105053149.png" alt="image-20220426105053149"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220426110908500.png" alt="image-20220426110908500"> </p>
+<p>单位元就是7个0</p>
+<h3 id="2、有限群和阿贝尔群"><a href="#2、有限群和阿贝尔群" class="headerlink" title="2、有限群和阿贝尔群"></a>2、有限群和阿贝尔群</h3><p><img src="/2024/07/07/Math/discreteMathematics/image-20220426111457154.png" alt="image-20220426111457154"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220419114443722.png" alt="image-20220419114443722"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220426112637756.png" alt="image-20220426112637756"></p>
+<p>矩阵不可逆的话，乘法就没有逆元</p>
+<p>矩阵的乘法永远都是不可交换的，所以不可能是阿贝尔群 </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220426114639728.png" alt="image-20220426114639728"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220428083035893.png" alt="image-20220428083035893"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220428082910195.png"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220428083006777.png" alt="image-20220428083006777"> </p>
+<h3 id="3、环与域"><a href="#3、环与域" class="headerlink" title="3、环与域"></a>3、环与域</h3><img src="/2024/07/07/Math/discreteMathematics/image-20220505083749099.png" alt="image-20220505083749099" style="zoom:150%;"> 
+
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220505084719361.png" alt="image-20220505084719361"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220505093532708.png" alt="image-20220505093532708"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220505094839592.png" alt="image-20220505094839592"></p>
+<h2 id="不会"><a href="#不会" class="headerlink" title="不会"></a>不会</h2><h3 id="4、格"><a href="#4、格" class="headerlink" title="4、格"></a>4、格</h3><p><img src="/2024/07/07/Math/discreteMathematics/image-20220510101544058.png"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220510103333475.png" alt="     "> </p>
+<p>c图中de有下界，但没有最大下界</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220510104906703.png" alt="image-20220510104906703"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220510105208596.png" alt="image-20220510105208596"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220510105255120.png" alt="image-20220510105255120"> </p>
+<p>且和或读成最小上界和最大下界</p>
+<p>把结论记好</p>
+<p>分配格：不包含钻石格和五角格</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220510111933516.png" alt="image-20220510111933516"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220510112014167.png" alt="image-20220510112014167"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220510112525196.png" alt="image-20220510112525196"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220510112712351.png" alt="image-20220510112712351"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220510113746549.png" alt="image-20220510113746549"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220510114703330.png" alt="image-20220510114703330"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220512083257598.png" alt="image-20220512083257598"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220512083530154.png" alt="image-20220512083530154"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220512083635470.png" alt="image-20220512083635470"> </p>
+<p>ABA</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220512084952652.png" alt="image-20220512084952652"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517111541243.png" alt="image-20220517111541243"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220512092056048.png" alt="image-20220512092056048"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220512092231830.png" alt="image-20220512092231830"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220512094544202.png" alt="image-20220512094544202"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517105926410.png" alt="image-20220517105926410"></p>
+<h2 id="题"><a href="#题" class="headerlink" title="题"></a>题</h2><p><img src="/2024/07/07/Math/discreteMathematics/image-20220517102941994.png" alt="image-20220517102941994"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220414192221028.png"></p>
+<p>还有5</p>
+<p>选择A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517103030139.png" alt="image-20220517103030139"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517103246368.png" alt="image-20220517103246368"></p>
+<p> A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517103352753.png" alt="image-20220517103352753"></p>
+<p>答案也不完全一样</p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517103443840.png" alt="image-20220517103443840"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517103554182.png" alt="image-20220517103554182"> </p>
+<p>还有（6）</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Z<sup>+</sup>（正整数）</th>
+<th>N（自然数）（非负整数）</th>
+<th>Z（整数）</th>
+<th>Q（有理数）</th>
+<th>r（实数）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>半群</td>
+<td>独异点</td>
+<td>群</td>
+<td>群</td>
+<td>群</td>
+</tr>
+</tbody></table>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517103713077.png"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517103802085.png" alt="image-20220517103802085"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517103837939.png" alt="image-20220517103837939"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517103900193.png" alt="image-20220517103900193"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517103909609.png" alt="image-20220517103909609"></p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517103934893.png" alt="image-20220517103934893"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104000164.png" alt="image-20220517104000164"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104029734.png" alt="image-20220517104029734"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104049459.png" alt="image-20220517104049459"> </p>
+<p>C</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104102418.png" alt="image-20220517104102418"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104117954.png" alt="image-20220517104117954"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104216744.png" alt="image-20220517104216744"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104310848.png" alt="image-20220517104310848"> </p>
+<p>a</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104413948.png" alt="image-20220517104413948"></p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104603252.png" alt="image-20220517104603252"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104615348.png" alt="image-20220517104615348"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104642557.png" alt="image-20220517104642557"></p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104717229.png" alt="image-20220517104717229"> </p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104818762.png" alt="image-20220517104818762"> </p>
+<p>A</p>
+<p>13</p>
+<p>A</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517104915592.png" alt="image-20220517104915592"> </p>
+<p>B</p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220517105053903.png" alt="image-20220517105053903"> </p>
+<p>BAA</p>
+<h1 id="期中"><a href="#期中" class="headerlink" title="期中"></a>期中</h1><p><img src="/2024/07/07/Math/discreteMathematics/image-20220503104039710.png" alt="image-20220503104039710"><img src="/2024/07/07/Math/discreteMathematics/image-20220503105452845.png" alt="image-20220503105452845"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220503112349087.png" alt="image-20220503112349087"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220503112451219.png" alt="image-20220503112451219"> </p>
+<p><img src="/2024/07/07/Math/discreteMathematics/image-20220503113408602.png" alt="image-20220503113408602"> </p>
+<p>模n加法是什么</p>
+<p>14.9（4）</p>
+<p>14.17的第四问和第五问</p>
+<p>环与域</p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/07/07/Math/discreteMathematics/" title="离散数学">http://example.com/2024/07/07/Math/discreteMathematics/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Math/" rel="tag"># Math</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/07/Web/CSS/" rel="prev" title="CSS">
+      <i class="fa fa-chevron-left"></i> CSS
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/07/Java/Java/" rel="next" title="Java基础">
+      Java基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">一、命题逻辑基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E3%80%81%E5%91%BD%E9%A2%98%E4%B8%8E%E8%81%94%E7%BB%93%E8%AF%8D"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、命题与联结词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%EF%BC%92%E3%80%81%E5%91%BD%E9%A2%98%E5%8F%98%E9%A1%B9%E4%B8%8E%E5%90%88%E5%BC%8F%E5%85%AC%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">1.２、命题变项与合式公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3%E3%80%81%E9%A2%98%E7%9B%AE"><span class="nav-number">1.3.</span> <span class="nav-text">1.3、题目</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91%E7%AD%89%E5%80%BC%E6%BC%94%E7%AE%97"><span class="nav-number">2.</span> <span class="nav-text">二、命题逻辑等值演算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1%E3%80%81%E7%AD%89%E5%80%BC%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、等值式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2%E3%80%81%E6%9E%90%E5%8F%96%E8%8C%83%E5%BC%8F%E4%B8%8E%E5%90%88%E5%8F%96%E8%8C%83%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、析取范式与合取范式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3%E3%80%81%E8%81%94%E7%BB%93%E8%AF%8D%E7%9A%84%E5%AE%8C%E5%A4%87%E9%9B%86"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、联结词的完备集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98"><span class="nav-number">2.4.</span> <span class="nav-text">习题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91%E7%9A%84%E6%8E%A8%E7%90%86%E7%90%86%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">三、命题逻辑的推理理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1%E3%80%81%E6%8E%A8%E7%90%86%E7%9A%84%E5%BD%A2%E5%BC%8F%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、推理的形式结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2%E3%80%81%E8%87%AA%E7%84%B6%E6%8E%A8%E7%90%86%E7%B3%BB%E7%BB%9FP"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、自然推理系统P</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">3.3.</span> <span class="nav-text">题目</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">4.</span> <span class="nav-text">四、一阶逻辑基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1%E3%80%81%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91%E5%91%BD%E9%A2%98%E7%AC%A6%E5%8F%B7%E5%8C%96"><span class="nav-number">4.1.</span> <span class="nav-text">4.1、一阶逻辑命题符号化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2%E3%80%81%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91%E5%85%AC%E5%BC%8F%E5%8F%8A%E8%A7%A3%E9%87%8A"><span class="nav-number">4.2.</span> <span class="nav-text">4.2、一阶逻辑公式及解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98-1"><span class="nav-number">4.3.</span> <span class="nav-text">习题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91%E7%AD%89%E5%80%BC%E6%BC%94%E7%AE%97"><span class="nav-number">5.</span> <span class="nav-text">五、一阶逻辑等值演算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1%E3%80%81%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91%E7%AD%89%E5%80%BC%E5%BC%8F%E4%B8%8E%E7%BD%AE%E6%8D%A2%E8%A7%84%E5%88%99"><span class="nav-number">5.1.</span> <span class="nav-text">5.1、一阶逻辑等值式与置换规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2%E3%80%81%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91%E5%89%8D%E6%9D%9F%E8%8C%83%E5%BC%8F"><span class="nav-number">5.2.</span> <span class="nav-text">5.2、一阶逻辑前束范式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E5%9E%8B"><span class="nav-number">5.3.</span> <span class="nav-text">题型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E9%9B%86%E5%90%88%E4%BB%A3%E6%95%B0"><span class="nav-number">6.</span> <span class="nav-text">六、集合代数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-number">6.1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1%E9%9B%86%E5%90%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">6.2.</span> <span class="nav-text">6.1集合的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%9B%86%E5%90%88%E5%AE%9A%E4%B9%89"><span class="nav-number">6.2.1.</span> <span class="nav-text">1.集合定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%9B%86%E5%90%88%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">6.2.2.</span> <span class="nav-text">2.集合表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%85%83%E7%B4%A0%E4%B8%8E%E9%9B%86%E5%90%88"><span class="nav-number">6.2.3.</span> <span class="nav-text">3.元素与集合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E9%9B%86%E5%90%88%E7%9A%84%E8%BF%90%E7%AE%97"><span class="nav-number">6.3.</span> <span class="nav-text">6.2 集合的运算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E4%BA%8C%E5%85%83%E5%85%B3%E7%B3%BB"><span class="nav-number">7.</span> <span class="nav-text">七、二元关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-%E6%9C%89%E5%BA%8F%E5%AF%B9%E4%B8%8E%E7%AC%9B%E5%8D%A1%E5%B0%94%E7%A7%AF"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 有序对与笛卡尔积</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-%E4%BA%8C%E5%85%83%E5%85%B3%E7%B3%BB"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 二元关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A%E5%88%B0B%E7%9A%84%E5%85%B3%E7%B3%BB%E4%B8%8EA%E4%B8%8A%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">7.2.1.</span> <span class="nav-text">A到B的关系与A上的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-%E5%85%B3%E7%B3%BB%E7%9A%84%E8%BF%90%E7%AE%97"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 关系的运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4-%E5%85%B3%E7%B3%BB%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">7.4.</span> <span class="nav-text">7.4 关系的性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-5-%E9%97%AD%E5%8C%85"><span class="nav-number">7.5.</span> <span class="nav-text">7.5 闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-6-%E7%AD%89%E4%BB%B7%E5%85%B3%E7%B3%BB%E4%B8%8E%E5%88%92%E5%88%86"><span class="nav-number">7.6.</span> <span class="nav-text">7.6 等价关系与划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-7-%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB"><span class="nav-number">7.7.</span> <span class="nav-text">7.7 偏序关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%A2%98%E5%9E%8B"><span class="nav-number">7.8.</span> <span class="nav-text">第七章 题型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E5%87%BD%E6%95%B0"><span class="nav-number">8.</span> <span class="nav-text">八、函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E6%80%A7%E8%B4%A8%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">8.1.</span> <span class="nav-text">8.1函数的定义与性质（重点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-%E3%80%81%E6%8E%A8%E8%AE%BA"><span class="nav-number">8.2.</span> <span class="nav-text">8.2 、推论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B9%A0%E9%A2%98-2"><span class="nav-number">8.3.</span> <span class="nav-text">习题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">9.</span> <span class="nav-text">九、图的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89"><span class="nav-number">9.1.</span> <span class="nav-text">9.1（重点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-%E9%80%9A%E8%B7%AF%E4%B8%8E%E5%9B%9E%E8%B7%AF"><span class="nav-number">9.2.</span> <span class="nav-text">9.2 通路与回路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3%E5%9B%BE%E7%9A%84%E8%BF%9E%E9%80%9A%E6%80%A7"><span class="nav-number">9.3.</span> <span class="nav-text">9.3图的连通性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9-%E5%85%A8%E9%83%A8%E9%83%BD%E6%98%AF%E9%80%89%E6%8B%A9%E9%A2%98"><span class="nav-number">9.4.</span> <span class="nav-text">知识点-全部都是选择题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E3%80%81%E6%A0%91%EF%BC%88%E5%A4%A7%E9%A2%98%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">十、树（大题）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1%E3%80%81%E6%97%A0%E5%90%91%E6%A0%91"><span class="nav-number">10.1.</span> <span class="nav-text">10.1、无向树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">10.2.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E5%87%A0%E7%A7%8D%E7%89%B9%E6%AE%8A%E7%9A%84%E5%9B%BE"><span class="nav-number">11.</span> <span class="nav-text">十一、几种特殊的图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-1%E3%80%81%E6%AC%A7%E6%8B%89%E5%9B%BE"><span class="nav-number">11.1.</span> <span class="nav-text">11.1、欧拉图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-2%E3%80%81%E5%93%88%E5%AF%86%E9%A1%BF%E5%9B%BE"><span class="nav-number">11.2.</span> <span class="nav-text">11.2、哈密顿图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-3%E3%80%81%E4%BA%8C%E9%83%A8%E5%9B%BE%E4%B8%8E%E5%8C%B9%E9%85%8D"><span class="nav-number">11.3.</span> <span class="nav-text">11.3、二部图与匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-4%E3%80%81%E5%B9%B3%E9%9D%A2%E5%9B%BE"><span class="nav-number">11.4.</span> <span class="nav-text">11.4、平面图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E5%9E%8B-1"><span class="nav-number">11.5.</span> <span class="nav-text">题型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81%E4%BB%A3%E6%95%B0%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%AE%BA"><span class="nav-number">12.</span> <span class="nav-text">十四、代数系统概论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#14-1%E3%80%81%E4%BB%A3%E6%95%B0%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">12.1.</span> <span class="nav-text">14.1、代数系统的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-2%E3%80%81%E4%BB%A3%E6%95%B0%E7%B3%BB%E7%BB%9F"><span class="nav-number">12.2.</span> <span class="nav-text">14.2、代数系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-3-%E5%87%A0%E4%B8%AA%E5%85%B8%E5%9E%8B%E7%9A%84%E4%BB%A3%E6%95%B0%E7%B3%BB%E7%BB%9F"><span class="nav-number">12.3.</span> <span class="nav-text">14.3 几个典型的代数系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%8D%8A%E7%BE%A4%E3%80%81%E7%8B%AC%E5%BC%82%E7%82%B9%E4%B8%8E%E7%BE%A4"><span class="nav-number">12.3.1.</span> <span class="nav-text">1、半群、独异点与群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%9C%89%E9%99%90%E7%BE%A4%E5%92%8C%E9%98%BF%E8%B4%9D%E5%B0%94%E7%BE%A4"><span class="nav-number">12.3.2.</span> <span class="nav-text">2、有限群和阿贝尔群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E7%8E%AF%E4%B8%8E%E5%9F%9F"><span class="nav-number">12.3.3.</span> <span class="nav-text">3、环与域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E4%BC%9A"><span class="nav-number">12.4.</span> <span class="nav-text">不会</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E6%A0%BC"><span class="nav-number">12.4.1.</span> <span class="nav-text">4、格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98"><span class="nav-number">12.5.</span> <span class="nav-text">题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%9F%E4%B8%AD"><span class="nav-number">13.</span> <span class="nav-text">期中</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
