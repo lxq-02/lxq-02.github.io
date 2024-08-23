@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、基础1.1、基本环境配置1、VMWare + Ubuntu （大家后面写代码的环境） 12《王道C++常用软件安装大全》https:&#x2F;&#x2F;docs.qq.com&#x2F;doc&#x2F;DSGNMZnpHRHdxS3FI  2、xshell（写代码的连接工具）3、安装winSCP（windows与linux之间传输资料的工具）4、服务器上可以安装其他软件，typora（8 Markdown_Editor做笔记）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux_基础(二)">
+<meta property="og:url" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="一、基础1.1、基本环境配置1、VMWare + Ubuntu （大家后面写代码的环境） 12《王道C++常用软件安装大全》https:&#x2F;&#x2F;docs.qq.com&#x2F;doc&#x2F;DSGNMZnpHRHdxS3FI  2、xshell（写代码的连接工具）3、安装winSCP（windows与linux之间传输资料的工具）4、服务器上可以安装其他软件，typora（8 Markdown_Editor做笔记）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231228154005237.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231228173415588.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231228173037641.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231229113513598.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231229142108050.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231229161743594.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231229171046362.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231229172142444.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230090352690.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230105505331.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230105541435.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230142419768.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230142304904.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230142100203.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230143237006.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230143304017.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230144358945.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230145154949.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230161230545.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230161209477.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230161515585.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230162116897.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230162813711.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230163957049.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230170435454.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230174033092.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230175337197.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231231092159380.png">
+<meta property="og:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231231102726968.png">
+<meta property="article:published_time" content="2024-07-07T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-23T07:24:02.607Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231228154005237.png">
+
+<link rel="canonical" href="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux_基础(二) | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux_基础(二)
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-07 12:00:00" itemprop="dateCreated datePublished" datetime="2024-07-07T12:00:00+08:00">2024-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-23 15:24:02" itemprop="dateModified" datetime="2024-08-23T15:24:02+08:00">2024-08-23</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、基础"><a href="#一、基础" class="headerlink" title="一、基础"></a>一、基础</h1><h2 id="1-1、基本环境配置"><a href="#1-1、基本环境配置" class="headerlink" title="1.1、基本环境配置"></a>1.1、基本环境配置</h2><p>1、VMWare + Ubuntu （大家后面写代码的环境）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">《王道C++常用软件安装大全》</span><br><span class="line">https:<span class="comment">//docs.qq.com/doc/DSGNMZnpHRHdxS3FI</span></span><br></pre></td></tr></table></figure>
+
+<p>2、xshell（写代码的连接工具）<br>3、安装winSCP（windows与linux之间传输资料的工具）<br>4、服务器上可以安装其他软件，typora（8 Markdown_Editor做笔记）、xmind（6 xmind，阅读《xmind的破解.txt》，app.asar）、everything（13 桌面管理工具，搜索）、向日葵（16向日葵）对应软件在百度网盘的位置</p>
+<p>&#x3D;&#x3D;注意：软件都在百度网盘进行安装即可&#x3D;&#x3D;</p>
+<p>5、gitee仓库地址</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//gitee.com/boldness2012/24Cpp.git</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2、历史"><a href="#1-2、历史" class="headerlink" title="1.2、历史"></a>1.2、历史</h2><p>汇编语言：偏向于底层，与硬件相关，移植性不行，效率比较高。</p>
+<p>C语言：高级语言，是一个面向过程的语言。</p>
+<p>multics</p>
+<p>Fortran  BCPL  B，C</p>
+<p>GNU计划，建造一个大的生态。免费、开源</p>
+<p>Linus大神在大二的时候，自己写出了Linux操作系统的内核。</p>
+<h2 id="1-3、windows与Linux的区别"><a href="#1-3、windows与Linux的区别" class="headerlink" title="1.3、windows与Linux的区别"></a>1.3、windows与Linux的区别</h2><p>windows有C盘、d盘这样的盘符的概念</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\assembly</span><br></pre></td></tr></table></figure>
+
+<p>Linux下面的Tab是具备联想功能的。</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231228154005237.png" alt="image-20231228154005237"></p>
+<p>Linux的目录结构是一个&#x3D;&#x3D;树形结构&#x3D;&#x3D;，然后根节点是”&#x2F;“.</p>
+<h1 id="二、Linux基本命令"><a href="#二、Linux基本命令" class="headerlink" title="二、Linux基本命令"></a>二、Linux基本命令</h1><p>&#x3D;&#x3D;<strong>可以使用man  + 命令名字</strong>&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;注意：在Linux下面执行命令的时候，如果什么都没有返回，那就表明该命令是对的，否者会有报错信息&#x3D;&#x3D;</p>
+<p>中文命令注释网站：<a target="_blank" rel="noopener" href="https://wangchujiang.com/linux-command/">https://wangchujiang.com/linux-command/</a></p>
+<p>清屏操作：clear 、ctrl + l(字母，不是数字1)</p>
+<h2 id="1、用户的创建"><a href="#1、用户的创建" class="headerlink" title="1、用户的创建"></a>1、用户的创建</h2><p>useradd - create a new user or update default new user information</p>
+<p>可以使用useradd命令</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd test4  <span class="comment">//本命令创建的用户是属于三无产品，没有在home目录下创建文件夹，用户没有密码，用户的shell是sh</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//该命令的作用是：使用选项-m在home目录下创建一个文件夹，叫test5，与用户名是一样的</span></span><br><span class="line"><span class="comment">//-s指定shell的类型</span></span><br><span class="line">sudo useradd -m test5 -s /bin/bash</span><br><span class="line">    </span><br><span class="line"><span class="comment">//配置用户的密码</span></span><br><span class="line">sudo passwd test2</span><br></pre></td></tr></table></figure>
+
+<p>执行 cat    &#x2F;etc&#x2F;passwd命令（&#x3D;&#x3D;重要&#x3D;&#x3D;）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">root:x:<span class="number">0</span>:<span class="number">0</span>:root:/root:/bin/bash</span><br><span class="line">...</span><br><span class="line">wangdao:x:<span class="number">1000</span>:<span class="number">1000</span>:wangdao,,,:/home/wangdao:/bin/bash</span><br><span class="line">sshd:x:<span class="number">122</span>:<span class="number">65534</span>::/run/sshd:/usr/sbin/nologin</span><br><span class="line">mysql:x:<span class="number">123</span>:<span class="number">127</span>:MySQL Server,,,:/nonexistent:/bin/<span class="literal">false</span></span><br><span class="line">test:x:<span class="number">1001</span>:<span class="number">1001</span>::/home/test:/bin/bash</span><br><span class="line">test2:x:<span class="number">1002</span>:<span class="number">1002</span>::/home/test2:/bin/bash</span><br><span class="line">test3:x:<span class="number">1003</span>:<span class="number">1003</span>::/home/test3:/bin/bash</span><br><span class="line">test4:x:<span class="number">1004</span>:<span class="number">1004</span>::/home/test4:/bin/sh</span><br><span class="line">用户  密码   uid（用户id）  gid（组id） （可有可无，是注释信息）  用户所在的目录    shell的类型</span><br><span class="line">冒号是分隔符</span><br></pre></td></tr></table></figure>
+
+<p>Linux如何查看命令的使用方法呢？</p>
+<p>&#x3D;&#x3D;<strong>可以使用man  + 命令名字</strong>&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;注意：在Linux下面执行命令的时候，如果什么都没有返回，那就表明该命令是对的，否者会有报错信息&#x3D;&#x3D;</p>
+<h2 id="2、cd命令（-常用-）"><a href="#2、cd命令（-常用-）" class="headerlink" title="2、cd命令（&#x3D;&#x3D;常用&#x3D;&#x3D;）"></a>2、cd命令（&#x3D;&#x3D;常用&#x3D;&#x3D;）</h2><p>在home目录下，也就是~目录下面执行下面的操作（波浪号目录与home是一样）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install manpages-posix-dev  manpages-posix manpages-dev</span><br><span class="line">sudo apt install glibc-doc manpages</span><br></pre></td></tr></table></figure>
+
+<p>cd — change the working directory  改变工作目录</p>
+<p>切换到上一级目录 cd ..</p>
+<p>切换到当前目录  cd  .</p>
+<p>切换到上一次的目录   cd  -</p>
+<p>注意相对路径与绝对路径（从根目录开始）的概念。</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231228173415588.png" alt="image-20231228173415588"></p>
+<h2 id="3、pwd命令（-常用-）"><a href="#3、pwd命令（-常用-）" class="headerlink" title="3、pwd命令（&#x3D;&#x3D;常用&#x3D;&#x3D;）"></a>3、pwd命令（&#x3D;&#x3D;常用&#x3D;&#x3D;）</h2><p>pwd - print name of current&#x2F;working directory 打印当前的工作目录</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231228173037641.png" alt="image-20231228173037641"></p>
+<h2 id="4、ls命令（-常用-）"><a href="#4、ls命令（-常用-）" class="headerlink" title="4、ls命令（&#x3D;&#x3D;常用&#x3D;&#x3D;）"></a>4、ls命令（&#x3D;&#x3D;常用&#x3D;&#x3D;）</h2><p>ls - list directory contents  打印目录下面的内容</p>
+<h2 id="5、用户的删除userdel"><a href="#5、用户的删除userdel" class="headerlink" title="5、用户的删除userdel"></a>5、用户的删除userdel</h2><p>userdel - delete a user account and related files</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//切换用户</span></span><br><span class="line">su  + 用户名</span><br><span class="line"></span><br><span class="line">用户切换的时候，展示出来的是栈结构</span><br><span class="line">    </span><br><span class="line"><span class="comment">//用户的删除</span></span><br><span class="line">sudo userdel test2   <span class="comment">//只会在/etc/passwd中删除用户，但是不会删除与用户关联的文件</span></span><br><span class="line">sudo userdel test4 -r <span class="comment">//-r选项，可以将用户的名字删除，同时也可以将关联的文件删除</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;注意：在Linux下面，不能使用root用户直接进行登录。为了系统的安全性。&#x3D;&#x3D;</p>
+<h2 id="6、文件夹的创建与删除"><a href="#6、文件夹的创建与删除" class="headerlink" title="6、文件夹的创建与删除"></a>6、文件夹的创建与删除</h2><p>mkdir - make directories 创建文件夹（&#x3D;&#x3D;常用&#x3D;&#x3D;）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir dir1</span><br><span class="line">mkdir  -p dir1/dir2/dir3  <span class="comment">//可以创建级联目录（创建多级目录）</span></span><br></pre></td></tr></table></figure>
+
+<p>rmdir - remove empty directories  删除空文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmdir teach  <span class="comment">//teach需要是空文件夹才行，否则删除不成功</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7、普通文件的创建"><a href="#7、普通文件的创建" class="headerlink" title="7、普通文件的创建"></a>7、普通文件的创建</h2><h5 id="touch命令"><a href="#touch命令" class="headerlink" title="touch命令"></a>touch命令</h5><p>touch - change file timestamps改变文件的时间戳</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch <span class="number">1.</span>txt  <span class="comment">//创建的文件是空的</span></span><br><span class="line">touch file1</span><br></pre></td></tr></table></figure>
+
+<h5 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h5><p>cat - concatenate files and print on the standard output关联文件并将文件内容输出到标准输出</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="number">1.</span>txt &gt; file1</span><br></pre></td></tr></table></figure>
+
+<h5 id="echo命令"><a href="#echo命令" class="headerlink" title="echo命令"></a>echo命令</h5><p>echo - display a line of text</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">&quot;123&quot;</span> &gt; file2  <span class="comment">//会将123写入到文件file2中，如果文件不存在就会创建文件file2，并将内容123写到file2中，如果文件存在就会将内容123写到文件file2</span></span><br><span class="line">echo -n &gt; file3   <span class="comment">//创建的文件是属于空文件</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;总结：cat与echo创建文件的时候，利用了重定向的概念。重定向：重新指定方向&#x3D;&#x3D;</p>
+<h5 id="vi-vim命令-重要"><a href="#vi-vim命令-重要" class="headerlink" title="vi&#x2F;vim命令(&#x3D;&#x3D;重要&#x3D;&#x3D;)"></a>vi&#x2F;vim命令(&#x3D;&#x3D;重要&#x3D;&#x3D;)</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim/vi  + 文件名字 <span class="comment">//如何退出，步骤：shift + :   再按wq(保存退出)   最后按enter键</span></span><br><span class="line"><span class="comment">//如果是编辑模式，需要改变步骤：先esc 然后在执行 shift + :   再按wq(保存退出)   最后按enter键</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231229113513598.png" alt="image-20231229113513598"></p>
+<h2 id="8、查看文件中的内容"><a href="#8、查看文件中的内容" class="headerlink" title="8、查看文件中的内容"></a>8、查看文件中的内容</h2><h5 id="cat命令-1"><a href="#cat命令-1" class="headerlink" title="cat命令"></a>cat命令</h5><p>cat - concatenate files and print on the standard output</p>
+<p>cat查看文件内容的时候，如果文件内容比较多，那么cat其实没有什么意义，建议：cat查看小文件。</p>
+<h5 id="head-tail命令"><a href="#head-tail命令" class="headerlink" title="head&#x2F;tail命令"></a>head&#x2F;tail命令</h5><p>head - output the first part of files</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//默认会显示文件的前10行</span></span><br><span class="line">head  +  文件名</span><br><span class="line">    </span><br><span class="line"><span class="comment">//如果想指定文件的前m行，可以使用如下命令</span></span><br><span class="line"> head  -n  m   文件名</span><br></pre></td></tr></table></figure>
+
+<p>tail - output the last part of files</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//默认会显示文件的后10行</span></span><br><span class="line">tail   +  文件名</span><br><span class="line">    </span><br><span class="line"><span class="comment">//如果想指定文件的后m行，可以使用如下命令</span></span><br><span class="line">tail   -n  m   文件名</span><br></pre></td></tr></table></figure>
+
+<h5 id="more-less命令"><a href="#more-less命令" class="headerlink" title="more&#x2F;less命令"></a>more&#x2F;less命令</h5><p>查看文件的内容，同时可以进行翻阅。enter，方向键</p>
+<p>&#x3D;&#x3D;注意：这些命令了解一下，不常用，最终都会被vim操作所取代。&#x3D;&#x3D;</p>
+<h2 id="9、文件的拷贝、移动、删除（-重要-）"><a href="#9、文件的拷贝、移动、删除（-重要-）" class="headerlink" title="9、文件的拷贝、移动、删除（&#x3D;&#x3D;重要&#x3D;&#x3D;）"></a>9、文件的拷贝、移动、删除（&#x3D;&#x3D;重要&#x3D;&#x3D;）</h2><h5 id="cp命令"><a href="#cp命令" class="headerlink" title="cp命令"></a>cp命令</h5><p>cp - copy files and directories拷贝文件与文件夹</p>
+<p>普通文件的拷贝</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp file1  file2</span><br><span class="line"><span class="comment">//-i选项具备提示的作用，防止拷贝的时候，因为文件名一样而导致了覆盖</span></span><br></pre></td></tr></table></figure>
+
+<p>普通文件拷贝到目录文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp file1 dir</span><br></pre></td></tr></table></figure>
+
+<p>目录文件拷贝到目录文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r  dir1 dir  <span class="comment">//-r是递归的含义</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231229142108050.png" alt="image-20231229142108050"></p>
+<p>tree的作用可以将文件的排布形式打印出来</p>
+<h5 id="mv命令"><a href="#mv命令" class="headerlink" title="mv命令"></a>mv命令</h5><p>mv - move (rename) files  移动文件&#x2F;改变文件的名字</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv file1 file2  <span class="comment">//给file1改名为file2</span></span><br><span class="line">mv file1  dir   <span class="comment">//将file1移动到dir目录下面</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="rm命令"><a href="#rm命令" class="headerlink" title="rm命令"></a>rm命令</h5><p>rm - remove files or directories移除文件或者目录</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm file1  <span class="comment">//直接删除普通文件</span></span><br><span class="line">rm -r dir  <span class="comment">//删除目录文件，-r有递归的作用</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -fr *  这个命名不要瞎用</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;注意：后面在执行mv&#x2F;cp&#x2F;rm命令的时候，最好都将-i带上，特别是刚开始的&#x3D;&#x3D;</p>
+<h2 id="10、ls命令（-重要-）"><a href="#10、ls命令（-重要-）" class="headerlink" title="10、ls命令（&#x3D;&#x3D;重要&#x3D;&#x3D;）"></a>10、ls命令（&#x3D;&#x3D;重要&#x3D;&#x3D;）</h2><p>ls - list directory contents列出文件目录的内容</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-a  <span class="comment">//列出目录下的所有的文件，包括隐藏文件。Linux下的隐藏文件是以.（点）开头的</span></span><br><span class="line">-l <span class="comment">//列出目录下面的所有文件的详细信息</span></span><br><span class="line">-h <span class="comment">//以人的可读方式进行显示</span></span><br><span class="line">-i <span class="comment">//文件的索引号</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">wangdao@wangdao:CppBaseDay02$ls -al</span><br><span class="line">total <span class="number">4264</span></span><br><span class="line">drwxrwxr-x <span class="number">4</span> wangdao wangdao    <span class="number">4096</span> <span class="number">12</span>月 <span class="number">29</span> <span class="number">15</span>:<span class="number">45</span> .</span><br><span class="line">drwxrwxr-x <span class="number">4</span> wangdao wangdao    <span class="number">4096</span> <span class="number">12</span>月 <span class="number">28</span> <span class="number">17</span>:<span class="number">54</span> ..</span><br><span class="line">drwxrwxr-x <span class="number">3</span> wangdao wangdao    <span class="number">4096</span> <span class="number">12</span>月 <span class="number">29</span> <span class="number">15</span>:<span class="number">06</span> dir1</span><br><span class="line">drwxrwxr-x <span class="number">2</span> wangdao wangdao    <span class="number">4096</span> <span class="number">12</span>月 <span class="number">29</span> <span class="number">15</span>:<span class="number">0</span>9 dir2</span><br><span class="line">-rw-rw-r-- <span class="number">1</span> wangdao wangdao       <span class="number">0</span> <span class="number">12</span>月 <span class="number">29</span> <span class="number">15</span>:<span class="number">45</span> .file2</span><br><span class="line">-rw-rw-r-- <span class="number">1</span> wangdao wangdao       <span class="number">0</span> <span class="number">12</span>月 <span class="number">29</span> <span class="number">15</span>:<span class="number">06</span> file<span class="number">20.</span>txt</span><br><span class="line">-rw-rw-r-- <span class="number">1</span> wangdao wangdao       <span class="number">0</span> <span class="number">12</span>月 <span class="number">28</span> <span class="number">17</span>:<span class="number">54</span> .keep</span><br><span class="line">-rw-rw-r-- <span class="number">1</span> wangdao wangdao <span class="number">4349598</span> <span class="number">12</span>月 <span class="number">25</span> <span class="number">0</span>9:<span class="number">50</span> The_Holy_Bible.txt</span><br><span class="line">    </span><br><span class="line">d rwx rwx r-x</span><br><span class="line">- rw- rw- r--</span><br><span class="line">r读  w写  x执行 -不能</span><br><span class="line">第一位代表是文件类型  d目录文件  -普通文件  l链接文件  </span><br><span class="line">第<span class="number">2</span><span class="number">-4</span>位代表的是本用户的权限</span><br><span class="line">第<span class="number">5</span><span class="number">-7</span>位代表的是组用户的权限</span><br><span class="line">第<span class="number">8</span><span class="number">-10</span>位代表的是其他用户的权限</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;注意：在Linux下面，一切皆文件。&#x3D;&#x3D;</p>
+<p>硬链接数</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231229161743594.png" alt="image-20231229161743594"></p>
+<h2 id="11、硬链接与软连接"><a href="#11、硬链接与软连接" class="headerlink" title="11、硬链接与软连接"></a>11、硬链接与软连接</h2><p>ln - make links between files</p>
+<p>硬链接</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln oldFile  newfILE   <span class="comment">//创建的硬链接，两个文件的内容是一样的，索引结点号也是一样；修改任何一个文件的内容，另外一个文件也会修改；删除掉一个文件，会使硬链接数减少1个；</span></span><br></pre></td></tr></table></figure>
+
+<p>软连接</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s oldFile newFile</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231229171046362.png" alt="image-20231229171046362"></p>
+<p>软链接相当于创建的是快捷方式。软连接文件与源文件的索引结点号是不一样，文件的类型也是不一样的。文件的大小也是不一样，因为软链接文件的大小就是源文件的路径加上文件名字的长度。但是查看源文件的内容与链接文件的内容是一样。如果源文件删除了，那么快捷方式就会失效。</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231229172142444.png" alt="image-20231229172142444"></p>
+<p>总结：</p>
+<p>1、两者的创建方式都是使用命令ln，但是软链接的时候需要加上-s选项</p>
+<p>2、硬链接相当于创建了文件的副本，但是软链接相当于创建的是快捷方式</p>
+<p>3、修改源文件的时候，查看新文件的内容的时候，都会发生改变。</p>
+<p>4、删除源文件的时候，对于硬链接而言，文件内容是不会受到任何影响，但是链接数会减1；对于软链接而言，如果源文件删除了，那么软链接就失效了。</p>
+<p>5、硬链接文件的索引结点号是一样的，但是软链接索引结点号是不一样；</p>
+<h2 id="12、改变文件权限的命令chmod"><a href="#12、改变文件权限的命令chmod" class="headerlink" title="12、改变文件权限的命令chmod"></a>12、改变文件权限的命令chmod</h2><p>chmod - change file mode bits改变文件的权限</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">-rw-rw-r-- <span class="number">1</span> wangdao wangdao    <span class="number">0</span> <span class="number">12</span>月 <span class="number">30</span> <span class="number">0</span>8:<span class="number">58</span> <span class="number">1.</span>txt</span><br><span class="line">rw-(u)   rw-(g)   r--(o)</span><br><span class="line">    </span><br><span class="line"><span class="number">1.</span>txt   u rw   g rx  o x</span><br><span class="line"></span><br><span class="line"><span class="comment">//文字设定法（略显麻烦）</span></span><br><span class="line">chmod u+r,u+w,g+r,g+x,o+x <span class="number">1.</span>txt</span><br><span class="line"></span><br><span class="line"><span class="comment">//数字设定法</span></span><br><span class="line">chmod <span class="number">534</span> <span class="number">1.</span>txt</span><br><span class="line">rw-  rw-  r--</span><br><span class="line"><span class="number">110</span>  <span class="number">110</span>  <span class="number">100</span></span><br><span class="line">    </span><br><span class="line"><span class="number">110</span> = <span class="number">4</span> + <span class="number">2</span> + <span class="number">0</span> = <span class="number">6</span></span><br><span class="line"><span class="number">110</span> = <span class="number">4</span> + <span class="number">2</span> + <span class="number">0</span> = <span class="number">6</span></span><br><span class="line"><span class="number">100</span> = <span class="number">4</span> + <span class="number">0</span> + <span class="number">0</span> = <span class="number">4</span></span><br><span class="line">    </span><br><span class="line"><span class="number">2.</span>txt r-x -wx r-- <span class="number">534</span></span><br><span class="line">    </span><br><span class="line">r-x -wx r--</span><br><span class="line"><span class="number">101</span> <span class="number">011</span> <span class="number">100</span></span><br><span class="line"><span class="number">534</span></span><br><span class="line">    </span><br><span class="line"><span class="number">777</span></span><br><span class="line"><span class="number">7</span> = <span class="number">4</span> + <span class="number">2</span> + <span class="number">1</span></span><br><span class="line"><span class="number">111</span> <span class="number">111</span> <span class="number">111</span></span><br><span class="line">rwx  rwx  rwx</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230090352690.png" alt="image-20231230090352690"></p>
+<h2 id="13、文件的查找find"><a href="#13、文件的查找find" class="headerlink" title="13、文件的查找find"></a>13、文件的查找find</h2><p>find - search for files in a directory hierarchy</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//find  起始目录  查找表达式（一般按照名字进行查找）</span></span><br><span class="line">find . -name <span class="string">&quot;bind.cc&quot;</span></span><br><span class="line">    </span><br><span class="line">通配符</span><br><span class="line">* 可以匹配<span class="number">0</span>个到任意个字符</span><br><span class="line">? 只能匹配一个字符</span><br><span class="line">[] 匹配范围内的任一字符  find . -name <span class="string">&quot;file[1-5]&quot;</span>   find . -name <span class="string">&quot;file[0-9,a-x]&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="14、查找文件内容grep"><a href="#14、查找文件内容grep" class="headerlink" title="14、查找文件内容grep"></a>14、查找文件内容grep</h2><p>grep, egrep, fgrep, rgrep - print lines matching a pattern</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230105505331.png" alt="image-20231230105505331"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep 选项 模式  文件/路径</span><br><span class="line">这里的模式就是正则表达式</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230105541435.png" alt="image-20231230105541435"></p>
+<h1 id="三、重定向-重要"><a href="#三、重定向-重要" class="headerlink" title="三、重定向(&#x3D;&#x3D;重要&#x3D;&#x3D;)"></a>三、重定向(&#x3D;&#x3D;重要&#x3D;&#x3D;)</h1><p>标准输入重定向， &lt;,  0&lt;， stdin</p>
+<p>标准输出重定向  &gt;, 1&gt;，stdout</p>
+<p>标准错误输出重定向  2&gt; ，stderr</p>
+<p>0,1,2这些数字在Linux中将其称为&#x3D;&#x3D;文件描述符&#x3D;&#x3D;，简称为fd</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230142419768.png" alt="image-20231230142419768"></p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230142304904.png" alt="image-20231230142304904"></p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230142100203.png" alt="image-20231230142100203"></p>
+<h5 id="追加模式"><a href="#追加模式" class="headerlink" title="追加模式"></a>追加模式</h5><p>标准输出的追加 &gt;&gt;</p>
+<p>标准错误输出的追加 2&gt;&gt; </p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230143237006.png" alt="image-20231230143237006"></p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230143304017.png" alt="image-20231230143304017"></p>
+<p>&lt;&lt;</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230144358945.png" alt="image-20231230144358945"></p>
+<h1 id="四、vim的基本操作（-繁琐，重要-）"><a href="#四、vim的基本操作（-繁琐，重要-）" class="headerlink" title="四、vim的基本操作（&#x3D;&#x3D;繁琐，重要&#x3D;&#x3D;）"></a>四、vim的基本操作（&#x3D;&#x3D;繁琐，重要&#x3D;&#x3D;）</h1><h4 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h4><p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230145154949.png" alt="image-20231230145154949"></p>
+<h4 id="2、基本操作"><a href="#2、基本操作" class="headerlink" title="2、基本操作"></a>2、基本操作</h4><h5 id="普通模式"><a href="#普通模式" class="headerlink" title="普通模式"></a>普通模式</h5><p>h向左移动光标    j向下移动光标  k 向上移动光标  l向右移动光标</p>
+<p>删除一个字符用x  nx （n是数字，可以删除多个字符）</p>
+<p>删除一个单词可以用dw  ndw（n代表是数字，可以删除多个单词）</p>
+<p>删除一行可以用  dd   ndd</p>
+<p>回退就是u</p>
+<p>复制一行yy  多行nyy</p>
+<p>粘贴p</p>
+<h5 id="编辑模式（插入模式）"><a href="#编辑模式（插入模式）" class="headerlink" title="编辑模式（插入模式）"></a>编辑模式（插入模式）</h5><p>从普通模式切换到编辑模式可以使用如下的操作</p>
+<p>i&#x2F;I   a&#x2F;A    o&#x2F;O</p>
+<p>如果修改完毕之后，可以使用esc回到普通模式</p>
+<h5 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h5><p>普通模式切换到命令模式可以使用shift + 冒号</p>
+<p>保存w  退出q   shift + 冒号 然后是行号，可以跳转到指定行 </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:x,ys/待替换的单词/目的单词/g   <span class="comment">//将x到y这些行的待查询词改为目的单词</span></span><br><span class="line">:%s/待替换的单词/目的单词/g   <span class="comment">//将所有行的待查询词改为目的单词</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="可视化模式"><a href="#可视化模式" class="headerlink" title="可视化模式"></a>可视化模式</h5><p>可以使用v或者ctrl + v进入可视化模式</p>
+<p>vimtutor</p>
+<h1 id="五、vimplus相关操作"><a href="#五、vimplus相关操作" class="headerlink" title="五、vimplus相关操作"></a>五、vimplus相关操作</h1><h4 id="1、vimplus的安装"><a href="#1、vimplus的安装" class="headerlink" title="1、vimplus的安装"></a>1、vimplus的安装</h4><p>可以安装《C++软件安装大全》进行操作</p>
+<p>1、从百度网盘下载</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230161230545.png" alt="image-20231230161230545"></p>
+<p>2、使用winscp将上述两个软件移动到的波浪号目录（cd  ~）,也就是&#x2F;home的下一级目录</p>
+<p>3、执行如下命令</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230161209477.png" alt="image-20231230161209477"></p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230161515585.png" alt="image-20231230161515585"></p>
+<h4 id="2、基本配置"><a href="#2、基本配置" class="headerlink" title="2、基本配置"></a>2、基本配置</h4><p>在该路径下面配置模板</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230162116897.png" alt="image-20231230162116897"></p>
+<p>配置snippet.c或者snippet.cc或者snippet.cc模板</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230162813711.png" alt="image-20231230162813711"></p>
+<h4 id="3、bashrc的配置"><a href="#3、bashrc的配置" class="headerlink" title="3、bashrc的配置"></a>3、bashrc的配置</h4><p>在家目录，也就是波浪号目录下满找到隐藏文件.bashrc，在最后加上如下一行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> PS1=<span class="string">&#x27;\[\e[36;47m\]\u\[\e[33;47m\]@\[\e[36;47m\]\h\[\e[35;47m\]:\[\e[31;47m\]\W\[\e[00m\]\$&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后让配置生效source .bashrc</p>
+<p>下面是改vim的配色问题</p>
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230163957049.png" alt="image-20231230163957049"></p>
+<h1 id="六、GCC编译工具链"><a href="#六、GCC编译工具链" class="headerlink" title="六、GCC编译工具链"></a>六、GCC编译工具链</h1><h4 id="1、软件的安装"><a href="#1、软件的安装" class="headerlink" title="1、软件的安装"></a>1、软件的安装</h4><p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230170435454.png" alt="image-20231230170435454"></p>
+<h4 id="2、源代码到可执行程序的步骤"><a href="#2、源代码到可执行程序的步骤" class="headerlink" title="2、源代码到可执行程序的步骤"></a>2、源代码到可执行程序的步骤</h4><h5 id="2-1、预处理"><a href="#2-1、预处理" class="headerlink" title="2.1、预处理"></a>2.1、预处理</h5><p>主要处理源代码文件中的以#开头的预编译指令</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以使用-E选项生成预处理之后的文件</span></span><br><span class="line">gcc -E hello.c -o hello.i</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-2、编译"><a href="#2-2、编译" class="headerlink" title="2.2、编译"></a>2.2、编译</h5><p>进行语法检测、词法检测、语义的检测。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -S hello.i -o hello.s</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-3、汇编"><a href="#2-3、汇编" class="headerlink" title="2.3、汇编"></a>2.3、汇编</h5><p>将汇编代码翻译(转变)成机器可以执行的指令(机器码文件)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">as hello.s -o hello.o</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230174033092.png" alt="image-20231230174033092"></p>
+<h5 id="2-4、链接"><a href="#2-4、链接" class="headerlink" title="2.4、链接"></a>2.4、链接</h5><p>主要是处理各个模块相互引用的部分，使得它们能正确衔接(确定各个符号的地址)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc hello.o -o hello</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231230175337197.png" alt="image-20231230175337197"></p>
+<h1 id="七、静态库与动态库"><a href="#七、静态库与动态库" class="headerlink" title="七、静态库与动态库"></a>七、静态库与动态库</h1><p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231231092159380.png" alt="image-20231231092159380"></p>
+<h4 id="静态库"><a href="#静态库" class="headerlink" title="静态库"></a>静态库</h4><p>独享库</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1、编译源代码生成目标文件</span></span><br><span class="line">gcc -c add.c -o add.o   <span class="comment">//add可以自己随便取名xxx,-c选项是只编译不链接</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//2、使用ar命令进行打包库</span></span><br><span class="line">ar crsv libadd.a add.o   <span class="comment">//静态库的文件名字叫做libadd.a,约定以lib开头，静态库以.a结尾</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//3、将静态库移动到系统的目录中</span></span><br><span class="line">sudo cp libadd.a /usr/lib</span><br><span class="line">    </span><br><span class="line"><span class="comment">//4、进行链接静态库</span></span><br><span class="line">gcc main.c -o main -ladd    <span class="comment">//-ladd中的l是库的首字母，后面的add与之前的xxx保持一致即可</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//测试</span></span><br><span class="line">接下来可以直接执行main可执行程序了</span><br><span class="line">  </span><br><span class="line"><span class="comment">//注意：此时如果将/usr/lib下的libadd.a文件删除了，也没有影响,可执行程序main也是可以运行的</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="动态库"><a href="#动态库" class="headerlink" title="动态库"></a>动态库</h4><p>共享库</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1、编译源代码生成目标文件</span></span><br><span class="line">gcc -c add.c -o add.o -fpic  <span class="comment">//add可以自己随便取名xxx,-c选项是只编译不链接,-fpic与位置无关</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//2、进行打包动态库</span></span><br><span class="line">gcc -shared -o libadd.so add.o   <span class="comment">//动态的文件名字叫做libadd.so,约定以lib开头，动态库以.so结尾</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//3、将动态库移动到系统的目录中</span></span><br><span class="line">sudo cp libadd.so /usr/lib</span><br><span class="line">    </span><br><span class="line"><span class="comment">//4、进行链接动态库</span></span><br><span class="line">gcc main.c -o main -ladd    <span class="comment">//-ladd中的l是库的首字母，后面的add与之前的xxx保持一致即可</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//测试</span></span><br><span class="line">接下来可以直接执行main可执行程序了</span><br><span class="line">  </span><br><span class="line"><span class="comment">//注意：此时如果将/usr/lib下的libadd.so文件删除了，执行程序main是会报错</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/image-20231231102726968.png" alt="image-20231231102726968"></p>
+<p>1</p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/07/07/Linux/Linux%E5%9F%BA%E7%A1%80/" title="Linux_基础(二)">http://example.com/2024/07/07/Linux/Linux基础/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/07/Linux/Linux%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="prev" title="Linux_基础(二)-系统软件安装">
+      <i class="fa fa-chevron-left"></i> Linux_基础(二)-系统软件安装
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/07/Math/discreteMathematics/" rel="next" title="离散数学">
+      离散数学 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">一、基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、基本环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E3%80%81%E5%8E%86%E5%8F%B2"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3%E3%80%81windows%E4%B8%8ELinux%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.</span> <span class="nav-text">1.3、windows与Linux的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Linux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">二、Linux基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%94%A8%E6%88%B7%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">2.1.</span> <span class="nav-text">1、用户的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81cd%E5%91%BD%E4%BB%A4%EF%BC%88-%E5%B8%B8%E7%94%A8-%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">2、cd命令（&#x3D;&#x3D;常用&#x3D;&#x3D;）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81pwd%E5%91%BD%E4%BB%A4%EF%BC%88-%E5%B8%B8%E7%94%A8-%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">3、pwd命令（&#x3D;&#x3D;常用&#x3D;&#x3D;）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81ls%E5%91%BD%E4%BB%A4%EF%BC%88-%E5%B8%B8%E7%94%A8-%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">4、ls命令（&#x3D;&#x3D;常用&#x3D;&#x3D;）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E7%94%A8%E6%88%B7%E7%9A%84%E5%88%A0%E9%99%A4userdel"><span class="nav-number">2.5.</span> <span class="nav-text">5、用户的删除userdel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E5%88%A0%E9%99%A4"><span class="nav-number">2.6.</span> <span class="nav-text">6、文件夹的创建与删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E6%99%AE%E9%80%9A%E6%96%87%E4%BB%B6%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">2.7.</span> <span class="nav-text">7、普通文件的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#touch%E5%91%BD%E4%BB%A4"><span class="nav-number">2.7.0.0.1.</span> <span class="nav-text">touch命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cat%E5%91%BD%E4%BB%A4"><span class="nav-number">2.7.0.0.2.</span> <span class="nav-text">cat命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#echo%E5%91%BD%E4%BB%A4"><span class="nav-number">2.7.0.0.3.</span> <span class="nav-text">echo命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#vi-vim%E5%91%BD%E4%BB%A4-%E9%87%8D%E8%A6%81"><span class="nav-number">2.7.0.0.4.</span> <span class="nav-text">vi&#x2F;vim命令(&#x3D;&#x3D;重要&#x3D;&#x3D;)</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">2.8.</span> <span class="nav-text">8、查看文件中的内容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cat%E5%91%BD%E4%BB%A4-1"><span class="nav-number">2.8.0.0.1.</span> <span class="nav-text">cat命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#head-tail%E5%91%BD%E4%BB%A4"><span class="nav-number">2.8.0.0.2.</span> <span class="nav-text">head&#x2F;tail命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#more-less%E5%91%BD%E4%BB%A4"><span class="nav-number">2.8.0.0.3.</span> <span class="nav-text">more&#x2F;less命令</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81%E6%96%87%E4%BB%B6%E7%9A%84%E6%8B%B7%E8%B4%9D%E3%80%81%E7%A7%BB%E5%8A%A8%E3%80%81%E5%88%A0%E9%99%A4%EF%BC%88-%E9%87%8D%E8%A6%81-%EF%BC%89"><span class="nav-number">2.9.</span> <span class="nav-text">9、文件的拷贝、移动、删除（&#x3D;&#x3D;重要&#x3D;&#x3D;）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cp%E5%91%BD%E4%BB%A4"><span class="nav-number">2.9.0.0.1.</span> <span class="nav-text">cp命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mv%E5%91%BD%E4%BB%A4"><span class="nav-number">2.9.0.0.2.</span> <span class="nav-text">mv命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rm%E5%91%BD%E4%BB%A4"><span class="nav-number">2.9.0.0.3.</span> <span class="nav-text">rm命令</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81ls%E5%91%BD%E4%BB%A4%EF%BC%88-%E9%87%8D%E8%A6%81-%EF%BC%89"><span class="nav-number">2.10.</span> <span class="nav-text">10、ls命令（&#x3D;&#x3D;重要&#x3D;&#x3D;）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11%E3%80%81%E7%A1%AC%E9%93%BE%E6%8E%A5%E4%B8%8E%E8%BD%AF%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.11.</span> <span class="nav-text">11、硬链接与软连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%E3%80%81%E6%94%B9%E5%8F%98%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E7%9A%84%E5%91%BD%E4%BB%A4chmod"><span class="nav-number">2.12.</span> <span class="nav-text">12、改变文件权限的命令chmod</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81%E6%96%87%E4%BB%B6%E7%9A%84%E6%9F%A5%E6%89%BEfind"><span class="nav-number">2.13.</span> <span class="nav-text">13、文件的查找find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%E3%80%81%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9grep"><span class="nav-number">2.14.</span> <span class="nav-text">14、查找文件内容grep</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%87%8D%E5%AE%9A%E5%90%91-%E9%87%8D%E8%A6%81"><span class="nav-number">3.</span> <span class="nav-text">三、重定向(&#x3D;&#x3D;重要&#x3D;&#x3D;)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%BD%E5%8A%A0%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">追加模式</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81vim%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%EF%BC%88-%E7%B9%81%E7%90%90%EF%BC%8C%E9%87%8D%E8%A6%81-%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">四、vim的基本操作（&#x3D;&#x3D;繁琐，重要&#x3D;&#x3D;）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">1、安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">2、基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.0.0.2.1.</span> <span class="nav-text">普通模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E6%A8%A1%E5%BC%8F%EF%BC%88%E6%8F%92%E5%85%A5%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="nav-number">4.0.0.2.2.</span> <span class="nav-text">编辑模式（插入模式）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.0.0.2.3.</span> <span class="nav-text">命令模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.0.0.2.4.</span> <span class="nav-text">可视化模式</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81vimplus%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="nav-number">5.</span> <span class="nav-text">五、vimplus相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81vimplus%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">1、vimplus的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">2、基本配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81bashrc%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">5.0.0.3.</span> <span class="nav-text">3、bashrc的配置</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81GCC%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7%E9%93%BE"><span class="nav-number">6.</span> <span class="nav-text">六、GCC编译工具链</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">6.0.0.1.</span> <span class="nav-text">1、软件的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-number">6.0.0.2.</span> <span class="nav-text">2、源代码到可执行程序的步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1%E3%80%81%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-number">6.0.0.2.1.</span> <span class="nav-text">2.1、预处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2%E3%80%81%E7%BC%96%E8%AF%91"><span class="nav-number">6.0.0.2.2.</span> <span class="nav-text">2.2、编译</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3%E3%80%81%E6%B1%87%E7%BC%96"><span class="nav-number">6.0.0.2.3.</span> <span class="nav-text">2.3、汇编</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4%E3%80%81%E9%93%BE%E6%8E%A5"><span class="nav-number">6.0.0.2.4.</span> <span class="nav-text">2.4、链接</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93"><span class="nav-number">7.</span> <span class="nav-text">七、静态库与动态库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%BA%93"><span class="nav-number">7.0.0.1.</span> <span class="nav-text">静态库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%BA%93"><span class="nav-number">7.0.0.2.</span> <span class="nav-text">动态库</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
