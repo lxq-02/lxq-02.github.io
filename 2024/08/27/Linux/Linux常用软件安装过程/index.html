@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="相关命令· whereis&amp;whichwhereis: 可以帮助快速的找到某个命令的二进制文件、帮助页面、源码所在路径。 which: 也是可以显示命令的二进制文件的路,shows the full path of (shell) commands. · systemctl &amp;service (sv&#x3D;&#x3D;servicename)添加开机启动 systemctl e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux_基础(三)-常用软件安装">
+<meta property="og:url" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="相关命令· whereis&amp;whichwhereis: 可以帮助快速的找到某个命令的二进制文件、帮助页面、源码所在路径。 which: 也是可以显示命令的二进制文件的路,shows the full path of (shell) commands. · systemctl &amp;service (sv&#x3D;&#x3D;servicename)添加开机启动 systemctl e">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps1.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps2.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps3.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps4.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps5.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps6.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps7.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps8.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps9.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps10.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps11.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps12.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps13.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps14.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps15.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps16.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps17.jpg">
+<meta property="article:published_time" content="2024-08-27T01:08:00.000Z">
+<meta property="article:modified_time" content="2024-08-27T03:09:42.620Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps1.jpg">
+
+<link rel="canonical" href="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux_基础(三)-常用软件安装 | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux_基础(三)-常用软件安装
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-08-27 09:08:00 / 修改时间：11:09:42" itemprop="dateCreated datePublished" datetime="2024-08-27T09:08:00+08:00">2024-08-27</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h1><h2 id="·-whereis-which"><a href="#·-whereis-which" class="headerlink" title="· whereis&amp;which"></a>· whereis&amp;which</h2><p>whereis: 可以帮助快速的找到某个命令的二进制文件、帮助页面、源码所在路径。</p>
+<p>which: 也是可以显示命令的二进制文件的路,shows the full path of (shell) commands.</p>
+<h2 id="·-systemctl-service-sv-servicename"><a href="#·-systemctl-service-sv-servicename" class="headerlink" title="· systemctl &amp;service (sv&#x3D;&#x3D;servicename)"></a>· systemctl &amp;service (sv&#x3D;&#x3D;servicename)</h2><p>添加开机启动 systemctl enable sv </p>
+<p>禁止开机启动 systemctl disable sv </p>
+<p>查看服务文件内容 systemctl cat sv</p>
+<p>-———————–</p>
+<p>立即启动服务 systemctl start sv service sv start</p>
+<p>立即停止服务 systemctl stop sv service sv stop</p>
+<p>重新启动服务 systemctl restart sv service sv restart </p>
+<p>重新加载服务配置 systemctl reload sv service sv reload </p>
+<p>查看服务状态 systemctl status sv service sv status </p>
+<h2 id="·-查看端口占用"><a href="#·-查看端口占用" class="headerlink" title="· 查看端口占用"></a><strong>·</strong> 查看端口占用</h2><p>netstat -anp |grep :80 ,不存在 netstat 可 yum install net-tools</p>
+<p>或 ss -anp | grep :80</p>
+<h2 id="防火墙相关"><a href="#防火墙相关" class="headerlink" title="防火墙相关"></a>防火墙相关</h2><p>开放端口 firewall-cmd –permanent –zone&#x3D;public –add-port&#x3D;80&#x2F;tcp </p>
+<p>开放多个端口 firewall-cmd –permanent –zone&#x3D;public –add-port&#x3D;8080-8083&#x2F;tcp</p>
+<p>关闭某个端口 firewall-cmd –permanent –zone&#x3D;public –remove-port&#x3D;81&#x2F;tcp</p>
+<p>修改后重载配置 firewall-cmd –reload</p>
+<p>列出开放的端口 firewall-cmd –list-ports </p>
+<h2 id="yum-相关命令"><a href="#yum-相关命令" class="headerlink" title="yum 相关命令"></a>yum 相关命令</h2><p>设置yum源 : 参考阿里 或华为镜像中说明 </p>
+<p>安装 yum install softwarename     </p>
+<p>卸载 yum remove softwarename     </p>
+<p>列出所有 yum list package</p>
+<p>列出已有 yum list installed</p>
+<p>查找 yum serach jdk</p>
+<h2 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h2><p>对应 .tar 文件：</p>
+<p>解包：tar xvf FileName.tar</p>
+<p>打包：tar cvf FileName.tar DirName</p>
+<p>.tar.gz 和 .tgz文件：</p>
+<p>解压：tar -zxvf FileName.tar.gz</p>
+<p>压缩：tar -zcvf FileName.tar.gz DirName</p>
+<h1 id="任务1：安装-apache"><a href="#任务1：安装-apache" class="headerlink" title="任务1：安装 apache"></a>任务1：安装 apache</h1><p>安装： yum install httpd</p>
+<p>进入目录： cd &#x2F;var&#x2F;www&#x2F;html 建立 自己index.html </p>
+<p>启动服务 systemctl start httpd</p>
+<p>虚拟机测试： curl 127.0.0.1</p>
+<p>真机测试： 浏览器</p>
+<p>如果真机不成功， 可以开放防火墙80 端口，或关闭防火墙，测试 </p>
+<p>systemctl stop firewalld</p>
+<p>-—————————————</p>
+<p>systemctl start firewalld</p>
+<p>firewall-cmd –zone&#x3D;public –add-port&#x3D;80&#x2F;tcp –permanent</p>
+<p>firewall-cmd –reload</p>
+<p>如果端口被占用. 查看80</p>
+<p>netstat -anp |grep :80 ，也可以用ps aux 查看</p>
+<p>netstat 不存在 ，则安装 yum install net-tools 即可。</p>
+<h1 id="任务2：安装pyton3"><a href="#任务2：安装pyton3" class="headerlink" title="任务2：安装pyton3"></a>任务2：安装pyton3</h1><p>yum -y install python3 </p>
+<p>python3 -version 查看版本</p>
+<p>which python3 可以看命令位置 </p>
+<p>如果不想要3.6 可以去官网或镜像下载</p>
+<h1 id="任务3：安装jdk-8"><a href="#任务3：安装jdk-8" class="headerlink" title="任务3：安装jdk 8"></a>任务3：安装jdk 8</h1><p>yum search java | grep 1.8</p>
+<p>yum install java-1.8.0-openjdk-devel.x86_64</p>
+<p>yum install java-1.8.0-openjdk.x86_64</p>
+<h1 id="任务4：-tomcat"><a href="#任务4：-tomcat" class="headerlink" title="任务4： tomcat"></a>任务4： tomcat</h1><p><a target="_blank" rel="noopener" href="https://repo.huaweicloud.com/apache/tomcat/tomcat-9/v9.0.10/bin/apache-tomcat-9.0.10-deployer.tar.gz">wget https://mirrors.aliyun.com/apache/tomcat/tomcat-9/v9.0.62/bin/apache-tomcat-9.0.62.tar.gz</a></p>
+<p>tar -zxvf ****</p>
+<p>进bin 执行.&#x2F;startup.sh</p>
+<p>192.168.231.139:8080</p>
+<h1 id="任务5：-安装nginx"><a href="#任务5：-安装nginx" class="headerlink" title="任务5： 安装nginx"></a>任务5： 安装nginx</h1><p>独立源地址： <a target="_blank" rel="noopener" href="http://nginx.org/">nginx.org</a></p>
+<p>安装依赖： yum -y install gcc pcre-devel zlib-devel openssl openssl-devel</p>
+<p>下载： wget <a target="_blank" rel="noopener" href="http://nginx.org/download/nginx-1.20.2.tar.gz">http://nginx.org/download/nginx-1.20.2.tar.gz</a></p>
+<p>解压： tar -zxvf nginx-1.20.2.tar.gz</p>
+<p>进入目录： cd nginx-1.20.2</p>
+<p>安装配置： .&#x2F;configure </p>
+<p>（提示 &#x2F;usr&#x2F;local&#x2F;nginx 目录）</p>
+<p>编译安装： make </p>
+<p>make install</p>
+<p>进入目录： cd &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin</p>
+<p>启动： .&#x2F;nginx</p>
+<p>停止： .&#x2F;nginx -s stop</p>
+<p>重新加载： .&#x2F;nginx -s reload</p>
+<p>虚拟机测试： curl 127.0.0.1</p>
+<p>真机测试： 浏览器</p>
+<p>如果真机不成功， 可以开放防火墙端口，或关闭防火墙，测试 </p>
+<p>可以进入 cd &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;html 目录下编写自己的html 静态文件</p>
+<h1 id="任务6：-安装-MySQL"><a href="#任务6：-安装-MySQL" class="headerlink" title="任务6： 安装 MySQL"></a>任务6： 安装 MySQL</h1><p>1、下载文件</p>
+<p>wget <a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/mysql/MySQL-8.0/mysql-8.0.26-1.el7.x86_64.rpm-bundle.tar">https://mirrors.aliyun.com/mysql/MySQL-8.0/mysql-8.0.26-1.el7.x86_64.rpm-bundle.tar</a></p>
+<p>或下载到本机，在上传到服务器</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps1.jpg" alt="img"> </p>
+<p>1.1 删除系统自带的 mariadb</p>
+<p>rpm -e mariadb-libs-5.5.68-1.el7.centos.x86_64 –nodeps</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps2.jpg" alt="img"> </p>
+<p>2、解压缩</p>
+<p>tar -xvf mysql-8.0.26-1.el7.x86_64.rpm-bundle.tar </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps3.jpg" alt="img"> </p>
+<p>3、安装 common、libs、client、server</p>
+<p>安装命令行</p>
+<p>rpm -ivh mysql-community-common-8.0.26-1.el7.x86_64.rpm –nodeps –force </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps4.jpg" alt="img"> </p>
+<p>rpm -ivh mysql-community-libs-8.0.26-1.el7.x86_64.rpm –nodeps –force</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps5.jpg" alt="img"> </p>
+<p>rpm -ivh mysql-community-client-8.0.26-1.el7.x86_64.rpm –nodeps –force</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps6.jpg" alt="img"> </p>
+<p>rpm -ivh mysql-community-server-8.0.26-1.el7.x86_64.rpm –nodeps –force </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps7.jpg" alt="img"> </p>
+<p>4、初始化 MySQL</p>
+<p>mysqld –initialize </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps8.jpg" alt="img"> </p>
+<p>7、授权防火墙</p>
+<p>chown mysql:mysql &#x2F;var&#x2F;lib&#x2F;mysql -R; 改变用户和用户组</p>
+<p>systemctl start mysqld.service; </p>
+<p>systemctl enable mysqld; 应该是默的，如果不是加上这句 </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps9.jpg" alt="img"> </p>
+<p>8、查看数据库的初始化密码</p>
+<p>cat &#x2F;var&#x2F;log&#x2F;mysqld.log | grep password </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps10.jpg" alt="img"> </p>
+<p>9、登录数据库</p>
+<p>mysql -uroot -p </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps11.jpg" alt="img"> </p>
+<p>10、修改密码</p>
+<p>ALTER USER ‘root‘@’localhost’ IDENTIFIED WITH mysql_native_password BY ‘root’; </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps12.jpg" alt="img"> </p>
+<p>11、使用新密码登录</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps13.jpg" alt="img"> </p>
+<p>12、开启远程访问</p>
+<p>create user ‘root‘@’%’ identified with mysql_native_password by ‘root’;</p>
+<p>grant all privileges on <em>.</em> to ‘root‘@’%’ with grant option;</p>
+<p>flush privileges; </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps14.jpg" alt="img"> </p>
+<p>13、开放 3306 端口</p>
+<p>firewall-cmd –zone&#x3D;public –add-port&#x3D;3306&#x2F;tcp –permanent</p>
+<p>systemctl restart firewalld.service</p>
+<p>firewall-cmd –reload </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps15.jpg" alt="img"> </p>
+<p>14、MySQL 安装默认使用美国的时区，北京时间比美国晚 8 小时</p>
+<p>set global time_zone&#x3D;’+8:00’; </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps16.jpg" alt="img"> </p>
+<p>15、创建数据表</p>
+<p>create database test character set utf8 collate utf8_general_ci;</p>
+<p>use test;</p>
+<p>create table user( id int primary key auto_increment, name varchar(22), birthday datetime ); insert into user(name, birthday) VALUES (‘小明’,’1999-01-01’); insert into user(name, birthday) VALUES (‘小红’,’2000-01-01’); </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/wps17.jpg" alt="img"> </p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/" title="Linux_基础(三)-常用软件安装">http://example.com/2024/08/27/Linux/Linux常用软件安装过程/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/08/26/OpenCV/OpenCV(%E4%BA%8C)-%E5%9B%BE%E5%83%8F%E4%B9%A6%E5%93%81%E7%9A%84%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%98%BE%E7%A4%BA/" rel="prev" title="OpenCV(二)-图像书品的加载与显示">
+      <i class="fa fa-chevron-left"></i> OpenCV(二)-图像书品的加载与显示
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/" rel="next" title="Linux_(五)-实验">
+      Linux_(五)-实验 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%B7-whereis-which"><span class="nav-number">1.1.</span> <span class="nav-text">· whereis&amp;which</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%B7-systemctl-service-sv-servicename"><span class="nav-number">1.2.</span> <span class="nav-text">· systemctl &amp;service (sv&#x3D;&#x3D;servicename)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%B7-%E6%9F%A5%E7%9C%8B%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">· 查看端口占用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9B%B8%E5%85%B3"><span class="nav-number">1.4.</span> <span class="nav-text">防火墙相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yum-%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">1.5.</span> <span class="nav-text">yum 相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar"><span class="nav-number">1.6.</span> <span class="nav-text">tar</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A11%EF%BC%9A%E5%AE%89%E8%A3%85-apache"><span class="nav-number">2.</span> <span class="nav-text">任务1：安装 apache</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A12%EF%BC%9A%E5%AE%89%E8%A3%85pyton3"><span class="nav-number">3.</span> <span class="nav-text">任务2：安装pyton3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A13%EF%BC%9A%E5%AE%89%E8%A3%85jdk-8"><span class="nav-number">4.</span> <span class="nav-text">任务3：安装jdk 8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A14%EF%BC%9A-tomcat"><span class="nav-number">5.</span> <span class="nav-text">任务4： tomcat</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A15%EF%BC%9A-%E5%AE%89%E8%A3%85nginx"><span class="nav-number">6.</span> <span class="nav-text">任务5： 安装nginx</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A16%EF%BC%9A-%E5%AE%89%E8%A3%85-MySQL"><span class="nav-number">7.</span> <span class="nav-text">任务6： 安装 MySQL</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

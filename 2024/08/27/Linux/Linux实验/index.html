@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、下载安装1.1、虚拟机的安装Windows 环境下安装vmware虚拟机。 \1. 打开安装驱动文件   \2. 一直下一步，更改保存位置   \3. 一直下一步，安装   \4. 等待下载成功   \5. 输入许可证密钥   题目2** – 安装** 1.2、centos在虚拟机中，安装centos 1.进入华为云镜像下载网站https:&#x2F;&#x2F;mirrors.huaweicloud.com&#x2F;h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux_(五)-实验">
+<meta property="og:url" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="一、下载安装1.1、虚拟机的安装Windows 环境下安装vmware虚拟机。 \1. 打开安装驱动文件   \2. 一直下一步，更改保存位置   \3. 一直下一步，安装   \4. 等待下载成功   \5. 输入许可证密钥   题目2** – 安装** 1.2、centos在虚拟机中，安装centos 1.进入华为云镜像下载网站https:&#x2F;&#x2F;mirrors.huaweicloud.com&#x2F;h">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps21.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps22.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps26.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps27.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724721484828.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724721484828.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724721484828.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724721484828.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724721484828.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724721484828.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724721484828.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724721484829.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724721484829.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724721484829.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724721484829.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724721484829.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724721484829.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724721484829.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724721484829.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724721484829.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724721711741.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724721711741.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724721711741.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724721711741.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724721711741.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724721711741.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724721711741.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724721711741.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724721711741.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724721711741.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724721711741.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724721711741.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724721711742.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724721711742.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724721711742.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724721711742.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724721970584.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps21-1724721970585.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps22-1724721970586.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23-1724721970586.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24-1724721970586.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25-1724721970586.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps26-1724721970586.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps27-1724721970586.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps28-1724721970586.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps29-1724721970586.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps30-1724721970586.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps31-1724721970586.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps32.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps33.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps34.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps35.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps36.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps37.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724722222445.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps21-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps22-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25-1724722222446.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724722406203.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps21-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps22-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps26-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps27-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps28-1724722406204.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps29-1724722406205.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps30-1724722406205.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps31-1724722406205.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps32-1724722406205.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps33-1724722406205.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps34-1724722406205.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps35-1724722406205.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps36-1724722406205.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps37-1724722406205.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps38.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps39.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps40.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps41.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps42.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps43.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724722600591.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19-1724722600592.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20-1724722600592.jpg">
+<meta property="og:image" content="file:///C:/Users/ADMINI~1/AppData/Local/Temp/ksohtml15024/wps21.jpg">
+<meta property="og:image" content="file:///C:/Users/ADMINI~1/AppData/Local/Temp/ksohtml15024/wps22.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23-1724722600593.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24-1724722600593.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25-1724722600593.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps26-1724722600593.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724722784156.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724722784156.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724722784156.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724722784156.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724722784156.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724722784156.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724722784156.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724722784157.jpg">
+<meta property="og:image" content="file:///C:/Users/ADMINI~1/AppData/Local/Temp/ksohtml14832/wps13.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps21-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps22-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps26-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps27-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps28-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps29-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps30-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps31-1724722784157.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724723044919.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724723044919.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724723044919.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724723044919.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724723044919.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724723044919.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724723044919.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724723044919.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724723044919.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724723044919.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps21-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps22-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps26-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps27-1724723044920.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps28-1724723044920.jpg">
+<meta property="article:published_time" content="2024-08-27T01:14:00.000Z">
+<meta property="article:modified_time" content="2024-08-27T03:09:42.380Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1.jpg">
+
+<link rel="canonical" href="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux_(五)-实验 | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux_(五)-实验
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-08-27 09:14:00 / 修改时间：11:09:42" itemprop="dateCreated datePublished" datetime="2024-08-27T09:14:00+08:00">2024-08-27</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、下载安装"><a href="#一、下载安装" class="headerlink" title="一、下载安装"></a>一、下载安装</h1><h2 id="1-1、虚拟机的安装"><a href="#1-1、虚拟机的安装" class="headerlink" title="1.1、虚拟机的安装"></a>1.1、虚拟机的安装</h2><p>Windows 环境下安装vmware虚拟机。</p>
+<p>\1. 打开安装驱动文件</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1.jpg" alt="img"> </p>
+<p>\2. 一直下一步，更改保存位置</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2.jpg" alt="img"> </p>
+<p>\3. 一直下一步，安装</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3.jpg" alt="img"> </p>
+<p>\4. 等待下载成功</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4.jpg" alt="img"> </p>
+<p>\5. 输入许可证密钥</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5.jpg" alt="img"> </p>
+<p>题目2** <strong>–</strong> <strong>安装</strong>**</p>
+<h2 id="1-2、centos"><a href="#1-2、centos" class="headerlink" title="1.2、centos"></a>1.2、centos</h2><p>在虚拟机中，安装centos</p>
+<p>1.进入华为云镜像下载网站<a target="_blank" rel="noopener" href="https://mirrors.huaweicloud.com/home">https://mirrors.huaweicloud.com/home</a></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6.jpg" alt="img"> </p>
+<p>2.找到Centos</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7.jpg" alt="img"> </p>
+<p>3.在对应目录找到下载的文件</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8.jpg" alt="img"> </p>
+<p>4.打开VMware，新建虚拟机向导</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9.jpg" alt="img"> </p>
+<p>5.保存映像文件位置</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10.jpg" alt="img"> </p>
+<p>6.保存地址，修改名字</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12.jpg" alt="img"> </p>
+<p>7.定义硬件</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13.jpg" alt="img"> </p>
+<p>\8. 安装成功</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14.jpg" alt="img"> </p>
+<p>\9. 测试安装</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18.jpg" alt="img"> </p>
+<p>10.登录账号和密码</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19.jpg" alt="img"> </p>
+<h2 id="1-3、网络测试"><a href="#1-3、网络测试" class="headerlink" title="1.3、网络测试"></a>1.3、网络测试</h2><p>系统安装成功后，检查网络是否可用，如果不可用，开启网络。</p>
+<p>1.登录centOS系统，登录账号，测试baidu.com</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20.jpg" alt="img"> </p>
+<p>2.使用curl baidu.com，查看是否返回对应数据</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps21.jpg" alt="img"> </p>
+<h2 id="1-4、远程连接工具"><a href="#1-4、远程连接工具" class="headerlink" title="1.4、远程连接工具"></a>1.4、远程连接工具</h2><p>使用工具连接到centos系统。finalshell</p>
+<p>1.下载finalshell的文件包</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps22.jpg" alt="img"> </p>
+<p>2.点击左上角文件夹图案的图标，右键“连接”，点击“新建”下的“SSH连接”</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23.jpg" alt="img"> </p>
+<p>2.在centOS中输入ip addr，寻找相应的IP地址</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24.jpg" alt="img"> </p>
+<p>3.在SSH连接后的选项里输入相应的信息</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25.jpg" alt="img"> </p>
+<p>4.点击相应的连接，接受密钥</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps26.jpg" alt="img"> </p>
+<p>5.连接成功</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps27.jpg" alt="img"> </p>
+<h1 id="二、Linux命令使用"><a href="#二、Linux命令使用" class="headerlink" title="二、Linux命令使用"></a>二、Linux命令使用</h1><h2 id="2-1、熟悉目录及文件相关命令"><a href="#2-1、熟悉目录及文件相关命令" class="headerlink" title="2.1、熟悉目录及文件相关命令"></a>2.1、熟悉目录及文件相关命令</h2><p><strong>1.</strong> <strong>实验内容</strong></p>
+<p>了解目录相关命令：cd、pwd、ls、mkdir、rmdir、rm等的使用；</p>
+<p>说明： 	mkdir 的-p选项使用场景；</p>
+<p>说明： 	rm -rf 的使用场景</p>
+<p>说明： 	ls -al  ，ls &#x2F;etc | more 的作用</p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>&#x2F;&#x2F;文字或结果截图</p>
+<p>\1. <img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724721484828.jpg" alt="img"></p>
+<p>\2. mkdir [-p] 参数<br>            -p，可选，表示创建前置路径，表示自动创建不存在的父目录，适用于创建连续多层级的目录<br>rm [-r -f] 参数…参数<br>-r：删除文件夹<br>-f: 强制删除<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724721484828.jpg" alt="img"></p>
+<p>\3. ls [-a -l] 参数<br>        -a：显示所有文件<br>     -l：显示文件的所有信息<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724721484828.jpg" alt="img"></p>
+<p>\4. ls &#x2F;etc | more：将&#x2F;etc下的文件名称翻页查看<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724721484828.jpg" alt="img"></p>
+<h2 id="2-2、熟悉文件相关命令"><a href="#2-2、熟悉文件相关命令" class="headerlink" title="2.2、熟悉文件相关命令"></a>2.2、熟悉文件相关命令</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>文件显示：cat、more、less</p>
+<p>文件复制、删除和移动：cp、rm、mv </p>
+<p>创建或改变文件时间标签：touch</p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1.cat 显示文件信息<br>    more 分页查看<br>    less 随意浏览文件，可以向上向下翻页<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724721484828.jpg" alt="img"></p>
+<p>2.touch创建文件</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724721484828.jpg" alt="img"> </p>
+<p>3.cp 复制文件 rm 删除文件 mv 移动文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724721484828.jpg" alt="img"></p>
+<h2 id="2-3、熟练运行通配符"><a href="#2-3、熟练运行通配符" class="headerlink" title="2.3、熟练运行通配符"></a>2.3、熟练运行通配符</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>基于ls命令练习通配符（？、*、[]）的使用</p>
+<ol>
+<li><p>在当前目录下生成 touch t{1..10}.c 文件</p>
+</li>
+<li><p>ls *.c 作用</p>
+</li>
+<li><p>ls  ??.c作用</p>
+</li>
+<li><p>ls t[1-5].c 的作用</p>
+</li>
+</ol>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<ol>
+<li><p>   在当前目录下生成 touch t{1..10}.c 文件</p>
+</li>
+<li><p>   ls *.c 作用：显示所有以.c结尾的文件</p>
+</li>
+<li><p>   ls  ??.c作用：显示所有以.c结尾且前面有两个字符的文件</p>
+</li>
+<li><p>   ls t[1-5].c 的作用：显示1.c，2.c, 3.c, 4.c，5.c</p>
+</li>
+</ol>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724721484829.jpg" alt="img"> </p>
+<h2 id="2-4、案例一"><a href="#2-4、案例一" class="headerlink" title="2.4、案例一"></a>2.4、案例一</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>(1) 在根目录（&#x2F;）下新建一目录 test</p>
+<p>(2) 改变当前目录至 &#x2F;test ，在该目录下，以自己名字的英文缩写建一个空的文件，再建两个子目录（xh）与（ah）；</p>
+<p>(3) 进入到（xh）子目录中，新建一个空文件text1；</p>
+<p>(4) 进入到（ah）子目录中，再新建一个子目录（abc）,同时建立空文件text2；</p>
+<p>(5) 把刚建的text1文件移动到刚建立的abc子目录下，并改名为text3，同时把text2文件复制到xh子目录中；</p>
+<p>(6) 删除text3文件与xh子目录及目录中的文件；并删除abc子目录；</p>
+<p>(7) 清屏；</p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724721484829.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724721484829.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724721484829.jpg" alt="img"> </p>
+<h2 id="2-5、-案例二"><a href="#2-5、-案例二" class="headerlink" title="2.5、 案例二"></a>2.5、 <strong>案例二</strong></h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>(1) 查看&#x2F;etc&#x2F;passwd文件的前二行与最后二行，并记录；</p>
+<p>(2) 查看&#x2F;etc&#x2F;目录下的文件，并记录前两个文件的文件名；</p>
+<p>(3) 查看&#x2F;etc&#x2F;目录中所有的文件中包含有sys字母的文件并记录；</p>
+<p>(4) 查看&#x2F;etc&#x2F;目录中文件包含有conf的前两个文件是什么；</p>
+<p>(5) 清屏；</p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<ol>
+<li><p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724721484829.jpg" alt="img"></p>
+</li>
+<li></li>
+</ol>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724721484829.jpg" alt="img"> </p>
+<ol start="3">
+<li></li>
+</ol>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724721484829.jpg" alt="img"> </p>
+<ol start="4">
+<li></li>
+</ol>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724721484829.jpg" alt="img"> </p>
+<ol start="5">
+<li></li>
+</ol>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724721484829.jpg" alt="img"> </p>
+<h2 id="2-6、统计、排序"><a href="#2-6、统计、排序" class="headerlink" title="2.6、统计、排序"></a>2.6、统计、排序</h2><p> 统计 wc</p>
+<p>排序 sort 	</p>
+<p>&#x2F;etc&#x2F;passwd 或者 &#x2F;var&#x2F;log&#x2F;</p>
+<p>\1.<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724721711741.jpg" alt="img"></p>
+<p>\2. 根据第13个字母进行排序<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724721711741.jpg" alt="img"></p>
+<h2 id="2-7、查询"><a href="#2-7、查询" class="headerlink" title="2.7、查询"></a>2.7、查询</h2><p>Find xxx</p>
+<p>-name 根据名称</p>
+<p>-type 根据文件类型查找</p>
+<p>-atime 按照文件访问时间查找</p>
+<p>-size按照指定大小搜索文件</p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1.在目录下查找文件名是yum.conf的文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724721711741.jpg" alt="img"></p>
+<p>2.查找大于1G的文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724721711741.jpg" alt="img"></p>
+<p>3.查找&#x2F;etc目录下有哪些子目录<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724721711741.jpg" alt="img"></p>
+<p>4.查找&#x2F;etc目录下5天内修改的文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724721711741.jpg" alt="img"></p>
+<h2 id="2-8、grep"><a href="#2-8、grep" class="headerlink" title="2.8、grep"></a>2.8、grep</h2><p>Grep</p>
+<p>^:开头的意思</p>
+<p>$:结尾</p>
+<p>[]:查找包含[]中的字符的文件</p>
+<p>*：匹配前一个字符重复0次，或多次</p>
+<p>?.</p>
+<ol>
+<li>   查找开头是“-”的文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724721711741.jpg" alt="img"></li>
+</ol>
+<p>2.查找结尾是“$”的文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724721711741.jpg" alt="img"></p>
+<p>3.查找包含a, b, 1的文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724721711741.jpg" alt="img"></p>
+<p>4.查找至少包含一个a的文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724721711741.jpg" alt="img"></p>
+<p>5.查找有两个a或者三个a的文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724721711741.jpg" alt="img"></p>
+<h2 id="2-8、覆盖追加"><a href="#2-8、覆盖追加" class="headerlink" title="2.8、覆盖追加"></a>2.8、覆盖追加</h2><p>\1. <strong>实验内容</strong></p>
+<p><strong>&gt;：覆盖输出</strong></p>
+<p><strong>&gt;&gt;：追加输出</strong></p>
+<p><strong>&lt;：输入重定向</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724721711741.jpg" alt="img"> </p>
+<p>通过重定向 &#x2F;etc&#x2F;passwd 作为输入设备，并输出重定向到 a.txt，最终实现了将 &#x2F;etc&#x2F;passwd 文件中内容复制到 a.txt 中。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724721711742.jpg" alt="img"> </p>
+<h2 id="2-9、管道符"><a href="#2-9、管道符" class="headerlink" title="2.9、管道符|"></a>2.9、管道符|</h2><p><strong>(1)</strong> <em><strong>*|*</strong></em></p>
+<p><strong>(2)</strong> <em><strong>*tee：读取标准输入*</strong></em></p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1.管道符，左边的输出作为右边的输入<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724721711742.jpg" alt="img"></p>
+<p>2.将输入的信息输入到file中</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724721711742.jpg" alt="img"></p>
+<h2 id="2-10、last"><a href="#2-10、last" class="headerlink" title="2.10、last"></a>2.10、last</h2><p><strong>last：显示最近的登录信息，文件是&#x2F;var&#x2F;log&#x2F;wtmp</strong></p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong>**<br><strong><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724721711742.jpg" alt="img"></strong><br>**</p>
+<h1 id="三、vi编辑器使用"><a href="#三、vi编辑器使用" class="headerlink" title="三、vi编辑器使用"></a>三、vi编辑器使用</h1><h2 id="3-1、vi工作模式的转换"><a href="#3-1、vi工作模式的转换" class="headerlink" title="3.1、vi工作模式的转换"></a>3.1、vi工作模式的转换</h2><p>打开文件：vi  [文件名]</p>
+<p>命令模式（Command mode）：输入字符都作为命令来解释执行。不显示输入内容。</p>
+<p>输入模式（Insert mode）：输入的任何字符都将作为文件内容被保存，并显示在屏幕上。</p>
+<p>末行模式（Last line mode）：在屏幕最末行接收行命令输入，并执行。</p>
+<p>练习3种工模间的切换</p>
+<p><strong>2</strong>实验结果与分析（文字或实验结果截图）**</p>
+<p>1.打开文件，进入命令模式</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724721970584.jpg" alt="img"> </p>
+<p>2.在命令模式下输入i、I、a、A、o、O进入插入模式，可以在此模式下对文件进行修改，按Esc退出插入模式</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724721970585.jpg" alt="img"> </p>
+<p>3.在命令模式下，输入 ：开始的命令，进入末行模式执行指令，如“:wq”保存退出，</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724721970585.jpg" alt="img"> </p>
+<h2 id="3-2、退出相关命令"><a href="#3-2、退出相关命令" class="headerlink" title="3.2、退出相关命令"></a>3.2、退出相关命令</h2><p>测试 :q、  :wq、 :q!  三个退出命令的区别</p>
+<p>\1. :q 该命令只能退出没有修改的文件<br>    修改过：</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724721970585.jpg" alt="img"> </p>
+<p>未修改：</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724721970585.jpg" alt="img"> </p>
+<p>\2. :wq 保存并退出<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724721970585.jpg" alt="img"></p>
+<p>\3. :q! 强制退出，但不会保存修改的内容<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724721970585.jpg" alt="img"></p>
+<h2 id="3-3、增删改查"><a href="#3-3、增删改查" class="headerlink" title="3.3、增删改查"></a>3.3、增删改查</h2><p>查询</p>
+<p>插入&#x2F;删除命令（iao,dd dw x)</p>
+<p>修改&#x2F;替换命令</p>
+<p>:s&#x2F;str1&#x2F;str2&#x2F; 用字符串 str2 替换行中首次出现的字符串 str1</p>
+<p>:s&#x2F;str1&#x2F;str2&#x2F;g 用字符串 str2 替换行中所有出现的字符串 str1</p>
+<p>:%s&#x2F;str1&#x2F;str2&#x2F;g 用字符串 str2 替换所有行中，所有出现的字符串 str1</p>
+<p> 进入插入模式：i（光标左边开始）</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724721970585.jpg" alt="img"> </p>
+<p>进入插入模式：a（光标右边开始）</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724721970585.jpg" alt="img"> </p>
+<p>进入插入模式：o（光标下一行开始）</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724721970585.jpg" alt="img"> </p>
+<p>命令模式输入dd，删除光标所在行</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724721970585.jpg" alt="img"> </p>
+<p>命令模式：输入dw，删除光标下的字母<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724721970585.jpg" alt="img"></p>
+<p>:s&#x2F;str1&#x2F;str2&#x2F; 用字符串 str2 替换行中首次出现的字符串 str1</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724721970585.jpg" alt="img"> </p>
+<p>:s&#x2F;str1&#x2F;str2&#x2F;g 用字符串 str2 替换行中所有出现的字符串 str1</p>
+<p>:s&#x2F;I am&#x2F;-BBB-&#x2F;g<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724721970585.jpg" alt="img"></p>
+<p>:%s&#x2F;str1&#x2F;str2&#x2F;g 用字符串 str2 替换所有行中，所有出现的字符串 str1</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724721970585.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724721970585.jpg" alt="img"> </p>
+<h2 id="3-4、复制与撤销"><a href="#3-4、复制与撤销" class="headerlink" title="3.4、复制与撤销"></a>3.4、复制与撤销</h2><p>拷贝&#x2F;粘贴命令</p>
+<p>撤销&#x2F;重做命令</p>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>拷贝命令yy，复制一行的内容，按q，将拷贝的内容粘贴</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17-1724721970585.jpg" alt="img"> </p>
+<p>撤销命令u或者U</p>
+<p>u:撤销前一个命令</p>
+<p>U：撤销对光标所在行的修改</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18-1724721970585.jpg" alt="img"> </p>
+<p><strong>3</strong><strong>.</strong> <strong>结论与讨论</strong></p>
+<h2 id="3-5、sed"><a href="#3-5、sed" class="headerlink" title="3.5、sed"></a>3.5、sed</h2><p>Sed 命令使用，参照课件</p>
+<p>sed ‘s&#x2F;coffee&#x2F;chocolate&#x2F;’ caffeine</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19-1724721970585.jpg" alt="img"> </p>
+<p>输入下面要求做全局修改的sed命令：</p>
+<p>  sed  ‘s&#x2F;coffee&#x2F;chocolate&#x2F;g’  caffeine</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20-1724721970585.jpg" alt="img"> </p>
+<p>sed命令可以用于只作用于满足要求的行。</p>
+<p>sed  ‘&#x2F;2003&#x2F;s&#x2F;coffee&#x2F;chocolate&#x2F;g’  caffeine</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps21-1724721970585.jpg" alt="img"> </p>
+<p>文件中所有含有字符串def的行都会被删除。</p>
+<p>§sed  ‘&#x2F;def&#x2F;d’  caffeine</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps22-1724721970586.jpg" alt="img"> </p>
+<p> sed  ‘&#x2F;^2&#x2F;s&#x2F;coffee&#x2F;chocolate&#x2F;g’  caffeine </p>
+<p>选中所有以2开头的行，如果该行包含字符串coffee，</p>
+<p>则将其替换为chocolate。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23-1724721970586.jpg" alt="img"> </p>
+<p>输入： sed  ‘&#x2F;^c&#x2F;d’  caffeine</p>
+<p>选中所有以字符c开头的行，然后删除这些行</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24-1724721970586.jpg" alt="img"> </p>
+<p>输入： sed  ‘&#x2F;^$&#x2F;d’  caffeine</p>
+<p>选中所有空行，然后删除这些行</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25-1724721970586.jpg" alt="img"> </p>
+<h2 id="3-6、awk"><a href="#3-6、awk" class="headerlink" title="3.6、awk"></a>3.6、awk</h2><p>awk命令使用，参照课件</p>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>Awk ‘&#x2F;dairy&#x2F;{print $3}’ food</p>
+<p>将food文件下，包含dairy的行的第三字段打印出来<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps26-1724721970586.jpg" alt="img"></p>
+<p>Awk ‘&#x2F;dairy&#x2F;{print $3,$1}’ food</p>
+<p>将food文件下，包含dairy的行的第三字段，第一字段打印出来</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps27-1724721970586.jpg" alt="img"> </p>
+<p>awk -F: ‘{print $1,$3,$4}’ &#x2F;etc&#x2F;passwd | more</p>
+<p>将&#x2F;etc&#x2F;passwd文件中以冒号:为分隔符的第一、第三、第四字段打印出来</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps28-1724721970586.jpg" alt="img"> </p>
+<h2 id="3-7、"><a href="#3-7、" class="headerlink" title="3.7、"></a>3.7、</h2><p>1.把&#x2F;etc&#x2F;inittab文件复制到&#x2F;test目录并改名为tab；<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps29-1724721970586.jpg" alt="img"></p>
+<p>2.查看tab文件共有多少行，第18行为什么，并记录；<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps30-1724721970586.jpg" alt="img"></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps31-1724721970586.jpg" alt="img"> </p>
+<p>3.在第25行后添加上自己的名字的英文缩写；<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps32.jpg" alt="img"></p>
+<p>4.把第26行分别复制到第34行下面与内容最后；<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps33.jpg" alt="img"></p>
+<p>5.查找单词now在多少行有；<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps34.jpg" alt="img"></p>
+<p>6.命令行模式下，在第10行前后分别添加一空行；</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps35.jpg" alt="img"> </p>
+<p>7.再删除该修改后内容的第25行、30行；<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps36.jpg" alt="img"></p>
+<p>8.保存并退出；<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps37.jpg" alt="img"></p>
+<p>9.在末行模式下命令q与q!分别在什么情况下使用<br>q：退出，在文件没有修改的情况的下使用<br>q!：强制退出，如果文件修改了，同样可以退出，但修改的内容不会保存</p>
+<h1 id="四、用户组管理"><a href="#四、用户组管理" class="headerlink" title="四、用户组管理"></a>四、用户组管理</h1><h2 id="4-1、相关文件"><a href="#4-1、相关文件" class="headerlink" title="4.1、相关文件"></a>4.1、相关文件</h2><ol>
+<li><p>查看用户账号文件―&gt;&#x2F;etc&#x2F;passwd，说明其一行的格式及各域作用</p>
+</li>
+<li><p>查看影子文件―&gt;&#x2F;etc&#x2F;shadow，说明其中一行的格式及各域作用</p>
+</li>
+<li><p>查看组文件―&gt;&#x2F;etc&#x2F;group，说明其中一行的格式及各域作用</p>
+</li>
+</ol>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1.查看用户账号文件―&gt;&#x2F;etc&#x2F;passwd</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724722222445.jpg" alt="img">如root:x:0:0:root:&#x2F;root:&#x2F;bin&#x2F;bash</p>
+<p>root：登录名，区分大小写</p>
+<p>x ： 账号密码，为了安全考虑，这个内容放到了&#x2F;etc&#x2F;shadow</p>
+<p>0 ：账号UID,32位无符号整数，唯一，root的UID为0</p>
+<p>0 ：账户GID，32位整数，组ID</p>
+<p>root : GECOS字段，用户个人信息说明</p>
+<p>&#x2F;root : 用户登录的子目录，保存该账号的配置信息</p>
+<p>&#x2F;bin&#x2F;bash : 登录shell，默认的shell是&#x2F;bin&#x2F;bash</p>
+<p>2.查看影子文件―&gt;&#x2F;etc&#x2F;shadow</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724722222446.jpg" alt="img"> </p>
+<p>bin:*:18353:0:99999:7:::</p>
+<p>bin:登录名</p>
+<p>*:加密指令</p>
+<p>18353:口令上次更改距1970年1月1日有18353天</p>
+<p>0:口令更改后不可以更改的天数为0</p>
+<p>99999:口令更改后必须在99999天后更改，也是有效期</p>
+<p>7:口令失效前7天警告用户</p>
+<p>Inctive:倒数第3个域，代表口令失效后被查封的天数</p>
+<p>Expire:账号被封时距1970年1月1日的天数，</p>
+<p>Flag：保留未用的域</p>
+<p>3、查看组文件―&gt;&#x2F;etc&#x2F;group</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724722222446.jpg" alt="img"> </p>
+<p>bin:x:1:</p>
+<p>Bin : 组名</p>
+<p>X : 加密口令</p>
+<p>1 ：GID，组ID</p>
+<p>最后一个区域：存放成员列表，彼此用逗号隔开，这个默认组没有成员，为空</p>
+<p><strong>3</strong><strong>.</strong> <strong>结论与讨论</strong></p>
+<h2 id="4-2、用户相关命令练习"><a href="#4-2、用户相关命令练习" class="headerlink" title="4.2、用户相关命令练习"></a>4.2、用户相关命令练习</h2><ol>
+<li><p>练习添加新用户命令：useradd；</p>
+</li>
+<li><p>练习设置用户口令命令：passwd；</p>
+</li>
+<li><p>练习切换用户身份命令：su；</p>
+</li>
+<li><p>练习删除用户命令：userdel；</p>
+</li>
+<li><p>练习修改用户信息命令：usermod；</p>
+</li>
+</ol>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1、练习添加新用户命令：useradd；<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724722222446.jpg" alt="img"></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724722222446.jpg" alt="img"> </p>
+<p>2、设置用户口令命令：passwd；<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724722222446.jpg" alt="img"></p>
+<p>3、练习切换用户身份命令：su；</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724722222446.jpg" alt="img"> </p>
+<p>4、练习删除用户命令：userdel；</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724722222446.jpg" alt="img"> </p>
+<p>没有LLL这个账号了</p>
+<p>5、练习修改用户信息命令：usermod；</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724722222446.jpg" alt="img"> </p>
+<h2 id="4-3、组相关命令"><a href="#4-3、组相关命令" class="headerlink" title="4.3、组相关命令"></a>4.3、组相关命令</h2><ol>
+<li><p>练习添加组命令：groupadd；</p>
+</li>
+<li><p>练习删除组命令：groupdel；</p>
+</li>
+<li><p>练习修改组信息命令：groupmod；</p>
+</li>
+<li><p>添加&#x2F;删除组成员：gpasswd；</p>
+</li>
+</ol>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1、添加组命令：groupadd</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724722222446.jpg" alt="img"> </p>
+<p>2、删除组命令：groupdel；</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724722222446.jpg" alt="img"> </p>
+<p>没有testbed这个组了</p>
+<p>3、修改组信息命令：groupmod；</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724722222446.jpg" alt="img"> </p>
+<p>4、添加&#x2F;删除组成员：gpasswd；</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724722222446.jpg" alt="img"> </p>
+<p>添加成员u1,u2</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724722222446.jpg" alt="img"> </p>
+<p>Testbed2组删除了用户u1，现在只有u2用户</p>
+<h2 id="4-4、文件相关命令练习"><a href="#4-4、文件相关命令练习" class="headerlink" title="4.4、文件相关命令练习"></a>4.4、文件相关命令练习</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<ol>
+<li><p>修改权限命令：chmod</p>
+</li>
+<li><p>改变文件拥有者：chown；</p>
+</li>
+<li><p>更改文件所属的组：chgrp；</p>
+</li>
+</ol>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1、修改权限命令：chmod</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724722222446.jpg" alt="img"> </p>
+<p>2、改变文件拥有者：chown；</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724722222446.jpg" alt="img"> </p>
+<p>将abc.txt的文件拥有者和组改为LXQ</p>
+<p>3、 更改文件所属的组：chgrp；</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17-1724722222446.jpg" alt="img"> </p>
+<h2 id="4-5、用户组管理"><a href="#4-5、用户组管理" class="headerlink" title="4.5、用户组管理"></a>4.5、用户组管理</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<ol>
+<li><p>建立一个标准的组group1，GID&#x3D;900；</p>
+</li>
+<li><p>建立一个标准组group2，选项为默认，观察该组的信息有什么变化；</p>
+</li>
+<li><p>新建用户ah、xh，再新建一个组group3，把root、u1、user2用户添加到group1组中，把ah、xh添加到group2组，</p>
+</li>
+<li><p>把group3组改名为g3，GID&#x3D;1000；</p>
+</li>
+<li><p>查看user2所属于的组，并记录；</p>
+</li>
+<li><p>删除user1组与g3组，观察有什么情况发生；</p>
+</li>
+</ol>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1、建立一个标准的组group1，GID&#x3D;900；</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18-1724722222446.jpg" alt="img"> </p>
+<p>2、建立一个标准组group2，选项为默认，</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19-1724722222446.jpg" alt="img"> </p>
+<p>3、新建用户ah、xh，再新建一个组group3，把root、u1、user2用户添加到group1组中，把ah、xh添加到group2组，</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20-1724722222446.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps21-1724722222446.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps22-1724722222446.jpg" alt="img"> </p>
+<p>4、把group3组改名为g3，GID&#x3D;1000</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23-1724722222446.jpg" alt="img"> </p>
+<p>5、查看user2所属于的组，并记录</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24-1724722222446.jpg" alt="img"> </p>
+<p>6、删除user1组与g3组</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25-1724722222446.jpg" alt="img"> </p>
+<h1 id="五、应用安装"><a href="#五、应用安装" class="headerlink" title="五、应用安装"></a>五、应用安装</h1><h2 id="5-1、安装apache"><a href="#5-1、安装apache" class="headerlink" title="5.1、安装apache"></a>5.1、安装apache</h2><p><strong>1.检测是否安装httpd</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724722406203.jpg" alt="img"> </p>
+<p><strong>2.安</strong>装： yum install httpd</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724722406204.jpg" alt="img"> </p>
+<p>3.进入目录： cd &#x2F;var&#x2F;www&#x2F;html 建立 自己index.html </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724722406204.jpg" alt="img"> </p>
+<p>4.启动服务 systemctl start httpd <img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724722406204.jpg" alt="img"></p>
+<p>如果真机不成功， 可以开放防火墙80 端口，或关闭防火墙，测试 </p>
+<p>systemctl stop firewalld</p>
+<p>-—————————————</p>
+<p>systemctl start firewalld</p>
+<p>firewall-cmd –zone&#x3D;public –add-port&#x3D;80&#x2F;tcp –permanent</p>
+<p>firewall-cmd –reload</p>
+<p>如果端口被占用. 查看80</p>
+<p>netstat -anp |grep :80 ，也可以用ps aux 查看</p>
+<p>netstat 不存在 ，则安装 yum install net-tools 即可。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724722406204.jpg" alt="img"> </p>
+<p>虚拟机测试： curl 127.0.0.1</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724722406204.jpg" alt="img"> </p>
+<p><strong>虚拟机测试<a target="_blank" rel="noopener" href="http://ip/">http://ip</a></strong></p>
+<p><strong>这里的ip是自己的虚拟器ip</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724722406204.jpg" alt="img"> </p>
+<h2 id="5-2、jdk8"><a href="#5-2、jdk8" class="headerlink" title="5.2、jdk8"></a>5.2、jdk8</h2><p>yum search java | grep 1.8</p>
+<p>yum install java-1.8.0-openjdk-devel.x86_64</p>
+<p>yum install java-1.8.0-openjdk.x86_64</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724722406204.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724722406204.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724722406204.jpg" alt="img"> </p>
+<h2 id="5-3、tomcat"><a href="#5-3、tomcat" class="headerlink" title="5.3、tomcat"></a>5.3、tomcat</h2><p><strong>从镜像源下载</strong></p>
+<p><a target="_blank" rel="noopener" href="https://repo.huaweicloud.com/apache/tomcat/tomcat-9/v9.0.10/bin/apache-tomcat-9.0.10-deployer.tar.gz">wget https://mirrors.aliyun.com/apache/tomcat/tomcat-9/v9.0.72/bin/apache-tomcat-9.0.72.tar.gz</a></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724722406204.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724722406204.jpg" alt="img"> </p>
+<p>解压缩tar -zxvf ****</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724722406204.jpg" alt="img"> </p>
+<p>进bin 执行.&#x2F;startup.sh</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724722406204.jpg" alt="img"> </p>
+<p>浏览器测试<a target="_blank" rel="noopener" href="http://192.168.152.129:8080/">http://192.168.152.129:8080</a></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724722406204.jpg" alt="img"> </p>
+<h2 id="5-4、安装nginx"><a href="#5-4、安装nginx" class="headerlink" title="5.4、安装nginx"></a>5.4、安装nginx</h2><p>独立源地址： <a target="_blank" rel="noopener" href="http://nginx.org/">nginx.org</a></p>
+<p>安装依赖： yum -y install gcc pcre-devel zlib-devel openssl openssl-devel</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724722406204.jpg" alt="img"> </p>
+<p>下载： wget <a target="_blank" rel="noopener" href="http://nginx.org/download/nginx-1.20.2.tar.gz">http://nginx.org/download/nginx-1.20.2.tar.gz</a></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17-1724722406204.jpg" alt="img"> </p>
+<p>解压： tar -zxvf nginx-1.20.2.tar.gz</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18-1724722406204.jpg" alt="img"> </p>
+<p>进入目录： cd nginx-1.20.2</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19-1724722406204.jpg" alt="img"> </p>
+<p>安装配置： .&#x2F;configure </p>
+<p>（提示 &#x2F;usr&#x2F;local&#x2F;nginx 目录）</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20-1724722406204.jpg" alt="img"> </p>
+<p>编译安装： make </p>
+<p>make install</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps21-1724722406204.jpg" alt="img"> </p>
+<p>进入目录： cd &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin</p>
+<p>启动： .&#x2F;nginx</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps22-1724722406204.jpg" alt="img"> </p>
+<p>停止： .&#x2F;nginx -s stop</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23-1724722406204.jpg" alt="img"> </p>
+<p>重新加载： .&#x2F;nginx -s reload</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24-1724722406204.jpg" alt="img"> </p>
+<p>虚拟机测试： curl 127.0.0.1</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25-1724722406204.jpg" alt="img"> </p>
+<p>真机测试： 浏览器</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps26-1724722406204.jpg" alt="img"> </p>
+<p>如果真机不成功， 可以开放防火墙端口，或关闭防火墙，测试 </p>
+<p>可以进入 cd &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;html 目录下编写自己的html 静态文件</p>
+<h2 id="5-5、安装-MySQL"><a href="#5-5、安装-MySQL" class="headerlink" title="5.5、安装 MySQL"></a>5.5、安装 MySQL</h2><p>1、下载文件</p>
+<p>wget <a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/mysql/MySQL-8.0/mysql-8.0.26-1.el7.x86_64.rpm-bundle.tar">https://mirrors.aliyun.com/mysql/MySQL-8.0/mysql-8.0.27-1.el7.x86_64.rpm-bundle.tar</a></p>
+<p>或下载到本机，在上传到服务器</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps27-1724722406204.jpg" alt="img"> </p>
+<p>1.1 删除系统自带的 mariadb</p>
+<p>rpm -e mariadb-libs-5.5.68-1.el7.centos.x86_64 –nodeps</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps28-1724722406204.jpg" alt="img"> </p>
+<p>2、解压缩</p>
+<p>tar -xvf mysql-8.0.27-1.el7.x86_64.rpm-bundle.tar </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps29-1724722406205.jpg" alt="img"> </p>
+<p>3、安装 common、libs、client、server</p>
+<p>安装命令行</p>
+<p>rpm -ivh mysql-community-common-8.0.27-1.el7.x86_64.rpm –nodeps –force </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps30-1724722406205.jpg" alt="img"> </p>
+<p>rpm -ivh mysql-community-libs-8.0.27-1.el7.x86_64.rpm –nodeps –force</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps31-1724722406205.jpg" alt="img"> </p>
+<p>rpm -ivh mysql-community-client-8.0.27-1.el7.x86_64.rpm –nodeps –force</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps32-1724722406205.jpg" alt="img"> </p>
+<p>rpm -ivh mysql-community-server-8.0.27-1.el7.x86_64.rpm –nodeps –force </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps33-1724722406205.jpg" alt="img"> </p>
+<p>4、初始化 MySQL</p>
+<p>mysqld –initialize </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps34-1724722406205.jpg" alt="img"> </p>
+<p>7、授权防火墙</p>
+<p>chown mysql:mysql &#x2F;var&#x2F;lib&#x2F;mysql -R; 改变用户和用户组</p>
+<p>systemctl start mysqld.service; </p>
+<p>systemctl enable mysqld; 应该是默的，如果不是加上这句 </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps35-1724722406205.jpg" alt="img"> </p>
+<p>8、查看数据库的初始化密码</p>
+<p>cat &#x2F;var&#x2F;log&#x2F;mysqld.log | grep password </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps36-1724722406205.jpg" alt="img"> </p>
+<p>9、登录数据库</p>
+<p>mysql -uroot -p </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps37-1724722406205.jpg" alt="img"> </p>
+<p>10、修改密码</p>
+<p>ALTER USER ‘root‘@’localhost’ IDENTIFIED WITH mysql_native_password BY ‘root’; </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps38.jpg" alt="img"> </p>
+<p>11、使用新密码登录</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps39.jpg" alt="img"> </p>
+<p>12、开启远程访问</p>
+<p>create user ‘root‘@’%’ identified with mysql_native_password by ‘root’;</p>
+<p>grant all privileges on <em>.</em> to ‘root‘@’%’ with grant option;</p>
+<p>flush privileges; </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps40.jpg" alt="img"> </p>
+<p>13、开放 3306 端口</p>
+<p>firewall-cmd –zone&#x3D;public –add-port&#x3D;3306&#x2F;tcp –permanent</p>
+<p>systemctl restart firewalld.service</p>
+<p>firewall-cmd –reload </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps41.jpg" alt="img"> </p>
+<p>14、MySQL 安装默认使用美国的时区，北京时间比美国晚 8 小时</p>
+<p>set global time_zone&#x3D;’+8:00’; </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps42.jpg" alt="img"> </p>
+<p>15、创建数据表</p>
+<p>create database test character set utf8 collate utf8_general_ci;</p>
+<p>use test;</p>
+<p>create table user( id int primary key auto_increment, name varchar(22), birthday datetime ); insert into user(name, birthday) VALUES (‘小明’,’1999-01-01’); insert into user(name, birthday) VALUES (‘小红’,’2000-01-01’); </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps43.jpg" alt="img"> </p>
+<h1 id="六、进程管理与定时任务"><a href="#六、进程管理与定时任务" class="headerlink" title="六、进程管理与定时任务"></a>六、进程管理与定时任务</h1><h2 id="6-1、静态显示系统进程信息"><a href="#6-1、静态显示系统进程信息" class="headerlink" title="6.1、静态显示系统进程信息"></a>6.1、静态显示系统进程信息</h2><p>\1. 实验内容</p>
+<p>ps命令的使用,并说明常用参数的作用，及输出信息中列的含意</p>
+<p>\2. 实验结果与分析（文字或实验结果截图）</p>
+<p># ps 　　　	&#x2F;&#x2F;显示当前用户进程</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724722600591.jpg" alt="img"> </p>
+<p># ps –aux  	&#x2F;&#x2F;显示所有进程信息</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724722600592.jpg" alt="img"> </p>
+<p>USER  进程的启动用户</p>
+<p>PID   进程号（进程的唯一标识）</p>
+<p>％CPU  占CPU的百分比</p>
+<p>％MEM 占用内存百分比</p>
+<p>VSZ   占用的虚拟内存大小</p>
+<p>RSS   占用的物理内存大小</p>
+<p>TTY   进程的工作终端（？表示没有终端）</p>
+<p>STAT  进程的状态：<br>    R: 正在执行中 S: 休眠静止状态 T: 暂停执行 Z:僵死状态</p>
+<p>Time   占用的cpu的时间</p>
+<p>Command 运行的程序</p>
+<p>\3. 结论与讨论</p>
+<h2 id="6-2、动态显示系统进程信息"><a href="#6-2、动态显示系统进程信息" class="headerlink" title="6.2、动态显示系统进程信息"></a>6.2、动态显示系统进程信息</h2><p>\1. 实验内容</p>
+<p>使用top命令，实时显示系统各个进程的资源占用情况。说明输出信息中列的含意。</p>
+<p>在top基本视图中，按h键进入另一个视图。</p>
+<p>在top基本视图中，按f键进入另一个视图，在这里可以编辑基本视图中的显示字段。</p>
+<p>在top基本视图中，按c键进入另一个视图,可以显示进程的路径。</p>
+<p>在top基本视图中，按k键，可以在不退出top命令的情况下杀死某个正在运行的进程。</p>
+<p>在top基本视图中，按b键，高亮显示当前正在运行的进程。</p>
+<p>\2. 实验结果与分析（文字或实验结果截图）</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724722600592.jpg" alt="img"> </p>
+<p>在top基本视图中，按h键进入另一个视图。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724722600592.jpg" alt="img"> </p>
+<p>在top基本视图中，按f键进入另一个视图，在这里可以编辑基本视图中的显示字段。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724722600592.jpg" alt="img"> </p>
+<p>在top基本视图中，按c键进入另一个视图,可以显示进程的路径。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724722600592.jpg" alt="img"> </p>
+<p>在top基本视图中，按k键，可以在不退出top命令的情况下杀死某个正在运行的进程。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724722600592.jpg" alt="img"> </p>
+<p>在top基本视图中，按b键，高亮显示当前正在运行的进程。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724722600592.jpg" alt="img"> </p>
+<h2 id="6-3、其他命令"><a href="#6-3、其他命令" class="headerlink" title="6.3、其他命令"></a>6.3、其他命令</h2><p>\1. 实验内容</p>
+<p>Kill、killall、jobs、fg、bg、nice、renice等</p>
+<p>\2. 实验结果与分析（文字或实验结果截图）</p>
+<p>Kill：终止正在运行的进程或作业</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724722600592.jpg" alt="img"> </p>
+<p>Killall：功能：终止指定程序名的所有进程</p>
+<p>下载killall</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724722600592.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724722600592.jpg" alt="img"> </p>
+<p>jobs：功能：显示当前所有作业<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724722600592.jpg" alt="img"></p>
+<p>Fg：把后台的作业调入前台运行<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724722600592.jpg" alt="img"></p>
+<p>Bg：将前台作业或进程切换到后台运行<br> <img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724722600592.jpg" alt="img"></p>
+<p>Nice：指定将启动进程的优先级。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724722600592.jpg" alt="img"> </p>
+<p>Renice：修改运行中的进程的优先级</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724722600592.jpg" alt="img"> </p>
+<h2 id="6-4、定时任务1"><a href="#6-4、定时任务1" class="headerlink" title="6.4、定时任务1"></a>6.4、定时任务1</h2><p>\1. 实验内容</p>
+<p>利用at设置一个任务自动化，在当天11：00钟，在根目录下自动创建一个abc目录，并进入到abc目录中，建立一个空的文件test，同时对该文件进行打包成test.tar;</p>
+<p>\2. 实验结果与分析（文字或实验结果截图）</p>
+<p>步骤及实验结果截图</p>
+<p>1.下载at命令</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17-1724722600592.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18-1724722600592.jpg" alt="img"> </p>
+<p>2、利用at设置一个任务自动化，在当天11：00钟，</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19-1724722600592.jpg" alt="img"> </p>
+<p>3、在根目录下自动创建一个abc目录，<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20-1724722600592.jpg" alt="img"><br>4、并进入到abc目录中<br><img src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml15024\wps21.jpg" alt="img"><br>5、建立一个空的文件test，同时对该文件进行打包成test.tar;<br><img src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml15024\wps22.jpg" alt="img"></p>
+<p>6、检查定时任务<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23-1724722600593.jpg" alt="img"></p>
+<h2 id="6-5、定时任务2"><a href="#6-5、定时任务2" class="headerlink" title="6.5、定时任务2"></a>6.5、定时任务2</h2><p>\1. 实验内容</p>
+<p>Cron应用：每周2,4,6早上3点启动系统</p>
+<p>\2. 实验结果与分析（文字或实验结果截图）</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24-1724722600593.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25-1724722600593.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps26-1724722600593.jpg" alt="img"> </p>
+<h1 id="七、Linux下GCC的使用"><a href="#七、Linux下GCC的使用" class="headerlink" title="七、Linux下GCC的使用"></a>七、Linux下GCC的使用</h1><p><strong>基本用法</strong></p>
+<p>gcc</p>
+<p>-o：指定生成文件的名称</p>
+<p>-E：激活预处理。生成预处理文件（ .i 文件）</p>
+<p>-S：激活预处理、编译。生成汇编代码（ .s 文件）</p>
+<p>-c：激活预处理、编译、汇编。生成目标文件（ .o 文件）</p>
+<p>-I：指定头文件目录</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724722784156.jpg" alt="img"> </p>
+<h2 id="7-1、预处理-预编译"><a href="#7-1、预处理-预编译" class="headerlink" title="7.1、预处理**(预编译)**"></a>7.1、预处理**(预编译)**</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>使编译器将 C 源代码中的包含的头文件如stdio.h编译进来，替换宏(如符号常量)。</p>
+<p><strong>gcc -E hello.c -o hello.i</strong> </p>
+<p><strong>cat hello.i</strong>	<strong>查看生成文件</strong></p>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>&#x2F;&#x2F;文字或结果截图</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724722784156.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724722784156.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724722784156.jpg" alt="img"> </p>
+<h2 id="7-2、编译"><a href="#7-2、编译" class="headerlink" title="7.2、编译"></a>7.2、编译</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>GCC 首先要检查代码的规范性、是否有语法错误等，以确定代码的实际要做的工作，在检查无误后，GCC 把代码翻译成汇编语言。</p>
+<p><strong>gcc –S hello.i –o  hello.s</strong> 进行到编译阶段停止，并生成 汇编文件 </p>
+<p>cat hello.s 查看生成的文件</p>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724722784156.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724722784156.jpg" alt="img"> </p>
+<h2 id="7-3、汇编"><a href="#7-3、汇编" class="headerlink" title="7.3、汇编"></a>7.3、汇编</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>把编译阶段生成的 ”.s” 文件转成二进制目标代码。</p>
+<p>gcc –c hello.s –o hello.o</p>
+<p>Cat 查看文件</p>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724722784156.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724722784157.jpg" alt="img"> </p>
+<h2 id="7-4、链接"><a href="#7-4、链接" class="headerlink" title="7.4、链接"></a>7.4、链接</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<ol>
+<li>链接到库中(链接其他目标文件)，生成可执行文件。</li>
+</ol>
+<p>gcc hello.o –o hello.out</p>
+<ol start="2">
+<li>执行文件</li>
+</ol>
+<p>.&#x2F;hello.out</p>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724722784157.jpg" alt="img"> </p>
+<h2 id="7-5、一次性完成"><a href="#7-5、一次性完成" class="headerlink" title="7.5、一次性完成"></a>7.5、一次性完成</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>输入命令，可以一次性完成上述步骤</p>
+<p>gcc hello.c -o hello3.out</p>
+<p>运行编译后的可执行程序.&#x2F;hello</p>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724722784157.jpg" alt="img"> </p>
+<h2 id="7-6、多个文件的编译"><a href="#7-6、多个文件的编译" class="headerlink" title="7.6、多个文件的编译"></a>7.6、多个文件的编译</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>现在有 3 个文件，分别是 main.c，print.c，print.h</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724722784157.jpg" alt="img"> </p>
+<p><strong>1）</strong><em><strong>*多个文件一起编译*</strong></em><em><strong>*：*</strong></em></p>
+<p>gcc print.c main.c -o main_print</p>
+<p><em><strong>*执行生成文件*</strong></em></p>
+<p><em><strong>*2）分别编译各个源文件，再对编译后输出的目标文件（.o）链接*</strong></em></p>
+<p>gcc -c print.c -o print.o</p>
+<p>gcc -c main.c -o main.o</p>
+<p>gcc print.o main.o -o main_print</p>
+<p><em><strong>*执行生成文件*</strong></em></p>
+<p><strong>2</strong><strong>.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724722784157.jpg" alt="img"> </p>
+<p><img src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml14832\wps13.jpg" alt="img"><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724722784157.jpg" alt="img"> </p>
+<p>1）多个文件一起编译：</p>
+<p>gcc print.c main.c -o main_print</p>
+<p>执行生成文件</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724722784157.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724722784157.jpg" alt="img"> </p>
+<p>2）分别编译各个源文件，再对编译后输出的目标文件（.o）链接</p>
+<p>gcc -c print.c -o print.o</p>
+<p>gcc -c main.c -o main.o</p>
+<p>gcc print.o main.o -o main_print</p>
+<p>执行生成文件</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17-1724722784157.jpg" alt="img"> </p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>题目6中，如果头文件和源文件不在一同目录中，如何解决？</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18-1724722784157.jpg" alt="img"> </p>
+<p>头文件所在目录：</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19-1724722784157.jpg" alt="img"> </p>
+<p>主要是要加 -I 指定头文件目录：</p>
+<p>gcc print.c main.c -o main_print -I myInclude</p>
+<p>运行文件</p>
+<p>\2. <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>源文件所在目录：<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20-1724722784157.jpg" alt="img"></p>
+<p>头文件所在目录：</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps21-1724722784157.jpg" alt="img"> </p>
+<p>主要是要加 -I 指定头文件目录：</p>
+<p>gcc print.c main.c -o main_print -I myInclude</p>
+<p>运行文件</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps22-1724722784157.jpg" alt="img"> </p>
+<h2 id="7-7、makefile-Makefile"><a href="#7-7、makefile-Makefile" class="headerlink" title="7.7、makefile(Makefile)"></a>7.7、makefile(Makefile)</h2><p><strong>题目****7</strong> <strong>–</strong> <strong>makefile(Makefile)</strong></p>
+<p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>在使用gcc命令时，一个工程又有多个文件（比如100个文件），如果按照上述编译方法，往往需要输入很多指令，而且修改文件也不方便，因此引入makefile文件解决该问题。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23-1724722784157.jpg" alt="img"> </p>
+<ol>
+<li><strong>当前路径下内容如下：</strong></li>
+</ol>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24-1724722784157.jpg" alt="img"> </p>
+<ol start="2">
+<li><strong>建立上图中makefile文件：</strong></li>
+</ol>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25-1724722784157.jpg" alt="img"> </p>
+<p>#main是需要生成的目标文件名，它依赖main.o print.o</p>
+<p>main:main.o print.o</p>
+<p>#gcc命令，生成main,语句前面要用TAB</p>
+<p>​	gcc main.o input.o cal.o -o main</p>
+<p>#main.o是目标文件，依赖main.c文件，通过gcc -c main.c生成main.o文件</p>
+<p>main.o:main.c</p>
+<p>​	gcc -c main.c</p>
+<p>print.o:print.c</p>
+<p>​	gcc -c print.c</p>
+<p>#增加clean命令</p>
+<p>clean:</p>
+<p>#删除所有以.o结尾的文件，使用了通配符*</p>
+<p>​	rm *.o</p>
+<p>#删除可执行文件main</p>
+<p>​	rm main</p>
+<ol start="3">
+<li><strong>使用</strong></li>
+</ol>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps26-1724722784157.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps27-1724722784157.jpg" alt="img"> </p>
+<p>\2. <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>当前路径下内容：</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps28-1724722784157.jpg" alt="img"> </p>
+<p><strong>makefile内容：</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps29-1724722784157.jpg" alt="img"> </p>
+<p><strong>使用：</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps30-1724722784157.jpg" alt="img"> </p>
+<p><strong>清除：</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps31-1724722784157.jpg" alt="img"> </p>
+<h1 id="八、shell程序设计"><a href="#八、shell程序设计" class="headerlink" title="八、shell程序设计"></a>八、shell程序设计</h1><h2 id="8-1、定义变量"><a href="#8-1、定义变量" class="headerlink" title="8.1、定义变量"></a>8.1、定义变量</h2><p><strong>1.</strong> <strong>实验内容</strong></p>
+<p>变量的定义，变量的引用，并输出值</p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>&#x2F;&#x2F;文字或结果截图</p>
+<p>\1. 创建以.sh结尾的文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps1-1724723044919.jpg" alt="img"></p>
+<p>\2. 修改文件权限<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps2-1724723044919.jpg" alt="img"></p>
+<p>\3. 输出文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps3-1724723044919.jpg" alt="img"></p>
+<p>\4. 在命令行定义一个整型<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps4-1724723044919.jpg" alt="img"></p>
+<p>\5. 输出整型<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps5-1724723044919.jpg" alt="img"></p>
+<h2 id="8-2、特定变量"><a href="#8-2、特定变量" class="headerlink" title="8.2、特定变量"></a>8.2、特定变量</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<ol>
+<li><p>编写脚本，测试特定变量。</p>
+</li>
+<li><p>设置可执行权限。</p>
+</li>
+<li><p>执行脚本，查看结果。</p>
+</li>
+</ol>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps6-1724723044919.jpg" alt="img"> </p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1、新建脚本<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps7-1724723044919.jpg" alt="img"></p>
+<p>2、设置权限<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps8-1724723044919.jpg" alt="img"></p>
+<p>3、执行文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps9-1724723044919.jpg" alt="img"></p>
+<h2 id="8-3、if-语句"><a href="#8-3、if-语句" class="headerlink" title="8.3、if 语句"></a>8.3、if 语句</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>判断参数是否少于3个</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps10-1724723044919.jpg" alt="img"> </p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1、编写脚本<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps11-1724723044920.jpg" alt="img"></p>
+<p>2、改权限<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps12-1724723044920.jpg" alt="img"></p>
+<p>3、执行<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps13-1724723044920.jpg" alt="img"></p>
+<h2 id="8-4、两数求和"><a href="#8-4、两数求和" class="headerlink" title="8.4、两数求和"></a>8.4、两数求和</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>计算由键盘输⼊的2个数的和值。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps14-1724723044920.jpg" alt="img"> </p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps15-1724723044920.jpg" alt="img"> </p>
+<h2 id="8-5、删除文件"><a href="#8-5、删除文件" class="headerlink" title="8.5、删除文件"></a>8.5、删除文件</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>利⽤for循环将当前⽬录下的**.c**⽂件删除</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps16-1724723044920.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps17-1724723044920.jpg" alt="img"> </p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps18-1724723044920.jpg" alt="img"> </p>
+<h2 id="8-6、求所有参数的和"><a href="#8-6、求所有参数的和" class="headerlink" title="8.6、求所有参数的和"></a>8.6、求所有参数的和</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>编写一个Shell脚本，它带有若干数字作为参数，脚本的功能是求参数和。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps19-1724723044920.jpg" alt="img"> </p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1、新建脚本<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps20-1724723044920.jpg" alt="img"></p>
+<p>2、改权限，执行<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps21-1724723044920.jpg" alt="img"></p>
+<h2 id="8-7、求1-100的和"><a href="#8-7、求1-100的和" class="headerlink" title="8.7、求1-100的和"></a>8.7、求1-100的和</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>编写一个Shell脚本，它带有若干数字作为参数，脚本的功能是求参数和。</p>
+<p><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps22-1724723044920.jpg" alt="img"> </p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1、新建脚本文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps23-1724723044920.jpg" alt="img"></p>
+<p>2、改权限<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps24-1724723044920.jpg" alt="img"></p>
+<p>3、执行<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps25-1724723044920.jpg" alt="img"></p>
+<h2 id="8-8、统计文件数量"><a href="#8-8、统计文件数量" class="headerlink" title="8.8、统计文件数量"></a>8.8、统计文件数量</h2><p><strong>1</strong><strong>.</strong> <strong>实验内容</strong></p>
+<p>编写一个Shell脚本，统计当前目录下所有后缀为”.c”的文件数量。</p>
+<p>参考 题目 4 5 6</p>
+<p><strong>2.</strong> <strong>实验结果与分析（文字或实验结果截图）</strong></p>
+<p>1、编写脚本<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps26-1724723044920.jpg" alt="img"></p>
+<p>2、修改权限<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps27-1724723044920.jpg" alt="img"></p>
+<p>3、执行文件<br><img src="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/wps28-1724723044920.jpg" alt="img"></p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/" title="Linux_(五)-实验">http://example.com/2024/08/27/Linux/Linux实验/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/08/27/Linux/Linux%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/" rel="prev" title="Linux_基础(三)-常用软件安装">
+      <i class="fa fa-chevron-left"></i> Linux_基础(三)-常用软件安装
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/" rel="next" title="Linux_(六)-课设">
+      Linux_(六)-课设 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">一、下载安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、虚拟机的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E3%80%81centos"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、centos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3%E3%80%81%E7%BD%91%E7%BB%9C%E6%B5%8B%E8%AF%95"><span class="nav-number">1.3.</span> <span class="nav-text">1.3、网络测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4%E3%80%81%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E5%B7%A5%E5%85%B7"><span class="nav-number">1.4.</span> <span class="nav-text">1.4、远程连接工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Linux%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">二、Linux命令使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1%E3%80%81%E7%86%9F%E6%82%89%E7%9B%AE%E5%BD%95%E5%8F%8A%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、熟悉目录及文件相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2%E3%80%81%E7%86%9F%E6%82%89%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、熟悉文件相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3%E3%80%81%E7%86%9F%E7%BB%83%E8%BF%90%E8%A1%8C%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、熟练运行通配符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4%E3%80%81%E6%A1%88%E4%BE%8B%E4%B8%80"><span class="nav-number">2.4.</span> <span class="nav-text">2.4、案例一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5%E3%80%81-%E6%A1%88%E4%BE%8B%E4%BA%8C"><span class="nav-number">2.5.</span> <span class="nav-text">2.5、 案例二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6%E3%80%81%E7%BB%9F%E8%AE%A1%E3%80%81%E6%8E%92%E5%BA%8F"><span class="nav-number">2.6.</span> <span class="nav-text">2.6、统计、排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7%E3%80%81%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.7.</span> <span class="nav-text">2.7、查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8%E3%80%81grep"><span class="nav-number">2.8.</span> <span class="nav-text">2.8、grep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8%E3%80%81%E8%A6%86%E7%9B%96%E8%BF%BD%E5%8A%A0"><span class="nav-number">2.9.</span> <span class="nav-text">2.8、覆盖追加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9%E3%80%81%E7%AE%A1%E9%81%93%E7%AC%A6"><span class="nav-number">2.10.</span> <span class="nav-text">2.9、管道符|</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-10%E3%80%81last"><span class="nav-number">2.11.</span> <span class="nav-text">2.10、last</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81vi%E7%BC%96%E8%BE%91%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">三、vi编辑器使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1%E3%80%81vi%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、vi工作模式的转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2%E3%80%81%E9%80%80%E5%87%BA%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、退出相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3%E3%80%81%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5"><span class="nav-number">3.3.</span> <span class="nav-text">3.3、增删改查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4%E3%80%81%E5%A4%8D%E5%88%B6%E4%B8%8E%E6%92%A4%E9%94%80"><span class="nav-number">3.4.</span> <span class="nav-text">3.4、复制与撤销</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5%E3%80%81sed"><span class="nav-number">3.5.</span> <span class="nav-text">3.5、sed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6%E3%80%81awk"><span class="nav-number">3.6.</span> <span class="nav-text">3.6、awk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7%E3%80%81"><span class="nav-number">3.7.</span> <span class="nav-text">3.7、</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">四、用户组管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1%E3%80%81%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">4.1、相关文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2%E3%80%81%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4%E7%BB%83%E4%B9%A0"><span class="nav-number">4.2.</span> <span class="nav-text">4.2、用户相关命令练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3%E3%80%81%E7%BB%84%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">4.3.</span> <span class="nav-text">4.3、组相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4%E3%80%81%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4%E7%BB%83%E4%B9%A0"><span class="nav-number">4.4.</span> <span class="nav-text">4.4、文件相关命令练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5%E3%80%81%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86"><span class="nav-number">4.5.</span> <span class="nav-text">4.5、用户组管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%BA%94%E7%94%A8%E5%AE%89%E8%A3%85"><span class="nav-number">5.</span> <span class="nav-text">五、应用安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1%E3%80%81%E5%AE%89%E8%A3%85apache"><span class="nav-number">5.1.</span> <span class="nav-text">5.1、安装apache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2%E3%80%81jdk8"><span class="nav-number">5.2.</span> <span class="nav-text">5.2、jdk8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3%E3%80%81tomcat"><span class="nav-number">5.3.</span> <span class="nav-text">5.3、tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4%E3%80%81%E5%AE%89%E8%A3%85nginx"><span class="nav-number">5.4.</span> <span class="nav-text">5.4、安装nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5%E3%80%81%E5%AE%89%E8%A3%85-MySQL"><span class="nav-number">5.5.</span> <span class="nav-text">5.5、安装 MySQL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%E4%B8%8E%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="nav-number">6.</span> <span class="nav-text">六、进程管理与定时任务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1%E3%80%81%E9%9D%99%E6%80%81%E6%98%BE%E7%A4%BA%E7%B3%BB%E7%BB%9F%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="nav-number">6.1.</span> <span class="nav-text">6.1、静态显示系统进程信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2%E3%80%81%E5%8A%A8%E6%80%81%E6%98%BE%E7%A4%BA%E7%B3%BB%E7%BB%9F%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="nav-number">6.2.</span> <span class="nav-text">6.2、动态显示系统进程信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3%E3%80%81%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="nav-number">6.3.</span> <span class="nav-text">6.3、其他命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4%E3%80%81%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A11"><span class="nav-number">6.4.</span> <span class="nav-text">6.4、定时任务1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5%E3%80%81%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A12"><span class="nav-number">6.5.</span> <span class="nav-text">6.5、定时任务2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E3%80%81Linux%E4%B8%8BGCC%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">七、Linux下GCC的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1%E3%80%81%E9%A2%84%E5%A4%84%E7%90%86-%E9%A2%84%E7%BC%96%E8%AF%91"><span class="nav-number">7.1.</span> <span class="nav-text">7.1、预处理**(预编译)**</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2%E3%80%81%E7%BC%96%E8%AF%91"><span class="nav-number">7.2.</span> <span class="nav-text">7.2、编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3%E3%80%81%E6%B1%87%E7%BC%96"><span class="nav-number">7.3.</span> <span class="nav-text">7.3、汇编</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4%E3%80%81%E9%93%BE%E6%8E%A5"><span class="nav-number">7.4.</span> <span class="nav-text">7.4、链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-5%E3%80%81%E4%B8%80%E6%AC%A1%E6%80%A7%E5%AE%8C%E6%88%90"><span class="nav-number">7.5.</span> <span class="nav-text">7.5、一次性完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-6%E3%80%81%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E8%AF%91"><span class="nav-number">7.6.</span> <span class="nav-text">7.6、多个文件的编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-number">7.7.</span> <span class="nav-text">问题解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-7%E3%80%81makefile-Makefile"><span class="nav-number">7.8.</span> <span class="nav-text">7.7、makefile(Makefile)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AB%E3%80%81shell%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="nav-number">8.</span> <span class="nav-text">八、shell程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1%E3%80%81%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="nav-number">8.1.</span> <span class="nav-text">8.1、定义变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2%E3%80%81%E7%89%B9%E5%AE%9A%E5%8F%98%E9%87%8F"><span class="nav-number">8.2.</span> <span class="nav-text">8.2、特定变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3%E3%80%81if-%E8%AF%AD%E5%8F%A5"><span class="nav-number">8.3.</span> <span class="nav-text">8.3、if 语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4%E3%80%81%E4%B8%A4%E6%95%B0%E6%B1%82%E5%92%8C"><span class="nav-number">8.4.</span> <span class="nav-text">8.4、两数求和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-5%E3%80%81%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">8.5.</span> <span class="nav-text">8.5、删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-6%E3%80%81%E6%B1%82%E6%89%80%E6%9C%89%E5%8F%82%E6%95%B0%E7%9A%84%E5%92%8C"><span class="nav-number">8.6.</span> <span class="nav-text">8.6、求所有参数的和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-7%E3%80%81%E6%B1%821-100%E7%9A%84%E5%92%8C"><span class="nav-number">8.7.</span> <span class="nav-text">8.7、求1-100的和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-8%E3%80%81%E7%BB%9F%E8%AE%A1%E6%96%87%E4%BB%B6%E6%95%B0%E9%87%8F"><span class="nav-number">8.8.</span> <span class="nav-text">8.8、统计文件数量</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

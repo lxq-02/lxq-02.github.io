@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="服务器端应用部署与项目发布任务描述： \1. 选择服务器：自建服务器或选择一个可靠的服务器供应商，比如 AWS、阿里云、腾讯云等。 \2. 部署环境：在服务器上搭建部署环境，包括选择操作系统、安装必要的软件包和库、配置防火墙和域名解析等。 \3. 负载均衡：使用负载均衡技术，可以将请求分发到多个服务器上，提高系统的并发处理能力和可靠性。 \4. 备份和恢复：定期备份数据，确保数据不会丢失，在发生故">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux_(六)-课设">
+<meta property="og:url" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="服务器端应用部署与项目发布任务描述： \1. 选择服务器：自建服务器或选择一个可靠的服务器供应商，比如 AWS、阿里云、腾讯云等。 \2. 部署环境：在服务器上搭建部署环境，包括选择操作系统、安装必要的软件包和库、配置防火墙和域名解析等。 \3. 负载均衡：使用负载均衡技术，可以将请求分发到多个服务器上，提高系统的并发处理能力和可靠性。 \4. 备份和恢复：定期备份数据，确保数据不会丢失，在发生故">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps2.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps3.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps4.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps5.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps6.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps7.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps8.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps9.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps10.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps11.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps12.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps13.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps14.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps15.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps16.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps17.jpg">
+<meta property="og:image" content="file:///C:/Users/ADMINI~1/AppData/Local/Temp/ksohtml5912/wps18.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps19.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps20.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps21.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps22.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps23.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps24.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps25.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps26.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps27.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps28.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps29.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps30.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps31.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps32.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps33.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps34.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps35.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps36.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps37.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps38.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps39.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps40.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps41.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps42.jpg">
+<meta property="og:image" content="file:///C:/Users/ADMINI~1/AppData/Local/Temp/ksohtml5912/wps43.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps44.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps45.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps46.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps47.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps48.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps49.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps50.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps51.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps52.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps53.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps54.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps55.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps56.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps57.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps58.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps59.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps60.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps61.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps62.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps63.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps64.jpg">
+<meta property="og:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps65.jpg">
+<meta property="article:published_time" content="2024-08-27T01:50:00.000Z">
+<meta property="article:modified_time" content="2024-08-27T03:09:42.634Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps2.jpg">
+
+<link rel="canonical" href="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux_(六)-课设 | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux_(六)-课设
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-08-27 09:50:00 / 修改时间：11:09:42" itemprop="dateCreated datePublished" datetime="2024-08-27T09:50:00+08:00">2024-08-27</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="服务器端应用部署与项目发布"><a href="#服务器端应用部署与项目发布" class="headerlink" title="服务器端应用部署与项目发布"></a>服务器端应用部署与项目发布</h1><p>任务描述：</p>
+<p>\1. 选择服务器：自建服务器或选择一个可靠的服务器供应商，比如 AWS、阿里云、腾讯云等。</p>
+<p>\2. 部署环境：在服务器上搭建部署环境，包括选择操作系统、安装必要的软件包和库、配置防火墙和域名解析等。</p>
+<p>\3. 负载均衡：使用负载均衡技术，可以将请求分发到多个服务器上，提高系统的并发处理能力和可靠性。</p>
+<p>\4. 备份和恢复：定期备份数据，确保数据不会丢失，在发生故障时可以快速恢复。</p>
+<p>备注：</p>
+<p>可以使用自动化部署工具，如 Jenkins、GitLab CI&#x2F;CD 等，可以简化部署流程；或者用容器化技术，如 Docker、Kubernetes 等</p>
+<p>1、选择服务器：使用的centos7.6系统</p>
+<p>2、连接服务器，通过sudo su root切换为root用户<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps2.jpg" alt="img"></p>
+<p>3、配置Apache服务</p>
+<p>(1) 检查是否安装过apache服务<br>yum info http<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps3.jpg" alt="img"></p>
+<p>(2) 安装apache服务<br>yum install -y httpd<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps4.jpg" alt="img"></p>
+<p>(3) 启动apache服务<br>systemctl start httpd<br>将apache设置为开机自启动<br>systemctl enable httpd<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps5.jpg" alt="img"></p>
+<p>(4) 查看apache服务的运行状态<br>systemctl status httpd<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps6.jpg" alt="img"><br>返回信息中出现active (running)表示正在运行</p>
+<p>(5) 在本地主机，通过浏览器访问轻量应用服务器公网IP，测试访问Apache服务的展示页。<br>轻量应用服务器公网IP获取步骤如下：</p>
+<p>① 返回轻量应用服务器管理控制台。</p>
+<p>② 在****服务器列表*<em><strong>页面，单击指定服务器，进入服务器的</strong></em>*概览****页面。</p>
+<p>③ 在****服务器信息区域****，查看轻量应用服务器公网IP<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps7.jpg" alt="img"></p>
+<p>④ Apache页面的展示结果为：<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps8.jpg" alt="img"></p>
+<p>4、安装jdk</p>
+<p>(1) 查找对应的jdk<br>yum search java | grep 1.8<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps9.jpg" alt="img"></p>
+<p>(2) 安装jdk<br>yum install java-1.8.0-openjdk-devel.x86_64<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps10.jpg" alt="img"></p>
+<p>5、安装tomcat</p>
+<p>(1) 从镜像源下载<br>wget <a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/apache/tomcat/tomcat-9/v9.0.76/bin/apache-tomcat-9.0.76.tar.gz">https://mirrors.aliyun.com/apache/tomcat/tomcat-9/v9.0.76/bin/apache-tomcat-9.0.76.tar.gz
+</a><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps11.jpg" alt="img"></p>
+<p>(2) 解压缩tomcat压缩包<br>tar -zxvf apache-tomcat-9.0.76.tar.gz<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps12.jpg" alt="img"></p>
+<p>(3) 进入tomcat的bin文件夹判断是否安装成功<br>cd apache-tomcat-9.0.76&#x2F;bin<br>.&#x2F;startup.sh<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps13.jpg" alt="img"></p>
+<p>6、安装nginx</p>
+<p>(1) 安装依赖<br>yum -y install gcc pcre-devel zlib-devel openssl openssl-devel<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps14.jpg" alt="img"></p>
+<p>(2) 下载压缩包<br>wget <a target="_blank" rel="noopener" href="http://nginx.org/download/nginx-1.20.2.tar.gz">http://nginx.org/download/nginx-1.20.2.tar.gz</a><br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps15.jpg" alt="img"></p>
+<p>(3) 解压缩<br>解压： tar -zxvf nginx-1.20.2.tar.gz<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps16.jpg" alt="img"></p>
+<p>(4) 进入nginx-1.20.2的目录下<br>cd nginx-1.20.2<br>.&#x2F;configure –prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps17.jpg" alt="img"></p>
+<p>(5) 安装<br>make<br><img src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5912\wps18.jpg" alt="img"><br>make install<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps19.jpg" alt="img"></p>
+<p>(6) 启动</p>
+<p>① 进入对应的文件夹<br>cd &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin<br>.&#x2F;nginx 启动<br>.&#x2F;nginx -s stop 关闭<br>.&#x2F;nginx -s reload 重新加载<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps20.jpg" alt="img"></p>
+<p>7、开启防火墙<br>    如果真机不成功， 可以开放防火墙80 端口，或关闭防火墙，测试<br>    systemctl stop firewalld<br>    —————————————-<br>    systemctl start firewalld<br>    firewall-cmd –zone&#x3D;public –add-port&#x3D;80&#x2F;tcp –permanent<br>    firewall-cmd –reload<br>    如果端口被占用. 查看80<br>    netstat -anp |grep :80 ，也可以用ps aux 查看<br>    netstat 不存在 ，则安装 yum install net-tools 即可。<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps21.jpg" alt="img"></p>
+<p>8、负载均衡</p>
+<table>
+<thead>
+<tr>
+<th>机器名</th>
+<th>服务器IP</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主服务器</td>
+<td>192.168.152.129</td>
+<td>负载均衡服务器</td>
+</tr>
+<tr>
+<td>服务器1</td>
+<td>192.168.152.130</td>
+<td>后端服务器</td>
+</tr>
+<tr>
+<td>服务器2</td>
+<td>192.168.152.131</td>
+<td>后端服务器</td>
+</tr>
+</tbody></table>
+<p>(1) 设置防火墙 三台虚拟机都要设置<br>firewall-cmd –zone&#x3D;public –add-port&#x3D;80&#x2F;tcp –permanent<br>systemctl restart firewalld.service<br>关闭selinux： vi &#x2F;etc&#x2F;selinux&#x2F;config<br>修改配置文件：将selinux&#x3D;enforcing改为Disabled<br>弄好后重启虚拟机，查看后出现Disabled<br>getenforce #查看selinux状态<br>或者临时关闭（不用重启机器）：setenforce 0</p>
+<p>(2) 轮询模式负载均衡</p>
+<p>① 打开nginx（负载负载均衡）主虚拟机<br>编辑配置文件</p>
+<ol>
+<li><p>进入文件夹<br>cd &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf</p>
+</li>
+<li><p>备份一个配置文件，防止配置错误可重新配置<br>cp nginx.conf nginx.conf.bak</p>
+</li>
+<li><p>编辑文件<br>vi nginx.conf</p>
+</li>
+</ol>
+<p>a. 在http{}模块里添加以下内容<br>upstream webServer {<br> server 192.168.152.130:80; #服务器1<br> server 192.168.152.131:80; #服务器2<br>}<br>server{<br> listen 80;<br> server_name 192.168.152.129;<br> location &#x2F; {<br>     index index.html index htm;<br>    proxy_pass <a target="_blank" rel="noopener" href="http://webserver/">http://webServer</a>; # webServer和upstream的webServer名字一致<br>    }<br>}</p>
+<p>b. 检查语法并重启</p>
+<p>a) 检查语法<br>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -t </p>
+<p>b) 重启<br>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -s reload<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps22.jpg" alt="img"></p>
+<p>② 配置服务器1</p>
+<ol>
+<li><p>进入文件夹<br>cd &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;html&#x2F;</p>
+</li>
+<li><p>备份<br>cp index.html index.html.bak</p>
+</li>
+<li><p>修改<br>vi index.html #清空里面的所有配置<br>添加下面的语句<br><h>Welcome to server 1<h></h></h></p>
+</li>
+<li><p>保存退出</p>
+</li>
+</ol>
+<p>a) 检查语法<br>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -t </p>
+<p>b) 重启<br>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -s reload</p>
+<ol start="5">
+<li>浏览器访问<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps23.jpg" alt="img"></li>
+</ol>
+<p>③ 配置服务器2</p>
+<ol>
+<li><p>进入文件夹<br>cd &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;html&#x2F;</p>
+</li>
+<li><p>备份<br>cp index.html index.html.bak</p>
+</li>
+<li><p>修改<br>vi index.html #清空里面的所有配置<br>添加下面的语句<br><h>Welcome to server 2<h></h></h></p>
+</li>
+<li><p>保存退出</p>
+</li>
+</ol>
+<p>a) 检查语法<br>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -t </p>
+<p>b) 重启<br>&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -s reload</p>
+<ol start="5">
+<li>浏览器访问</li>
+</ol>
+<p>④ 结果<br>两个服务器轮流进行处置请求<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps24.jpg" alt="img"></p>
+<p>\5. 备份和恢复：定期备份数据，确保数据不会丢失，在发生故障时可以快速恢复。</p>
+<p>(1) tar命令备份<br>特点：保留权限<br>备份整个目录<br>可以选择不同的压缩方式</p>
+<p>① 备份过程</p>
+<ol>
+<li><p>Root权限登录，进入根目录<br>cd &#x2F;</p>
+</li>
+<li><p>执行完整的备份命令<br>tar cvpzf backup.tgz &#x2F; –exclude&#x3D;&#x2F;proc –exclude&#x3D;&#x2F;lost+found –exclude&#x3D;&#x2F;mnt –exclude&#x3D;&#x2F;sys –exclude&#x3D;backup.tgz<br>解释：tar 是用于打包文件的命令。<br>cvpfz 是tar的选项，分别是“创建档案文件”、“保持权限”(保留所有东西原来的权限)、“使用gzip来减小文件尺寸”。<br>Backup.gz 是我们作为备份文件的文件名。<br>“&#x2F;” 是我们要备份的目录，&#x2F;代表的是整个文件系统<br>exclude 给出的排除在外，不需要备份的目录</p>
+</li>
+</ol>
+<p>② 备份完成演示<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps25.jpg" alt="img"></p>
+<p>(2) 恢复<br>恢复系统其实非常简单，就是把之前打包的文件覆盖回去就是了。<br>首先登陆为root用户，然后把之前备份的文件“backup.tgz”拷贝到分区的根目录下。<br>Linux中可以在一个运行的系统中恢复系统，不需要用boot-cd来专门引导。当然如果系统已经无法启动， 那就只能先重装一下系统，再来恢复。</p>
+<p>① tar恢复<br>使用下面的命令来恢复系统<br>tar xvpfz backup.tgz -C &#x2F;</p>
+<p>② Bzip2压缩备份恢复<br>如果备份文件是使用Bzip2压缩的，那就用：<br>tar xvpfj backup.tar.bz2 -C &#x2F;</p>
+<h1 id="日志文件处理与数据提取"><a href="#日志文件处理与数据提取" class="headerlink" title="日志文件处理与数据提取"></a>日志文件处理与数据提取</h1><p>任务描述：</p>
+<p>在部署完成后，需要对系统进行监控和日志记录，及时发现和解决问题。服务器日志文件处理是指对服务器上产生的各种日志文件进行收集、存储、分析和归档等操作。</p>
+<p><em><strong>*日志作用：*</strong></em></p>
+<p>日志文件用于记录linux系统的各种运行信息的文件，相当于linux主机的日记，不同的日志文件记载了不同类型的信息,如Linux内核消息、用户登录事件、程序错误等。. 日志文件对于诊断和解决问题很有帮助，因为linux运行的程序通常把系统的消息和错误写入对应的日志文件，这样系统可以有据可查， 此外,当主机遭受攻击时,日志文件还可以帮助寻找攻击者留下的痕迹。</p>
+<p><em><strong>*日志分类：*</strong></em></p>
+<p><strong>1.</strong> ****内核及系统日志：****由系统服务rsyslog统一管理，配置文件在&#x2F;etc&#x2F;rsyslog.conf</p>
+<p><strong>2.</strong> ****用户日志****：记录Linux系统用户登录及退出系统的相关信息，包括用户名、登录终端，登录时间、操作等。</p>
+<p><strong>3.</strong> ****程序旧志****：有些应用程序会选择独立管理一份日志文件，用于记录本程序运行过程中的各种事件信息。</p>
+<p><em><strong>*日志位置：*</strong></em></p>
+<p>Linux系统本身和大部分服务器程序的日志文件默认放在&#x2F;var&#x2F;log&#x2F;下。</p>
+<p>&#x2F;var&#x2F;log&#x2F;message 内核消息及各种应用程序的公共日志信息,包括启动、I&#x2F;O错误、 网络错误、</p>
+<p>&#x2F;var&#x2F;log&#x2F;cron Crond周期性计划任务产生的时间信息</p>
+<p>&#x2F;var&#x2F;log&#x2F;dmesg 弓|导过程中的各种时间信息</p>
+<p>&#x2F;var&#x2F;log&#x2F; maillog 进入或发出系统的电子邮件活动</p>
+<p>&#x2F;var&#x2F;log&#x2F;lastlog 每个用户最近的登录事件</p>
+<p>&#x2F;var&#x2F;log&#x2F;secure 用户认证相关的安全事件信息</p>
+<p>&#x2F;var&#x2F;log&#x2F;wtmp 每个用户登录注销及系统启动和停机事件</p>
+<p>&#x2F;var&#x2F;log&#x2F;btmp 失败的、错误的登录尝试及验证事件</p>
+<p>下面是几个常见的服务器日志文件处理步骤：</p>
+<p>\1. 收集：通过服务器上运行的应用程序、操作系统或其他工具自动或手动收集日志文件。</p>
+<p>(1) 日志等级一定要规范</p>
+<p>(2) error日志内容一定要详实 ,info日志要简洁易懂</p>
+<p>(3) error日志一定是全局统一收集的</p>
+<p>\2. 存储：将收集到的日志文件保存在本地计算机或远程服务器上的文件系统中，也可以使用云存储。<br>日志存储基本都是按照时间顺序进行保存的，但也有一定的要求</p>
+<p>(1) 单个文件的大小要控制<br>处理问题时主要关注的是最近的日志，控制单个日志的大小，对日志的性能和后期的运维是非常有利的</p>
+<p>(2) 日志要便于浏览</p>
+<p>(3) 日志的安全性要得到保障</p>
+<p>(4) 日志要定时清理</p>
+<p>\3. 分析：通过分析日志文件，获得对服务器性能的反馈，以及检测安全事件、错误等问题。分析可以手动或自动处理</p>
+<p>(1) ：内核及大多数系统消息 内核及系统日志主要由默认安装的rsyslog软件包提供, rsyslog服务所使用的配置文件为&#x2F;etc&#x2F;rsyslog.conf ,通过查看配置文件内容可以了解到系统默认的日志位置。<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps26.jpg" alt="img"><br>可以看出大部分文件存放到公共日志文件&#x2F;var&#x2F;log&#x2F;message中，其他的直接发送给用户或独立的日志文件中</p>
+<p>(2) 查看&#x2F;var&#x2F;log&#x2F;messages日志信息<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps27.jpg" alt="img"></p>
+<p>\4. 归档：对于长期存储的日志文件，需要进行归档处理，以便后续读取或查询。</p>
+<p>(1) chattr +a日志文件, a选项为append (追加) only ,即给日志文件加上a权限后,将只可以追加,不可以删除和修改之前的内容。<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps28.jpg" alt="img"></p>
+<h1 id="Linux进程管理及定时任务"><a href="#Linux进程管理及定时任务" class="headerlink" title="Linux进程管理及定时任务"></a>Linux进程管理及定时任务</h1><p>任务描述：</p>
+<p>进程是操作系统资源分配的基本单位，是运行中的程序实例。Linux系统中，可以使用一些命令来管理进程，本部分可以介绍几个常用的命令。</p>
+<p>定时任务是操作系统中按照一定时间间隔执行特定任务的机制。在Linux系统中，可以使用crontab命令来配置定时任务</p>
+<p>一、常用命令</p>
+<p>1．静态显示系统进程信息  </p>
+<p>（1）ps &#x2F;&#x2F;显示当前用户进程<br>   <img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps29.jpg" alt="img"></p>
+<p><strong>ps -aux &#x2F;&#x2F;显示所有进程信息</strong>**<br>**		<img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps30.jpg" alt="img">**<br>**USER  进程的启动用户</p>
+<p>PID   进程号（进程的唯一标识）</p>
+<p>％CPU  占CPU的百分比</p>
+<p>％MEM 占用内存百分比</p>
+<p>VSZ   占用的虚拟内存大小</p>
+<p>RSS   占用的物理内存大小</p>
+<p>TTY   进程的工作终端（？表示没有终端）</p>
+<p>STAT  进程的状态：<br>    R: 正在执行中 S: 休眠静止状态 T: 暂停执行 Z:僵死状态</p>
+<p>Time   占用的cpu的时间</p>
+<p>Command 运行的程序</p>
+<p>2、动态显示系统进程信息</p>
+<p>使用top命令，实时显示系统各个进程的资源占用情况。说明输出信息中列的含意。</p>
+<p>在top基本视图中，按h键进入另一个视图。</p>
+<p>在top基本视图中，按f键进入另一个视图，在这里可以编辑基本视图中的显示字段。</p>
+<p>在top基本视图中，按c键进入另一个视图,可以显示进程的路径。</p>
+<p>在top基本视图中，按k键，可以在不退出top命令的情况下杀死某个正在运行的进程。</p>
+<p>在top基本视图中，按b键，高亮显示当前正在运行的进程<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps31.jpg" alt="img"></p>
+<p>3、Kill：终止正在运行的进程或作业</p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps32.jpg" alt="img"> </p>
+<p>4、Killall：功能：终止指定程序名的所有进程</p>
+<p>下载killall</p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps33.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps34.jpg" alt="img"> </p>
+<p>5、Jobs：功能：显示当前所有作业<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps35.jpg" alt="img"></p>
+<p>6、Fg：把后台的作业调入前台运行<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps36.jpg" alt="img"></p>
+<p>7、Bg：将前台作业或进程切换到后台运行<br> <img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps37.jpg" alt="img"></p>
+<p>8、Nice：指定将启动进程的优先级。</p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps38.jpg" alt="img"> </p>
+<p>9、Renice：修改运行中的进程的优先级</p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps39.jpg" alt="img"> </p>
+<p>二、设置定时任务</p>
+<p>1．任务名称<br>        Cron应用：每周2,4,6早上3点启动系统</p>
+<p>2．任务操作</p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps40.jpg" alt="img"> </p>
+<p>分钟、小时、月内的第几天、月份、每周的第几天</p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps41.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps42.jpg" alt="img"> </p>
+<h1 id="父子进程与C程序编译"><a href="#父子进程与C程序编译" class="headerlink" title="父子进程与C程序编译"></a>父子进程与C程序编译</h1><p>任务描述：</p>
+<p>父子进程是指在操作系统中，一个进程创建的子进程。简述Linux中如何创建子进程，请使用C语言完成该功能，并进行编译</p>
+<p>一、父子进程</p>
+<p>1．使用fork创建子进程，功能是：<br>        父进程输出main,子进程输出child<br>        使用gcc编译，并运行</p>
+<p>2．注意事项</p>
+<p>（1）查看一个函数功能的方法：man fork</p>
+<p>（2）需要包含的头文件：#include &lt;unistd.h&gt;</p>
+<p>（3）fork返回值</p>
+<p>a．成功时，父进程返回子进程的进程ID号；子进程返回0。</p>
+<p>b．失败时，父进程返回-1，子进程创建失败。</p>
+<p>二、实验结果</p>
+<p>没有sleep(1);<br><img src="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml5912\wps43.jpg" alt="img"><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps44.jpg" alt="img"></p>
+<p>有sleep(1);</p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps45.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps46.jpg" alt="img"> </p>
+<h1 id="Shell编程综合应用"><a href="#Shell编程综合应用" class="headerlink" title="Shell编程综合应用"></a>Shell编程综合应用</h1><p>任务描述：</p>
+<p>Shell编程的好处是它可以快速编写简单的脚本，使得可以在命令行中完成更多的任务，而不需要在每个命令之间反复输入参数和控制流程。</p>
+<p>Shell编程是一种非常实用的技能，可以用于编写各种类型的脚本，包括系统管理脚本、数据处理脚本、网络管理脚本等。</p>
+<p>本部分可先介绍shell程序设计的基本语法。</p>
+<p>然后，尝试完成如2个数字求和、批量创建用户、批量复制文件等功能。</p>
+<p>一、基本语法</p>
+<p>（1）变量的定义与引用</p>
+<p>\1. 创建以.sh结尾的文件<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps47.jpg" alt="img"></p>
+<p>\2. 修改文件权限<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps48.jpg" alt="img"></p>
+<p>\3. 输出文件<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps49.jpg" alt="img"></p>
+<p>\4. 在命令行定义一个整型<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps50.jpg" alt="img"></p>
+<p>\5. 输出整型<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps51.jpg" alt="img"></p>
+<p>（2）特定变量</p>
+<p>1、新建脚本<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps52.jpg" alt="img"></p>
+<p>2、设置权限<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps53.jpg" alt="img"></p>
+<p>3、执行文件<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps54.jpg" alt="img"></p>
+<p>(3)if语句<br>1、编写脚本<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps55.jpg" alt="img"></p>
+<p>2、改权限<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps56.jpg" alt="img"></p>
+<p>3、执行<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps57.jpg" alt="img"></p>
+<p>二、根据语法完成相应的功能</p>
+<p>1．两数求和<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps58.jpg" alt="img"></p>
+<p>2．批量创建用户<br><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps59.jpg" alt="img"></p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps60.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps61.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps62.jpg" alt="img"> </p>
+<p>3．批量复制文件</p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps63.jpg" alt="img"> </p>
+<p>name.txt</p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps64.jpg" alt="img"> </p>
+<p><img src="/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/wps65.jpg" alt="img"> </p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/08/27/Linux/Linux%E8%AF%BE%E8%AE%BE/" title="Linux_(六)-课设">http://example.com/2024/08/27/Linux/Linux课设/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/08/27/Linux/Linux%E5%AE%9E%E9%AA%8C/" rel="prev" title="Linux_(五)-实验">
+      <i class="fa fa-chevron-left"></i> Linux_(五)-实验
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%8F%91%E5%B8%83"><span class="nav-number">1.</span> <span class="nav-text">服务器端应用部署与项目发布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8F%90%E5%8F%96"><span class="nav-number">2.</span> <span class="nav-text">日志文件处理与数据提取</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%E5%8F%8A%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">Linux进程管理及定时任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%88%B6%E5%AD%90%E8%BF%9B%E7%A8%8B%E4%B8%8EC%E7%A8%8B%E5%BA%8F%E7%BC%96%E8%AF%91"><span class="nav-number">4.</span> <span class="nav-text">父子进程与C程序编译</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell%E7%BC%96%E7%A8%8B%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">Shell编程综合应用</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
