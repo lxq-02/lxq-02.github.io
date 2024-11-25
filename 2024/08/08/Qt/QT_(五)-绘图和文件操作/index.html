@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、绘图和绘图设备1.1、QPainter 绘图1.1 绘图事件  void paintEvent() 1.2 声明一个画家对象  QPainter  painter(this)  this指定绘图设备 1.3 画线、画圆、画矩形、画文字 1.4 设置画笔 QPen  设置画笔宽度 、风格 1.5 设置画刷 QBrush 设置画刷 风格 123456789101112131415161718192">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QT_基础(五)-绘图和文件操作">
+<meta property="og:url" content="http://example.com/2024/08/08/Qt/QT_(%E4%BA%94)-%E7%BB%98%E5%9B%BE%E5%92%8C%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="一、绘图和绘图设备1.1、QPainter 绘图1.1 绘图事件  void paintEvent() 1.2 声明一个画家对象  QPainter  painter(this)  this指定绘图设备 1.3 画线、画圆、画矩形、画文字 1.4 设置画笔 QPen  设置画笔宽度 、风格 1.5 设置画刷 QBrush 设置画刷 风格 123456789101112131415161718192">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/08/08/Qt/QT_(%E4%BA%94)-%E7%BB%98%E5%9B%BE%E5%92%8C%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/image-20240807101324349.png">
+<meta property="article:published_time" content="2024-08-08T08:48:00.000Z">
+<meta property="article:modified_time" content="2024-11-15T13:55:41.319Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="QT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/08/08/Qt/QT_(%E4%BA%94)-%E7%BB%98%E5%9B%BE%E5%92%8C%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/image-20240807101324349.png">
+
+<link rel="canonical" href="http://example.com/2024/08/08/Qt/QT_(%E4%BA%94)-%E7%BB%98%E5%9B%BE%E5%92%8C%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>QT_基础(五)-绘图和文件操作 | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/08/Qt/QT_(%E4%BA%94)-%E7%BB%98%E5%9B%BE%E5%92%8C%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          QT_基础(五)-绘图和文件操作
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-08-08 16:48:00" itemprop="dateCreated datePublished" datetime="2024-08-08T16:48:00+08:00">2024-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-11-15 21:55:41" itemprop="dateModified" datetime="2024-11-15T21:55:41+08:00">2024-11-15</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、绘图和绘图设备"><a href="#一、绘图和绘图设备" class="headerlink" title="一、绘图和绘图设备"></a>一、绘图和绘图设备</h1><h2 id="1-1、QPainter-绘图"><a href="#1-1、QPainter-绘图" class="headerlink" title="1.1、QPainter 绘图"></a>1.1、QPainter 绘图</h2><p>1.1 绘图事件  void paintEvent()</p>
+<p>1.2 声明一个画家对象  QPainter  painter(this)  this指定绘图设备</p>
+<p>1.3 画线、画圆、画矩形、画文字</p>
+<p>1.4 设置画笔 QPen  设置画笔宽度 、风格</p>
+<p>1.5 设置画刷 QBrush 设置画刷 风格</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPainter&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘图事件</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Widget::paintEvent</span><span class="params">(QPaintEvent *)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 实例化画家对象 this指定的是绘图的设备</span></span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置画笔</span></span><br><span class="line">    <span class="function">QPen <span class="title">pen</span><span class="params">(QColor(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>))</span></span>;</span><br><span class="line">    <span class="comment">// 设置画笔的宽度</span></span><br><span class="line">    pen.<span class="built_in">setWidth</span>(<span class="number">3</span>);</span><br><span class="line">    <span class="comment">// 设置画笔的风格</span></span><br><span class="line">    pen.<span class="built_in">setStyle</span>(Qt::DotLine);</span><br><span class="line">    <span class="comment">// 让画家使用这个笔</span></span><br><span class="line">    painter.<span class="built_in">setPen</span>(pen);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置画刷</span></span><br><span class="line">    <span class="function">QBrush <span class="title">brush</span><span class="params">(Qt::cyan)</span></span>;</span><br><span class="line">    <span class="comment">// 设置画刷风格</span></span><br><span class="line">    brush.<span class="built_in">setStyle</span>(Qt::Dense7Pattern);</span><br><span class="line">    <span class="comment">// 让画家使用画刷</span></span><br><span class="line">    painter.<span class="built_in">setBrush</span>(brush);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 画线</span></span><br><span class="line">    painter.<span class="built_in">drawLine</span>(<span class="built_in">QPoint</span>(<span class="number">0</span>, <span class="number">0</span>), <span class="built_in">QPoint</span>(<span class="number">100</span>, <span class="number">100</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 画圆 椭圆</span></span><br><span class="line">    painter.<span class="built_in">drawEllipse</span>(<span class="built_in">QPoint</span>(<span class="number">100</span>, <span class="number">100</span>), <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 画矩形</span></span><br><span class="line">    painter.<span class="built_in">drawRect</span>(<span class="built_in">QRect</span>(<span class="built_in">QPoint</span>(<span class="number">40</span>, <span class="number">40</span>), <span class="built_in">QPoint</span>(<span class="number">80</span>, <span class="number">80</span>)));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 画文字</span></span><br><span class="line">    painter.<span class="built_in">drawText</span>(<span class="built_in">QRect</span>(<span class="number">10</span>, <span class="number">200</span>, <span class="number">100</span>, <span class="number">50</span>), <span class="string">&quot;好好学习天天向上&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/08/08/Qt/QT_(%E4%BA%94)-%E7%BB%98%E5%9B%BE%E5%92%8C%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/image-20240807101324349.png" alt="image-20240807101324349"></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将一个矩形区域填充颜色</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MidWidget::paintEvent</span><span class="params">(QPaintEvent* event)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置填充颜色</span></span><br><span class="line">    painter.<span class="built_in">setBrush</span>(<span class="built_in">QBrush</span>(Qt::black));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义矩形（x, y, width, height)</span></span><br><span class="line">    <span class="function">QRect <span class="title">rect</span><span class="params">(m_leftMargin, <span class="number">0</span>, <span class="keyword">this</span>-&gt;width() - m_leftMargin, <span class="keyword">this</span>-&gt;height() - m_bottomMargin)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 填充矩形</span></span><br><span class="line">    painter.<span class="built_in">fillRect</span>(rect, painter.<span class="built_in">brush</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-2、QPainter高级设置"><a href="#1-2、QPainter高级设置" class="headerlink" title="1.2、QPainter高级设置"></a>1.2、QPainter高级设置</h2><ul>
+<li><p>抗锯齿 效率低</p>
+<ul>
+<li>painter.setRenderHint(QPainter::Antialiasing);</li>
+</ul>
+</li>
+<li><p>对画家进行移动</p>
+<ul>
+<li>painter.translate(100,0);</li>
+<li>保存状态 save</li>
+<li>还原状态 restore</li>
+</ul>
+</li>
+<li><p>如果想手动调用绘图事件 利用update</p>
+</li>
+<li><p>利用画家画图片 painter.drawPixmap( x，y，QPixmap(  路飞) )</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPainter&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘图事件</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Widget::paintEvent</span><span class="params">(QPaintEvent *)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//-------------------------高级设置-----------------------------</span></span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    <span class="comment">// painter.drawEllipse(QPoint(100, 50), 50, 50);</span></span><br><span class="line">    <span class="comment">// // 设置 抗锯齿能力</span></span><br><span class="line">    <span class="comment">// painter.setRenderHint(QPainter::Antialiasing);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// painter.drawEllipse(QPoint(200, 50), 50, 50);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 画矩形</span></span><br><span class="line">    painter.<span class="built_in">drawRect</span>(<span class="built_in">QRect</span>(<span class="number">20</span>, <span class="number">20</span>, <span class="number">50</span>, <span class="number">50</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 移动画家</span></span><br><span class="line">    painter.<span class="built_in">translate</span>(<span class="number">100</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 保存画家状态</span></span><br><span class="line">    painter.<span class="built_in">save</span>();</span><br><span class="line"></span><br><span class="line">    painter.<span class="built_in">drawRect</span>(<span class="built_in">QRect</span>(<span class="number">20</span>, <span class="number">20</span>, <span class="number">50</span>, <span class="number">50</span>));</span><br><span class="line"></span><br><span class="line">    painter.<span class="built_in">translate</span>(<span class="number">100</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 还原画家保存状态</span></span><br><span class="line">    painter.<span class="built_in">restore</span>();</span><br><span class="line"></span><br><span class="line">    painter.<span class="built_in">drawRect</span>(<span class="built_in">QRect</span>(<span class="number">20</span>, <span class="number">20</span>, <span class="number">50</span>, <span class="number">50</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPainter&gt;</span></span></span><br><span class="line"></span><br><span class="line">Widget::<span class="built_in">Widget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">    , <span class="built_in">ui</span>(<span class="keyword">new</span> Ui::Widget)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;<span class="built_in">setupUi</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 点击移动按钮，移动图片</span></span><br><span class="line">    <span class="built_in">connect</span>(ui-&gt;pushButton, &amp;QPushButton::clicked, [=]()&#123;</span><br><span class="line">        <span class="comment">// 如果要手动调用绘图事件， 用update更新</span></span><br><span class="line">        <span class="built_in">update</span>();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘图事件</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Widget::paintEvent</span><span class="params">(QPaintEvent *)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//----------------------利用画家 画资源图片------------------</span></span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    posX += <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果超出屏幕，从0开始</span></span><br><span class="line">    <span class="keyword">if</span> (posX &gt; <span class="keyword">this</span>-&gt;<span class="built_in">width</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        posX = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    painter.<span class="built_in">drawPixmap</span>(posX, <span class="number">0</span>, <span class="built_in">QPixmap</span>(<span class="string">&quot;:/Image/Luffy.png&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1-3、QPaintDevice绘图设备"><a href="#1-3、QPaintDevice绘图设备" class="headerlink" title="1.3、QPaintDevice绘图设备"></a>1.3、QPaintDevice绘图设备</h2><ul>
+<li>QPixmap QImage  QBitmap(黑白色) QPicture  QWidget</li>
+</ul>
+<h3 id="QPixmap"><a href="#QPixmap" class="headerlink" title="QPixmap"></a>QPixmap</h3><ul>
+<li><p>QPixmap 对不同平台做了显示的优化</p>
+<ul>
+<li><p>QPixmap pix( 300,300)</p>
+</li>
+<li><p>pix.fill( 填充颜色 )</p>
+</li>
+<li><p>利用画家 往pix上画画  QPainter painter( &amp; pix)</p>
+</li>
+<li><p>保存  pix.save( “路径”)</p>
+</li>
+<li><pre><code class="cpp">Widget::Widget(QWidget *parent)
+&#123;
+    ui-&gt;setupUi(this);
+
+    // Pixmap绘图设备 专门为平台做了显示的优化
+    QPixmap pix(300, 300);
+
+    // 填充颜色
+    pix.fill(Qt::white);
+
+    // 声明画家
+    QPainter painter(&amp;pix);
+    painter.setPen(QPen(Qt::green));
+    painter.drawEllipse(QPoint(150,150), 100, 100);
+
+    // 保存
+    pix.save(&quot;F:\\pix.png&quot;);
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### QImage</span><br><span class="line"></span><br><span class="line">- Qimage 可以对像素进行访问</span><br><span class="line"></span><br><span class="line">  - 使用和QPixmap差不多 QImage img(300,300,**QImage::Format_RGB32**);</span><br><span class="line"></span><br><span class="line">  - 其他流程和QPixmap一样</span><br><span class="line"></span><br><span class="line">  - 可以对像素进行修改 img.setPixel(i,j,value);</span><br><span class="line"></span><br><span class="line">  - ```cpp</span><br><span class="line">    Widget::Widget(QWidget *parent)</span><br><span class="line">    &#123;</span><br><span class="line">        ui-&gt;setupUi(this);</span><br><span class="line">    </span><br><span class="line">        // QImage 绘图设备 可以对像素进行访问</span><br><span class="line">        QImage img(300, 300, QImage::Format_RGB32);</span><br><span class="line">        img.fill(Qt::white);</span><br><span class="line">    </span><br><span class="line">        QPainter painter(&amp;img);</span><br><span class="line">        painter.setPen(QPen(Qt::blue));</span><br><span class="line">        painter.drawEllipse(QPoint(150,150), 100, 100);</span><br><span class="line">    </span><br><span class="line">        // 保存</span><br><span class="line">        img.save(&quot;F:\\img.png&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 绘图事件</span><br><span class="line">    void Widget::paintEvent(QPaintEvent *)</span><br><span class="line">    &#123;</span><br><span class="line">        QPainter painter(this);</span><br><span class="line">    </span><br><span class="line">        // 利用QImage 对像素进行修改</span><br><span class="line">        QImage img;</span><br><span class="line">        img.load(&quot;:/Image/Luffy.png&quot;);</span><br><span class="line">    </span><br><span class="line">        // 修改像素点</span><br><span class="line">        for (int i = 50; i &lt; 100; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for (int j = 50; j &lt; 100; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                QRgb value = qRgb(255, 0, 0);</span><br><span class="line">                img.setPixel(i, j, value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        painter.drawImage(0, 0, img);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="QPicture"><a href="#QPicture" class="headerlink" title="QPicture"></a>QPicture</h3><ul>
+<li><p>QPicture  记录和重现 绘图指令</p>
+<ul>
+<li><p>QPicture pic</p>
+</li>
+<li><p>painter.begin(&amp;pic);</p>
+</li>
+<li><p>保存 pic.save( 任意后缀名 )</p>
+</li>
+<li><p>重现 利用画家可以重现painter.drawPicture(0,0,pic);</p>
+</li>
+<li><pre><code class="cpp">Widget::Widget(QWidget *parent)
+&#123;
+    ui-&gt;setupUi(this);
+
+    // QPicture 绘图设备 可以记录和重现绘图指令
+    QPicture pic;
+    QPainter painter;
+    painter.begin(&amp;pic);    // 开始往pic上画
+    painter.setPen(QPen(Qt::cyan));
+    painter.drawEllipse(QPoint(150, 150), 100, 150);
+    painter.end();  // 结束画画
+
+    // 保存到磁盘
+    pic.save(&quot;F:\\pic.zt&quot;);
+&#125;
+
+// 绘图事件
+void Widget::paintEvent(QPaintEvent *)
+&#123;
+    // 重现QPicture的绘图指令
+    QPainter painter(this);
+
+    QPicture pic;
+    pic.load(&quot;F:\\pic.zt&quot;);
+    painter.drawPicture(0, 0, pic);
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 1.4、设备自定义控件背景颜色</span><br><span class="line"></span><br><span class="line">```cpp</span><br><span class="line">    // 使用 QPalette 设置背景颜色为灰色</span><br><span class="line">    QPalette pal = palette();</span><br><span class="line">    pal.setColor(QPalette::Window, Qt::gray);</span><br><span class="line">    this-&gt;setAutoFillBackground(true);</span><br><span class="line">    this-&gt;setPalette(pal);</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-5、加载图片"><a href="#1-5、加载图片" class="headerlink" title="1.5、加载图片"></a>1.5、加载图片</h2><h3 id="1-5-1、Pixmap"><a href="#1-5-1、Pixmap" class="headerlink" title="1.5.1、Pixmap"></a>1.5.1、Pixmap</h3><p>路径中不要有中文</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先定义QPixmap对象</span></span><br><span class="line">QPixmap pixmap;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 然后加载图片</span></span><br><span class="line">pixmap.<span class="built_in">load</span>(<span class="string">&quot;:/res/light-1.png&quot;</span>);</span><br><span class="line">ui-&gt;m_labelLocoSignalStatus-&gt;<span class="built_in">setPixmap</span>(pixmap);</span><br><span class="line">ui-&gt;m_labelLocoSignalStatus-&gt;<span class="built_in">setScaledContents</span>(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h1 id="二、文件系统"><a href="#二、文件系统" class="headerlink" title="二、文件系统"></a>二、文件系统</h1><h2 id="2-1、-QFile-对文件进行读写操作"><a href="#2-1、-QFile-对文件进行读写操作" class="headerlink" title="2.1、 QFile 对文件进行读写操作"></a>2.1、 QFile 对文件进行读写操作</h2><ul>
+<li>QFile进行读写操作<ul>
+<li>QFile file( path 文件路径)</li>
+<li>读<ul>
+<li>file.open(打开方式) QIODevice::readOnly</li>
+<li>全部读取  file.readAll()  按行读  file.readLine()  atend()判断是否读到文件尾</li>
+<li>默认支持编码格式 utf-8</li>
+<li>利用编码格式类 指定格式 QTextCodeC <ul>
+<li><a target="_blank" rel="noopener" href="https://www.jb51.net/article/275365.htm">QT6中QTextcodec头文件找不到的解决方法_C 语言_脚本之家 (jb51.net)</a></li>
+<li>QTextCodec * codec &#x3D; QTextCodec::codecForName(“gbk”);</li>
+<li>&#x2F;&#x2F;ui-&gt;textEdit-&gt;setText( codec-&gt;toUnicode(array)  );</li>
+</ul>
+</li>
+<li>文件对象关闭 close</li>
+</ul>
+</li>
+<li>写<ul>
+<li>file.open( QIODevice::writeOnly  &#x2F; Append)</li>
+<li>file.write(内容)</li>
+<li>file.close 关闭</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Widget::<span class="built_in">Widget</span>(QWidget *parent)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;<span class="built_in">setupUi</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 点击选取文件的按钮，弹出对话框</span></span><br><span class="line">    <span class="built_in">connect</span>(ui-&gt;pushButton, &amp;QPushButton::clicked, [=]()&#123;</span><br><span class="line">        QString path = QFileDialog::<span class="built_in">getOpenFileName</span>(<span class="keyword">this</span>, <span class="string">&quot;打开文件&quot;</span>, <span class="string">&quot;C:\\Users\\Administrator\\Desktop&quot;</span>);</span><br><span class="line">        <span class="comment">// 将路径放入到lineEdit中</span></span><br><span class="line">        ui-&gt;lineEdit-&gt;<span class="built_in">setText</span>(path);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 编码格式类</span></span><br><span class="line">        <span class="comment">//QTextCodec * codec = QTextCodec::codecForName(&quot;gbk&quot;);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 读取内容 放入到textEdit中</span></span><br><span class="line">        <span class="comment">// QFile默认支持的格式是utf-8</span></span><br><span class="line">        QFile <span class="built_in">file</span>(path);   <span class="comment">// 参数就是读取文件的路径</span></span><br><span class="line">        <span class="comment">// 设置打开方式</span></span><br><span class="line">        file.<span class="built_in">open</span>(QIODevice::ReadOnly);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// QByteArray array = file.readAll();</span></span><br><span class="line"></span><br><span class="line">        QByteArray array;</span><br><span class="line">        <span class="keyword">while</span> (!file.<span class="built_in">atEnd</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            array += file.<span class="built_in">readLine</span>();     <span class="comment">// 按行读</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 将读取到的数据 放入到textEdit中</span></span><br><span class="line">        ui-&gt;textEdit-&gt;<span class="built_in">setText</span>(array);</span><br><span class="line">        <span class="comment">// ui-&gt;textEdit-&gt;setText(codec-&gt;toUnicode((array)));</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 对文件对象进行关闭</span></span><br><span class="line">        file.<span class="built_in">close</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 进行写入</span></span><br><span class="line">        file.<span class="built_in">open</span>(QIODevice::Append);   <span class="comment">// 用追加的方式进行写</span></span><br><span class="line">        file.<span class="built_in">write</span>(<span class="string">&quot;aaaaaaa&quot;</span>);</span><br><span class="line">        file.<span class="built_in">close</span>();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-2、QFileInfo-读取文件信息"><a href="#2-2、QFileInfo-读取文件信息" class="headerlink" title="2.2、QFileInfo 读取文件信息"></a>2.2、QFileInfo 读取文件信息</h2><ul>
+<li>QFileInfo info(路径)</li>
+<li>qDebug() &lt;&lt; “大小：” &lt;&lt; info.size() &lt;&lt; “ 后缀名：” &lt;&lt; <strong>info.suffix()</strong> &lt;&lt; “ 文件名称：”&lt;&lt;info.fileName() &lt;&lt; “ 文件路径：”&lt;&lt; info.filePath();</li>
+<li>qDebug() &lt;&lt; “创建日期：” &lt;&lt; info.created().toString(“yyyy&#x2F;MM&#x2F;dd hh:mm:ss”);</li>
+<li>qDebug() &lt;&lt; “最后修改日期：”&lt;&lt;info.lastModified().toString(“yyyy-MM-dd hh:mm:ss”);</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Widget::<span class="built_in">Widget</span>(QWidget *parent)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;<span class="built_in">setupUi</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 点击选取文件的按钮，弹出对话框</span></span><br><span class="line">    <span class="built_in">connect</span>(ui-&gt;pushButton, &amp;QPushButton::clicked, [=]()&#123;</span><br><span class="line"></span><br><span class="line">        QString path = QFileDialog::<span class="built_in">getOpenFileName</span>(<span class="keyword">this</span>, <span class="string">&quot;打开文件&quot;</span>, <span class="string">&quot;C:\\Users\\Administrator\\Desktop&quot;</span>);</span><br><span class="line">        <span class="comment">// 将路径放入到lineEdit中</span></span><br><span class="line">        ui-&gt;lineEdit-&gt;<span class="built_in">setText</span>(path);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// QFileInfo 文件消息类</span></span><br><span class="line">        QFileInfo <span class="built_in">info</span>(path);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;大小：&quot;</span> &lt;&lt; info.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot; 后缀名：&quot;</span> &lt;&lt; info.<span class="built_in">suffix</span>() &lt;&lt; <span class="string">&quot; 文件名称:&quot;</span> &lt;&lt; info.<span class="built_in">fileName</span>();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-3、QFile文件读取文件"><a href="#2-3、QFile文件读取文件" class="headerlink" title="2.3、QFile文件读取文件"></a>2.3、QFile文件读取文件</h2><p>文本内容：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">train_number</span><br><span class="line">K123</span><br><span class="line"></span><br><span class="line">locomotive_number</span><br><span class="line">DF4D-01234</span><br><span class="line"></span><br><span class="line">routes</span><br><span class="line">线路1 457.500MHz B1</span><br><span class="line">线路2 457.500MHz B2</span><br><span class="line">线路3 459.750MHz B3</span><br><span class="line">线路4 460.500MHz B4</span><br><span class="line">线路5 461.875MHz B5</span><br><span class="line"></span><br><span class="line">alarms</span><br><span class="line">紧急，K1次列车，896.8公里事故，注意运行！</span><br><span class="line">紧急，G45次列车，320.5公里事故，注意运行！</span><br><span class="line">紧急，D12次列车，750.2公里故障，注意运行！</span><br><span class="line">紧急，T88次列车，435.9公里事故，注意运行！</span><br><span class="line">紧急，Z22次列车，678.3公里故障，注意运行！</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">ViewWidget::readConfig</span><span class="params">(<span class="type">const</span> QString&amp; filePath)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建 QFile 对象以读取配置文件</span></span><br><span class="line">    <span class="function">QFile <span class="title">file</span><span class="params">(filePath)</span></span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 尝试以只读和文本模式打开文件</span></span><br><span class="line">    <span class="keyword">if</span> (file.<span class="built_in">open</span>(QIODevice::ReadOnly | QIODevice::Text)) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 创建 QTextStream 对象，以便从文件中逐行读取文本</span></span><br><span class="line">        <span class="function">QTextStream <span class="title">in</span><span class="params">(&amp;file)</span></span>;</span><br><span class="line">        in.<span class="built_in">setCodec</span>(<span class="string">&quot;UTF-8&quot;</span>);  <span class="comment">// 设置编码为 UTF-8</span></span><br><span class="line"></span><br><span class="line">        QString line;  <span class="comment">// 用于存储当前读取的行</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 循环直到文件结束</span></span><br><span class="line">        <span class="keyword">while</span> (!in.<span class="built_in">atEnd</span>()) </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 读取一行并去除首尾空白</span></span><br><span class="line">            line = in.<span class="built_in">readLine</span>().<span class="built_in">trimmed</span>();</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 检查当前行的内容并根据关键字进行相应处理</span></span><br><span class="line">            <span class="keyword">if</span> (line == <span class="string">&quot;train_number&quot;</span>) </span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 读取下一行并设置 trainNumber</span></span><br><span class="line">                m_dataConfig.trainNumber = in.<span class="built_in">readLine</span>().<span class="built_in">trimmed</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (line == <span class="string">&quot;locomotive_number&quot;</span>) </span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 读取下一行并设置 locomotiveNumber</span></span><br><span class="line">                m_dataConfig.locomotiveNumber = in.<span class="built_in">readLine</span>().<span class="built_in">trimmed</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (line == <span class="string">&quot;routes&quot;</span>) </span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 读取所有非空行并添加到 routes 列表</span></span><br><span class="line">                <span class="keyword">while</span> (!(line = in.<span class="built_in">readLine</span>().<span class="built_in">trimmed</span>()).<span class="built_in">isEmpty</span>()) &#123;</span><br><span class="line">                    m_dataConfig.routes.<span class="built_in">append</span>(line);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (line == <span class="string">&quot;alarms&quot;</span>) </span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 读取所有非空行并添加到 alarms 列表</span></span><br><span class="line">                <span class="keyword">while</span> (!(line = in.<span class="built_in">readLine</span>().<span class="built_in">trimmed</span>()).<span class="built_in">isEmpty</span>()) &#123;</span><br><span class="line">                    m_dataConfig.alarms.<span class="built_in">append</span>(line);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 关闭文件</span></span><br><span class="line">        file.<span class="built_in">close</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/08/08/Qt/QT_(%E4%BA%94)-%E7%BB%98%E5%9B%BE%E5%92%8C%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" title="QT_基础(五)-绘图和文件操作">http://example.com/2024/08/08/Qt/QT_(五)-绘图和文件操作/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/QT/" rel="tag"># QT</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/08/08/Qt/QT_(%E4%BA%8C)-%E6%8E%A7%E4%BB%B6%E3%80%81%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%92%8C%E6%A7%BD/" rel="prev" title="QT_基础(二)-控件、信号量和槽">
+      <i class="fa fa-chevron-left"></i> QT_基础(二)-控件、信号量和槽
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/08/08/Qt/QT_(%E4%B8%89)-%E7%AA%97%E5%8F%A3%E4%B8%8E%E5%B8%83%E5%B1%80/" rel="next" title="QT_基础(三)-窗口与布局">
+      QT_基础(三)-窗口与布局 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BB%98%E5%9B%BE%E5%92%8C%E7%BB%98%E5%9B%BE%E8%AE%BE%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">一、绘图和绘图设备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E3%80%81QPainter-%E7%BB%98%E5%9B%BE"><span class="nav-number">1.1.</span> <span class="nav-text">1.1、QPainter 绘图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E3%80%81QPainter%E9%AB%98%E7%BA%A7%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">1.2、QPainter高级设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3%E3%80%81QPaintDevice%E7%BB%98%E5%9B%BE%E8%AE%BE%E5%A4%87"><span class="nav-number">1.3.</span> <span class="nav-text">1.3、QPaintDevice绘图设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QPixmap"><span class="nav-number">1.3.1.</span> <span class="nav-text">QPixmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QPicture"><span class="nav-number">1.3.2.</span> <span class="nav-text">QPicture</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5%E3%80%81%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87"><span class="nav-number">1.4.</span> <span class="nav-text">1.5、加载图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1%E3%80%81Pixmap"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.5.1、Pixmap</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">二、文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1%E3%80%81-QFile-%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、 QFile 对文件进行读写操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2%E3%80%81QFileInfo-%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、QFileInfo 读取文件信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3%E3%80%81QFile%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、QFile文件读取文件</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

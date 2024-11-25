@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、特征检测的基本概念 OpenCV特征的场景  图像搜索，如以图搜图 拼图游戏 图像拼接，将两长有关联的图拼接到一起   什么是特征  图像特征就是有意义的图像区域，具有独特性、易于识别性，比如角点、斑点以及高密度区   角点  最重要 灰度梯度的最大值对应的像素 两条线的交点 极值点（一阶导数最大值，但二阶导数为0）    二、Harris角点检测  Harris点 光滑地区，无论向哪里移动，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV(十)-特征点检测与匹配">
+<meta property="og:url" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="一、特征检测的基本概念 OpenCV特征的场景  图像搜索，如以图搜图 拼图游戏 图像拼接，将两长有关联的图拼接到一起   什么是特征  图像特征就是有意义的图像区域，具有独特性、易于识别性，比如角点、斑点以及高密度区   角点  最重要 灰度梯度的最大值对应的像素 两条线的交点 极值点（一阶导数最大值，但二阶导数为0）    二、Harris角点检测  Harris点 光滑地区，无论向哪里移动，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241118213557869.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241118215302893.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241118220940288.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241118221443997.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241118222217321.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241119072440618.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241119074420260.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241119080618083.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122221633600.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122222610059.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122222639807.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122222653418.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122222732609.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122222812687.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122222837683.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122224119442.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122224655622.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122224747670.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122224758055.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122231255131.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122231618519.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122231717700.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122235547170.png">
+<meta property="og:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241123004225535.png">
+<meta property="article:published_time" content="2024-11-18T13:16:00.000Z">
+<meta property="article:modified_time" content="2024-11-22T16:42:36.327Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="OpenCV">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241118213557869.png">
+
+<link rel="canonical" href="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>OpenCV(十)-特征点检测与匹配 | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OpenCV(十)-特征点检测与匹配
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-11-18 21:16:00" itemprop="dateCreated datePublished" datetime="2024-11-18T21:16:00+08:00">2024-11-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-11-23 00:42:36" itemprop="dateModified" datetime="2024-11-23T00:42:36+08:00">2024-11-23</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、特征检测的基本概念"><a href="#一、特征检测的基本概念" class="headerlink" title="一、特征检测的基本概念"></a>一、特征检测的基本概念</h1><ul>
+<li><p>OpenCV特征的场景</p>
+<ul>
+<li>图像搜索，如以图搜图</li>
+<li>拼图游戏</li>
+<li>图像拼接，将两长有关联的图拼接到一起</li>
+</ul>
+</li>
+<li><p>什么是特征</p>
+<ul>
+<li>图像特征就是有意义的图像区域，具有独特性、易于识别性，比如角点、斑点以及高密度区</li>
+</ul>
+</li>
+<li><p>角点</p>
+<ul>
+<li>最重要</li>
+<li>灰度梯度的最大值对应的像素</li>
+<li>两条线的交点</li>
+<li>极值点（一阶导数最大值，但二阶导数为0）</li>
+</ul>
+</li>
+</ul>
+<h1 id="二、Harris角点检测"><a href="#二、Harris角点检测" class="headerlink" title="二、Harris角点检测"></a>二、Harris角点检测</h1><p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241118213557869.png" alt="image-20241118213557869"></p>
+<ul>
+<li>Harris点<ul>
+<li>光滑地区，无论向哪里移动，衡量系数不变</li>
+<li>边缘地区，垂直边缘移动时，衡量系统变化剧烈</li>
+<li>在交点处，往哪个方向移动，衡量系统都变化剧烈</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Harris角点检测API</span></span><br><span class="line">cornerHarris(img, dst, blockSize, ksize, k)</span><br><span class="line">blockSize:检测窗口大小</span><br><span class="line">ksize:Sobel的卷积核</span><br><span class="line">k:权重系数，经验值，一般取<span class="number">0.02</span>~<span class="number">0.04</span>z</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> numpy</span><br><span class="line"></span><br><span class="line">blockSize = <span class="number">2</span></span><br><span class="line">ksize = <span class="number">3</span></span><br><span class="line">k = <span class="number">0.04</span></span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;chess.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度化</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Harris角点检测</span></span><br><span class="line">dst = cv2.cornerHarris(gray, blockSize, ksize, k)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Harris角点的展示</span></span><br><span class="line">img[dst&gt;<span class="number">0.01</span>*dst.<span class="built_in">max</span>()] = [<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>]</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;harris&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241118215302893.png" alt="image-20241118215302893"></p>
+<h1 id="三、Shi-Tomasi角点检测"><a href="#三、Shi-Tomasi角点检测" class="headerlink" title="三、Shi-Tomasi角点检测"></a>三、Shi-Tomasi角点检测</h1><ul>
+<li>Shi-Tomasi是Harris角点检测的改进</li>
+<li>Harris角点检测的稳定性和k经验值有关，不好设定最佳值</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># API</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">goodFeaturesToTrack</span>(<span class="params">image: UMat,			</span></span><br><span class="line"><span class="params">                        maxCorners: <span class="built_in">int</span>, 		<span class="comment"># 角点的最大数，值为0表示无限制</span></span></span><br><span class="line"><span class="params">                        qualityLevel: <span class="built_in">float</span>, 	<span class="comment"># 小于1.0的正数，一般在0.01-0.1之间</span></span></span><br><span class="line"><span class="params">                        minDistance: <span class="built_in">float</span>, 	<span class="comment"># 角之间最小欧式距离，忽略小于此距离的点</span></span></span><br><span class="line"><span class="params">                        mask: UMat, 			<span class="comment"># 感兴趣的区域</span></span></span><br><span class="line"><span class="params">                        blockSize: <span class="built_in">int</span>, 		<span class="comment"># 检测窗口</span></span></span><br><span class="line"><span class="params">                        gradientSize: <span class="built_in">int</span>, 		</span></span><br><span class="line"><span class="params">                        corners: UMat | <span class="literal">None</span>=..., </span></span><br><span class="line"><span class="params">                        useHarrisDetector: 		<span class="comment"># 是否使用Harris算法</span></span></span><br><span class="line"><span class="params">                        <span class="built_in">bool</span>=..., 			</span></span><br><span class="line"><span class="params">                        k: <span class="built_in">float</span>=...			<span class="comment"># 默认是0.04</span></span></span><br><span class="line"><span class="params">                       </span>) -&gt; UMat</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">maxCorners = <span class="number">1000</span></span><br><span class="line">qualityLevel = <span class="number">0.01</span></span><br><span class="line">minDistance = <span class="number">10</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;chess.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度化</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Harris角点检测</span></span><br><span class="line"><span class="comment"># dst = cv2.cornerHarris(gray, blockSize, ksize, k)</span></span><br><span class="line">corners = cv2.goodFeaturesToTrack(gray, maxCorners, qualityLevel, minDistance)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 得到的corners是32位，需要换为整型输出</span></span><br><span class="line">corners = np.int0(corners)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Shi-Tomasi绘制角点</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> corners:</span><br><span class="line">    x,y = i.ravel()     <span class="comment"># 它是多维的，需要转化为一维</span></span><br><span class="line">    cv2.circle(img, (x,y), <span class="number">3</span>, (<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>), -<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;harris&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241118220940288.png" alt="image-20241118220940288"></p>
+<h1 id="四、SIFT关键点检测"><a href="#四、SIFT关键点检测" class="headerlink" title="四、SIFT关键点检测"></a>四、SIFT关键点检测</h1><p>Scale-Invariant Feature Transform：与缩放无关的特征点检测</p>
+<p>&#x3D;&#x3D;SIFT出现的原因&#x3D;&#x3D;</p>
+<ul>
+<li>Harris角点具有旋转不变的特性</li>
+<li>但是缩放后，原来的角点有可能就不是角点了</li>
+</ul>
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241118221443997.png" alt="image-20241118221443997"></p>
+<p>&#x3D;&#x3D;使用SIFT的步骤&#x3D;&#x3D;</p>
+<ul>
+<li>创建SIFT对象</li>
+<li>进行检测，kp&#x3D;sift.detect(img, …)</li>
+<li>绘制关键点，drawKeypoints(gray, kp, img)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读图片</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;chess.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度化</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建sift对象</span></span><br><span class="line">sift = cv2.xfeatures2d.SIFT_create()</span><br><span class="line"><span class="comment"># 进行检测</span></span><br><span class="line">kp = sift.detect(gray, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制Keypoints</span></span><br><span class="line">cv2.drawKeypoints(gray, kp, img)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241118222217321.png" alt="image-20241118222217321"></p>
+<h1 id="五、SIFT计算描述子"><a href="#五、SIFT计算描述子" class="headerlink" title="五、SIFT计算描述子"></a>五、SIFT计算描述子</h1><ul>
+<li>关键点和描述子<ul>
+<li>关键点：位置、大小和方向</li>
+<li>关键点描述子：记录了关键点周围对其有贡献的像素点的一组向量值，其不受仿射变换、光照变换等影响</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算描述子</span></span><br><span class="line">kp,des = sift.compute(img,kp)</span><br><span class="line"><span class="comment"># 其作用是进行特征匹配</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同时计算关键点和描述子</span></span><br><span class="line">kp,des = sift.detectAndCompute(img, ...)</span><br><span class="line">mask：指明对img中哪个区域进行计算</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读图片</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;chess.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度化</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建sift对象</span></span><br><span class="line">sift = cv2.xfeatures2d.SIFT_create()</span><br><span class="line"><span class="comment"># 进行检测</span></span><br><span class="line">kp, des = sift.detectAndCompute(gray, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(des[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制Keypoints</span></span><br><span class="line">cv2.drawKeypoints(gray, kp, img)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241119072440618.png" alt="image-20241119072440618"></p>
+<h1 id="六、SURF特征检测"><a href="#六、SURF特征检测" class="headerlink" title="六、SURF特征检测"></a>六、SURF特征检测</h1><p>Speeded-Up Robust Features:加速的Robust检测</p>
+<ul>
+<li>SURF的优点<ul>
+<li>SIFT最大的问题是速度慢，因此才有SURF</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用SURF的步骤</span></span><br><span class="line">surf = cv2.xfeatures2d.SURF_create()</span><br><span class="line">kp, des = surf.detectAndCompute(img, mas)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读图片</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;chess.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度化</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建sift对象</span></span><br><span class="line"><span class="comment"># sift = cv2.xfeatures2d.SIFT_create()</span></span><br><span class="line"><span class="comment"># 船舰surf对象</span></span><br><span class="line">surf = cv2.xfeatures2d.SURF_create()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行检测</span></span><br><span class="line"><span class="comment"># kp, des = sift.detectAndCompute(gray, None)</span></span><br><span class="line"><span class="comment"># 使用surf进行检测</span></span><br><span class="line">kp, des = surf.detectAndCompute(gray, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制Keypoints</span></span><br><span class="line">cv2.drawKeypoints(gray, kp, img)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241119074420260.png" alt="image-20241119074420260"></p>
+<h1 id="七、ORB特征检测"><a href="#七、ORB特征检测" class="headerlink" title="七、ORB特征检测"></a>七、ORB特征检测</h1><p>Oriented FAST and Rotated BRIEF</p>
+<ul>
+<li>ORB优势<ul>
+<li>ORB可以做到实时检测</li>
+</ul>
+</li>
+<li>FAST<ul>
+<li>可以做到特征点的实时检测，本身不带方向，ORB加了方向</li>
+</ul>
+</li>
+<li>BRIEF<ul>
+<li>是对已检测到的特征点进行描述</li>
+<li>加快了特征描述符建立的速度</li>
+<li>降低了特征匹配的时间</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用ORB的步骤</span></span><br><span class="line">orb = cv2.ORB_create()</span><br><span class="line">kp, des = orb.detectAndCompute(img, mask)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读图片</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;chess.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度化</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建orb对象</span></span><br><span class="line">orb = cv2.ORB_create()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用orb进行检测</span></span><br><span class="line">kp, des = orb.detectAndCompute(gray, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制Keypoints</span></span><br><span class="line">cv2.drawKeypoints(gray, kp, img)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241119080618083.png" alt="image-20241119080618083"></p>
+<h1 id="八、暴力特征匹配"><a href="#八、暴力特征匹配" class="headerlink" title="八、暴力特征匹配"></a>八、暴力特征匹配</h1><ul>
+<li>原理<ul>
+<li>它使用第一组中的&#x3D;&#x3D;每个特征&#x3D;&#x3D;的描述子</li>
+<li>与第二组中的&#x3D;&#x3D;所有特征描述子&#x3D;&#x3D;进行匹配</li>
+<li>计算它们之间的差距，然后将最接近一个匹配返回</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># OpenCV特征匹配步骤</span></span><br><span class="line">创建匹配器，BFMatcher(normType, crossCheck)</span><br><span class="line">进行特征匹配，bf.<span class="keyword">match</span>(des1, des2)</span><br><span class="line">绘制匹配点，cv2.drawMatches(img1, kp1, img2, k2, ...)</span><br><span class="line"></span><br><span class="line"><span class="comment"># BFMatcher</span></span><br><span class="line">normType: NORM_L1,NORM_L2, HAMMING1...</span><br><span class="line">crossCheck: 是否进行交叉匹配，默认false</span><br><span class="line">    </span><br><span class="line"><span class="comment"># match方法</span></span><br><span class="line">参数为SIFT、SURF、ORB等计算的描述子</span><br><span class="line"></span><br><span class="line"><span class="comment"># drawMatches</span></span><br><span class="line">搜索img,kp</span><br><span class="line">匹配图img,kp</span><br><span class="line"><span class="keyword">match</span>()f</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy as np</span><br><span class="line"></span><br><span class="line"># 读图片</span><br><span class="line">img1 = cv<span class="number">2.</span><span class="built_in">imread</span>(<span class="string">&#x27;opencv_search.png&#x27;</span>)</span><br><span class="line">img2 = cv<span class="number">2.</span><span class="built_in">imread</span>(<span class="string">&#x27;opencv_orig.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"># 灰度化</span><br><span class="line">gray1 = cv<span class="number">2.</span><span class="built_in">cvtColor</span>(img1, cv<span class="number">2.</span>COLOR_BGR2GRAY)</span><br><span class="line">gray2 = cv<span class="number">2.</span><span class="built_in">cvtColor</span>(img2, cv<span class="number">2.</span>COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"># 创建sift对象</span><br><span class="line">sift = cv<span class="number">2.</span>xfeatures2d.<span class="built_in">SIFT_create</span>()</span><br><span class="line"></span><br><span class="line"># 进行检测</span><br><span class="line">kp1, des1 = sift.<span class="built_in">detectAndCompute</span>(gray1, None)</span><br><span class="line">kp2, des2 = sift.<span class="built_in">detectAndCompute</span>(gray2, None)</span><br><span class="line"></span><br><span class="line">bf = cv<span class="number">2.</span><span class="built_in">BFMatcher</span>(cv<span class="number">2.</span>NORM_L1)</span><br><span class="line">match = bf.<span class="built_in">match</span>(des1, des2)</span><br><span class="line"></span><br><span class="line">img3 = cv<span class="number">2.</span><span class="built_in">drawMatches</span>(img1, kp1, img2, kp2, match, None)</span><br><span class="line"></span><br><span class="line">cv<span class="number">2.</span><span class="built_in">imshow</span>(<span class="string">&#x27;img3&#x27;</span>, img3)</span><br><span class="line">cv<span class="number">2.</span><span class="built_in">waitKey</span>(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122221633600.png" alt="image-20241122221633600"></p>
+<h1 id="九、FLANN特征匹配"><a href="#九、FLANN特征匹配" class="headerlink" title="九、FLANN特征匹配"></a>九、FLANN特征匹配</h1><ul>
+<li>FLANN优点<ul>
+<li>在进行批量特征匹配时，FLANN速度更快</li>
+<li>使用的是临近近似值，所以精度较差</li>
+</ul>
+</li>
+<li>&#x3D;&#x3D;使用FLANN特征匹配的步骤&#x3D;&#x3D;<ul>
+<li>创建FLANN匹配器，FlannBasedMatcher(…)</li>
+<li>进行特征匹配，flann.match&#x2F;knnMatch(…)</li>
+<li>绘制匹配点，cv2.drawMatches&#x2F;drawMatchesKnn(…)</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122222610059.png" alt="image-20241122222610059"></p>
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122222639807.png" alt="image-20241122222639807"></p>
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122222653418.png" alt="image-20241122222653418"></p>
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122222732609.png" alt="image-20241122222732609"></p>
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122222812687.png" alt="image-20241122222812687"></p>
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122222837683.png" alt="image-20241122222837683"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开两个文件</span></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;opencv_search.png&#x27;</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;opencv_orig.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度化</span></span><br><span class="line">g1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)</span><br><span class="line">g2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建sift特征检测器</span></span><br><span class="line">sift = cv2.xfeatures2d.SIFT_create()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算描述子和特征点</span></span><br><span class="line">kp1, des1 = sift.detectAndCompute(g1, <span class="literal">None</span>)    </span><br><span class="line">kp2, des2 = sift.detectAndCompute(g2, <span class="literal">None</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建匹配器</span></span><br><span class="line">index_params = <span class="built_in">dict</span>(algorithm = <span class="number">1</span>, trees = <span class="number">5</span>)</span><br><span class="line">search_params = <span class="built_in">dict</span>(checks = <span class="number">50</span>)</span><br><span class="line">flann = cv2.FlannBasedMatcher(index_params, search_params)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对描述子进行匹配计算</span></span><br><span class="line">matchs = flann.knnMatch(des1, des2, k = <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">good = []</span><br><span class="line"><span class="keyword">for</span> i, (m,n) <span class="keyword">in</span> <span class="built_in">enumerate</span>(matchs):</span><br><span class="line">    <span class="keyword">if</span> m.distance &lt; <span class="number">0.7</span> * n.distance:</span><br><span class="line">        good.append(m)</span><br><span class="line"></span><br><span class="line">ret = cv2.drawMatchesKnn(img1, kp1, img2, kp2, [good], <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;result&#x27;</span>, ret)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122224119442.png" alt="image-20241122224119442"></p>
+<h1 id="十一、图像查找"><a href="#十一、图像查找" class="headerlink" title="十一、图像查找"></a>十一、图像查找</h1><p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122224655622.png" alt="image-20241122224655622"></p>
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122224747670.png" alt="image-20241122224747670"></p>
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122224758055.png" alt="image-20241122224758055"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开两个文件</span></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;opencv_search.png&#x27;</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;opencv_orig.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度化</span></span><br><span class="line">g1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)</span><br><span class="line">g2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建sift特征检测器</span></span><br><span class="line">sift = cv2.xfeatures2d.SIFT_create()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算描述子和特征点</span></span><br><span class="line">kp1, des1 = sift.detectAndCompute(g1, <span class="literal">None</span>)    </span><br><span class="line">kp2, des2 = sift.detectAndCompute(g2, <span class="literal">None</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建匹配器</span></span><br><span class="line">index_params = <span class="built_in">dict</span>(algorithm = <span class="number">1</span>, trees = <span class="number">5</span>)</span><br><span class="line">search_params = <span class="built_in">dict</span>(checks = <span class="number">50</span>)</span><br><span class="line">flann = cv2.FlannBasedMatcher(index_params, search_params)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对描述子进行匹配计算</span></span><br><span class="line">matches = flann.knnMatch(des1, des2, k = <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">good = []</span><br><span class="line"><span class="keyword">for</span> i, (m,n) <span class="keyword">in</span> <span class="built_in">enumerate</span>(matches):</span><br><span class="line">    <span class="keyword">if</span> m.distance &lt; <span class="number">0.7</span> * n.distance:</span><br><span class="line">        good.append(m)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(good) &gt;= <span class="number">4</span>:</span><br><span class="line">    srcPts = np.float32([kp1[m.queryIdx].pt <span class="keyword">for</span> m <span class="keyword">in</span> good]).reshape(-<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    dstPts = np.float32([kp2[m.trainIdx].pt <span class="keyword">for</span> m <span class="keyword">in</span> good]).reshape(-<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    H, _ = cv2.findHomography(srcPts, dstPts, cv2.RANSAC, <span class="number">5.0</span>)</span><br><span class="line"></span><br><span class="line">    h, w = img1.shape[:<span class="number">2</span>]</span><br><span class="line">    pts = np.float32([[<span class="number">0</span>,<span class="number">0</span>], [<span class="number">0</span>, h-<span class="number">1</span>], [w-<span class="number">1</span>, h-<span class="number">1</span>], [w-<span class="number">1</span>, <span class="number">0</span>]]).reshape(-<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    dst = cv2. perspectiveTransform(pts, H)</span><br><span class="line">    </span><br><span class="line">    cv2.polylines(img2, [np.int32(dst)], <span class="literal">True</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;the number of good is less than 4.&#x27;</span>)</span><br><span class="line">    exit()</span><br><span class="line">    </span><br><span class="line">ret = cv2.drawMatchesKnn(img1, kp1, img2, kp2, [good], <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;result&#x27;</span>, ret)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122231255131.png" alt="image-20241122231255131"></p>
+<h1 id="十二、大作业-图像拼接基础知识"><a href="#十二、大作业-图像拼接基础知识" class="headerlink" title="十二、大作业-图像拼接基础知识"></a>十二、大作业-图像拼接基础知识</h1><p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122231618519.png" alt="image-20241122231618519"></p>
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122231717700.png" alt="image-20241122231717700"></p>
+<h1 id="十三、大作业-图像拼接（一）"><a href="#十三、大作业-图像拼接（一）" class="headerlink" title="十三、大作业-图像拼接（一）"></a>十三、大作业-图像拼接（一）</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一步，读取文件，将图片设置成一样大小640*480</span></span><br><span class="line"><span class="comment"># 第二步，找特征点，描述子，计算单应性矩阵</span></span><br><span class="line"><span class="comment"># 第三步，根据单应性矩阵对图像进行变换，然后平移</span></span><br><span class="line"><span class="comment"># 第四步，拼接并输出最终结果</span></span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;map1.png&#x27;</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;map2.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将两张图片设置成同样大小</span></span><br><span class="line">img1 = cv2.resize(img1, (<span class="number">640</span>, <span class="number">480</span>))</span><br><span class="line">img2 = cv2.resize(img2, (<span class="number">640</span>, <span class="number">480</span>))</span><br><span class="line"></span><br><span class="line">inputs = np.hstack((img1, img2))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;input img&#x27;</span>, inputs)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241122235547170.png" alt="image-20241122235547170"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy  <span class="keyword">as</span> np</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">stitch_image</span>(<span class="params">img1, img2, H</span>):</span><br><span class="line">    <span class="comment"># 1. 获得每张图片的四个角点</span></span><br><span class="line">    <span class="comment"># 2. 对图片进行变换（单应性矩阵使图进行旋转，平移）</span></span><br><span class="line">    <span class="comment"># 3. 创建一张大图，将两张图拼接到一起</span></span><br><span class="line">    <span class="comment"># 4. 将结果输出</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">#获得原始图的高/宽</span></span><br><span class="line">    h1, w1 = img1.shape[:<span class="number">2</span>]</span><br><span class="line">    h2, w2 = img2.shape[:<span class="number">2</span>]</span><br><span class="line"> </span><br><span class="line">    img1_dims = np.float32([[<span class="number">0</span>,<span class="number">0</span>], [<span class="number">0</span>, h1], [w1, h1], [w1, <span class="number">0</span>]]).reshape(-<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    img2_dims = np.float32([[<span class="number">0</span>,<span class="number">0</span>], [<span class="number">0</span>, h2], [w2, h2], [w2, <span class="number">0</span>]]).reshape(-<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"> </span><br><span class="line">    img1_transform = cv2.perspectiveTransform(img1_dims, H)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># print(img1_dims)</span></span><br><span class="line">    <span class="comment"># print(img2_dims)</span></span><br><span class="line">    <span class="comment"># print(img1_transform)</span></span><br><span class="line"> </span><br><span class="line">    result_dims = np.concatenate((img2_dims, img1_transform), axis=<span class="number">0</span>)</span><br><span class="line">    <span class="comment">#print(result_dims)</span></span><br><span class="line"> </span><br><span class="line">    [x_min, y_min] = np.int32(result_dims.<span class="built_in">min</span>(axis=<span class="number">0</span>).ravel()-<span class="number">0.5</span>)</span><br><span class="line">    [x_max, y_max ] = np.int32(result_dims.<span class="built_in">max</span>(axis=<span class="number">0</span>).ravel()+<span class="number">0.5</span>)</span><br><span class="line"> </span><br><span class="line">    <span class="comment">#平移的距离</span></span><br><span class="line">    transform_dist = [-x_min, -y_min]</span><br><span class="line"> </span><br><span class="line">    <span class="comment">#[1, 0, dx]</span></span><br><span class="line">    <span class="comment">#[0, 1, dy]         </span></span><br><span class="line">    <span class="comment">#[0, 0, 1 ]</span></span><br><span class="line">    transform_array = np.array([[<span class="number">1</span>, <span class="number">0</span>, transform_dist[<span class="number">0</span>]],</span><br><span class="line">                                [<span class="number">0</span>, <span class="number">1</span>, transform_dist[<span class="number">1</span>]],</span><br><span class="line">                                [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line"> </span><br><span class="line">    result_img = cv2.warpPerspective(img1, transform_array.dot(H), (x_max-x_min, y_max-y_min))</span><br><span class="line"> </span><br><span class="line">    result_img[transform_dist[<span class="number">1</span>]:transform_dist[<span class="number">1</span>]+h2, </span><br><span class="line">                transform_dist[<span class="number">0</span>]:transform_dist[<span class="number">0</span>]+w2] = img2</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> result_img</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">   </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_homo</span>(<span class="params">img1, img2</span>):</span><br><span class="line"> </span><br><span class="line">    <span class="comment">#1. 创建特征转换对象</span></span><br><span class="line">    <span class="comment">#2. 通过特征转换对象获得特征点和描述子</span></span><br><span class="line">    <span class="comment">#3. 创建特征匹配器</span></span><br><span class="line">    <span class="comment">#4. 进行特征匹配</span></span><br><span class="line">    <span class="comment">#5. 过滤特征，找出有效的特征匹配点</span></span><br><span class="line"> </span><br><span class="line">    sift = cv2.xfeatures2d.SIFT_create()</span><br><span class="line"> </span><br><span class="line">    k1, d1 = sift.detectAndCompute(img1, <span class="literal">None</span>)</span><br><span class="line">    k2, d2 = sift.detectAndCompute(img2, <span class="literal">None</span>)</span><br><span class="line"> </span><br><span class="line">    <span class="comment">#创建特征匹配器</span></span><br><span class="line">    bf = cv2.BFMatcher()</span><br><span class="line">    matches = bf.knnMatch(d1, d2, k=<span class="number">2</span>)</span><br><span class="line"> </span><br><span class="line">    <span class="comment">#过滤特征，找出有效的特征匹配点</span></span><br><span class="line">    verify_ratio = <span class="number">0.8</span></span><br><span class="line">    verify_matches = []</span><br><span class="line">    <span class="keyword">for</span> m1, m2 <span class="keyword">in</span> matches:</span><br><span class="line">        <span class="keyword">if</span> m1.distance &lt; <span class="number">0.8</span> * m2.distance:</span><br><span class="line">            verify_matches.append(m1)</span><br><span class="line">     </span><br><span class="line">    min_matches = <span class="number">8</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(verify_matches) &gt; min_matches:</span><br><span class="line"> </span><br><span class="line">        img1_pts = []</span><br><span class="line">        img2_pts = []</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> verify_matches:</span><br><span class="line">            img1_pts.append(k1[m.queryIdx].pt)</span><br><span class="line">            img2_pts.append(k2[m.trainIdx].pt)</span><br><span class="line">        <span class="comment">#[(x1, y1), (x2, y2), ...]</span></span><br><span class="line">        <span class="comment">#[[x1, y1], [x2, y2], ...]</span></span><br><span class="line"> </span><br><span class="line">        img1_pts = np.float32(img1_pts).reshape(-<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">        img2_pts = np.float32(img2_pts).reshape(-<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">        H, mask = cv2.findHomography(img1_pts, img2_pts, cv2.RANSAC, <span class="number">5.0</span>)</span><br><span class="line">        <span class="keyword">return</span> H</span><br><span class="line">     </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;err: Not enough matches!&#x27;</span>)</span><br><span class="line">        exit()</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">#第一步，读取文件，将图片设置成一样大小640x480</span></span><br><span class="line"><span class="comment">#第二步，找特征点，描述子，计算单应性矩阵</span></span><br><span class="line"><span class="comment">#第三步，根据单应性矩阵对图像进行变换，然后平移</span></span><br><span class="line"><span class="comment">#第四步，拼接并输出最终结果</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#读取两张图片</span></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;map1.png&#x27;</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;map2.png&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#将两张图片设置成同样大小</span></span><br><span class="line">img1 = cv2.resize(img1, (<span class="number">640</span>, <span class="number">480</span>))</span><br><span class="line">img2 = cv2.resize(img2, (<span class="number">640</span>, <span class="number">480</span>))</span><br><span class="line"> </span><br><span class="line">inputs = np.hstack((img1, img2))</span><br><span class="line"> </span><br><span class="line"><span class="comment">#获得单应性矩阵</span></span><br><span class="line">H = get_homo(img1, img2)</span><br><span class="line"> </span><br><span class="line"><span class="comment">#进行图像拼接</span></span><br><span class="line">result_image = stitch_image(img1, img2, H)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">cv2.imshow(<span class="string">&#x27;input img&#x27;</span>, result_image)</span><br><span class="line">cv2.waitKey()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/image-20241123004225535.png" alt="image-20241123004225535"></p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/11/18/OpenCV/OpenCV(%E5%8D%81)-%E7%89%B9%E5%BE%81%E7%82%B9%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%8C%B9%E9%85%8D/" title="OpenCV(十)-特征点检测与匹配">http://example.com/2024/11/18/OpenCV/OpenCV(十)-特征点检测与匹配/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OpenCV/" rel="tag"># OpenCV</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/11/15/C++/C++(%E4%B8%83)-%E7%BA%BF%E7%A8%8B/" rel="prev" title="C++（七）-线程">
+      <i class="fa fa-chevron-left"></i> C++（七）-线程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/11/19/C++/C++(%E4%B9%9D)-Reactor/" rel="next" title="C++（九）-Reactor结构">
+      C++（九）-Reactor结构 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">一、特征检测的基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Harris%E8%A7%92%E7%82%B9%E6%A3%80%E6%B5%8B"><span class="nav-number">2.</span> <span class="nav-text">二、Harris角点检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81Shi-Tomasi%E8%A7%92%E7%82%B9%E6%A3%80%E6%B5%8B"><span class="nav-number">3.</span> <span class="nav-text">三、Shi-Tomasi角点检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81SIFT%E5%85%B3%E9%94%AE%E7%82%B9%E6%A3%80%E6%B5%8B"><span class="nav-number">4.</span> <span class="nav-text">四、SIFT关键点检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81SIFT%E8%AE%A1%E7%AE%97%E6%8F%8F%E8%BF%B0%E5%AD%90"><span class="nav-number">5.</span> <span class="nav-text">五、SIFT计算描述子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81SURF%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B"><span class="nav-number">6.</span> <span class="nav-text">六、SURF特征检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E3%80%81ORB%E7%89%B9%E5%BE%81%E6%A3%80%E6%B5%8B"><span class="nav-number">7.</span> <span class="nav-text">七、ORB特征检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E6%9A%B4%E5%8A%9B%E7%89%B9%E5%BE%81%E5%8C%B9%E9%85%8D"><span class="nav-number">8.</span> <span class="nav-text">八、暴力特征匹配</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B9%9D%E3%80%81FLANN%E7%89%B9%E5%BE%81%E5%8C%B9%E9%85%8D"><span class="nav-number">9.</span> <span class="nav-text">九、FLANN特征匹配</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E5%9B%BE%E5%83%8F%E6%9F%A5%E6%89%BE"><span class="nav-number">10.</span> <span class="nav-text">十一、图像查找</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E5%9B%BE%E5%83%8F%E6%8B%BC%E6%8E%A5%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">11.</span> <span class="nav-text">十二、大作业-图像拼接基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%B8%89%E3%80%81%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E5%9B%BE%E5%83%8F%E6%8B%BC%E6%8E%A5%EF%BC%88%E4%B8%80%EF%BC%89"><span class="nav-number">12.</span> <span class="nav-text">十三、大作业-图像拼接（一）</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

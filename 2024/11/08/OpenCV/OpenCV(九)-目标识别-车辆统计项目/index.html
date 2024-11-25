@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、图像轮廓具有相同&#x3D;&#x3D;颜色&#x3D;&#x3D;或&#x3D;&#x3D;强度&#x3D;&#x3D;的&#x3D;&#x3D;连续点&#x3D;&#x3D;的曲线   图像轮廓的作用 可以用于图形分析 物体的识别与检测   注意点 为了检测的准确性，需要先对图像进行二值化或Canny操作 画轮廓时会修改输入的图像    轮廓查找的API 12345678910(funct">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV(九)-轮廓">
+<meta property="og:url" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="一、图像轮廓具有相同&#x3D;&#x3D;颜色&#x3D;&#x3D;或&#x3D;&#x3D;强度&#x3D;&#x3D;的&#x3D;&#x3D;连续点&#x3D;&#x3D;的曲线   图像轮廓的作用 可以用于图形分析 物体的识别与检测   注意点 为了检测的准确性，需要先对图像进行二值化或Canny操作 画轮廓时会修改输入的图像    轮廓查找的API 12345678910(funct">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108164945322.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108165051241.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108165106635.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108165115197.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108165132778.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108165144100.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113153838976.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113154729831.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113155929896.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113160349632.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113161229355.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113161744677.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113161755405.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113161800379.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113161810280.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113164238392.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113165933266.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113171250130.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113172805642.png">
+<meta property="og:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113173259189.png">
+<meta property="article:published_time" content="2024-11-08T01:38:00.000Z">
+<meta property="article:modified_time" content="2024-11-15T13:55:41.193Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="OpenCV">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108164945322.png">
+
+<link rel="canonical" href="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>OpenCV(九)-轮廓 | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OpenCV(九)-轮廓
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-11-08 09:38:00" itemprop="dateCreated datePublished" datetime="2024-11-08T09:38:00+08:00">2024-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-11-15 21:55:41" itemprop="dateModified" datetime="2024-11-15T21:55:41+08:00">2024-11-15</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、图像轮廓"><a href="#一、图像轮廓" class="headerlink" title="一、图像轮廓"></a>一、图像轮廓</h1><p>具有相同&#x3D;&#x3D;颜色&#x3D;&#x3D;或&#x3D;&#x3D;强度&#x3D;&#x3D;的&#x3D;&#x3D;连续点&#x3D;&#x3D;的曲线</p>
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108164945322.png" alt="image-20241108164945322"></p>
+<ul>
+<li>图像轮廓的作用<ul>
+<li>可以用于图形分析</li>
+<li>物体的识别与检测</li>
+</ul>
+</li>
+<li>注意点<ul>
+<li>为了检测的准确性，需要先对图像进行二值化或Canny操作</li>
+<li>画轮廓时会修改输入的图像</li>
+</ul>
+</li>
+</ul>
+<p>轮廓查找的API</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(function) <span class="keyword">def</span> <span class="title function_">findContours</span>(<span class="params"></span></span><br><span class="line"><span class="params">    image: MatLike,</span></span><br><span class="line"><span class="params">    mode: <span class="built_in">int</span>,</span></span><br><span class="line"><span class="params">    method: <span class="built_in">int</span>,</span></span><br><span class="line"><span class="params">    contours: <span class="type">Sequence</span>[MatLike] | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    hierarchy: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    offset: Point = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; <span class="built_in">tuple</span>[<span class="type">Sequence</span>[MatLike], MatLike]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 两个返回值 contours和hierarchy</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mode</span></span><br><span class="line">RETR_EXTERNAL = <span class="number">0</span>,表示只检测外轮廓</span><br><span class="line">RETR_LIST=<span class="number">1</span>，检测的轮廓不建立等级关系</span><br><span class="line">RETR_CCOMP=<span class="number">2</span>，每层最多两级</span><br><span class="line">RETR_TREE=<span class="number">3</span>,按树形存储轮廓</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># method</span></span><br><span class="line">CHAIN_APPROX_NONE,保存所有轮廓上的点</span><br><span class="line">CHAIN_APPROX_SIMPLE,只保存角点</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108165051241.png" alt="image-20241108165051241"></p>
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108165106635.png" alt="image-20241108165106635"></p>
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108165115197.png" alt="image-20241108165115197"></p>
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108165132778.png" alt="image-20241108165132778"></p>
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241108165144100.png" alt="image-20241108165144100"></p>
+<h1 id="二、查找轮廓"><a href="#二、查找轮廓" class="headerlink" title="二、查找轮廓"></a>二、查找轮廓</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读文件</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./contours1.jpeg&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(img.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转变为单通道</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 二值化</span></span><br><span class="line">ret, binary = cv2.threshold(gray, <span class="number">150</span>, <span class="number">255</span>, cv2.THRESH_BINARY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮廓查找</span></span><br><span class="line">contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(contours)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(array([[[  <span class="number">0</span>,   <span class="number">0</span>]],</span><br><span class="line"></span><br><span class="line">       [[  <span class="number">0</span>, <span class="number">435</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">345</span>, <span class="number">435</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">345</span>,   <span class="number">0</span>]]], dtype=int32),)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># list</span></span><br><span class="line">(array([[[ <span class="number">36</span>, <span class="number">130</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">37</span>, <span class="number">129</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">310</span>, <span class="number">129</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">311</span>, <span class="number">130</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">311</span>, <span class="number">400</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">310</span>, <span class="number">401</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">37</span>, <span class="number">401</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">36</span>, <span class="number">400</span>]]], dtype=int32), array([[[ <span class="number">36</span>,  <span class="number">35</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">37</span>,  <span class="number">34</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">308</span>,  <span class="number">34</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">309</span>,  <span class="number">35</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">309</span>,  <span class="number">39</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">308</span>,  <span class="number">40</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">37</span>,  <span class="number">40</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">36</span>,  <span class="number">39</span>]]], dtype=int32), array([[[  <span class="number">0</span>,   <span class="number">0</span>]],</span><br><span class="line"></span><br><span class="line">       [[  <span class="number">0</span>, <span class="number">435</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">345</span>, <span class="number">435</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">345</span>,   <span class="number">0</span>]]], dtype=int32))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ccomp</span></span><br><span class="line">(array([[[  <span class="number">0</span>,   <span class="number">0</span>]],</span><br><span class="line"></span><br><span class="line">       [[  <span class="number">0</span>, <span class="number">435</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">345</span>, <span class="number">435</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">345</span>,   <span class="number">0</span>]]], dtype=int32), array([[[ <span class="number">36</span>, <span class="number">130</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">37</span>, <span class="number">129</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">310</span>, <span class="number">129</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">311</span>, <span class="number">130</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">311</span>, <span class="number">400</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">310</span>, <span class="number">401</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">37</span>, <span class="number">401</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">36</span>, <span class="number">400</span>]]], dtype=int32), array([[[ <span class="number">36</span>,  <span class="number">35</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">37</span>,  <span class="number">34</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">308</span>,  <span class="number">34</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">309</span>,  <span class="number">35</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">309</span>,  <span class="number">39</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">308</span>,  <span class="number">40</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">37</span>,  <span class="number">40</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">36</span>,  <span class="number">39</span>]]], dtype=int32))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tree</span></span><br><span class="line">(array([[[  <span class="number">0</span>,   <span class="number">0</span>]],</span><br><span class="line"></span><br><span class="line">       [[  <span class="number">0</span>, <span class="number">435</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">345</span>, <span class="number">435</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">345</span>,   <span class="number">0</span>]]], dtype=int32), array([[[ <span class="number">36</span>, <span class="number">130</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">37</span>, <span class="number">129</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">310</span>, <span class="number">129</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">311</span>, <span class="number">130</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">311</span>, <span class="number">400</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">310</span>, <span class="number">401</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">37</span>, <span class="number">401</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">36</span>, <span class="number">400</span>]]], dtype=int32), array([[[ <span class="number">36</span>,  <span class="number">35</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">37</span>,  <span class="number">34</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">308</span>,  <span class="number">34</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">309</span>,  <span class="number">35</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">309</span>,  <span class="number">39</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">308</span>,  <span class="number">40</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">37</span>,  <span class="number">40</span>]],</span><br><span class="line"></span><br><span class="line">       [[ <span class="number">36</span>,  <span class="number">39</span>]]], dtype=int32))</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="三、绘制轮廓"><a href="#三、绘制轮廓" class="headerlink" title="三、绘制轮廓"></a>三、绘制轮廓</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(function)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">drawContours</span>(<span class="params"></span></span><br><span class="line"><span class="params">    image: MatLike,</span></span><br><span class="line"><span class="params">    contours: <span class="type">Sequence</span>[MatLike],</span></span><br><span class="line"><span class="params">    contourIdx: <span class="built_in">int</span>,	<span class="comment"># -1表示绘制所有轮廓</span></span></span><br><span class="line"><span class="params">    color: Scalar,		<span class="comment"># 颜色（0，0，255）</span></span></span><br><span class="line"><span class="params">    thickness: <span class="built_in">int</span> = ...,	<span class="comment"># 线宽，-1是全部填充</span></span></span><br><span class="line"><span class="params">    lineType: <span class="built_in">int</span> = ...,</span></span><br><span class="line"><span class="params">    hierarchy: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    maxLevel: <span class="built_in">int</span> = ...,</span></span><br><span class="line"><span class="params">    offset: Point = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; MatLike: ...</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读文件</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./contours1.jpeg&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(img.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转变为单通道</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 二值化</span></span><br><span class="line">ret, binary = cv2.threshold(gray, <span class="number">150</span>, <span class="number">255</span>, cv2.THRESH_BINARY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮廓查找</span></span><br><span class="line">contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制轮廓</span></span><br><span class="line">cv2.drawContours(img, contours, -<span class="number">1</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(contours)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113153838976.png" alt="image-20241113153838976"></p>
+<h1 id="四、轮廓的面积与周长"><a href="#四、轮廓的面积与周长" class="headerlink" title="四、轮廓的面积与周长"></a>四、轮廓的面积与周长</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 面积</span></span><br><span class="line">(function) <span class="keyword">def</span> <span class="title function_">contourArea</span>(<span class="params"></span></span><br><span class="line"><span class="params">    contour: MatLike,	<span class="comment"># 轮廓</span></span></span><br><span class="line"><span class="params">    oriented: <span class="built_in">bool</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; <span class="built_in">float</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 周长</span></span><br><span class="line">(function) <span class="keyword">def</span> <span class="title function_">arcLength</span>(<span class="params"></span></span><br><span class="line"><span class="params">    curve: MatLike,		<span class="comment"># 轮廓</span></span></span><br><span class="line"><span class="params">    closed: <span class="built_in">bool</span>		<span class="comment"># 是否是闭合的轮廓</span></span></span><br><span class="line"><span class="params"></span>) -&gt; <span class="built_in">float</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读文件</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./contours1.jpeg&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(img.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转变为单通道</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 二值化</span></span><br><span class="line">ret, binary = cv2.threshold(gray, <span class="number">150</span>, <span class="number">255</span>, cv2.THRESH_BINARY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮廓查找</span></span><br><span class="line">contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制轮廓</span></span><br><span class="line">cv2.drawContours(img, contours, <span class="number">0</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算面积</span></span><br><span class="line">area = cv2.contourArea(contours[<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;area=%d&quot;</span>%(area))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算周长</span></span><br><span class="line"><span class="built_in">len</span> = cv2.arcLength(contours[<span class="number">0</span>], <span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;lenght=%d&quot;</span>%(<span class="built_in">len</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(contours)</span></span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">area=150075</span><br><span class="line">lenght=1560</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="五、多边形逼近与凸包"><a href="#五、多边形逼近与凸包" class="headerlink" title="五、多边形逼近与凸包"></a>五、多边形逼近与凸包</h1><p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113154729831.png" alt="image-20241113154729831"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(function) <span class="keyword">def</span> <span class="title function_">approxPolyDP</span>(<span class="params"></span></span><br><span class="line"><span class="params">    curve: MatLike,	<span class="comment"># 轮廓</span></span></span><br><span class="line"><span class="params">    epsilon: <span class="built_in">float</span>,	<span class="comment"># 精度</span></span></span><br><span class="line"><span class="params">    closed: <span class="built_in">bool</span>,	<span class="comment"># 是否闭合</span></span></span><br><span class="line"><span class="params">    approxCurve: MatLike | <span class="literal">None</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; MatLike</span><br><span class="line"></span><br><span class="line">(function)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">convexHull</span>(<span class="params"></span></span><br><span class="line"><span class="params">    points: MatLike,	<span class="comment"># 轮廓</span></span></span><br><span class="line"><span class="params">    hull: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    clockwise: <span class="built_in">bool</span> = ...,	<span class="comment"># 顺时针绘制</span></span></span><br><span class="line"><span class="params">    returnPoints: <span class="built_in">bool</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; MatLike: ...</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">drawShape</span>(<span class="params">src, points</span>):</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(points):</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="built_in">len</span>(points) - <span class="number">1</span>):</span><br><span class="line">            x,y = points[i][<span class="number">0</span>]</span><br><span class="line">            x1,y1 = points[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">            cv2.line(src, (x,y), (x1,y1), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">3</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            x,y = points[i][<span class="number">0</span>]</span><br><span class="line">            x1,y1 = points[i+<span class="number">1</span>][<span class="number">0</span>]</span><br><span class="line">            cv2.line(src, (x,y), (x1,y1), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">3</span>)</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读文件</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./hand.png&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(img.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转变为单通道</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 二值化</span></span><br><span class="line">ret, binary = cv2.threshold(gray, <span class="number">150</span>, <span class="number">255</span>, cv2.THRESH_BINARY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮廓查找</span></span><br><span class="line">contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制轮廓</span></span><br><span class="line">cv2.drawContours(img, contours, <span class="number">0</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">e = <span class="number">20</span></span><br><span class="line">approx = cv2.approxPolyDP(contours[<span class="number">0</span>], e, <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">drawShape(img, approx)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">hull = cv2.convexHull(contours[<span class="number">0</span>])</span><br><span class="line">drawShape(img, hull)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113155929896.png" alt="image-20241113155929896"></p>
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113160349632.png" alt="image-20241113160349632"></p>
+<h1 id="六、外接矩形"><a href="#六、外接矩形" class="headerlink" title="六、外接矩形"></a>六、外接矩形</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读文件</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./hello.jpeg&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(img.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转变为单通道</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 二值化</span></span><br><span class="line">ret, binary = cv2.threshold(gray, <span class="number">150</span>, <span class="number">255</span>, cv2.THRESH_BINARY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮廓查找</span></span><br><span class="line">contours, hierarchy = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制轮廓</span></span><br><span class="line">cv2.drawContours(img, contours, <span class="number">0</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最小矩形</span></span><br><span class="line">r = cv2.minAreaRect(contours[<span class="number">1</span>])    <span class="comment"># 得到的点是浮点型</span></span><br><span class="line">box = cv2.boxPoints(r)          <span class="comment"># 得到的点是带角度的，将角度去除</span></span><br><span class="line">box = np.int0(box)              <span class="comment"># 转换为int</span></span><br><span class="line">cv2.drawContours(img, [box], <span class="number">0</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最大矩形</span></span><br><span class="line">x,y,w,h = cv2.boundingRect(contours[<span class="number">1</span>])</span><br><span class="line">cv2.rectangle(img, (x,y), (x+w, y+h), (<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113161229355.png" alt="image-20241113161229355"></p>
+<h1 id="七、项目总览（车辆统计）"><a href="#七、项目总览（车辆统计）" class="headerlink" title="七、项目总览（车辆统计）"></a>七、项目总览（车辆统计）</h1><p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113161744677.png" alt="image-20241113161744677"></p>
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113161755405.png" alt="image-20241113161755405"></p>
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113161800379.png" alt="image-20241113161800379"></p>
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113161810280.png" alt="image-20241113161810280"></p>
+<h1 id="八、视频加载（车辆统计）"><a href="#八、视频加载（车辆统计）" class="headerlink" title="八、视频加载（车辆统计）"></a>八、视频加载（车辆统计）</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">&#x27;video.mp4&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="literal">True</span>):</span><br><span class="line">        cv2.imshow(<span class="string">&#x27;video&#x27;</span>, frame)</span><br><span class="line"></span><br><span class="line">    key = cv2.waitKey(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> (key == <span class="number">27</span>): <span class="comment"># 27就是esc</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="九、去背景（车辆统计）"><a href="#九、去背景（车辆统计）" class="headerlink" title="九、去背景（车辆统计）"></a>九、去背景（车辆统计）</h1><p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113164238392.png" alt="image-20241113164238392"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">&#x27;video.mp4&#x27;</span>)</span><br><span class="line"></span><br><span class="line">bgsubmog = cv2.bgsegm.createBackgroundSubtractorMOG()</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="literal">True</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 灰度</span></span><br><span class="line">        cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line">        <span class="comment"># 去噪（高斯）</span></span><br><span class="line">        blur = cv2.GaussianBlur(frame, (<span class="number">3</span>,<span class="number">3</span>), <span class="number">5</span>)</span><br><span class="line">        <span class="comment"># 去背景</span></span><br><span class="line">        mask = bgsubmog.apply(blur)</span><br><span class="line">        cv2.imshow(<span class="string">&#x27;video&#x27;</span>, mask)</span><br><span class="line"></span><br><span class="line">    key = cv2.waitKey(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> (key == <span class="number">27</span>): <span class="comment"># 27就是esc</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113165933266.png" alt="image-20241113165933266"></p>
+<h1 id="十、形态学处理（车辆统计）"><a href="#十、形态学处理（车辆统计）" class="headerlink" title="十、形态学处理（车辆统计）"></a>十、形态学处理（车辆统计）</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">&#x27;video.mp4&#x27;</span>)</span><br><span class="line"></span><br><span class="line">bgsubmog = cv2.bgsegm.createBackgroundSubtractorMOG()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 形态学kernel</span></span><br><span class="line">kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="number">5</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="literal">True</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 灰度</span></span><br><span class="line">        cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line">        <span class="comment"># 去噪（高斯）</span></span><br><span class="line">        blur = cv2.GaussianBlur(frame, (<span class="number">3</span>,<span class="number">3</span>), <span class="number">5</span>)</span><br><span class="line">        <span class="comment"># 去背景</span></span><br><span class="line">        mask = bgsubmog.apply(blur)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 腐蚀，去掉图中小斑块</span></span><br><span class="line">        erode = cv2.erode(mask, kernel)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 膨胀，还原放大</span></span><br><span class="line">        dilate = cv2.dilate(erode, kernel, iterations=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 闭操作，去掉物体内部的小块</span></span><br><span class="line">        close = cv2.morphologyEx(dilate, cv2.MORPH_CLOSE, kernel)</span><br><span class="line">        close = cv2.morphologyEx(dilate, cv2.MORPH_CLOSE, kernel)</span><br><span class="line"></span><br><span class="line">        cnts, h = cv2.findContours(close, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i, c) <span class="keyword">in</span> <span class="built_in">enumerate</span>(cnts):</span><br><span class="line">            (x,y,w,h) = cv2.boundingRect(c)</span><br><span class="line">            cv2.rectangle(frame, (x,y), (x+w,y+h), (<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line">        cv2.imshow(<span class="string">&#x27;video&#x27;</span>, frame)</span><br><span class="line"></span><br><span class="line">    key = cv2.waitKey(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> (key == <span class="number">27</span>): <span class="comment"># 27就是esc</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113171250130.png" alt="image-20241113171250130"></p>
+<h1 id="十一、逻辑处理（车辆统计）"><a href="#十一、逻辑处理（车辆统计）" class="headerlink" title="十一、逻辑处理（车辆统计）"></a>十一、逻辑处理（车辆统计）</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">min_w = <span class="number">90</span></span><br><span class="line">min_h = <span class="number">90</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 检测线的高度</span></span><br><span class="line">line_high = <span class="number">600</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#线的偏移</span></span><br><span class="line">offset = <span class="number">7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#统计车的数量</span></span><br><span class="line">carno =<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#存放有效车辆的数组</span></span><br><span class="line">cars = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span>  <span class="title function_">center</span>(<span class="params">x, y, w, h</span>):</span><br><span class="line">    x1 = <span class="built_in">int</span>(w/<span class="number">2</span>)</span><br><span class="line">    y1 = <span class="built_in">int</span>(h/<span class="number">2</span>)</span><br><span class="line">    cx = x + x1</span><br><span class="line">    cy = y + y1</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> cx, cy</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">&#x27;video.mp4&#x27;</span>)</span><br><span class="line"></span><br><span class="line">bgsubmog = cv2.bgsegm.createBackgroundSubtractorMOG()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 形态学kernel</span></span><br><span class="line">kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="number">5</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="literal">True</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 灰度</span></span><br><span class="line">        cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line">        <span class="comment"># 去噪（高斯）</span></span><br><span class="line">        blur = cv2.GaussianBlur(frame, (<span class="number">3</span>,<span class="number">3</span>), <span class="number">5</span>)</span><br><span class="line">        <span class="comment"># 去背景</span></span><br><span class="line">        mask = bgsubmog.apply(blur)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 腐蚀，去掉图中小斑块</span></span><br><span class="line">        erode = cv2.erode(mask, kernel)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 膨胀，还原放大</span></span><br><span class="line">        dilate = cv2.dilate(erode, kernel, iterations=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 闭操作，去掉物体内部的小块</span></span><br><span class="line">        close = cv2.morphologyEx(dilate, cv2.MORPH_CLOSE, kernel)</span><br><span class="line">        close = cv2.morphologyEx(dilate, cv2.MORPH_CLOSE, kernel)</span><br><span class="line"></span><br><span class="line">        cnts, h = cv2.findContours(close, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line">        cv2.line(frame, (<span class="number">10</span>, line_high), (<span class="number">1200</span>, line_high), (<span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">3</span>)</span><br><span class="line">        <span class="keyword">for</span> (i, c) <span class="keyword">in</span> <span class="built_in">enumerate</span>(cnts):</span><br><span class="line">            (x,y,w,h) = cv2.boundingRect(c)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 对车辆的宽高进行判断</span></span><br><span class="line">            <span class="comment"># 以验证是否是有效的车辆</span></span><br><span class="line">            isValid = (w &gt;= min_w ) <span class="keyword">and</span> (h &gt;= min_h)</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">not</span> isValid):</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 到这里都是有效的车</span></span><br><span class="line">            cv2.rectangle(frame, (x, y), (x+w, y+h), (<span class="number">0</span>, <span class="number">0</span>,<span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line">            cpoint = center(x, y, w, h)</span><br><span class="line">            cars.append(cpoint)</span><br><span class="line">            cv2.circle(frame, (cpoint), <span class="number">5</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), -<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (x,y) <span class="keyword">in</span> cars:</span><br><span class="line">                <span class="keyword">if</span> (y &gt; line_high - offset) <span class="keyword">and</span> (y &lt; line_high + offset):</span><br><span class="line">                    carno += <span class="number">1</span></span><br><span class="line">                    cars.remove((x,y))</span><br><span class="line">                    <span class="built_in">print</span>(carno)</span><br><span class="line"></span><br><span class="line">        cv2.imshow(<span class="string">&#x27;video&#x27;</span>, frame)</span><br><span class="line"></span><br><span class="line">    key = cv2.waitKey(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> (key == <span class="number">27</span>): <span class="comment"># 27就是esc</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113172805642.png" alt="image-20241113172805642"></p>
+<h1 id="十二、显示信息（车辆统计）"><a href="#十二、显示信息（车辆统计）" class="headerlink" title="十二、显示信息（车辆统计）"></a>十二、显示信息（车辆统计）</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">min_w = <span class="number">90</span></span><br><span class="line">min_h = <span class="number">90</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#检测线的高度</span></span><br><span class="line">line_high = <span class="number">550</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#线的偏移</span></span><br><span class="line">offset = <span class="number">7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#统计车的数量</span></span><br><span class="line">carno =<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#存放有效车辆的数组</span></span><br><span class="line">cars = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">center</span>(<span class="params">x, y, w, h</span>):</span><br><span class="line">    x1 = <span class="built_in">int</span>(w/<span class="number">2</span>)</span><br><span class="line">    y1 = <span class="built_in">int</span>(h/<span class="number">2</span>)</span><br><span class="line">    cx = x + x1</span><br><span class="line">    cy = y + y1</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> cx, cy</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">&#x27;video.mp4&#x27;</span>)</span><br><span class="line"></span><br><span class="line">bgsubmog = cv2.bgsegm.createBackgroundSubtractorMOG()</span><br><span class="line"></span><br><span class="line"><span class="comment">#形态学kernel</span></span><br><span class="line">kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="number">5</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="literal">True</span>):     </span><br><span class="line"></span><br><span class="line">        <span class="comment">#灰度</span></span><br><span class="line">        cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line">        <span class="comment">#去噪（高斯）</span></span><br><span class="line">        blur = cv2.GaussianBlur(frame, (<span class="number">3</span>,<span class="number">3</span>), <span class="number">5</span>)</span><br><span class="line">        <span class="comment">#去背影</span></span><br><span class="line">        mask = bgsubmog.apply(blur)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#腐蚀， 去掉图中小斑块</span></span><br><span class="line">        erode = cv2.erode(mask, kernel) </span><br><span class="line"></span><br><span class="line">        <span class="comment">#膨胀， 还原放大</span></span><br><span class="line">        dilate = cv2.dilate(erode, kernel, iterations = <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">#闭操作，去掉物体内部的小块</span></span><br><span class="line">        close = cv2.morphologyEx(dilate, cv2.MORPH_CLOSE, kernel)</span><br><span class="line">        close = cv2.morphologyEx(close, cv2.MORPH_CLOSE, kernel)</span><br><span class="line"></span><br><span class="line">        cnts, h = cv2.findContours(close, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line">    </span><br><span class="line">        <span class="comment">#画一条检测线</span></span><br><span class="line">        cv2.line(frame, (<span class="number">10</span>, line_high), (<span class="number">1200</span>, line_high), (<span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i, c) <span class="keyword">in</span> <span class="built_in">enumerate</span>(cnts):</span><br><span class="line">            (x,y,w,h) = cv2.boundingRect(c)</span><br><span class="line"></span><br><span class="line">            <span class="comment">#对车辆的宽高进行判断</span></span><br><span class="line">            <span class="comment">#以验证是否是有效的车辆</span></span><br><span class="line">            isValid = ( w &gt;= min_w ) <span class="keyword">and</span> ( h &gt;= min_h) </span><br><span class="line">            <span class="keyword">if</span>( <span class="keyword">not</span> isValid):</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">#到这里都是有效的车 </span></span><br><span class="line">            cv2.rectangle(frame, (x, y), (x+w, y+h), (<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line">            cpoint = center(x, y, w, h)</span><br><span class="line">            cars.append(cpoint) </span><br><span class="line">            cv2.circle(frame, (cpoint), <span class="number">5</span>, (<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>), -<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (x, y) <span class="keyword">in</span> cars:</span><br><span class="line">                <span class="keyword">if</span>( (y &gt; line_high - offset) <span class="keyword">and</span> (y &lt; line_high + offset ) ):</span><br><span class="line">                    carno +=<span class="number">1</span></span><br><span class="line">                    cars.remove((x , y ))</span><br><span class="line">                    <span class="built_in">print</span>(carno)</span><br><span class="line">        </span><br><span class="line">        cv2.putText(frame, <span class="string">&quot;Cars Count:&quot;</span> + <span class="built_in">str</span>(carno), (<span class="number">500</span>, <span class="number">60</span>), cv2.FONT_HERSHEY_SIMPLEX, <span class="number">2</span>, (<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>), <span class="number">5</span>)</span><br><span class="line">        cv2.imshow(<span class="string">&#x27;video&#x27;</span>, frame)</span><br><span class="line">        <span class="comment">#cv2.imshow(&#x27;erode&#x27;, close)</span></span><br><span class="line">    </span><br><span class="line">    key = cv2.waitKey(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span>(key == <span class="number">27</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/image-20241113173259189.png" alt="image-20241113173259189"></p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/11/08/OpenCV/OpenCV(%E4%B9%9D)-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB-%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%E9%A1%B9%E7%9B%AE/" title="OpenCV(九)-轮廓">http://example.com/2024/11/08/OpenCV/OpenCV(九)-目标识别-车辆统计项目/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OpenCV/" rel="tag"># OpenCV</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/11/08/OpenCV/OpenCV(%E5%85%AB)-%E5%BD%A2%E6%80%81%E5%AD%A6/" rel="prev" title="OpenCV(八)-形态学">
+      <i class="fa fa-chevron-left"></i> OpenCV(八)-形态学
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/11/13/%E8%BD%AF%E4%BB%B6/VS/%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE/" rel="next" title="VS">
+      VS <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9B%BE%E5%83%8F%E8%BD%AE%E5%BB%93"><span class="nav-number">1.</span> <span class="nav-text">一、图像轮廓</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%9F%A5%E6%89%BE%E8%BD%AE%E5%BB%93"><span class="nav-number">2.</span> <span class="nav-text">二、查找轮廓</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BB%98%E5%88%B6%E8%BD%AE%E5%BB%93"><span class="nav-number">3.</span> <span class="nav-text">三、绘制轮廓</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E8%BD%AE%E5%BB%93%E7%9A%84%E9%9D%A2%E7%A7%AF%E4%B8%8E%E5%91%A8%E9%95%BF"><span class="nav-number">4.</span> <span class="nav-text">四、轮廓的面积与周长</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%A4%9A%E8%BE%B9%E5%BD%A2%E9%80%BC%E8%BF%91%E4%B8%8E%E5%87%B8%E5%8C%85"><span class="nav-number">5.</span> <span class="nav-text">五、多边形逼近与凸包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%A4%96%E6%8E%A5%E7%9F%A9%E5%BD%A2"><span class="nav-number">6.</span> <span class="nav-text">六、外接矩形</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E9%A1%B9%E7%9B%AE%E6%80%BB%E8%A7%88%EF%BC%88%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">七、项目总览（车辆统计）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E8%A7%86%E9%A2%91%E5%8A%A0%E8%BD%BD%EF%BC%88%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">八、视频加载（车辆统计）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B9%9D%E3%80%81%E5%8E%BB%E8%83%8C%E6%99%AF%EF%BC%88%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">九、去背景（车辆统计）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E3%80%81%E5%BD%A2%E6%80%81%E5%AD%A6%E5%A4%84%E7%90%86%EF%BC%88%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">十、形态学处理（车辆统计）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E9%80%BB%E8%BE%91%E5%A4%84%E7%90%86%EF%BC%88%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%EF%BC%89"><span class="nav-number">11.</span> <span class="nav-text">十一、逻辑处理（车辆统计）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E6%98%BE%E7%A4%BA%E4%BF%A1%E6%81%AF%EF%BC%88%E8%BD%A6%E8%BE%86%E7%BB%9F%E8%AE%A1%EF%BC%89"><span class="nav-number">12.</span> <span class="nav-text">十二、显示信息（车辆统计）</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

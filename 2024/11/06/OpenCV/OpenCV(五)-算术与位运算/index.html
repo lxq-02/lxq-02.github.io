@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、加法运算1234567(function) def add(    src1: MatLike,    src2: MatLike,    dst: MatLike | None &#x3D; ...,    mask: MatLike | None &#x3D; ...,    dtype: int &#x3D; ...) -&gt; MatLike  123456789101112131415161718192021i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV(五)-算术与位运算">
+<meta property="og:url" content="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="一、加法运算1234567(function) def add(    src1: MatLike,    src2: MatLike,    dst: MatLike | None &#x3D; ...,    mask: MatLike | None &#x3D; ...,    dtype: int &#x3D; ...) -&gt; MatLike  123456789101112131415161718192021i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106133825500.png">
+<meta property="og:image" content="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106134420249.png">
+<meta property="og:image" content="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106134755836.png">
+<meta property="og:image" content="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106134845892.png">
+<meta property="og:image" content="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106135659757.png">
+<meta property="og:image" content="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106140437287.png">
+<meta property="og:image" content="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106141248022.png">
+<meta property="og:image" content="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106141723484.png">
+<meta property="og:image" content="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106143531430.png">
+<meta property="article:published_time" content="2024-11-06T05:18:00.000Z">
+<meta property="article:modified_time" content="2024-11-15T13:55:41.225Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="OpenCV">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106133825500.png">
+
+<link rel="canonical" href="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>OpenCV(五)-算术与位运算 | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OpenCV(五)-算术与位运算
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-11-06 13:18:00" itemprop="dateCreated datePublished" datetime="2024-11-06T13:18:00+08:00">2024-11-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-11-15 21:55:41" itemprop="dateModified" datetime="2024-11-15T21:55:41+08:00">2024-11-15</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="一、加法运算"><a href="#一、加法运算" class="headerlink" title="一、加法运算"></a>一、加法运算</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(function) <span class="keyword">def</span> <span class="title function_">add</span>(<span class="params"></span></span><br><span class="line"><span class="params">    src1: MatLike,</span></span><br><span class="line"><span class="params">    src2: MatLike,</span></span><br><span class="line"><span class="params">    dst: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    mask: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    dtype: <span class="built_in">int</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; MatLike</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">dog = cv2.imread(<span class="string">&#x27;./dog.jpeg&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图的加法运算就是矩阵的加法运算</span></span><br><span class="line"><span class="comment"># 因此，加法运算的两张图必须是相等的</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(dog.shape)</span></span><br><span class="line"></span><br><span class="line">img = np.ones((<span class="number">1200</span>, <span class="number">1920</span>, <span class="number">3</span>), np.uint8) * <span class="number">50</span></span><br><span class="line"></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;orig&#x27;</span>, cv2.WINDOW_NORMAL)		<span class="comment"># 这两行是为了重新设置窗口大小</span></span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;orig&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;orig&#x27;</span>, dog)		<span class="comment"># 没有上面那两行，也可以显示，结果就是图片的大小</span></span><br><span class="line"></span><br><span class="line">result = cv2.add(dog, img)</span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;result&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;result&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;result&#x27;</span>, result)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106133825500.png" alt="image-20241106133825500"></p>
+<h1 id="二、减法运算"><a href="#二、减法运算" class="headerlink" title="二、减法运算"></a>二、减法运算</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(function) <span class="keyword">def</span> <span class="title function_">subtract</span>(<span class="params"></span></span><br><span class="line"><span class="params">    src1: MatLike,		<span class="comment"># src1 减去 src2，减少亮度</span></span></span><br><span class="line"><span class="params">    src2: MatLike,</span></span><br><span class="line"><span class="params">    dst: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    mask: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    dtype: <span class="built_in">int</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; MatLike</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">dog = cv2.imread(<span class="string">&#x27;./dog.jpeg&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图的减法运算就是矩阵的减法运算</span></span><br><span class="line"><span class="comment"># 因此，减法运算的两张图必须是相等的</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(dog.shape)</span></span><br><span class="line"></span><br><span class="line">img = np.ones((<span class="number">1200</span>, <span class="number">1920</span>, <span class="number">3</span>), np.uint8) * <span class="number">50</span></span><br><span class="line"></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;orig&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;orig&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;orig&#x27;</span>, dog)</span><br><span class="line"></span><br><span class="line">result = cv2.subtract(dog, img)</span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;result&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;result&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;result&#x27;</span>, result)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106134420249.png" alt="image-20241106134420249"></p>
+<h1 id="三、乘法运算"><a href="#三、乘法运算" class="headerlink" title="三、乘法运算"></a>三、乘法运算</h1><p>乘除法就是更快的加减，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(function) <span class="keyword">def</span> <span class="title function_">multiply</span>(<span class="params"></span></span><br><span class="line"><span class="params">    src1: MatLike,</span></span><br><span class="line"><span class="params">    src2: MatLike,</span></span><br><span class="line"><span class="params">    dst: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    scale: <span class="built_in">float</span> = ...,</span></span><br><span class="line"><span class="params">    dtype: <span class="built_in">int</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; MatLike</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">dog = cv2.imread(<span class="string">&#x27;./dog.jpeg&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">img = np.ones((<span class="number">1200</span>, <span class="number">1920</span>, <span class="number">3</span>), np.uint8) * <span class="number">50</span></span><br><span class="line"></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;orig&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;orig&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;orig&#x27;</span>, dog)</span><br><span class="line"></span><br><span class="line">result = cv2.multiply(dog, img)</span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;result&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;result&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;result&#x27;</span>, result)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106134755836.png" alt="image-20241106134755836"></p>
+<h1 id="四、除法运算"><a href="#四、除法运算" class="headerlink" title="四、除法运算"></a>四、除法运算</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(function) <span class="keyword">def</span> <span class="title function_">divide</span>(<span class="params"></span></span><br><span class="line"><span class="params">    src1: MatLike,</span></span><br><span class="line"><span class="params">    src2: MatLike,</span></span><br><span class="line"><span class="params">    dst: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    scale: <span class="built_in">float</span> = ...,</span></span><br><span class="line"><span class="params">    dtype: <span class="built_in">int</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; MatLike</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">dog = cv2.imread(<span class="string">&#x27;./dog.jpeg&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">img = np.ones((<span class="number">1200</span>, <span class="number">1920</span>, <span class="number">3</span>), np.uint8) * <span class="number">50</span></span><br><span class="line"></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;orig&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;orig&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;orig&#x27;</span>, dog)</span><br><span class="line"></span><br><span class="line">result = cv2.divide(dog, img)</span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;result&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;result&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;result&#x27;</span>, result)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106134845892.png" alt="image-20241106134845892"></p>
+<h1 id="三、图像的溶合"><a href="#三、图像的溶合" class="headerlink" title="三、图像的溶合"></a>三、图像的溶合</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(function) <span class="keyword">def</span> <span class="title function_">addWeighted</span>(<span class="params"></span></span><br><span class="line"><span class="params">    src1: MatLike,		<span class="comment"># 图片1</span></span></span><br><span class="line"><span class="params">    alpha: <span class="built_in">float</span>,		<span class="comment"># 图片1的权重</span></span></span><br><span class="line"><span class="params">    src2: MatLike,		<span class="comment"># 图片2</span></span></span><br><span class="line"><span class="params">    beta: <span class="built_in">float</span>,		<span class="comment"># 图片2的权重</span></span></span><br><span class="line"><span class="params">    gamma: <span class="built_in">float</span>,		<span class="comment"># 静态权重</span></span></span><br><span class="line"><span class="params">    dst: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    dtype: <span class="built_in">int</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; MatLike</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">back = cv2.imread(<span class="string">&#x27;./back.jpeg&#x27;</span>)</span><br><span class="line">smallcat = cv2.imread(<span class="string">&#x27;./smallcat1.jpeg&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只有两张图的属性是一样的才可以进行溶合</span></span><br><span class="line"><span class="built_in">print</span>(back.shape)</span><br><span class="line"><span class="built_in">print</span>(smallcat.shape)</span><br><span class="line"></span><br><span class="line">result = cv2.addWeighted(smallcat, <span class="number">0.7</span>, back, <span class="number">0.3</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;result&#x27;</span>, result)</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106135659757.png" alt="image-20241106135659757"></p>
+<h1 id="四、位运算-非操作"><a href="#四、位运算-非操作" class="headerlink" title="四、位运算-非操作"></a>四、位运算-非操作</h1><p>讲矩阵中的01互换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(function) <span class="keyword">def</span> <span class="title function_">bitwise_not</span>(<span class="params"></span></span><br><span class="line"><span class="params">    src: MatLike,</span></span><br><span class="line"><span class="params">    dst: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    mask: MatLike | <span class="literal">None</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; MatLike</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一张图片</span></span><br><span class="line">img = np.zeros((<span class="number">200</span>, <span class="number">400</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">img[<span class="number">50</span>:<span class="number">150</span>, <span class="number">100</span>: <span class="number">200</span>] = <span class="number">255</span></span><br><span class="line"></span><br><span class="line">new_img = cv2.bitwise_not(img)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;new_img&#x27;</span>, new_img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106140437287.png" alt="image-20241106140437287"></p>
+<h1 id="五、位运算-与操作"><a href="#五、位运算-与操作" class="headerlink" title="五、位运算-与操作"></a>五、位运算-与操作</h1><p>与操作，同一为一，所以下面只有两个白色的交叉部分为白</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(function) <span class="keyword">def</span> <span class="title function_">bitwise_and</span>(<span class="params"></span></span><br><span class="line"><span class="params">    src1: MatLike,</span></span><br><span class="line"><span class="params">    src2: MatLike,</span></span><br><span class="line"><span class="params">    dst: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    mask: MatLike | <span class="literal">None</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; MatLike</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一张图片</span></span><br><span class="line">img = np.zeros((<span class="number">200</span>, <span class="number">200</span>), np.uint8)</span><br><span class="line">img2 = np.zeros((<span class="number">200</span>, <span class="number">200</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">img[<span class="number">20</span>:<span class="number">120</span>, <span class="number">20</span>: <span class="number">120</span>] = <span class="number">255</span></span><br><span class="line">img2[<span class="number">80</span>: <span class="number">180</span>, <span class="number">80</span>:<span class="number">180</span>] = <span class="number">255</span></span><br><span class="line"></span><br><span class="line">new_img = cv2.bitwise_and(img, img2)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;img2&#x27;</span>, img2)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;new_img&#x27;</span>, new_img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106141248022.png" alt="image-20241106141248022"></p>
+<h1 id="六、为运算-或与异或"><a href="#六、为运算-或与异或" class="headerlink" title="六、为运算-或与异或"></a>六、为运算-或与异或</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">(function) <span class="keyword">def</span> <span class="title function_">bitwise_or</span>(<span class="params"></span></span><br><span class="line"><span class="params">    src1: MatLike,</span></span><br><span class="line"><span class="params">    src2: MatLike,</span></span><br><span class="line"><span class="params">    dst: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    mask: MatLike | <span class="literal">None</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; MatLike</span><br><span class="line"></span><br><span class="line">(function) <span class="keyword">def</span> <span class="title function_">bitwise_xor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    src1: MatLike,</span></span><br><span class="line"><span class="params">    src2: MatLike,</span></span><br><span class="line"><span class="params">    dst: MatLike | <span class="literal">None</span> = ...,</span></span><br><span class="line"><span class="params">    mask: MatLike | <span class="literal">None</span> = ...</span></span><br><span class="line"><span class="params"></span>) -&gt; MatLike</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一张图片</span></span><br><span class="line">img = np.zeros((<span class="number">200</span>, <span class="number">200</span>), np.uint8)</span><br><span class="line">img2 = np.zeros((<span class="number">200</span>, <span class="number">200</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">img[<span class="number">20</span>:<span class="number">120</span>, <span class="number">20</span>: <span class="number">120</span>] = <span class="number">255</span></span><br><span class="line">img2[<span class="number">80</span>: <span class="number">180</span>, <span class="number">80</span>:<span class="number">180</span>] = <span class="number">255</span></span><br><span class="line"></span><br><span class="line">new_img = cv2.bitwise_or(img, img2)</span><br><span class="line">new_img2 = cv2.bitwise_xor(img, img2)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;img2&#x27;</span>, img2)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;new_img&#x27;</span>, new_img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;new_img2&#x27;</span>, new_img2)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106141723484.png" alt="image-20241106141723484"></p>
+<h1 id="七、大作业-为图像添加水印"><a href="#七、大作业-为图像添加水印" class="headerlink" title="七、大作业-为图像添加水印"></a>七、大作业-为图像添加水印</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1. 引入一幅图片，dog</span></span><br><span class="line"><span class="comment">#2. 要有一个LOGO，需要自己创建</span></span><br><span class="line"><span class="comment">#3. 计算图片在什么地方添加，在添加的地方变成黑色</span></span><br><span class="line"><span class="comment">#4. 利用add，将logo 与 图处叠加到一起</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment">#导入图片</span></span><br><span class="line">dog = cv2.imread(<span class="string">&#x27;./dog.jpeg&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建LOGO和mask</span></span><br><span class="line">logo = np.zeros((<span class="number">200</span>, <span class="number">200</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line">mask = np.zeros((<span class="number">200</span>, <span class="number">200</span>), np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment">#绘制LOGO</span></span><br><span class="line">logo[<span class="number">20</span>:<span class="number">120</span>, <span class="number">20</span>:<span class="number">120</span>] = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>]  <span class="comment"># 红色块</span></span><br><span class="line">logo[<span class="number">80</span>:<span class="number">180</span>, <span class="number">80</span>:<span class="number">180</span>] = [<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>]  <span class="comment"># 绿色块</span></span><br><span class="line"></span><br><span class="line">mask[<span class="number">20</span>:<span class="number">120</span>, <span class="number">20</span>:<span class="number">120</span>] = <span class="number">255</span>  <span class="comment"># 红色区域的 mask</span></span><br><span class="line">mask[<span class="number">80</span>:<span class="number">180</span>, <span class="number">80</span>:<span class="number">180</span>] = <span class="number">255</span>  <span class="comment"># 绿色区域的 mask</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#对mask按位求反，01互换，与dog的图片进行操作，方块的位置就变为了0</span></span><br><span class="line">m = cv2.bitwise_not(mask)</span><br><span class="line"></span><br><span class="line"><span class="comment">#选择dog添加logo的位置</span></span><br><span class="line">roi = dog[<span class="number">0</span>:<span class="number">200</span>, <span class="number">0</span>:<span class="number">200</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用掩码对原图区域进行与操作，保留原图的背景</span></span><br><span class="line">tmp = cv2.bitwise_and(roi, roi, mask = m)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 LOGO 添加到原图的对应区域</span></span><br><span class="line">dst = cv2.add(tmp, logo)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将修改后的区域重新放回原图</span></span><br><span class="line">dog[<span class="number">0</span>:<span class="number">200</span>,<span class="number">0</span>:<span class="number">200</span>] = dst</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;dog&#x27;</span>, dog)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;dst&#x27;</span>, dst)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;tmp&#x27;</span>, tmp)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;m&#x27;</span>, m)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;mask&#x27;</span>, mask)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;logo&#x27;</span>, logo)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/image-20241106143531430.png" alt="image-20241106143531430"></p>
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/11/06/OpenCV/OpenCV(%E4%BA%94)-%E7%AE%97%E6%9C%AF%E4%B8%8E%E4%BD%8D%E8%BF%90%E7%AE%97/" title="OpenCV(五)-算术与位运算">http://example.com/2024/11/06/OpenCV/OpenCV(五)-算术与位运算/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OpenCV/" rel="tag"># OpenCV</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/11/05/OpenCV/OpenCV(%E5%9B%9B)-%E5%9B%BE%E5%BD%A2%E7%9A%84%E7%BB%98%E5%88%B6/" rel="prev" title="OpenCV(四)-图形的绘制">
+      <i class="fa fa-chevron-left"></i> OpenCV(四)-图形的绘制
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/11/06/OpenCV/OpenCV(%E5%85%AD)-%E5%9B%BE%E5%83%8F%E5%8F%98%E6%8D%A2/" rel="next" title="OpenCV(六)-图像变换">
+      OpenCV(六)-图像变换 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8A%A0%E6%B3%95%E8%BF%90%E7%AE%97"><span class="nav-number">1.</span> <span class="nav-text">一、加法运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%87%8F%E6%B3%95%E8%BF%90%E7%AE%97"><span class="nav-number">2.</span> <span class="nav-text">二、减法运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B9%98%E6%B3%95%E8%BF%90%E7%AE%97"><span class="nav-number">3.</span> <span class="nav-text">三、乘法运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%99%A4%E6%B3%95%E8%BF%90%E7%AE%97"><span class="nav-number">4.</span> <span class="nav-text">四、除法运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%9B%BE%E5%83%8F%E7%9A%84%E6%BA%B6%E5%90%88"><span class="nav-number">5.</span> <span class="nav-text">三、图像的溶合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BD%8D%E8%BF%90%E7%AE%97-%E9%9D%9E%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">四、位运算-非操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%BD%8D%E8%BF%90%E7%AE%97-%E4%B8%8E%E6%93%8D%E4%BD%9C"><span class="nav-number">7.</span> <span class="nav-text">五、位运算-与操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E4%B8%BA%E8%BF%90%E7%AE%97-%E6%88%96%E4%B8%8E%E5%BC%82%E6%88%96"><span class="nav-number">8.</span> <span class="nav-text">六、为运算-或与异或</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E5%A4%A7%E4%BD%9C%E4%B8%9A-%E4%B8%BA%E5%9B%BE%E5%83%8F%E6%B7%BB%E5%8A%A0%E6%B0%B4%E5%8D%B0"><span class="nav-number">9.</span> <span class="nav-text">七、大作业-为图像添加水印</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

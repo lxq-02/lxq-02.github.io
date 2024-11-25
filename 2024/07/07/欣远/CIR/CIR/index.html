@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="研发 CIR初版开发 8月25日 根据需求说明书完成基础界面与通讯功能          一、创建项目使用： VS2022 QT5.15.2  二、仿真界面开发仿真界面分为两部分，一部分为窗口显示区域，一部分为模拟按钮区域。 将两部分分别设置为自定义控件，然后分别设置界面内容和响应操作。 软件启动后默认带外侧按键，主界面黑屏。 竖屏MMI分辨率768*1024，主界面640 * 480. 主">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CIR">
+<meta property="og:url" content="http://example.com/2024/07/07/%E6%AC%A3%E8%BF%9C/CIR/CIR/index.html">
+<meta property="og:site_name" content="李新乾的个人博客">
+<meta property="og:description" content="研发 CIR初版开发 8月25日 根据需求说明书完成基础界面与通讯功能          一、创建项目使用： VS2022 QT5.15.2  二、仿真界面开发仿真界面分为两部分，一部分为窗口显示区域，一部分为模拟按钮区域。 将两部分分别设置为自定义控件，然后分别设置界面内容和响应操作。 软件启动后默认带外侧按键，主界面黑屏。 竖屏MMI分辨率768*1024，主界面640 * 480. 主">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/07/07/%E6%AC%A3%E8%BF%9C/CIR/CIR/image-20240813112624374.png">
+<meta property="og:image" content="http://example.com/2024/07/07/%E6%AC%A3%E8%BF%9C/CIR/CIR/image-20240814160522265.png">
+<meta property="article:published_time" content="2024-07-07T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-04T10:32:29.133Z">
+<meta property="article:author" content="李新乾">
+<meta property="article:tag" content="欣远">
+<meta property="article:tag" content="Qt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/07/07/%E6%AC%A3%E8%BF%9C/CIR/CIR/image-20240813112624374.png">
+
+<link rel="canonical" href="http://example.com/2024/07/07/%E6%AC%A3%E8%BF%9C/CIR/CIR/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CIR | 李新乾的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="李新乾的个人博客" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">李新乾的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/07/%E6%AC%A3%E8%BF%9C/CIR/CIR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cat.png">
+      <meta itemprop="name" content="李新乾">
+      <meta itemprop="description" content="命由我做，福自己求">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李新乾的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CIR
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-07 12:00:00" itemprop="dateCreated datePublished" datetime="2024-07-07T12:00:00+08:00">2024-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-11-04 18:32:29" itemprop="dateModified" datetime="2024-11-04T18:32:29+08:00">2024-11-04</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <table>
+<thead>
+<tr>
+<th>研发</th>
+<th>CIR初版开发</th>
+<th>8月25日</th>
+<th>根据需求说明书完成基础界面与通讯功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="一、创建项目"><a href="#一、创建项目" class="headerlink" title="一、创建项目"></a>一、创建项目</h1><p>使用：</p>
+<p>VS2022</p>
+<p>QT5.15.2</p>
+<p><img src="/2024/07/07/%E6%AC%A3%E8%BF%9C/CIR/CIR/image-20240813112624374.png" alt="image-20240813112624374"></p>
+<h1 id="二、仿真界面开发"><a href="#二、仿真界面开发" class="headerlink" title="二、仿真界面开发"></a>二、仿真界面开发</h1><p>仿真界面分为两部分，一部分为窗口显示区域，一部分为模拟按钮区域。</p>
+<p>将两部分分别设置为自定义控件，然后分别设置界面内容和响应操作。</p>
+<p>软件启动后默认带外侧按键，主界面黑屏。</p>
+<p>竖屏MMI分辨率768*1024，主界面640 * 480.</p>
+<p>主界面640*480 ViewWidget</p>
+<p>按钮界面（768 * 480） ButtonWidget</p>
+<p><img src="/2024/07/07/%E6%AC%A3%E8%BF%9C/CIR/CIR/image-20240814160522265.png" alt="image-20240814160522265"></p>
+<h1 id="三、ButtonWidget开发"><a href="#三、ButtonWidget开发" class="headerlink" title="三、ButtonWidget开发"></a>三、ButtonWidget开发</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43376782/article/details/130478962">【五一创作】VS+Qt主界面内嵌自定义控件的四种方法以及不同自定义控件数据交互_qt交互控件-CSDN博客</a></p>
+<p>ButtonWidget为主要包含下面的按钮，我分为了几类：</p>
+<ol>
+<li>上方8个功能按钮</li>
+<li>左侧比较重要的几个按钮</li>
+<li>中间包含列尾控制和数字的15个按钮</li>
+<li>右侧的各种按钮</li>
+</ol>
+<p>按钮为QPushButton，保存在vector容器中</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;QPushButton*&gt; m_topButtons;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">createTopButtons</span><span class="params">(<span class="type">int</span> count)</span></span>;</span><br><span class="line"></span><br><span class="line">std::vector&lt;QPushButton*&gt; m_leftButtons;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">createLeftButtons</span><span class="params">(<span class="type">int</span> count)</span></span>;</span><br><span class="line"></span><br><span class="line">std::vector&lt;QPushButton*&gt; m_midButtons;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">createMidButtons</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">std::vector&lt;QPushButton*&gt; m_rightButtons;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">createRightButtons</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-1、中间按钮"><a href="#3-1、中间按钮" class="headerlink" title="3.1、中间按钮"></a>3.1、中间按钮</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">ButtonWidget::createMidButtons</span><span class="params">()</span>	<span class="comment">// 创建中间的按钮</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 设置按钮的坐标</span></span><br><span class="line">	<span class="type">int</span> m_btnWidth = <span class="number">75</span>;</span><br><span class="line">	<span class="type">int</span> m_btnHeight = <span class="number">75</span>;</span><br><span class="line">	<span class="type">int</span> initialX = <span class="number">197</span>;</span><br><span class="line">	<span class="type">int</span> initialY = <span class="number">152.9</span>;</span><br><span class="line">	<span class="type">int</span> x = initialX;</span><br><span class="line">	<span class="type">int</span> y = initialY;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 设置标签文本</span></span><br><span class="line">	QStringList labelTexts = &#123;</span><br><span class="line">		QString::<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;列尾\n消号&quot;</span>),</span><br><span class="line">		QString::<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;列尾\n确认&quot;</span>),</span><br><span class="line">		QString::<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;风压\n查询&quot;</span>),</span><br><span class="line">		 <span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>, <span class="string">&quot;4&quot;</span>, <span class="string">&quot;5&quot;</span>, <span class="string">&quot;6&quot;</span>, <span class="string">&quot;7&quot;</span>, <span class="string">&quot;8&quot;</span>, <span class="string">&quot;9&quot;</span>, <span class="string">&quot;*&quot;</span>, <span class="string">&quot;0&quot;</span>, <span class="string">&quot;#&quot;</span></span><br><span class="line">	&#125;;</span><br><span class="line">    <span class="comment">// 设置按钮两种状态下的显示文本</span></span><br><span class="line">	QString initialImagePaths[] = </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">&quot;:/res/7.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/12.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/17.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/8.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/13.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/18.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/9.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/14.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/19.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/10.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/15.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/20.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/11.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/16.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/21.png&quot;</span></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	QString pressedImagePaths[] =</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">&quot;:/res/7-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/12-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/17-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/8-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/13-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/18-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/9-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/14-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/19-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/10-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/15-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/20-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/11-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/16-1.png&quot;</span>,</span><br><span class="line">		<span class="string">&quot;:/res/21-1.png&quot;</span></span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			QPushButton* button = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="keyword">this</span>);</span><br><span class="line">			<span class="comment">// 加载初始背景图片</span></span><br><span class="line">			<span class="function">QPixmap <span class="title">initialPixmap</span><span class="params">(initialImagePaths[i * <span class="number">3</span> + j])</span></span>;</span><br><span class="line">			<span class="keyword">if</span> (!initialPixmap.<span class="built_in">isNull</span>())</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 根据图片大小设置按钮大小</span></span><br><span class="line">				button-&gt;<span class="built_in">resize</span>(initialPixmap.<span class="built_in">size</span>());</span><br><span class="line">				button-&gt;<span class="built_in">setStyleSheet</span>(</span><br><span class="line">					<span class="built_in">QString</span>(</span><br><span class="line">						<span class="string">&quot;QPushButton &#123;&quot;</span></span><br><span class="line">						<span class="string">&quot;background-image: url(%1);&quot;</span>  <span class="comment">// 初始背景图片</span></span><br><span class="line">						<span class="string">&quot;background-position: center;&quot;</span></span><br><span class="line">						<span class="string">&quot;background-repeat: no-repeat;&quot;</span></span><br><span class="line">						<span class="string">&quot;border: 0px;&quot;</span></span><br><span class="line">						<span class="string">&quot;&#125;&quot;</span></span><br><span class="line">						<span class="string">&quot;QPushButton:pressed &#123;&quot;</span></span><br><span class="line">						<span class="string">&quot;background-image: url(%2);&quot;</span>  <span class="comment">// 按下时的背景图片</span></span><br><span class="line">						<span class="string">&quot;background-position: center;&quot;</span></span><br><span class="line">						<span class="string">&quot;background-repeat: no-repeat;&quot;</span></span><br><span class="line">						<span class="string">&quot;background-color: transparent;&quot;</span>  <span class="comment">// 保持背景透明</span></span><br><span class="line">						<span class="string">&quot;&#125;&quot;</span></span><br><span class="line">					).<span class="built_in">arg</span>(initialImagePaths[i * <span class="number">3</span> + j]).<span class="built_in">arg</span>(pressedImagePaths[i * <span class="number">3</span> + j])	<span class="comment">// 根据索引设置不同的图片路径</span></span><br><span class="line">				);</span><br><span class="line">                <span class="comment">// 设置按钮的name，用于后续在x,y坐标查找按钮进行</span></span><br><span class="line">				button-&gt;<span class="built_in">setObjectName</span>(<span class="built_in">QString</span>(<span class="string">&quot;m_midButtons[%1]&quot;</span>).<span class="built_in">arg</span>(i*<span class="number">3</span> + j));</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">// 如果图片加载失败，则设置为默认尺寸</span></span><br><span class="line">				button-&gt;<span class="built_in">resize</span>(m_btnWidth, m_btnHeight);</span><br><span class="line">			&#125;</span><br><span class="line">			button-&gt;<span class="built_in">move</span>(x, y);</span><br><span class="line"></span><br><span class="line">			m_midButtons.<span class="built_in">push_back</span>(button);</span><br><span class="line"></span><br><span class="line">			x += button-&gt;<span class="built_in">width</span>() + <span class="number">20</span>;	<span class="comment">// 根据按钮实际宽度调整x坐标</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function">QPixmap <span class="title">initialPixmap</span><span class="params">(initialImagePaths[i * <span class="number">3</span>])</span></span>;</span><br><span class="line">		<span class="comment">// 更新y坐标，准备下一行</span></span><br><span class="line">		y += (initialPixmap.<span class="built_in">isNull</span>() ? m_btnHeight : initialPixmap.<span class="built_in">height</span>() + <span class="number">10.95</span>);</span><br><span class="line">		x = initialX;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-2、保存按钮位置信息"><a href="#3-2、保存按钮位置信息" class="headerlink" title="3.2、保存按钮位置信息"></a>3.2、保存按钮位置信息</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">ButtonWidget::showEvent</span><span class="params">(QShowEvent* event)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	QWidget::<span class="built_in">showEvent</span>(event);</span><br><span class="line">	m_geometries = <span class="built_in">getButtonsGeometries</span>();	<span class="comment">// 显示之后更新的坐标才是对的，否则都是0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">QMap&lt;QString, QRect&gt; <span class="title">ButtonWidget::getButtonsGeometries</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	QMap&lt;QString, QRect&gt; buttonGeometries;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; m_topButtons.<span class="built_in">size</span>(); ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		buttonGeometries[<span class="built_in">QString</span>(<span class="string">&quot;m_topButton[%1]&quot;</span>).<span class="built_in">arg</span>(i)] = m_topButtons[i]-&gt;<span class="built_in">geometry</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; m_leftButtons.<span class="built_in">size</span>(); ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		buttonGeometries[<span class="built_in">QString</span>(<span class="string">&quot;m_leftButtons[%1]&quot;</span>).<span class="built_in">arg</span>(i)] = m_leftButtons[i]-&gt;<span class="built_in">geometry</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; m_midButtons.<span class="built_in">size</span>(); ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		buttonGeometries[<span class="built_in">QString</span>(<span class="string">&quot;m_midButtons[%1]&quot;</span>).<span class="built_in">arg</span>(i)] = m_midButtons[i]-&gt;<span class="built_in">geometry</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; m_rightButtons.<span class="built_in">size</span>(); ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		buttonGeometries[<span class="built_in">QString</span>(<span class="string">&quot;m_rightButtons[%1]&quot;</span>).<span class="built_in">arg</span>(i)] = m_rightButtons[i]-&gt;<span class="built_in">geometry</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> buttonGeometries;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="四、主界面"><a href="#四、主界面" class="headerlink" title="四、主界面"></a>四、主界面</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ViewWidget.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPainter&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QPixmap&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QFrame&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QLabel&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QFontDatabase&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ViewWidget::<span class="built_in">ViewWidget</span>(QWidget *parent)</span><br><span class="line">	: <span class="built_in">QWidget</span>(parent)</span><br><span class="line">&#123;</span><br><span class="line">    ui.<span class="built_in">setupUi</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>-&gt;<span class="built_in">setFixedSize</span>(<span class="number">640</span>, <span class="number">480</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建主布局</span></span><br><span class="line">    QVBoxLayout* mainLayout = <span class="keyword">new</span> <span class="built_in">QVBoxLayout</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建并设置6个显示区域</span></span><br><span class="line">    QWidget* basicWidget = <span class="keyword">new</span> <span class="built_in">QWidget</span>(<span class="keyword">this</span>);</span><br><span class="line">    basicWidget-&gt;<span class="built_in">setFixedSize</span>(<span class="number">640</span>, <span class="number">80</span>);</span><br><span class="line">    basicWidget-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;background-image: url(:/image/backgroundimage.png);&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建标签并设置文本和样式</span></span><br><span class="line">    QLabel* trainNumlabel = <span class="keyword">new</span> <span class="built_in">QLabel</span>(basicWidget);</span><br><span class="line">    QString str = str.<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;车次号：&quot;</span>);</span><br><span class="line">    trainNumlabel-&gt;<span class="built_in">setText</span>(str);</span><br><span class="line">    QFont font;</span><br><span class="line">    font.<span class="built_in">setFamily</span>(<span class="string">&quot;Microsoft YaHei UI&quot;</span>);  <span class="comment">// 设置字体为宋体</span></span><br><span class="line">    font.<span class="built_in">setPointSize</span>(<span class="number">17</span>);     <span class="comment">// 设置字体大小</span></span><br><span class="line">    trainNumlabel-&gt;<span class="built_in">setFont</span>(font);</span><br><span class="line">    trainNumlabel-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;color: white;&quot;</span>);</span><br><span class="line">    trainNumlabel-&gt;<span class="built_in">setGeometry</span>(<span class="number">110</span>, <span class="number">20</span>, <span class="number">100</span>, <span class="number">30</span>);  <span class="comment">// 设置 QLabel 的位置和大小</span></span><br><span class="line"></span><br><span class="line">    QLabel* locoNumLabel = <span class="keyword">new</span> <span class="built_in">QLabel</span>(basicWidget);</span><br><span class="line">    str = str.<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;机车号：&quot;</span>);</span><br><span class="line">    locoNumLabel-&gt;<span class="built_in">setText</span>(str);</span><br><span class="line">    locoNumLabel-&gt;<span class="built_in">setFont</span>(font);</span><br><span class="line">    locoNumLabel-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;color: white;&quot;</span>);</span><br><span class="line">    locoNumLabel-&gt;<span class="built_in">setGeometry</span>(<span class="number">300</span>, <span class="number">20</span>, <span class="number">100</span>, <span class="number">30</span>);</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    QWidget* endOfTrainStatusWidget = <span class="keyword">new</span> <span class="built_in">QWidget</span>(<span class="keyword">this</span>);</span><br><span class="line">    endOfTrainStatusWidget-&gt;<span class="built_in">setFixedSize</span>(<span class="number">640</span>, <span class="number">80</span>);</span><br><span class="line">    endOfTrainStatusWidget-&gt;<span class="built_in">move</span>(<span class="number">0</span>, <span class="number">80</span>);</span><br><span class="line">    endOfTrainStatusWidget-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;background-image: url(:/image/backgroundimage1.png);&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建标签并设置文本和样式</span></span><br><span class="line">    QLabel* endOfTrainStatuslabel = <span class="keyword">new</span> <span class="built_in">QLabel</span>(endOfTrainStatusWidget);</span><br><span class="line">    str = str.<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;列尾状态：&quot;</span>);</span><br><span class="line">    endOfTrainStatuslabel-&gt;<span class="built_in">setText</span>(str);</span><br><span class="line">    endOfTrainStatuslabel-&gt;<span class="built_in">setFont</span>(font);</span><br><span class="line">    endOfTrainStatuslabel-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;color: black;&quot;</span>);</span><br><span class="line">    endOfTrainStatuslabel-&gt;<span class="built_in">setGeometry</span>(<span class="number">80</span>, <span class="number">20</span>, <span class="number">100</span>, <span class="number">30</span>);  <span class="comment">// 设置 QLabel 的位置和大小</span></span><br><span class="line"></span><br><span class="line">    QLabel* endOfPressLabel = <span class="keyword">new</span> <span class="built_in">QLabel</span>(endOfTrainStatusWidget);</span><br><span class="line">    str = str.<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;尾部风压：&quot;</span>);</span><br><span class="line">    endOfPressLabel-&gt;<span class="built_in">setText</span>(str);</span><br><span class="line">    endOfPressLabel-&gt;<span class="built_in">setFont</span>(font);</span><br><span class="line">    endOfPressLabel-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;color: black;&quot;</span>);</span><br><span class="line">    endOfPressLabel-&gt;<span class="built_in">setGeometry</span>(<span class="number">320</span>, <span class="number">20</span>, <span class="number">100</span>, <span class="number">30</span>);</span><br><span class="line"></span><br><span class="line">    QWidget* safeWidget = <span class="keyword">new</span> <span class="built_in">QWidget</span>(<span class="keyword">this</span>);</span><br><span class="line">    safeWidget-&gt;<span class="built_in">setFixedSize</span>(<span class="number">640</span>, <span class="number">120</span>);</span><br><span class="line">    safeWidget-&gt;<span class="built_in">move</span>(<span class="number">0</span>, <span class="number">160</span>);</span><br><span class="line">    safeWidget-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;background-image: url(:/image/black.png);&quot;</span>);</span><br><span class="line"></span><br><span class="line">    QWidget* workWidget = <span class="keyword">new</span> <span class="built_in">QWidget</span>(<span class="keyword">this</span>);</span><br><span class="line">    workWidget-&gt;<span class="built_in">setFixedSize</span>(<span class="number">640</span>, <span class="number">40</span>);</span><br><span class="line">    workWidget-&gt;<span class="built_in">move</span>(<span class="number">0</span>, <span class="number">280</span>);</span><br><span class="line">    workWidget-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;background-image: url(:/image/black.png);&quot;</span>);</span><br><span class="line"></span><br><span class="line">    QWidget* dispatchWidget = <span class="keyword">new</span> <span class="built_in">QWidget</span>(<span class="keyword">this</span>);</span><br><span class="line">    dispatchWidget-&gt;<span class="built_in">setFixedSize</span>(<span class="number">640</span>, <span class="number">80</span>);</span><br><span class="line">    dispatchWidget-&gt;<span class="built_in">move</span>(<span class="number">0</span>, <span class="number">320</span>);</span><br><span class="line">    dispatchWidget-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;background-image: url(:/image/backgroundimage1.png);&quot;</span>);</span><br><span class="line"></span><br><span class="line">    QWidget* funcKeyWidget = <span class="keyword">new</span> <span class="built_in">QWidget</span>(<span class="keyword">this</span>);</span><br><span class="line">    funcKeyWidget-&gt;<span class="built_in">setFixedSize</span>(<span class="number">640</span>, <span class="number">80</span>);</span><br><span class="line">    funcKeyWidget-&gt;<span class="built_in">move</span>(<span class="number">0</span>, <span class="number">400</span>);</span><br><span class="line">    funcKeyWidget-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;background-image: url(:/image/backgroundimage.png);&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置标签文本</span></span><br><span class="line">    QStringList labelTexts = &#123;</span><br><span class="line">        QString::<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;第一个&quot;</span>),</span><br><span class="line">        QString::<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;调度&quot;</span>),</span><br><span class="line">        QString::<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;第三个&quot;</span>),</span><br><span class="line">        QString::<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;第四个&quot;</span>),</span><br><span class="line">        QString::<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;隧道\n司机&quot;</span>),</span><br><span class="line">        QString::<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;隧道\n车站&quot;</span>),</span><br><span class="line">        QString::<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;平原\n司机&quot;</span>),</span><br><span class="line">        QString::<span class="built_in">fromLocal8Bit</span>(<span class="string">&quot;平原\n车站&quot;</span>)</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        QLabel* label = <span class="keyword">new</span> <span class="built_in">QLabel</span>(funcKeyWidget);</span><br><span class="line">        label-&gt;<span class="built_in">setText</span>(labelTexts[i]);</span><br><span class="line">        label-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;color: white; font-size: 23px; border: 2px solid black&quot;</span>);</span><br><span class="line">        label-&gt;<span class="built_in">setGeometry</span>(i * <span class="number">80</span>, <span class="number">0</span>, <span class="number">80</span>, <span class="number">80</span>);</span><br><span class="line">        label-&gt;<span class="built_in">setMargin</span>(<span class="number">5</span>);</span><br><span class="line">        labels.<span class="built_in">push_back</span>(label);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加显示区域到主布局</span></span><br><span class="line">    mainLayout-&gt;<span class="built_in">addWidget</span>(basicWidget);</span><br><span class="line">    mainLayout-&gt;<span class="built_in">addWidget</span>(endOfTrainStatusWidget);</span><br><span class="line">    mainLayout-&gt;<span class="built_in">addWidget</span>(safeWidget);</span><br><span class="line">    mainLayout-&gt;<span class="built_in">addWidget</span>(workWidget);</span><br><span class="line">    mainLayout-&gt;<span class="built_in">addWidget</span>(dispatchWidget);</span><br><span class="line">    mainLayout-&gt;<span class="built_in">addWidget</span>(funcKeyWidget);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">setLayout</span>(mainLayout);</span><br><span class="line">	</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="五、数据通信"><a href="#五、数据通信" class="headerlink" title="五、数据通信"></a>五、数据通信</h1><p>&#x3D;&#x3D;使用SMTNet&#x3D;&#x3D;</p>
+<p>先将SMTNet文件夹放在写代码的文件路径中，然后新建筛选器，将文件导入到VS中</p>
+<p>将config.dat和.dll文件放入写代码的文件路径中，不需要把SMTnet.dll加到链接器中</p>
+<p>将SMTnet.dll放到写代码的文件路径中</p>
+<p>SMTNET是在32位系统下的，切记</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">MainWindow::UpdataState</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (m_dataRecv.MC_POWER != m_lateRecv.MC_POWER)</span><br><span class="line">    &#123;</span><br><span class="line">        m_dataRecv.MC_POWER = m_lateRecv.MC_POWER;</span><br><span class="line">        <span class="function">emit <span class="title">power</span><span class="params">(m_dataRecv.MC_POWER)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (m_dataRecv.MC_POWER)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (m_dataRecv.MC_STATE != m_lateRecv.MC_STATE)</span><br><span class="line">        &#123;</span><br><span class="line">            m_dataRecv.MC_STATE = m_lateRecv.MC_STATE;</span><br><span class="line">            <span class="function">emit <span class="title">endOfTrainStatus</span><span class="params">(m_dataRecv.MC_STATE)</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_dataRecv.MC_AIRP != m_lateRecv.MC_AIRP)</span><br><span class="line">        &#123;</span><br><span class="line">            m_dataRecv.MC_AIRP = m_lateRecv.MC_AIRP;</span><br><span class="line">            <span class="function">emit <span class="title">updataAirPress</span><span class="params">(m_dataRecv.MC_AIRP)</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_dataRecv.MC_AIRCHECK != m_lateRecv.MC_AIRCHECK)</span><br><span class="line">        &#123;</span><br><span class="line">            m_dataRecv.MC_AIRCHECK = m_lateRecv.MC_AIRCHECK;</span><br><span class="line">            <span class="function">emit <span class="title">speakAirPress</span><span class="params">(m_dataRecv.MC_AIRCHECK)</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_dataRecv.MC_MODE != m_lateRecv.MC_MODE)</span><br><span class="line">        &#123;</span><br><span class="line">            m_dataRecv.MC_MODE = m_lateRecv.MC_MODE;</span><br><span class="line">            <span class="function">emit <span class="title">changeWorkMode</span><span class="params">(m_dataRecv.MC_MODE)</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_dataRecv.MC_LINE != m_lateRecv.MC_LINE)</span><br><span class="line">        &#123;</span><br><span class="line">            m_dataRecv.MC_LINE = m_lateRecv.MC_LINE;</span><br><span class="line">            <span class="function">emit <span class="title">changeLineMode</span><span class="params">(m_dataRecv.MC_LINE)</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_dataRecv.MC_AIRWARN != m_lateRecv.MC_AIRWARN)</span><br><span class="line">        &#123;</span><br><span class="line">            m_dataRecv.MC_AIRWARN = m_lateRecv.MC_AIRWARN;</span><br><span class="line">            <span class="function">emit <span class="title">airWarningReceived</span><span class="params">(m_dataRecv.MC_AIRWARN)</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_dataRecv.MC_POWERWARN != m_lateRecv.MC_POWERWARN)</span><br><span class="line">        &#123;</span><br><span class="line">            m_dataRecv.MC_POWERWARN = m_lateRecv.MC_AIRWARN;</span><br><span class="line">            <span class="function">emit <span class="title">powerWarningReceived</span><span class="params">(m_dataRecv.MC_POWERWARN)</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_dataRecv.MC_LBJWARN != m_lateRecv.MC_LBJWARN)</span><br><span class="line">        &#123;</span><br><span class="line">            m_dataRecv.MC_LBJWARN = m_lateRecv.MC_LBJWARN;</span><br><span class="line">            <span class="function">emit <span class="title">safeInfoWarningReceived</span><span class="params">(m_dataRecv.MC_LBJWARN)</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_dataRecv.MC_AIRDISCHARGE != m_lateRecv.MC_AIRDISCHARGE)</span><br><span class="line">        &#123;</span><br><span class="line">            m_dataRecv.MC_AIRDISCHARGE = m_lateRecv.MC_AIRDISCHARGE;</span><br><span class="line">            <span class="function">emit <span class="title">airDischarge</span><span class="params">(m_dataRecv.MC_AIRDISCHARGE)</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_dataRecv.MC_MALFUNCTION != m_lateRecv.MC_MALFUNCTION)</span><br><span class="line">        &#123;</span><br><span class="line">            m_dataRecv.MC_MALFUNCTION = m_lateRecv.MC_MALFUNCTION;</span><br><span class="line">            <span class="function">emit <span class="title">malFunction</span><span class="params">(m_dataRecv.MC_MALFUNCTION)</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m_dataRecv.MC_SHOWorHIDE != m_lateRecv.MC_SHOWorHIDE)</span><br><span class="line">        &#123;</span><br><span class="line">            m_dataRecv.MC_SHOWorHIDE = m_lateRecv.MC_SHOWorHIDE;</span><br><span class="line">            <span class="function">emit <span class="title">showOrHide</span><span class="params">(m_dataRecv.MC_SHOWorHIDE)</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="number">0</span> != m_lateRecv.MC_COORD_X || <span class="number">0</span> != m_lateRecv.MC_COORD_Y)</span><br><span class="line">        &#123;</span><br><span class="line">            m_dataRecv.MC_COORD_X = m_lateRecv.MC_COORD_X;</span><br><span class="line">            m_dataRecv.MC_COORD_Y = m_lateRecv.MC_COORD_Y;</span><br><span class="line">            <span class="comment">// 传递相对于ButtonWidget的坐标</span></span><br><span class="line">            <span class="function">emit <span class="title">signalCoordXY</span><span class="params">(m_dataRecv.MC_COORD_X - buttonWidget-&gt;geometry().x(), m_dataRecv.MC_COORD_Y - buttonWidget-&gt;geometry().y())</span></span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="六、文本转语音"><a href="#六、文本转语音" class="headerlink" title="六、文本转语音"></a>六、文本转语音</h1><p>使用的是SAPI，代码如下，</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sapi.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> <span class="keyword">warning</span>(push)</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> <span class="keyword">warning</span>(disable: 4996)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sphelper.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;qlogging.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> <span class="keyword">warning</span>(pop)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">VoiceController</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">VoiceController</span>() : <span class="built_in">pVoice</span>(<span class="literal">nullptr</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 初始化 COM 库</span></span><br><span class="line">        hr = ::<span class="built_in">CoInitialize</span>(<span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">FAILED</span>(hr))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;Failed to initialize COM library.&quot;</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建 SAPI 语音实例</span></span><br><span class="line">        hr = <span class="built_in">CoCreateInstance</span>(CLSID_SpVoice, <span class="literal">NULL</span>, CLSCTX_ALL, IID_ISpVoice, (<span class="type">void</span>**)&amp;pVoice);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">FAILED</span>(hr))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;Failed to create voice instance.&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~<span class="built_in">VoiceController</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (pVoice)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 停止任何正在进行的朗读</span></span><br><span class="line">            pVoice-&gt;<span class="built_in">Speak</span>(<span class="literal">NULL</span>, SPF_PURGEBEFORESPEAK, <span class="literal">NULL</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 释放 COM 库</span></span><br><span class="line">        ::<span class="built_in">CoUninitialize</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">(<span class="type">const</span> std::wstring&amp; text)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (pVoice)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 异步朗读文本</span></span><br><span class="line">            hr = pVoice-&gt;<span class="built_in">Speak</span>(text.<span class="built_in">c_str</span>(), SPF_ASYNC, <span class="literal">NULL</span>);</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">FAILED</span>(hr))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;Speak failed.&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">stop</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (pVoice)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 停止当前的朗读</span></span><br><span class="line">            pVoice-&gt;<span class="built_in">Speak</span>(<span class="literal">NULL</span>, SPF_PURGEBEFORESPEAK, <span class="literal">NULL</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    HRESULT hr;</span><br><span class="line">    CComPtr&lt;ISpVoice&gt; pVoice;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="七、长按按钮3秒运行功能"><a href="#七、长按按钮3秒运行功能" class="headerlink" title="七、长按按钮3秒运行功能"></a>七、长按按钮3秒运行功能</h1><p>首先，创建一个定时器，可以用来检测3秒的时间</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">QTimer* m_pressTimer;   <span class="comment">// 用于检测3秒的定时器</span></span><br><span class="line"><span class="type">bool</span> m_confirmButtonPressed;    <span class="comment">// 用于检测“列尾确认”键是否按下</span></span><br><span class="line"><span class="type">bool</span> m_airDischargeInitiated; <span class="comment">// 用于检测是否已经启动排风</span></span><br><span class="line"><span class="type">bool</span> m_airDischarge = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"> m_pressTimer = <span class="keyword">new</span> <span class="built_in">QTimer</span>(<span class="keyword">this</span>);</span><br><span class="line"> m_pressTimer-&gt;<span class="built_in">setInterval</span>(<span class="number">3000</span>); <span class="comment">// 3秒</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，一个按钮控件设置3个槽函数，一个pressed按压，一个released释放，还有一个是定时器超时的槽函数</p>
+<p>按压启动定时器，释放关闭定时器，</p>
+<p>如果按压时间超过3秒，启动定时器超时槽函数，判断功能是否已经实现，如果未实现，实现功能</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">MainWindow::onAirDischargeButtonPressed</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    m_airDischargeInitiated = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动定时器，开始计时</span></span><br><span class="line">    m_pressTimer-&gt;<span class="built_in">start</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MainWindow::onAirDischargeButtonReleased</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 停止定时器</span></span><br><span class="line">    m_pressTimer-&gt;<span class="built_in">stop</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MainWindow::onPressTimerTimeout</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 停止定时器</span></span><br><span class="line">    m_pressTimer-&gt;<span class="built_in">stop</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定时器超时后，如果排风动作还未触发，则触发</span></span><br><span class="line">    <span class="keyword">if</span> (!m_airDischargeInitiated)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">initiateAirDischarge</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="八、点击按钮之后，5秒内点击确认键"><a href="#八、点击按钮之后，5秒内点击确认键" class="headerlink" title="八、点击按钮之后，5秒内点击确认键"></a>八、点击按钮之后，5秒内点击确认键</h1><p>如果有两个按钮一起点击才可以运行的功能，可以设置筛选器，其实就是给每个按钮的点击设置一个bool变量，如果点击了，bool变量为真，其他的bool变量全部置false；如果按钮绑定实现功能，则在第二个按钮点击时，先判断绑定的按钮是否是true，如果是true，则代表两个按钮是连续点击的，再继续判读是否满足其他实现功能的条件</p>
+<p>例子如下：</p>
+<p>按钮warning 和按钮Confirm是绑定的，如果中间有其他按钮点击了，如按钮Right，则组合按键功能失败</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">MainWindow::handleButtonWarningPressed</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">setButtonStateFalse</span>();</span><br><span class="line">    m_btnLeft[<span class="number">2</span>] = <span class="literal">true</span>;    <span class="comment">// 按下了“报警”键，等待点击“确认”</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MainWindow::onButtonRight</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">setButtonStateFalse</span>();	<span class="comment">// 没有绑定的按钮的话，自动将所有按钮的bool变量置false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">MainWindow::handleButtonConfirm</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 前一次按下了“报警”键</span></span><br><span class="line">    <span class="keyword">if</span> (m_btnLeft[<span class="number">2</span>] == <span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!m_warningTriggered &amp;&amp; m_warningConfirmTimer-&gt;<span class="built_in">isActive</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">initiateWarning</span>();</span><br><span class="line">            m_warningConfirmTimer-&gt;<span class="built_in">stop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">setButtonStateFalse</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    
+        <div>
+             <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+        </div>
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李新乾
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2024/07/07/%E6%AC%A3%E8%BF%9C/CIR/CIR/" title="CIR">http://example.com/2024/07/07/欣远/CIR/CIR/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%AC%A3%E8%BF%9C/" rel="tag"># 欣远</a>
+              <a href="/tags/Qt/" rel="tag"># Qt</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/07/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="next" title="计算机网络">
+      计算机网络 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC82MDA0OC8zNjUxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">一、创建项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BB%BF%E7%9C%9F%E7%95%8C%E9%9D%A2%E5%BC%80%E5%8F%91"><span class="nav-number">2.</span> <span class="nav-text">二、仿真界面开发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81ButtonWidget%E5%BC%80%E5%8F%91"><span class="nav-number">3.</span> <span class="nav-text">三、ButtonWidget开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1%E3%80%81%E4%B8%AD%E9%97%B4%E6%8C%89%E9%92%AE"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、中间按钮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2%E3%80%81%E4%BF%9D%E5%AD%98%E6%8C%89%E9%92%AE%E4%BD%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、保存按钮位置信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%B8%BB%E7%95%8C%E9%9D%A2"><span class="nav-number">4.</span> <span class="nav-text">四、主界面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1"><span class="nav-number">5.</span> <span class="nav-text">五、数据通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%96%87%E6%9C%AC%E8%BD%AC%E8%AF%AD%E9%9F%B3"><span class="nav-number">6.</span> <span class="nav-text">六、文本转语音</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E9%95%BF%E6%8C%89%E6%8C%89%E9%92%AE3%E7%A7%92%E8%BF%90%E8%A1%8C%E5%8A%9F%E8%83%BD"><span class="nav-number">7.</span> <span class="nav-text">七、长按按钮3秒运行功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E7%82%B9%E5%87%BB%E6%8C%89%E9%92%AE%E4%B9%8B%E5%90%8E%EF%BC%8C5%E7%A7%92%E5%86%85%E7%82%B9%E5%87%BB%E7%A1%AE%E8%AE%A4%E9%94%AE"><span class="nav-number">8.</span> <span class="nav-text">八、点击按钮之后，5秒内点击确认键</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李新乾"
+      src="/images/cat.png">
+  <p class="site-author-name" itemprop="name">李新乾</p>
+  <div class="site-description" itemprop="description">命由我做，福自己求</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lxq-02" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lxq-02" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://chatgpt.com/" title="Chatgpt → https:&#x2F;&#x2F;chatgpt.com" rel="noopener" target="_blank"><i class="fas fa-robot fa-fw"></i>Chatgpt</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      链接网站
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://baidu.com/" title="https:&#x2F;&#x2F;baidu.com" rel="noopener" target="_blank">百度</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://mail.qq.com/" title="https:&#x2F;&#x2F;mail.qq.com" rel="noopener" target="_blank">QQ邮箱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://outlook.live.com/" title="https:&#x2F;&#x2F;outlook.live.com" rel="noopener" target="_blank">Outlook</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fishc.com.cn/" title="https:&#x2F;&#x2F;fishc.com.cn" rel="noopener" target="_blank">鱼C论坛</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2024-07 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李新乾</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset);
+            clearInterval(int);
+        }
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据
+            clearInterval(int); // 停止检测
+        }
+    }
+
+});
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
